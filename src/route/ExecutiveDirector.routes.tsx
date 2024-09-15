@@ -1,4 +1,4 @@
-export const adminPaths = [
+export const executivePaths = [
   {
     name: "Dashboard",
     path: "dashboard",
@@ -95,21 +95,6 @@ export const adminPaths = [
     ],
   },
   {
-    name: "Utility Bill",
-    children: [
-      {
-        name: "Add Utility Bill",
-        path: "add_bill",
-        element: "Add Utility Bill",
-      },
-      {
-        name: "All Utility Bill",
-        path: "all_bill",
-        element: "Add Utility Bill",
-      },
-    ],
-  },
-  {
     name: "Collection",
     children: [
       {
@@ -121,51 +106,6 @@ export const adminPaths = [
         name: "All Collection",
         path: "all-collection:",
         element: "All Collection",
-      },
-    ],
-  },
-  {
-    name: "Fixed cost",
-    children: [
-      {
-        name: "Add Fixed cost",
-        path: "add_fixed_cost",
-        element: "Add fixed cost",
-      },
-      {
-        name: "All Fixed cost",
-        path: "all_fixed_cost",
-        element: "all Fixed cost",
-      },
-    ],
-  },
-  {
-    name: "Production Report",
-    children: [
-      {
-        name: "Add Production Report",
-        path: "add_production_report",
-        element: "addProductionReport",
-      },
-      {
-        name: "All Production Report",
-        path: "all_production_reports",
-        element: "all Production Report",
-      },
-    ],
-  },
-  {
-    name: "User Management",
-    children: [
-      {
-        name: "Add User",
-        path: "addUser",
-        element: "addUser",
-      },
-      {
-        name: "All Users",
-        path: "allUsers",
-        element: "allUsers",
       },
     ],
   },

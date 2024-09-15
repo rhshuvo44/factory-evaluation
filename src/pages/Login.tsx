@@ -12,20 +12,10 @@ const Login = () => {
     // and handle the response appropriately
     // You can use the following code as a reference:
     if (values.username === "admin" && values.password === "admin") {
-      // Redirect to the dashboard page
-      navigate("/admin/dashboard", { replace: true }); // Uncomment this line if you want to replace the current route in the browser history
-      // or navigate("/admin/dashboard", { state: { from: "/some-previous-route" } }); // Uncomment this line if you want to pass a state object to the dashboard page
-
-      // For simplicity, let's just simulate a successful login and redirect to the dashboard page
-      // In a real-world application, you should handle the response from your backend API appropriately
-      // and redirect based on the response data.
-
-      // Redirect to the dashboard page with the replace option set to true
-      // This will remove the current route from the browser history and add the new route instead
-
-      // Uncomment the following line to simulate a successful login and redirect to the dashboard page with replace option set to true
-      // navigate("/", { replace: true }); // Uncomment this line if you want to replace the current route in the
-      // navigate("/admin/dashboard");
+      navigate("/admin/dashboard", { replace: true });
+    }
+    if (values.username === "executive" && values.password === "executive") {
+      navigate("/executive-director/dashboard", { replace: true });
     } else {
       // Display an error message
       alert("Invalid username or password");
