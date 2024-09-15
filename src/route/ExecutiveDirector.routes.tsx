@@ -56,7 +56,7 @@ export const executivePaths = [
     children: [
       {
         name: "Add Employee salary cost",
-        path: "Add_salary_cost",
+        path: "add_salary_cost",
         element: "Employee salary cost",
       },
       {
