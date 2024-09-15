@@ -10,7 +10,6 @@ const MainLayout = () => {
     <Layout style={{ height: "100vh" }}>
       <SideBar />
       <Layout>
-        
         <HeaderMenu />
         <Content style={{ margin: "24px 16px 0" }}>
           <div

@@ -9,10 +9,10 @@ import { sidebarItemsGenerator } from "../../utilis/sidebarItemsGenerator";
 
 const userRole = {
   ADMIN: "admin",
-  ExecutiveDirector: "ExecutiveDirector",
-  ManagingDirector: "ManagingDirector",
-  GeneralManager: "GeneralManager",
-  Coordinator: "Coordinator",
+  ExecutiveDirector: "executive-director",
+  ManagingDirector: "managing-director",
+  GeneralManager: "general-director",
+  Coordinator: "coordinator",
 };
 const SideBar = () => {
   // const token = useAppSelector(useCurrentToken);
