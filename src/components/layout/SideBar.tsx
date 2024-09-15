@@ -4,15 +4,17 @@ import { adminSidebarItems } from "../../route/admin.routes";
 
 const SideBar = () => {
   return (
-    <Sider width={250}
+    <Sider
+      width={250}
       breakpoint="lg"
       collapsedWidth="0"
-      onBreakpoint={(broken) => {
-        console.log(broken);
-      }}
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
+      // onBreakpoint={(broken) => {
+      //   console.log(broken);
+      // }}
+      // onCollapse={(collapsed, type) => {
+      //   console.log(collapsed, type);
+      // }}
+      style={{ height: "100vh", position: "sticky", top: "0", left: "0" }}
     >
       <div
         style={{

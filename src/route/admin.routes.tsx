@@ -1,15 +1,6 @@
-import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
+import { TRoute, TSidebarItem } from "../types/adminRoutesType";
 
-export type TRoute = {
-  path: string;
-  element: ReactNode;
-};
-export type TSidebarItem = {
-  key: string;
-  label: ReactNode;
-  children?: TSidebarItem[];
-};
 const adminPaths = [
   {
     name: "Dashboard",
