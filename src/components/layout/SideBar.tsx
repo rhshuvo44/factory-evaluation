@@ -3,30 +3,19 @@ import Sider from "antd/es/layout/Sider";
 import { adminSidebarItems } from "../../route/admin.routes";
 
 const SideBar = () => {
+  const siderStyle: React.CSSProperties = {
+    overflow: "auto",
+    height: "100vh",
+    position: "fixed",
+    insetInlineStart: 0,
+    top: 60,
+    bottom: 0,
+    scrollbarWidth: "none",
+    scrollbarColor: "unset",
+  };
   return (
-    <Sider
-      width={250}
-      breakpoint="lg"
-      collapsedWidth="0"
-      // onBreakpoint={(broken) => {
-      //   console.log(broken);
-      // }}
-      // onCollapse={(collapsed, type) => {
-      //   console.log(collapsed, type);
-      // }}
-      style={{ height: "100vh", position: "sticky", top: "0", left: "0" }}
-    >
-      <div
-        style={{
-          color: "white",
-          height: "4rem",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <h1>Sarkar Group</h1>
-      </div>
+    <Sider width={250} breakpoint="lg" collapsedWidth="0" style={siderStyle}>
+      
       <Menu
         theme="dark"
         mode="inline"

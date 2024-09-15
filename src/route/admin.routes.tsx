@@ -12,28 +12,28 @@ const adminPaths = [
     children: [
       {
         name: "Add Travel Allowance",
-        path: "addUser",
-        element: "addUser",
+        path: "add_travel_allowance",
+        element: "Travel Allowance",
       },
       {
         name: "All Travel Allowance",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_travel_allowance",
+        element: "Travel Allowance",
       },
     ],
   },
   {
-    name: "Miscellaneous cost ",
+    name: "Miscellaneous cost",
     children: [
       {
         name: "Add Miscellaneous cost",
-        path: "addUser",
-        element: "addUser",
+        path: "add_misc_cost",
+        element: "Miscellaneous cost",
       },
       {
         name: "All Miscellaneous cost",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_misc_cost",
+        element: "All Miscellaneous cost",
       },
     ],
   },
@@ -42,13 +42,13 @@ const adminPaths = [
     children: [
       {
         name: "Add Buyer Development cost",
-        path: "addUser",
-        element: "addUser",
+        path: "add_buyer_development",
+        element: "Buyer Development cost",
       },
       {
         name: "All Buyer Development cost",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_buyer_development",
+        element: "All Buyer Development cost",
       },
     ],
   },
@@ -57,13 +57,13 @@ const adminPaths = [
     children: [
       {
         name: "Add Employee salary cost",
-        path: "addUser",
-        element: "addUser",
+        path: "Add_salary_cost",
+        element: "Employee salary cost",
       },
       {
         name: "All Employee salary cost",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_salary_cost",
+        element: "All Employee salary cost",
       },
     ],
   },
