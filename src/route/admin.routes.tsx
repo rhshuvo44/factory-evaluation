@@ -1,8 +1,10 @@
+import Dashboard from "../pages/Dashboard";
+
 export const adminPaths = [
   {
     name: "Dashboard",
     path: "dashboard",
-    element: "dashboard",
+    element: <Dashboard />,
   },
   {
     name: "Travel Allowance",

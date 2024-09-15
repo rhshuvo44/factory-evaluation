@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import HeaderMenu from "./HeaderMenu";
 import SideBar from "./SideBar";
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const MainLayout = () => {
   return (
@@ -21,10 +21,6 @@ const MainLayout = () => {
             <Outlet />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Sarkar Group ©{new Date().getFullYear()} Created by Sarkar It
-          Solutions
-        </Footer>
       </Layout>
     </Layout>
   );

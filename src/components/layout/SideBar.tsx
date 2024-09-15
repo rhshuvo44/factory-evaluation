@@ -18,8 +18,8 @@ const SideBar = () => {
   // const token = useAppSelector(useCurrentToken);
 
   const user = {
-    // role: userRole.ADMIN,
-    role: userRole.ExecutiveDirector,
+    role: userRole.ADMIN,
+    // role: userRole.ExecutiveDirector,
     // role: userRole.ManagingDirector,
     // role: userRole.GeneralManager,
     // role: userRole.Coordinator,
@@ -62,18 +62,18 @@ const SideBar = () => {
       break;
   }
 
-  const siderStyle: React.CSSProperties = {
-    overflow: "auto",
-    height: "100vh",
-    position: "fixed",
-    insetInlineStart: 0,
-    top: 60,
-    bottom: 0,
-    scrollbarWidth: "none",
-    scrollbarColor: "unset",
-  };
   return (
-    <Sider width={250} breakpoint="lg" collapsedWidth="0" style={siderStyle}>
+    <Sider
+      width={250}
+      breakpoint="lg"
+      collapsedWidth="0"
+      className="overflow-auto"
+    >
+      <div className="m-5">
+        <h1 className="text-white font-bold md:text-2xl lg:text-3xl">
+          Sarkar Group
+        </h1>
+      </div>
       <Menu
         theme="dark"
         mode="inline"

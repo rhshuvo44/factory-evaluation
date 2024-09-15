@@ -7,3 +7,9 @@
   margin: 0;
   padding: 0;
 } */
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
