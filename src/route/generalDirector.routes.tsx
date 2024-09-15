@@ -1,4 +1,4 @@
-export const coordinatorPaths = [
+export const generalPaths = [
   {
     name: "Dashboard",
     path: "dashboard",

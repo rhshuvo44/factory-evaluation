@@ -3,7 +3,10 @@ import App from "../App";
 import Login from "../pages/Login";
 import { routeGenerator } from "../utilis/routesGenerator";
 import { adminPaths } from "./admin.routes";
+import { coordinatorPaths } from "./Coordinator.routes";
 import { executivePaths } from "./ExecutiveDirector.routes";
+import { generalPaths } from "./generalDirector.routes";
+import { managingPaths } from "./ManagingDirector.routes";
 
 export const router = createBrowserRouter([
   {
@@ -19,17 +22,17 @@ export const router = createBrowserRouter([
   {
     path: "/managing-director",
     element: <App />,
-    children: routeGenerator(adminPaths),
+    children: routeGenerator(managingPaths),
   },
   {
     path: "/general-director",
     element: <App />,
-    children: routeGenerator(adminPaths),
+    children: routeGenerator(generalPaths),
   },
   {
     path: "/coordinator",
     element: <App />,
-    children: routeGenerator(adminPaths),
+    children: routeGenerator(coordinatorPaths),
   },
   {
     path: "/",

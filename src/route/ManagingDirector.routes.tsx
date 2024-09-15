@@ -1,7 +1,4 @@
-import { NavLink } from "react-router-dom";
-import { TRoute, TSidebarItem } from "../types/adminRoutesType";
-
-const adminPaths = [
+export const managingPaths = [
   {
     name: "Dashboard",
     path: "dashboard",
@@ -72,13 +69,13 @@ const adminPaths = [
     children: [
       {
         name: "Add Factory Development cost",
-        path: "addUser",
-        element: "addUser",
+        path: "add_factory_development",
+        element: "Add Factory Development cost",
       },
       {
         name: "All Factory Development cost",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_factory_development",
+        element: "All Factory Development cost",
       },
     ],
   },
@@ -87,13 +84,13 @@ const adminPaths = [
     children: [
       {
         name: "Add Loan Return",
-        path: "addUser",
-        element: "addUser",
+        path: "add_loan",
+        element: "Add Loan",
       },
       {
         name: "All Loan Return",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_loan",
+        element: "All Loan",
       },
     ],
   },
@@ -102,13 +99,13 @@ const adminPaths = [
     children: [
       {
         name: "Add Utility Bill",
-        path: "addUser",
-        element: "addUser",
+        path: "add_bill",
+        element: "Add Utility Bill",
       },
       {
         name: "All Utility Bill",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_bill",
+        element: "Add Utility Bill",
       },
     ],
   },
@@ -117,13 +114,13 @@ const adminPaths = [
     children: [
       {
         name: "Add Collection",
-        path: "addUser",
-        element: "addUser",
+        path: "add_collection",
+        element: "Add Collection",
       },
       {
         name: "All Collection",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all-collection:",
+        element: "All Collection",
       },
     ],
   },
@@ -132,13 +129,13 @@ const adminPaths = [
     children: [
       {
         name: "Add Fixed cost",
-        path: "addUser",
-        element: "addUser",
+        path: "add_fixed_cost",
+        element: "Add fixed cost",
       },
       {
         name: "All Fixed cost",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_fixed_cost",
+        element: "all Fixed cost",
       },
     ],
   },
@@ -147,13 +144,13 @@ const adminPaths = [
     children: [
       {
         name: "Add Production Report",
-        path: "addUser",
-        element: "addUser",
+        path: "add_production_report",
+        element: "addProductionReport",
       },
       {
         name: "All Production Report",
-        path: "allUsers",
-        element: "allUsers",
+        path: "all_production_reports",
+        element: "all Production Report",
       },
     ],
   },
@@ -173,51 +170,3 @@ const adminPaths = [
     ],
   },
 ];
-
-export const adminSidebarItems = adminPaths.reduce(
-  (acc: TSidebarItem[], item) => {
-    if (item.path && item.name) {
-      acc.push({
-        key: item.name,
-        label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
-        title: item.name,
-      });
-    }
-
-    if (item.children) {
-      acc.push({
-        key: item.name,
-        label: item.name,
-        title: item.name,
-        children: item.children.map((child) => ({
-          key: child.name,
-          label: <NavLink to={`/admin/${child.path}`}>{child.name}</NavLink>,
-          title: child.name,
-        })),
-      });
-    }
-
-    return acc;
-  },
-  []
-);
-
-export const adminRoutes = adminPaths.reduce((acc: TRoute[], item) => {
-  if (item.path && item.element) {
-    acc.push({
-      path: item.path,
-      element: item.element,
-    });
-  }
-
-  if (item.children) {
-    item.children.forEach((child) => {
-      acc.push({
-        path: child.path,
-        element: child.element,
-      });
-    });
-  }
-
-  return acc;
-}, []);

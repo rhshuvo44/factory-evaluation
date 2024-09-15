@@ -1,7 +1,10 @@
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { adminPaths } from "../../route/admin.routes";
+import { coordinatorPaths } from "../../route/Coordinator.routes";
 import { executivePaths } from "../../route/ExecutiveDirector.routes";
+import { generalPaths } from "../../route/generalDirector.routes";
+import { managingPaths } from "../../route/ManagingDirector.routes";
 import { sidebarItemsGenerator } from "../../utilis/sidebarItemsGenerator";
 
 const userRole = {
@@ -36,21 +39,24 @@ const SideBar = () => {
         userRole.ExecutiveDirector
       );
       break;
-    // case userRole.ManagingDirector:
-    //   sidebarItems = sidebarItemsGenerator(
-    //     studentPaths,
-    //     userRole.ManagingDirector
-    //   );
-    //   break;
-    // case userRole.GeneralManager:
-    //   sidebarItems = sidebarItemsGenerator(
-    //     studentPaths,
-    //     userRole.GeneralManager
-    //   );
-    //   break;
-    // case userRole.Coordinator:
-    //   sidebarItems = sidebarItemsGenerator(studentPaths, userRole.Coordinator);
-    //   break;
+    case userRole.ManagingDirector:
+      sidebarItems = sidebarItemsGenerator(
+        managingPaths,
+        userRole.ManagingDirector
+      );
+      break;
+    case userRole.GeneralManager:
+      sidebarItems = sidebarItemsGenerator(
+        generalPaths,
+        userRole.GeneralManager
+      );
+      break;
+    case userRole.Coordinator:
+      sidebarItems = sidebarItemsGenerator(
+        coordinatorPaths,
+        userRole.Coordinator
+      );
+      break;
 
     default:
       break;
