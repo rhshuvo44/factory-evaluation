@@ -81,7 +81,7 @@ const CommonTable = () => {
       title: "Action",
       key: "action",
       render: (_: number, record: TTravel) => (
-        <Button type="link" onClick={() => navigate(`/product/${record._id}`)}>
+        <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
           View Details
         </Button>
       ),

@@ -14,9 +14,9 @@ const userRole = {
   GeneralManager: "general-director",
   Coordinator: "coordinator",
 };
-const SideBar = () => {
-  // const token = useAppSelector(useCurrentToken);
 
+const SideBar = ({ collapsed }: any) => {
+  // const token = useAppSelector(useCurrentToken);
   const user = {
     role: userRole.ADMIN,
     // role: userRole.ExecutiveDirector,
@@ -64,13 +64,16 @@ const SideBar = () => {
 
   return (
     <Sider
-      width={250}
-      breakpoint="lg"
-      collapsedWidth="0"
-      className="overflow-auto"
       style={{
         width: "100%",
       }}
+      width={250}
+      breakpoint="lg"
+      collapsedWidth="0"
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+      className="overflow-auto"
     >
       <div className="m-5">
         <h1 className="text-white font-bold md:text-2xl lg:text-3xl">
