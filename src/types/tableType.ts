@@ -30,7 +30,6 @@ export type TMiscellaneous = {
     totalPrice: number;
 }
 
-
 export type TBuyer = {
     slNo: number;
     date: Date;
@@ -45,4 +44,15 @@ export type TBuyer = {
     unitPrice: number;
     totalPrice: number;
 }
-
+export type TSalary = {
+    employeeId: number;
+    employeeImg: string;
+    name: string;
+    designation: string;
+    workingDays: number
+    status: boolean;
+    perDaySalary: number;
+    overtime: number;
+    overTimeRate: number;
+    grossPerDaySalary: number;
+}

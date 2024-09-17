@@ -3,6 +3,8 @@ import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentFor
 import Dashboard from "../pages/Dashboard";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
+import Salary from "../pages/salary/Salary";
+import SalaryForm from "../pages/salary/SalaryForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 
@@ -63,12 +65,12 @@ export const adminPaths = [
       {
         name: "Add Employee salary cost",
         path: "add_salary_cost",
-        element: "Employee salary cost",
+        element: <SalaryForm />,
       },
       {
         name: "All Employee salary cost",
         path: "all_salary_cost",
-        element: "All Employee salary cost",
+        element: <Salary />,
       },
     ],
   },
