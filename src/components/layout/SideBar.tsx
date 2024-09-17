@@ -6,7 +6,7 @@ import { executivePaths } from "../../route/ExecutiveDirector.routes";
 import { generalPaths } from "../../route/generalDirector.routes";
 import { managingPaths } from "../../route/ManagingDirector.routes";
 import { sidebarItemsGenerator } from "../../utilis/sidebarItemsGenerator";
-
+import logo from "../../assets/image/logo.png";
 const userRole = {
   ADMIN: "admin",
   ExecutiveDirector: "executive-director",
@@ -81,9 +81,10 @@ const SideBar = () => {
       }}
     >
       <div className="m-5">
-        <h1 className="text-white font-bold md:text-2xl lg:text-3xl">
+        {/* <h1 className="text-white font-bold md:text-2xl lg:text-3xl">
           Sarkar Group
-        </h1>
+        </h1> */}
+        <img src={logo} alt="logo" />
       </div>
       <Menu
         theme="dark"
