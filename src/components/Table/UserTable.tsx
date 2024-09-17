@@ -1,3 +1,10 @@
+import { Button, Table } from "antd";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGetTravellingsQuery } from "../../redux/api/api";
+import { TUSer } from "../../types/tableType";
+import Loading from "../ui/Loading";
+
 const UserTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
@@ -5,71 +12,40 @@ const UserTable = () => {
 
   const colums = [
     {
-      title: "SL No",
-      dataIndex: "SL No",
-      key: "SL No",
-    },
-
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: "Particulars",
-      dataIndex: "particulars",
-      key: "particulars",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+      title: "Password",
+      dataIndex: "password",
+      key: "password",
     },
     {
-      title: "Remark",
-      dataIndex: "remark",
-      key: "remark",
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
-      title: "Buyer ID",
-      dataIndex: "buyer ID",
-      key: "buyer ID",
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
     },
     {
-      title: "Order No",
-      dataIndex: "order No",
-      key: "order No",
-    },
-    {
-      title: "Pay To",
-      dataIndex: "pay",
-      key: "pay",
-    },
-    {
-      title: "Payment Type",
-      dataIndex: "payment",
-      key: "payment",
-    },
-    {
-      title: "Unit",
-      dataIndex: "unit",
-      key: "unit",
-    },
-    {
-      title: "Unit Price",
-      dataIndex: "unit price",
-      key: "unit price",
-    },
-    {
-      title: "Total Price",
-      dataIndex: "total price",
-      key: "total price",
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
     {
       title: "Action",
       key: "action",
-      render: (_: number, record: TTravel) => (
-        <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
+      render: (_: number, record: TUSer) => (
+        <Button type="link" onClick={() => navigate(`/user/${record.email}`)}>
           View Details
         </Button>
       ),
@@ -87,7 +63,7 @@ const UserTable = () => {
       className="table-auto"
       bordered
       columns={colums}
-      dataSource={data?.travelling}
+    //   dataSource={data?.travelling}
       rowKey="id"
       pagination={{
         current: currentPage,
