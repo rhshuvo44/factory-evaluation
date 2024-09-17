@@ -1,8 +1,19 @@
+import Evaluation from "../components/Table/Evaluation";
+import RunningCostTable from "../components/Table/RunningCostTable";
+import SectionTitle from "../components/ui/SectionTitle";
+
 const Dashboard = () => {
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <>
+      <SectionTitle title="Factory Running Cost" />
+      <div className="responsive-table-container">
+        <RunningCostTable />
+      </div>
+      <SectionTitle title="Factory Evaluation Cost" />
+      <div className="responsive-table-container">
+        <Evaluation />
+      </div>
+    </>
   );
 };
 

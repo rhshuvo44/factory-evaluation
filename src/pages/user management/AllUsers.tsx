@@ -1,11 +1,10 @@
 import UserTable from "../../components/Table/UserTable";
+import SectionTitle from "../../components/ui/SectionTitle";
 
 const AllUsers = () => {
   return (
     <>
-      <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-center mb-2">
-        All Users Data
-      </h1>
+      <SectionTitle title="All Users Data" />
 
       <div className="responsive-table-container">
         <UserTable />

@@ -1,11 +1,11 @@
 import SalaryAddForm from "../../components/ui/form/SalaryAddForm";
+import SectionTitle from "../../components/ui/SectionTitle";
 
 const SalaryForm = () => {
   return (
     <>
-      <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-center mb-2">
-        All Salary Add form
-      </h1>
+      <SectionTitle title="Salary Add Form" />
+
       <div>
         <SalaryAddForm />
       </div>

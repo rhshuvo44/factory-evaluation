@@ -1,11 +1,11 @@
 import BuyerDevelopmentAdd from "../../components/ui/form/BuyerDevelopmentAdd";
+import SectionTitle from "../../components/ui/SectionTitle";
 
 const BuyerDevelopmentForm = () => {
   return (
     <>
-      <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-center mb-2">
-        Buyer Development Cost Add form
-      </h1>
+      <SectionTitle title=" Buyer Development Cost Add form" />
+
       <div>
         <BuyerDevelopmentAdd />
       </div>

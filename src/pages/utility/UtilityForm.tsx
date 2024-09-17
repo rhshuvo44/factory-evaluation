@@ -1,11 +1,11 @@
 import UtilityAddForm from "../../components/ui/form/UtilityAddForm";
+import SectionTitle from "../../components/ui/SectionTitle";
 
 const UtilityForm = () => {
   return (
     <>
-      <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-center mb-2">
-        Utility Add form
-      </h1>
+      <SectionTitle title="Utility Add form" />
+
       <div>
         <UtilityAddForm />
       </div>

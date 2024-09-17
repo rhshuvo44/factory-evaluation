@@ -1,9 +1,10 @@
 import { Avatar, Dropdown, Layout, MenuProps } from "antd";
+import { NavLink } from "react-router-dom";
 import userImg from "../../assets/image/user.jpg";
 const { Header } = Layout;
 const items: MenuProps["items"] = [
   {
-    label: "Profile",
+    label: <NavLink to={`/me`}>Profile</NavLink>,
     key: "profile",
   },
   {
@@ -23,22 +24,6 @@ const HeaderMenu = () => {
   const date = new Date();
   return (
     <Header className="flex items-center gap-1 md:gap-5 justify-between">
-      {/* <div className="flex justify-content-center items-center text-white">
-        <h1 className="text-white font-bold md:text-2xl lg:text-3xl">
-          Sarkar Group
-        </h1>
-      </div> */}
-      {/* <Button
-        type="text"
-        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => setCollapsed(!collapsed)}
-        style={{
-          fontSize: "16px",
-          width: 64,
-          height: 64,
-          color: "white",
-        }}
-      /> */}
       <div className="flex items-center md:px-8 text-white justify-center">
         <h3 className="text-sm md:font-bold md:text-2xl lg:text-3xl capitalize text-primary md:mr-3">
           Hello Ripon,

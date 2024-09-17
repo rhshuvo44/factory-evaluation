@@ -1,11 +1,11 @@
 import TravellingForm from "../../components/ui/form/TravellingForm";
+import SectionTitle from "../../components/ui/SectionTitle";
 
 const TravellingAllowanceForm = () => {
   return (
     <>
-      <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-center mb-2">
-        Travelling Allowance form
-      </h1>
+      <SectionTitle title=" Travelling Allowance Form" />
+
       <div>
         <TravellingForm />
       </div>

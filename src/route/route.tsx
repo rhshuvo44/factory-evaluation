@@ -11,6 +11,16 @@ import { managingPaths } from "./ManagingDirector.routes";
 
 export const router = createBrowserRouter([
   {
+    path: "/me",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Profile />,
+      },
+    ],
+  },
+  {
     path: "/admin",
     element: <App />,
     children: routeGenerator(adminPaths),
@@ -38,9 +48,5 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
   },
 ]);
