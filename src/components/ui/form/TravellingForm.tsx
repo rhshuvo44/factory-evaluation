@@ -1,5 +1,8 @@
-import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
-import { TTravel } from "../../types/tableType";
+import { Button, DatePicker, Form, Select } from "antd";
+import { TTravel } from "../../../types/tableType";
+import CustomInput from "../../form/CustomInput";
+import CustomInputNumber from "../../form/CustomInputNumber";
+import CustomTextArea from "../../form/CustomTextArea";
 
 const formItemLayout = {
   labelCol: {
@@ -12,7 +15,7 @@ const formItemLayout = {
   },
 };
 
-const CommonForm = () => {
+const TravellingForm = () => {
   const onFinish = (values: TTravel) => {
     console.log("Received values of form: ", values);
     // Call your backend API to handle the login request
@@ -21,58 +24,39 @@ const CommonForm = () => {
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish}>
-      <Form.Item
+      <CustomInputNumber
         label="SL No"
         name="slNo"
-        rules={[{ required: true, message: "Please input SL No" }]}
-      >
-        <InputNumber style={{ width: "100%" }} />
-      </Form.Item>
+        message="Please input SL No"
+      />
 
-      <Form.Item
+      <CustomInput
         label="Particulars"
         name="particulars"
-        rules={[{ required: true, message: "Please input! Particulars" }]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
+        message="Please input! Particulars"
+      />
+      <CustomTextArea
         label="Description"
         name="description"
-        rules={[{ required: true, message: "Please input! Description" }]}
-      >
-        <Input.TextArea />
-      </Form.Item>
-
-      <Form.Item
+        message="Please input! Description"
+      />
+      <CustomInput
         label="Remark"
         name="remark"
-        rules={[{ required: true, message: "Please input! Remark" }]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
+        message="Please input! Remark"
+      />
+      <CustomInput
         label="Buyer ID"
         name="buyerId"
-        rules={[{ required: true, message: "Please input! Buyer ID" }]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
+        message="Please input! Buyer ID"
+      />
+      <CustomInput
         label="Order No"
         name="orderNo"
-        rules={[{ required: true, message: "Please input! Order No" }]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Pay to"
-        name="payTo"
-        rules={[{ required: true, message: "Please input! Pay to" }]}
-      >
-        <Input />
-      </Form.Item>
+        message="Please input! Order No"
+      />
+      <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
+
       <Form.Item
         label="Date"
         name="date"
@@ -80,6 +64,7 @@ const CommonForm = () => {
       >
         <DatePicker style={{ width: "100%" }} />
       </Form.Item>
+
       <Form.Item
         label="Payment Type"
         name="paymentType"
@@ -95,28 +80,21 @@ const CommonForm = () => {
           ]}
         />
       </Form.Item>
-
-      <Form.Item
+      <CustomInputNumber
         label="Unit"
         name="unit"
-        rules={[{ required: true, message: "Please input! Unit" }]}
-      >
-        <InputNumber style={{ width: "100%" }} />
-      </Form.Item>
-      <Form.Item
+        message="Please input! Unit"
+      />
+      <CustomInputNumber
         label="Unit Price"
         name="unitPrice"
-        rules={[{ required: true, message: "Please input! Unit Price" }]}
-      >
-        <InputNumber style={{ width: "100%" }} />
-      </Form.Item>
-      <Form.Item
+        message="Please input! Unit Price"
+      />
+      <CustomInputNumber
         label="Total Price"
         name="totalPrice"
-        rules={[{ required: true, message: "Please input! Total Price" }]}
-      >
-        <InputNumber style={{ width: "100%" }} />
-      </Form.Item>
+        message="Please input! Total Price"
+      />
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
         <Button type="primary" htmlType="submit">
@@ -127,4 +105,4 @@ const CommonForm = () => {
   );
 };
 
-export default CommonForm;
+export default TravellingForm;

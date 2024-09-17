@@ -1,4 +1,4 @@
-import CommonForm from "../../components/form/CommonForm";
+import MiscellaneousForm from "../../components/ui/form/MiscellaneousForm";
 
 const Miscellaneous = () => {
   return (
@@ -7,7 +7,7 @@ const Miscellaneous = () => {
         Miscellaneous form
       </h1>
       <div>
-        <CommonForm />
+        <MiscellaneousForm />
       </div>
     </>
   );

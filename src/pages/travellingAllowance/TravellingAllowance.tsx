@@ -1,4 +1,5 @@
-import CommonForm from "../../components/form/CommonForm";
+import TravellingForm from "../../components/ui/form/TravellingForm";
+
 
 const TravellingAllowance = () => {
   return (
@@ -7,7 +8,7 @@ const TravellingAllowance = () => {
         Travelling Allowance form
       </h1>
       <div>
-        <CommonForm />
+        <TravellingForm />
       </div>
     </>
   );
