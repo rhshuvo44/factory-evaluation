@@ -18,8 +18,8 @@ const userRole = {
 const SideBar = () => {
   // const token = useAppSelector(useCurrentToken);
   const user = {
-    role: userRole.ADMIN,
-    // role: userRole.ExecutiveDirector,
+    // role: userRole.ADMIN,
+    role: userRole.ExecutiveDirector,
     // role: userRole.ManagingDirector,
     // role: userRole.GeneralManager,
     // role: userRole.Coordinator,

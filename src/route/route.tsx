@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../pages/Login";
+import Profile from "../pages/Profile";
 import { routeGenerator } from "../utilis/routesGenerator";
 import { adminPaths } from "./admin.routes";
 import { coordinatorPaths } from "./Coordinator.routes";
@@ -37,5 +38,9 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);

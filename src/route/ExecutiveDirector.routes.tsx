@@ -1,4 +1,12 @@
+import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
+import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
 import Dashboard from "../pages/Dashboard";
+import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
+import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
+import Salary from "../pages/salary/Salary";
+import SalaryForm from "../pages/salary/SalaryForm";
+import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
+import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 
 export const executivePaths = [
   {
@@ -12,12 +20,12 @@ export const executivePaths = [
       {
         name: "Add Travel Allowance",
         path: "add_travel_allowance",
-        element: "Travel Allowance",
+        element: <TravellingAllowanceForm />,
       },
       {
         name: "All Travel Allowance",
         path: "all_travel_allowance",
-        element: "Travel Allowance",
+        element: <TravellingAllowance />,
       },
     ],
   },
@@ -27,12 +35,12 @@ export const executivePaths = [
       {
         name: "Add Miscellaneous cost",
         path: "add_misc_cost",
-        element: "Miscellaneous cost",
+        element: <MiscellaneousForm />,
       },
       {
         name: "All Miscellaneous cost",
         path: "all_misc_cost",
-        element: "All Miscellaneous cost",
+        element: <Miscellaneous />,
       },
     ],
   },
@@ -42,12 +50,12 @@ export const executivePaths = [
       {
         name: "Add Buyer Development cost",
         path: "add_buyer_development",
-        element: "Buyer Development cost",
+        element: <BuyerDevelopmentForm />,
       },
       {
         name: "All Buyer Development cost",
         path: "all_buyer_development",
-        element: "All Buyer Development cost",
+        element: <BuyerDevelopment />,
       },
     ],
   },
@@ -57,12 +65,12 @@ export const executivePaths = [
       {
         name: "Add Employee salary cost",
         path: "add_salary_cost",
-        element: "Employee salary cost",
+        element: <SalaryForm />,
       },
       {
         name: "All Employee salary cost",
         path: "all_salary_cost",
-        element: "All Employee salary cost",
+        element: <Salary />,
       },
     ],
   },
