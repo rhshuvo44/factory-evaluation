@@ -1,5 +1,6 @@
 
 export type PaymentType = 'Monthly' | 'Day' | 'Once';
+export type userRole = "admin" | "executive-director" | "managing-director" | "general-director" | "coordinator"
 
 export type TTravel = {
     slNo: number;
@@ -57,12 +58,19 @@ export type TSalary = {
     grossPerDaySalary: number;
 }
 
-
-
 export type TUtility = {
     internet: number;
     water: string;
     electricity: string;
     others?: string;
+}
+
+export type TUSer = {
+    name: number;
+    email: string;
+    password: string;
+    phone: string;
+    role: userRole;
+    address: string;
 }
 

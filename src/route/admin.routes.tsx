@@ -7,6 +7,8 @@ import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
+import AddUser from "../pages/user management/AddUser";
+import AllUsers from "../pages/user management/AllUsers";
 import Utility from "../pages/utility/Utility";
 import UtilityForm from "../pages/utility/UtilityForm";
 
@@ -172,12 +174,12 @@ export const adminPaths = [
       {
         name: "Add User",
         path: "addUser",
-        element: "addUser",
+        element: <AddUser />,
       },
       {
         name: "All Users",
         path: "allUsers",
-        element: "allUsers",
+        element: <AllUsers />,
       },
     ],
   },
