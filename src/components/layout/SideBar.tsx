@@ -1,12 +1,12 @@
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
+import logo from "../../assets/image/logo.png";
 import { adminPaths } from "../../route/admin.routes";
 import { coordinatorPaths } from "../../route/Coordinator.routes";
 import { executivePaths } from "../../route/ExecutiveDirector.routes";
 import { generalPaths } from "../../route/generalDirector.routes";
 import { managingPaths } from "../../route/ManagingDirector.routes";
 import { sidebarItemsGenerator } from "../../utilis/sidebarItemsGenerator";
-import logo from "../../assets/image/logo.png";
 const userRole = {
   ADMIN: "admin",
   ExecutiveDirector: "executive-director",

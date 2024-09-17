@@ -41,7 +41,7 @@ const UserForm = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="user"
+          defaultValue="Select User Role"
           options={[
             { value: "admin", label: "Admin" },
             { value: "executive-director", label: "Executive Director" },

@@ -173,12 +173,12 @@ export const adminPaths = [
     children: [
       {
         name: "Add User",
-        path: "addUser",
+        path: "add_user",
         element: <AddUser />,
       },
       {
         name: "All Users",
-        path: "allUsers",
+        path: "all_users",
         element: <AllUsers />,
       },
     ],

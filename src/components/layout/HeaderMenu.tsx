@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, Layout, MenuProps } from "antd";
+import { Avatar, Button, Dropdown, Layout, MenuProps } from "antd";
 import { NavLink } from "react-router-dom";
 import userImg from "../../assets/image/user.jpg";
 const { Header } = Layout;
@@ -16,8 +16,8 @@ const items: MenuProps["items"] = [
     type: "divider",
   },
   {
-    label: "Logout",
-    key: "1",
+    label:<Button>Logout</Button>,
+    key: "logout",
   },
 ];
 const HeaderMenu = () => {
