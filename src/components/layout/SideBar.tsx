@@ -67,7 +67,7 @@ const SideBar = () => {
       width={250}
       breakpoint="lg"
       collapsedWidth="0"
-      className="overflow-auto"
+      className="overflow-auto h-[100%]"
     >
       <div className="m-5">
         <h1 className="text-white font-bold md:text-2xl lg:text-3xl">

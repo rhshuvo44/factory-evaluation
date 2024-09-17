@@ -1,4 +1,6 @@
 import Dashboard from "../pages/Dashboard";
+import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
+import TravellingAllowanceTable from "../pages/travellingAllowance/TravellingAllowanceTable";
 
 export const adminPaths = [
   {
@@ -12,12 +14,12 @@ export const adminPaths = [
       {
         name: "Add Travel Allowance",
         path: "add_travel_allowance",
-        element: "Travel Allowance",
+        element: <TravellingAllowance />,
       },
       {
         name: "All Travel Allowance",
         path: "all_travel_allowance",
-        element: "Travel Allowance",
+        element: <TravellingAllowanceTable />,
       },
     ],
   },

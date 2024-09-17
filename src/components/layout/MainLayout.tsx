@@ -12,12 +12,7 @@ const MainLayout = () => {
       <Layout>
         <HeaderMenu />
         <Content style={{ margin: "24px 16px 0" }}>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-            }}
-          >
+          <div>
             <Outlet />
           </div>
         </Content>
