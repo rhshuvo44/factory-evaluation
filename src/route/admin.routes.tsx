@@ -7,6 +7,8 @@ import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
+import Utility from "../pages/utility/Utility";
+import UtilityForm from "../pages/utility/UtilityForm";
 
 export const adminPaths = [
   {
@@ -110,12 +112,12 @@ export const adminPaths = [
       {
         name: "Add Utility Bill",
         path: "add_bill",
-        element: "Add Utility Bill",
+        element: <UtilityForm />,
       },
       {
         name: "All Utility Bill",
         path: "all_bill",
-        element: "Add Utility Bill",
+        element: <Utility />,
       },
     ],
   },

@@ -56,3 +56,13 @@ export type TSalary = {
     overTimeRate: number;
     grossPerDaySalary: number;
 }
+
+
+
+export type TUtility = {
+    internet: number;
+    water: string;
+    electricity: string;
+    others?: string;
+}
+
