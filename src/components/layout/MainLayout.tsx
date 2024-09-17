@@ -7,14 +7,12 @@ const { Content } = Layout;
 
 const MainLayout = () => {
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "100%" }}>
       <SideBar />
       <Layout>
         <HeaderMenu />
         <Content style={{ margin: "24px 16px 0" }}>
-          <div>
-            <Outlet />
-          </div>
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
