@@ -2,7 +2,7 @@
 export type PaymentType = 'Monthly' | 'Day' | 'Once';
 
 export type TTravel = {
-    _id: string;
+
     slNo: number;
     date: Date;
     particulars: string;

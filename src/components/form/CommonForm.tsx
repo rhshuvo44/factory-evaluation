@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Select } from "antd";
+import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
 import { TTravel } from "../../types/tableType";
 
 const formItemLayout = {
@@ -20,19 +20,19 @@ const CommonForm = () => {
     // You can use the following code as a reference:
   };
   return (
-    <Form {...formItemLayout} style={{ maxWidth: 600 }} onFinish={onFinish}>
+    <Form {...formItemLayout} onFinish={onFinish}>
       <Form.Item
         label="SL No"
         name="slNo"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input SL No" }]}
       >
-        <Input />
+        <InputNumber style={{ width: "100%" }} />
       </Form.Item>
 
       <Form.Item
         label="Particulars"
         name="particulars"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Particulars" }]}
       >
         <Input />
       </Form.Item>
@@ -40,7 +40,7 @@ const CommonForm = () => {
       <Form.Item
         label="Description"
         name="description"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Description" }]}
       >
         <Input.TextArea />
       </Form.Item>
@@ -48,46 +48,46 @@ const CommonForm = () => {
       <Form.Item
         label="Remark"
         name="remark"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Remark" }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label="Buyer ID"
         name="buyerId"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Buyer ID" }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label="Order No"
         name="orderNo"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Order No" }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label="Pay to"
         name="payTo"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Pay to" }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label="Date"
         name="date"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Date" }]}
       >
-        <DatePicker />
+        <DatePicker style={{ width: "100%" }} />
       </Form.Item>
       <Form.Item
         label="Payment Type"
         name="paymentType"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please select Payment type! " }]}
       >
         <Select
+          style={{ width: "100%" }}
           defaultValue="monthly"
-          style={{ width: 120 }}
           options={[
             { value: "monthly", label: "Monthly" },
             { value: "day", label: "Day" },
@@ -99,23 +99,23 @@ const CommonForm = () => {
       <Form.Item
         label="Unit"
         name="unit"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Unit" }]}
       >
-        <Input />
+        <InputNumber style={{ width: "100%" }} />
       </Form.Item>
       <Form.Item
         label="Unit Price"
         name="unitPrice"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Unit Price" }]}
       >
-        <Input />
+        <InputNumber style={{ width: "100%" }} />
       </Form.Item>
       <Form.Item
         label="Total Price"
         name="totalPrice"
-        rules={[{ required: true, message: "Please input!" }]}
+        rules={[{ required: true, message: "Please input! Total Price" }]}
       >
-        <Input />
+        <InputNumber style={{ width: "100%" }} />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
