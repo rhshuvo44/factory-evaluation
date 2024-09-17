@@ -39,11 +39,11 @@ const HeaderMenu = () => {
           color: "white",
         }}
       /> */}
-      <div className="flex items-center px-8 text-white justify-center">
-        <h3 className="font-bold md:text-2xl lg:text-3xl capitalize text-primary mr-3">
+      <div className="flex items-center md:px-8 text-white justify-center">
+        <h3 className="text-sm md:font-bold md:text-2xl lg:text-3xl capitalize text-primary mr-3">
           Hello Ripon,
         </h3>
-        <p className="lg:mt-3"> {date.toDateString()}</p>
+        <p className="hidden md:block lg:mt-3"> {date.toDateString()}</p>
       </div>
 
       <Dropdown menu={{ items }} trigger={["click"]}>

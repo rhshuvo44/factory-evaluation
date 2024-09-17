@@ -12,7 +12,13 @@ const MainLayout = () => {
       <Layout>
         <HeaderMenu />
         <Content style={{ margin: "24px 16px 0" }}>
-          <Outlet />
+          <div
+            style={{
+              padding: 24,
+            }}
+          >
+            <Outlet />
+          </div>
         </Content>
       </Layout>
     </Layout>
