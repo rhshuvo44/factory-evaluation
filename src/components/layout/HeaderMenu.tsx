@@ -1,5 +1,4 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Avatar, Button, Dropdown, Layout, MenuProps } from "antd";
+import { Avatar, Dropdown, Layout, MenuProps } from "antd";
 import userImg from "../../assets/image/user.jpg";
 const { Header } = Layout;
 const items: MenuProps["items"] = [
@@ -20,7 +19,7 @@ const items: MenuProps["items"] = [
     key: "1",
   },
 ];
-const HeaderMenu = ({ collapsed, setCollapsed }: any) => {
+const HeaderMenu = () => {
   const date = new Date();
   return (
     <Header className="flex items-center gap-5 justify-between">
@@ -29,7 +28,7 @@ const HeaderMenu = ({ collapsed, setCollapsed }: any) => {
           Sarkar Group
         </h1>
       </div> */}
-      <Button
+      {/* <Button
         type="text"
         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         onClick={() => setCollapsed(!collapsed)}
@@ -39,7 +38,7 @@ const HeaderMenu = ({ collapsed, setCollapsed }: any) => {
           height: 64,
           color: "white",
         }}
-      />
+      /> */}
       <div className="flex items-center px-8 text-white justify-center">
         <h3 className="font-bold md:text-2xl lg:text-3xl capitalize text-primary mr-3">
           Hello Ripon,

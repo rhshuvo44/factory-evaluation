@@ -15,7 +15,7 @@ const userRole = {
   Coordinator: "coordinator",
 };
 
-const SideBar = ({ collapsed }: any) => {
+const SideBar = () => {
   // const token = useAppSelector(useCurrentToken);
   const user = {
     role: userRole.ADMIN,
@@ -68,12 +68,16 @@ const SideBar = ({ collapsed }: any) => {
         width: "100%",
       }}
       width={250}
+      // className="overflow-auto"
+
       breakpoint="lg"
       collapsedWidth="0"
-      trigger={null}
-      collapsible
-      collapsed={collapsed}
-      className="overflow-auto"
+      onBreakpoint={(broken) => {
+        console.log(broken);
+      }}
+      onCollapse={(collapsed, type) => {
+        console.log(collapsed, type);
+      }}
     >
       <div className="m-5">
         <h1 className="text-white font-bold md:text-2xl lg:text-3xl">
