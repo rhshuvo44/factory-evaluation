@@ -1,4 +1,4 @@
-import CommonTable from "../../components/Table/CommonTable";
+import TravellingTable from "../../components/Table/TravellingTable";
 
 const TravellingAllowanceTable = () => {
   return (
@@ -6,8 +6,9 @@ const TravellingAllowanceTable = () => {
       <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-center mb-2">
         Travelling Allowance
       </h1>
+
       <div className="responsive-table-container">
-        <CommonTable />
+        <TravellingTable />
       </div>
     </>
   );

@@ -13,3 +13,13 @@
   width: 0px;
 }
 
+.responsive-table-container {
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .responsive-table-container {
+    width: 100%;
+    overflow-x: scroll;
+  }
+}

@@ -1,21 +1,16 @@
 import { Button, Table } from "antd";
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetTravellingsQuery } from "../../redux/api/api";
 import { TTravel } from "../../types/tableType";
 import Loading from "../ui/Loading";
 
-const CommonTable = () => {
+const TravellingTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const { data, isError, isLoading } = useGetTravellingsQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
   const navigate = useNavigate();
 
-  const columns = [
+  const colums = [
     {
       title: "SL No",
       dataIndex: "SL No",
@@ -87,6 +82,10 @@ const CommonTable = () => {
       ),
     },
   ];
+  const { data, isError, isLoading } = useGetTravellingsQuery({
+    limit: pageSize,
+    skip: (currentPage - 1) * pageSize,
+  });
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
@@ -94,7 +93,7 @@ const CommonTable = () => {
     <Table
       className="table-auto"
       bordered
-      columns={columns}
+      columns={colums}
       dataSource={data?.travelling}
       rowKey="id"
       pagination={{
@@ -110,4 +109,4 @@ const CommonTable = () => {
   );
 };
 
-export default CommonTable;
+export default TravellingTable;

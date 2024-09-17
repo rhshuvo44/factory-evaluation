@@ -15,7 +15,7 @@ const MainLayout = () => {
           <div
             style={{
               padding: 24,
-              overflow: "hidden",
+              // overflow: "hidden",
             }}
           >
             <Outlet />

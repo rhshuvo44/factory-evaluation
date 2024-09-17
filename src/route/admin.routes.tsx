@@ -1,4 +1,6 @@
 import Dashboard from "../pages/Dashboard";
+import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
+import MiscellaneousTable from "../pages/Miscellaneous/MiscellaneousTable";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceTable from "../pages/travellingAllowance/TravellingAllowanceTable";
 
@@ -29,12 +31,12 @@ export const adminPaths = [
       {
         name: "Add Miscellaneous cost",
         path: "add_misc_cost",
-        element: "Miscellaneous cost",
+        element: <Miscellaneous />,
       },
       {
         name: "All Miscellaneous cost",
         path: "all_misc_cost",
-        element: "All Miscellaneous cost",
+        element: <MiscellaneousTable />,
       },
     ],
   },
