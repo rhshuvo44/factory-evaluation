@@ -30,3 +30,19 @@ export type TMiscellaneous = {
     totalPrice: number;
 }
 
+
+export type TBuyer = {
+    slNo: number;
+    date: Date;
+    particulars: string;
+    description: string;
+    quantity: number
+    buyerId: string;
+    orderNo: string;
+    payTo: string;
+    paymentType: PaymentType;
+    unit: number;
+    unitPrice: number;
+    totalPrice: number;
+}
+

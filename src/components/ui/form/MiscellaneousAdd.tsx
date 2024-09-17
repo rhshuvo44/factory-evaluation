@@ -15,7 +15,7 @@ const formItemLayout = {
   },
 };
 
-const MiscellaneousForm = () => {
+const MiscellaneousAdd = () => {
   const onFinish = (values: TMiscellaneous) => {
     console.log("Received values of form: ", values);
     // Call your backend API to handle the login request
@@ -105,4 +105,4 @@ const MiscellaneousForm = () => {
   );
 };
 
-export default MiscellaneousForm;
+export default MiscellaneousAdd;

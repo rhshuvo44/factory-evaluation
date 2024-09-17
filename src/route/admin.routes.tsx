@@ -1,8 +1,10 @@
+import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
+import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
 import Dashboard from "../pages/Dashboard";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
-import MiscellaneousTable from "../pages/Miscellaneous/MiscellaneousTable";
+import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
-import TravellingAllowanceTable from "../pages/travellingAllowance/TravellingAllowanceTable";
+import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 
 export const adminPaths = [
   {
@@ -16,12 +18,12 @@ export const adminPaths = [
       {
         name: "Add Travel Allowance",
         path: "add_travel_allowance",
-        element: <TravellingAllowance />,
+        element: <TravellingAllowanceForm />,
       },
       {
         name: "All Travel Allowance",
         path: "all_travel_allowance",
-        element: <TravellingAllowanceTable />,
+        element: <TravellingAllowance />,
       },
     ],
   },
@@ -31,12 +33,12 @@ export const adminPaths = [
       {
         name: "Add Miscellaneous cost",
         path: "add_misc_cost",
-        element: <Miscellaneous />,
+        element: <MiscellaneousForm />,
       },
       {
         name: "All Miscellaneous cost",
         path: "all_misc_cost",
-        element: <MiscellaneousTable />,
+        element: <Miscellaneous />,
       },
     ],
   },
@@ -46,12 +48,12 @@ export const adminPaths = [
       {
         name: "Add Buyer Development cost",
         path: "add_buyer_development",
-        element: "Buyer Development cost",
+        element: <BuyerDevelopmentForm />,
       },
       {
         name: "All Buyer Development cost",
         path: "all_buyer_development",
-        element: "All Buyer Development cost",
+        element: <BuyerDevelopment />,
       },
     ],
   },
