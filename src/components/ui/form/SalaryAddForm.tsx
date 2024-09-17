@@ -1,7 +1,7 @@
-import { Form } from "antd";
+import { Button, Form } from "antd";
 import { TSalary } from "../../../types/tableType";
-import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomInput from "../../form/CustomInput";
+import CustomInputNumber from "../../form/CustomInputNumber";
 
 const formItemLayout = {
   labelCol: {
@@ -23,75 +23,53 @@ const SalaryAddForm = () => {
   return (
     <Form {...formItemLayout} onFinish={onFinish}>
       <CustomInputNumber
-        label="SL No"
-        name="slNo"
-        message="Please input SL No"
+        label="Employee ID"
+        name="employeeID"
+        message="Please input Employee ID"
       />
 
       <CustomInput
-        label="Particulars"
-        name="particulars"
-        message="Please input! Particulars"
+        label="Employee Photo"
+        name="employeeImg"
+        message="Please input! Employee Photo"
       />
-      <CustomTextArea
-        label="Description"
-        name="description"
-        message="Please input! Description"
-      />
-      <CustomInput
-        label="Quantity"
-        name="quantity"
-        message="Please input! Quantity"
-      />
-      <CustomInput
-        label="Buyer ID"
-        name="buyerId"
-        message="Please input! Buyer ID"
-      />
-      <CustomInput
-        label="Order No"
-        name="orderNo"
-        message="Please input! Order No"
-      />
-      <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
 
-      <Form.Item
-        label="Date"
-        name="date"
-        rules={[{ required: true, message: "Please input! Date" }]}
-      >
-        <DatePicker style={{ width: "100%" }} />
-      </Form.Item>
+      <CustomInput label="Name" name="name" message="Please input! Name" />
+      <CustomInput
+        label="Designation"
+        name="designation"
+        message="Please input! Designation"
+      />
+      <CustomInputNumber
+        label="Working Days"
+        name="workingDays"
+        message="Please input! Working Days"
+      />
 
-      <Form.Item
-        label="Payment Type"
-        name="paymentType"
-        rules={[{ required: true, message: "Please select Payment type! " }]}
-      >
-        <Select
-          style={{ width: "100%" }}
-          defaultValue="monthly"
-          options={[
-            { value: "monthly", label: "Monthly" },
-            { value: "day", label: "Day" },
-            { value: "once", label: "Once" },
-          ]}
-        />
-      </Form.Item>
       <CustomInputNumber
-        label="Unit"
-        name="unit"
-        message="Please input! Unit"
+        label="Salary"
+        name="salary"
+        message="Please input! Salary"
       />
       <CustomInputNumber
-        label="Unit Price"
-        name="unitPrice"
-        message="Please input! Unit Price"
+        label="Per Day Salary"
+        name="perDaySalary"
+        message="Please input! Per Day Salary"
       />
       <CustomInputNumber
-        label="Total Price"
-        name="totalPrice"
-        message="Please input! Total Price"
+        label="Over Time"
+        name="overTime"
+        message="Please input! Over Time"
+      />
+      <CustomInputNumber
+        label="Over Time Rate"
+        name="overTimeRate"
+        message="Please input! Over Time Rate"
+      />
+      <CustomInputNumber
+        label="Gross Per Day Salary"
+        name="grossPerDaySalary"
+        message="Please input! Gross Per Day Salary"
       />
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
