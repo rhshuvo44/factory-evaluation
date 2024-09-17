@@ -22,3 +22,6 @@ export const baseApi = createApi({
 })
 
 export const { useGetTravelQuery, useGetTravellingsQuery, useUpdateTravellingMutation } = baseApi
+
+
+

@@ -23,23 +23,23 @@ const UtilityAddForm = () => {
       <CustomInputNumber
         label="Internet"
         name="internet"
-        message="Please input Internet"
+        message="Please input Internet Bill"
       />
       <CustomInputNumber
         label="Water"
         name="water"
-        message="Please input Water"
+        message="Please input Water bill"
       />
       <CustomInputNumber
         label="Electricity"
         name="electricity"
-        message="Please input Electricity"
+        message="Please input Electricity bill"
       />
 
       <Form.Item
         label="Others"
         name="others"
-        rules={[{ required: false, message: "Please input Others" }]}
+        rules={[{ required: false, message: "Please input Others Bill" }]}
       >
         <InputNumber style={{ width: "100%" }} />
       </Form.Item>

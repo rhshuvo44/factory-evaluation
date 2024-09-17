@@ -1,8 +1,7 @@
-import { Button, Form, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { TUSer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomTextArea from "../../form/CustomTextArea";
-
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -25,11 +24,15 @@ const UserForm = () => {
     <Form {...formItemLayout} onFinish={onFinish}>
       <CustomInput label="Name" name="name" message="Please input Name" />
       <CustomInput label="Email" name="email" message="Please input Email" />
-      <CustomInput
+
+      <Form.Item
         label="Password"
         name="password"
-        message="Please input Password"
-      />
+        rules={[{ required: true, message: "Please input Password" }]}
+      >
+        <Input.Password style={{ width: "100%" }} />
+      </Form.Item>
+
       <CustomInput label="Phone" name="phone" message="Please input Phone" />
       <Form.Item
         label="User Role"

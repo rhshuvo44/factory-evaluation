@@ -41,11 +41,7 @@ const Login = () => {
           name="password"
           rules={[{ required: true, message: "Please input your Password!" }]}
         >
-          <Input
-            prefix={<LockOutlined />}
-            type="password"
-            placeholder="Password"
-          />
+          <Input.Password prefix={<LockOutlined />} placeholder="Password" />
         </Form.Item>
         <Form.Item>
           <Flex justify="space-between" align="center">
