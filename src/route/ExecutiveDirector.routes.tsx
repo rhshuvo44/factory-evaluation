@@ -1,6 +1,12 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
+import Collection from "../pages/Collection/Collection";
+import CollectionForm from "../pages/Collection/CollectionForm";
 import Dashboard from "../pages/Dashboard";
+import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
+import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
+import Loan from "../pages/loan/Loan";
+import LoanForm from "../pages/loan/LoanForm";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import Salary from "../pages/salary/Salary";
@@ -80,12 +86,12 @@ export const executivePaths = [
       {
         name: "Add Factory Development cost",
         path: "add_factory_development",
-        element: "Add Factory Development cost",
+        element: <FactoryDevelopmentForm />,
       },
       {
         name: "All Factory Development cost",
         path: "all_factory_development",
-        element: "All Factory Development cost",
+        element: <FactoryDevelopment />,
       },
     ],
   },
@@ -95,12 +101,12 @@ export const executivePaths = [
       {
         name: "Add Loan Return",
         path: "add_loan",
-        element: "Add Loan",
+        element: <LoanForm />,
       },
       {
         name: "All Loan Return",
         path: "all_loan",
-        element: "All Loan",
+        element: <Loan />,
       },
     ],
   },
@@ -110,12 +116,12 @@ export const executivePaths = [
       {
         name: "Add Collection",
         path: "add_collection",
-        element: "Add Collection",
+        element: <CollectionForm />,
       },
       {
         name: "All Collection",
         path: "all-collection:",
-        element: "All Collection",
+        element: <Collection />,
       },
     ],
   },

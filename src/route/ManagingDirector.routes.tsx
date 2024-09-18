@@ -1,6 +1,10 @@
 import TravellingTable from "../components/Table/TravellingTable";
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
+import Collection from "../pages/Collection/Collection";
 import Dashboard from "../pages/Dashboard";
+import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
+import FixedCost from "../pages/Fixed cost/FixedCost";
+import Loan from "../pages/loan/Loan";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import Salary from "../pages/salary/Salary";
 import Utility from "../pages/utility/Utility";
@@ -34,12 +38,12 @@ export const managingPaths = [
   {
     name: "Factory Development cost",
     path: "all_factory_development",
-    element: "All Factory Development cost",
+    element: <FactoryDevelopment />,
   },
   {
     name: "Loan Return",
     path: "all_loan",
-    element: "All Loan",
+    element: <Loan />,
   },
   {
     name: "Utility Bill",
@@ -49,12 +53,12 @@ export const managingPaths = [
   {
     name: "Collection",
     path: "all-collection:",
-    element: "All Collection",
+    element: <Collection />,
   },
   {
     name: "Fixed cost",
     path: "all_fixed_cost",
-    element: "all Fixed cost",
+    element: <FixedCost />,
   },
   {
     name: "Production Report",

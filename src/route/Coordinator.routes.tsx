@@ -1,4 +1,13 @@
+import TravellingTable from "../components/Table/TravellingTable";
+import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
+import Collection from "../pages/Collection/Collection";
 import Dashboard from "../pages/Dashboard";
+import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
+import FixedCost from "../pages/Fixed cost/FixedCost";
+import Loan from "../pages/loan/Loan";
+import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
+import Salary from "../pages/salary/Salary";
+import Utility from "../pages/utility/Utility";
 
 export const coordinatorPaths = [
   {
@@ -8,59 +17,50 @@ export const coordinatorPaths = [
   },
   {
     name: "Travel Allowance",
-
     path: "all_travel_allowance",
-    element: "Travel Allowance",
+    element: <TravellingTable />,
   },
   {
     name: "Miscellaneous cost",
-
     path: "all_misc_cost",
-    element: "All Miscellaneous cost",
+    element: <Miscellaneous />,
   },
   {
     name: "Buyer Development cost",
-
     path: "all_buyer_development",
-    element: "All Buyer Development cost",
+    element: <BuyerDevelopment />,
   },
-
   {
     name: "Employee salary cost",
-
     path: "all_salary_cost",
-    element: "All Employee salary cost",
+    element: <Salary />,
   },
   {
     name: "Factory Development cost",
-
     path: "all_factory_development",
-    element: "All Factory Development cost",
+    element: <FactoryDevelopment />,
   },
   {
     name: "Loan Return",
-
     path: "all_loan",
-    element: "All Loan",
+    element: <Loan />,
   },
   {
     name: "Utility Bill",
-
     path: "all_bill",
-    element: "Add Utility Bill",
+    element: <Utility />,
   },
   {
     name: "Collection",
-
     path: "all-collection:",
-    element: "All Collection",
+    element: <Collection />,
   },
   {
     name: "Fixed cost",
-
     path: "all_fixed_cost",
-    element: "all Fixed cost",
+    element: <FixedCost />,
   },
+
   {
     name: "Production Report",
     children: [
