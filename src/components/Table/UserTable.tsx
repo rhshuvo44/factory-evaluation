@@ -22,11 +22,6 @@ const UserTable = () => {
       key: "email",
     },
     {
-      title: "Password",
-      dataIndex: "password",
-      key: "password",
-    },
-    {
       title: "Phone",
       dataIndex: "phone",
       key: "phone",
@@ -63,7 +58,7 @@ const UserTable = () => {
       className="table-auto"
       bordered
       columns={colums}
-    //   dataSource={data?.travelling}
+      //   dataSource={data?.travelling}
       rowKey="id"
       pagination={{
         current: currentPage,

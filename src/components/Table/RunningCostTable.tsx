@@ -1,7 +1,5 @@
 import { Table } from "antd";
 import { useState } from "react";
-import { useGetTravellingsQuery } from "../../redux/api/api";
-import Loading from "../ui/Loading";
 
 const RunningCostTable = () => {
   const [currentPage, setCurrentPage] = useState(1);

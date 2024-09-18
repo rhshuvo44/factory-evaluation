@@ -23,3 +23,22 @@
     overflow-x: scroll;
   }
 }
+
+:where(
+    .css-dev-only-do-not-override-qnu6hi
+  ).ant-upload-wrapper.ant-upload-picture-card-wrapper
+  .ant-upload-list.ant-upload-list-picture-card,
+:where(
+    .css-dev-only-do-not-override-qnu6hi
+  ).ant-upload-wrapper.ant-upload-picture-circle-wrapper
+  .ant-upload-list.ant-upload-list-picture-card,
+:where(
+    .css-dev-only-do-not-override-qnu6hi
+  ).ant-upload-wrapper.ant-upload-picture-card-wrapper
+  .ant-upload-list.ant-upload-list-picture-circle,
+:where(
+    .css-dev-only-do-not-override-qnu6hi
+  ).ant-upload-wrapper.ant-upload-picture-circle-wrapper
+  .ant-upload-list.ant-upload-list-picture-circle {
+  justify-content: center;
+}
