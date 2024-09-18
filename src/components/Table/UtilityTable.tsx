@@ -2,8 +2,8 @@ import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetTravellingsQuery } from "../../redux/api/api";
-import Loading from "../ui/Loading";
 import { TUtility } from "../../types/tableType";
+import Loading from "../ui/Loading";
 
 const UtilityTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,60 +12,24 @@ const UtilityTable = () => {
 
   const colums = [
     {
-      title: "Employee ID",
-      dataIndex: "employeeId",
-      key: "employeeId",
-    },
-
-    {
-      title: "Photo",
-      dataIndex: "photo",
-      key: "photo",
+      title: "Internet",
+      dataIndex: "internet",
+      key: "internet",
     },
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Water",
+      dataIndex: "water",
+      key: "water",
     },
     {
-      title: "Designation",
-      dataIndex: "designation",
-      key: "designation",
+      title: "Electricity",
+      dataIndex: "electricity",
+      key: "electricity",
     },
     {
-      title: "WorkingDays",
-      dataIndex: "workingDays",
-      key: "workingDays",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
-      title: "Salary",
-      dataIndex: "salary",
-      key: "salary",
-    },
-    {
-      title: "Per Day Salary",
-      dataIndex: "perDaySalary",
-      key: "perDaySalary",
-    },
-    {
-      title: "Over Time",
-      dataIndex: "overTime",
-      key: "overTime",
-    },
-    {
-      title: "Over Time Rate",
-      dataIndex: "overTimeRate",
-      key: "overTimeRate",
-    },
-    {
-      title: "Gross Per Day Salary",
-      dataIndex: "grossPerDaySalary",
-      key: "grossPerDaySalary",
+      title: "Others",
+      dataIndex: "others",
+      key: "others",
     },
 
     {
