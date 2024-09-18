@@ -60,13 +60,13 @@ export type TSalary = {
 
 export type TUtility = {
     internet: number;
-    water: string;
-    electricity: string;
-    others?: string;
+    water: number;
+    electricity: number;
+    others?: number;
 }
 
 export type TUSer = {
-    name: number;
+    name: string;
     email: string;
     password: string;
     phone: string;
@@ -115,3 +115,9 @@ export type TCollection = {
     ratePer: string;
     amount: number;
 }
+export type TFixed = {
+    factoryRent: number;
+    honorary: number;
+    factoryRevenue: number;
+}
+

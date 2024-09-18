@@ -5,6 +5,8 @@ import CollectionForm from "../pages/Collection/CollectionForm";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
+import FixedCost from "../pages/Fixed cost/FixedCost";
+import FixedCostForm from "../pages/Fixed cost/FixedCostForm";
 import Loan from "../pages/loan/Loan";
 import LoanForm from "../pages/loan/LoanForm";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
@@ -150,12 +152,12 @@ export const adminPaths = [
       {
         name: "Add Fixed cost",
         path: "add_fixed_cost",
-        element: "Add fixed cost",
+        element: <FixedCostForm />,
       },
       {
         name: "All Fixed cost",
         path: "all_fixed_cost",
-        element: "all Fixed cost",
+        element: <FixedCost />,
       },
     ],
   },
