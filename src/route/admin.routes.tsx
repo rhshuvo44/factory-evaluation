@@ -3,6 +3,8 @@ import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentFor
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
+import Loan from "../pages/loan/Loan";
+import LoanForm from "../pages/loan/LoanForm";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import Salary from "../pages/salary/Salary";
@@ -86,12 +88,12 @@ export const adminPaths = [
       {
         name: "Add Factory Development cost",
         path: "add_factory_development",
-        element: <FactoryDevelopment />,
+        element: <FactoryDevelopmentForm />,
       },
       {
         name: "All Factory Development cost",
         path: "all_factory_development",
-        element: <FactoryDevelopmentForm />,
+        element: <FactoryDevelopment />,
       },
     ],
   },
@@ -101,12 +103,12 @@ export const adminPaths = [
       {
         name: "Add Loan Return",
         path: "add_loan",
-        element: "Add Loan",
+        element: <LoanForm />,
       },
       {
         name: "All Loan Return",
         path: "all_loan",
-        element: "All Loan",
+        element: <Loan />,
       },
     ],
   },
