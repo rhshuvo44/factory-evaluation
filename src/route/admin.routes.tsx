@@ -1,5 +1,6 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
+import Collection from "../pages/Collection/Collection";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
@@ -138,7 +139,7 @@ export const adminPaths = [
       {
         name: "All Collection",
         path: "all-collection:",
-        element: "All Collection",
+        element: <Collection />,
       },
     ],
   },
