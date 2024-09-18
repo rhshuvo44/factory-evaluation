@@ -89,3 +89,17 @@ export type TFactory = {
     unitPrice: number;
     totalPrice: number;
 }
+export type TLoan = {
+    slNo: number;
+    date: Date;
+    particulars: string;
+    description: string;
+    quantity: number;
+    memoNo: string;
+    orderedBy: string;
+    payTo: string;
+    paymentType: PaymentType;
+    unit: number;
+    unitPrice: number;
+    totalPrice: number;
+}
