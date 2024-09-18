@@ -1,9 +1,8 @@
 import { Button, Form, Input, Select } from "antd";
+import { formItemLayout } from "../../../constants/formItemLayout";
 import { TUSer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomTextArea from "../../form/CustomTextArea";
-import { formItemLayout } from "../../../constants/formItemLayout";
-
 
 const UserForm = () => {
   const onFinish = (values: TUSer) => {
@@ -15,6 +14,11 @@ const UserForm = () => {
   return (
     <Form {...formItemLayout} onFinish={onFinish}>
       <CustomInput label="Name" name="name" message="Please input Name" />
+      <CustomInput
+        label="Username"
+        name="username"
+        message="Please input Username"
+      />
       <CustomInput label="Email" name="email" message="Please input Email" />
 
       <Form.Item

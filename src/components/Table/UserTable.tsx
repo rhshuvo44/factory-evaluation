@@ -17,6 +17,11 @@ const UserTable = () => {
       key: "name",
     },
     {
+      title: "username",
+      dataIndex: "username",
+      key: "username",
+    },
+    {
       title: "Email",
       dataIndex: "email",
       key: "email",

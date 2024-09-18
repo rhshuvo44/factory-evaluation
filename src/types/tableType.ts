@@ -67,6 +67,7 @@ export type TUtility = {
 
 export type TUSer = {
     name: string;
+    username: string;
     email: string;
     password: string;
     phone: string;
