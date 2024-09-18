@@ -121,3 +121,17 @@ export type TFixed = {
     factoryRevenue: number;
 }
 
+export type TRunning = {
+    slNo: number;
+    date: Date;
+    particulars: string;
+    description: string;
+    remark?: string;
+    buyerId: string;
+    orderNo: string;
+    payTo: string;
+    paymentType: PaymentType;
+    unit: number;
+    unitPrice: number;
+    totalPrice: number;
+}
