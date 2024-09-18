@@ -1,13 +1,3 @@
-// slNo: number;
-// date: Date;
-// time: string;
-// style: string;
-// total: number;
-// challan: string;
-// chalanNo: number;
-// ratePer: string;
-// amount: number;
-
 import { Button, Table } from "antd";
 import { TCollection } from "../../types/tableType";
 import { useState } from "react";

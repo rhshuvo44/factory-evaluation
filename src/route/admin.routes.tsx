@@ -1,6 +1,7 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
 import Collection from "../pages/Collection/Collection";
+import CollectionForm from "../pages/Collection/CollectionForm";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
@@ -134,7 +135,7 @@ export const adminPaths = [
       {
         name: "Add Collection",
         path: "add_collection",
-        element: "Add Collection",
+        element: <CollectionForm />,
       },
       {
         name: "All Collection",
