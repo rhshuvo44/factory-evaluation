@@ -1,6 +1,7 @@
 import { Avatar, Button, Dropdown, Layout, MenuProps } from "antd";
 import { NavLink } from "react-router-dom";
-import userImg from "../../assets/image/user.jpg";
+// import userImg from "../../assets/image/logo.png";
+import { UserOutlined } from "@ant-design/icons";
 const { Header } = Layout;
 const items: MenuProps["items"] = [
   {
@@ -16,7 +17,7 @@ const items: MenuProps["items"] = [
     type: "divider",
   },
   {
-    label:<Button>Logout</Button>,
+    label: <Button>Logout</Button>,
     key: "logout",
   },
 ];
@@ -34,8 +35,9 @@ const HeaderMenu = () => {
       <Dropdown menu={{ items }} trigger={["click"]}>
         <a onClick={(e) => e.preventDefault()}>
           <Avatar
-            src={userImg}
+            // src={userImg}
             alt="avatar"
+            icon={<UserOutlined />}
             size={{ xs: 24, sm: 32, md: 40, lg: 50, xl: 56, xxl: 60 }}
           />
         </a>

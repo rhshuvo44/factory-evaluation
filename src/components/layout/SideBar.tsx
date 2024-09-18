@@ -69,8 +69,6 @@ const SideBar = () => {
         width: "100%",
       }}
       width={250}
-      // className="overflow-auto"
-
       breakpoint="lg"
       collapsedWidth="0"
       onBreakpoint={(broken) => {
@@ -81,9 +79,6 @@ const SideBar = () => {
       }}
     >
       <div className="m-5">
-        {/* <h1 className="text-white font-bold md:text-2xl lg:text-3xl">
-          Sarkar Group
-        </h1> */}
         <img src={logo} alt="logo" />
       </div>
       <Menu
