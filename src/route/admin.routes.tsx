@@ -1,6 +1,8 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
 import Dashboard from "../pages/Dashboard";
+import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
+import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import Salary from "../pages/salary/Salary";
@@ -84,12 +86,12 @@ export const adminPaths = [
       {
         name: "Add Factory Development cost",
         path: "add_factory_development",
-        element: "Add Factory Development cost",
+        element: <FactoryDevelopment />,
       },
       {
         name: "All Factory Development cost",
         path: "all_factory_development",
-        element: "All Factory Development cost",
+        element: <FactoryDevelopmentForm />,
       },
     ],
   },
