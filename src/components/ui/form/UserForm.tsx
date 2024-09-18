@@ -2,16 +2,8 @@ import { Button, Form, Input, Select } from "antd";
 import { TUSer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomTextArea from "../../form/CustomTextArea";
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
+import { formItemLayout } from "../../../constants/formItemLayout";
+
 
 const UserForm = () => {
   const onFinish = (values: TUSer) => {

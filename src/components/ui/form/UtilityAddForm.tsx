@@ -1,16 +1,8 @@
 import { Button, Form, InputNumber } from "antd";
 import { TUtility } from "../../../types/tableType";
 import CustomInputNumber from "../../form/CustomInputNumber";
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
+import { formItemLayout } from "../../../constants/formItemLayout";
+
 const UtilityAddForm = () => {
   const onFinish = (values: TUtility) => {
     console.log("Received values of form: ", values);

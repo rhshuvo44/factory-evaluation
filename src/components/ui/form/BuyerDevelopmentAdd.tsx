@@ -3,17 +3,9 @@ import { TBuyer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
+import { formItemLayout } from "../../../constants/formItemLayout";
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
+
 const BuyerDevelopmentAdd = () => {
   const onFinish = (values: TBuyer) => {
     console.log("Received values of form: ", values);

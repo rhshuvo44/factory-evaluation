@@ -2,17 +2,9 @@ import { Button, Form } from "antd";
 import { TSalary } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
+import { formItemLayout } from "../../../constants/formItemLayout";
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
+
 const SalaryAddForm = () => {
   const onFinish = (values: TSalary) => {
     console.log("Received values of form: ", values);

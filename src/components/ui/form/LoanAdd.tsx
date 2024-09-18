@@ -1,18 +1,10 @@
 import { Button, DatePicker, Form, Select } from "antd";
+import { formItemLayout } from "../../../constants/formItemLayout";
 import { TLoan } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
+
 const LoanAdd = () => {
   const onFinish = (values: TLoan) => {
     console.log("Received values of form: ", values);

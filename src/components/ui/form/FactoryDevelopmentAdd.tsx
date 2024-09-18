@@ -3,16 +3,8 @@ import { TFactory } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
+import { formItemLayout } from "../../../constants/formItemLayout";
+
 const FactoryDevelopmentAdd = () => {
   const onFinish = (values: TFactory) => {
     console.log("Received values of form: ", values);
