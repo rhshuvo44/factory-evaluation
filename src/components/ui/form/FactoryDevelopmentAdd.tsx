@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Select } from "antd";
+import { Button, DatePicker, DatePickerProps, Form, Select } from "antd";
 import { TFactory } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
@@ -6,8 +6,12 @@ import CustomTextArea from "../../form/CustomTextArea";
 import { formItemLayout } from "../../../constants/formItemLayout";
 
 const FactoryDevelopmentAdd = () => {
+  let date: any;
+  const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
+    date = dateString;
+  };
   const onFinish = (values: TFactory) => {
-    console.log("Received values of form: ", values);
+    console.log("Received values of form: ", { ...values, date });
     // Call your backend API to handle the login request
     // and handle the response appropriately
     // You can use the following code as a reference:
@@ -52,7 +56,7 @@ const FactoryDevelopmentAdd = () => {
         name="date"
         rules={[{ required: true, message: "Please input! Date" }]}
       >
-        <DatePicker style={{ width: "100%" }} />
+        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
       </Form.Item>
 
       <Form.Item

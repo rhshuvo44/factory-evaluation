@@ -1,9 +1,8 @@
 import { Button, Form } from "antd";
+import { formItemLayout } from "../../../constants/formItemLayout";
 import { TSalary } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
-import { formItemLayout } from "../../../constants/formItemLayout";
-
 
 const SalaryAddForm = () => {
   const onFinish = (values: TSalary) => {

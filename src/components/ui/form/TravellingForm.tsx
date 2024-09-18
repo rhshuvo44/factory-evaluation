@@ -1,15 +1,17 @@
-import { Button, DatePicker, Form, Select } from "antd";
+import { Button, DatePicker, DatePickerProps, Form, Select } from "antd";
+import { formItemLayout } from "../../../constants/formItemLayout";
 import { TTravel } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-import { formItemLayout } from "../../../constants/formItemLayout";
-
-
 
 const TravellingForm = () => {
+  let date: any;
+  const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
+    date = dateString;
+  };
   const onFinish = (values: TTravel) => {
-    console.log("Received values of form: ", values);
+    console.log("Received values of form: ", { ...values, date });
     // Call your backend API to handle the login request
     // and handle the response appropriately
     // You can use the following code as a reference:
@@ -54,7 +56,7 @@ const TravellingForm = () => {
         name="date"
         rules={[{ required: true, message: "Please input! Date" }]}
       >
-        <DatePicker style={{ width: "100%" }} />
+        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
       </Form.Item>
 
       <Form.Item
