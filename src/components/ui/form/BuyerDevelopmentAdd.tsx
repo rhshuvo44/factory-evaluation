@@ -27,11 +27,9 @@ const BuyerDevelopmentAdd = () => {
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
-  // console.log("outside date: " + date);
   const onChangeUnit: InputNumberProps["onChange"] = (values) => {
     setUnit(values as number);
   };
-  console.log(unit);
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
@@ -108,12 +106,28 @@ const BuyerDevelopmentAdd = () => {
           options={paymentOptions}
         />
       </Form.Item>
-      <Form.Item label="Unit" name="unit">
-        <InputNumber style={{ width: "100%" }} onChange={onChangeUnit} />
+      <Form.Item
+        label="Unit"
+        name="unit"
+        rules={[{ required: true, message: "Please Input Unit! " }]}
+      >
+        <InputNumber
+          style={{ width: "100%" }}
+          min={0}
+          onChange={onChangeUnit}
+        />
       </Form.Item>
 
-      <Form.Item label="Unit Price" name="unitPrice">
-        <InputNumber style={{ width: "100%" }} onChange={onChangeUnitPrice} />
+      <Form.Item
+        label="Unit Price"
+        name="unitPrice"
+        rules={[{ required: true, message: "Please Input Unit Price! " }]}
+      >
+        <InputNumber
+          style={{ width: "100%" }}
+          min={0}
+          onChange={onChangeUnitPrice}
+        />
       </Form.Item>
 
       <Form.Item label="Total Price" name="totalPrice">
