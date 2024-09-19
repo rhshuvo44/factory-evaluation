@@ -6,6 +6,10 @@ export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Ta
 export type TDesignation = 'Supervisor' | 'G.M' | 'P.M' | 'Ex. Accountant' | 'Security' | 'Cutting Master' | 'Fin. Incharge' | 'Mechanic' | 'Operator' | 'Folding' | 'Check' | 'Poly' | 'Helper' | 'Maid' | 'Cleaner' | 'Cut. Helper' | 'Cutting Man';
 
 type TParticulars = 'Commission' | 'Meal Cost' | 'Machine Maintenance' | 'Loading & Unloading' | 'Rental Machine Bill' | 'Sample Development Cost' | 'Night Bill (STF)' | 'Night Bill (WRK)';
+export type TSubUtility = {
+    unitPrice: number;
+    totalPrice: number;
+}
 export type TTravel = {
     slNo: number;
     date: Date;
@@ -63,10 +67,10 @@ export type TSalary = {
 }
 
 export type TUtility = {
-    internet: number;
-    water: number;
-    electricity: number;
-    others?: number;
+    internet: TSubUtility;
+    water: TSubUtility;
+    electricity: TSubUtility;
+    others?: TSubUtility;
 }
 
 export type TUSer = {
