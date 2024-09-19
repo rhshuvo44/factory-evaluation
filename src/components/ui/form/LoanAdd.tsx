@@ -1,10 +1,18 @@
-import { Button, DatePicker, DatePickerProps, Form, InputNumber, InputNumberProps, Select } from "antd";
+import {
+  Button,
+  DatePicker,
+  DatePickerProps,
+  Form,
+  InputNumber,
+  InputNumberProps,
+  Select,
+} from "antd";
+import { useEffect, useState } from "react";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TLoan } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-import { useEffect, useState } from "react";
 
 const LoanAdd = () => {
   const [form] = Form.useForm();
@@ -32,9 +40,6 @@ const LoanAdd = () => {
     // and handle the response appropriately
     // You can use the following code as a reference:
   };
-
-  // orderedBy: "M.D" | "Chairman";
-  //   payTo: "sarkar alliance plc" | "chairman" | "M.D";
 
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
@@ -93,8 +98,6 @@ const LoanAdd = () => {
           ]}
         />
       </Form.Item>
-
-      
 
       <Form.Item
         label="Date"

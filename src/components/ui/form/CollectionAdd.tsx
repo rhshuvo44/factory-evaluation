@@ -4,38 +4,42 @@ import {
   DatePickerProps,
   Form,
   InputNumber,
+  InputNumberProps,
   Select,
 } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { useEffect, useState } from "react";
+import { styleOption } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TCollection } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
-import { styleOption } from "../../../constants/dropdownoptions";
 
 const CollectionAdd = () => {
   dayjs.extend(customParseFormat);
-  let date: string;
+  const [form] = Form.useForm();
+  const [total, setTotal] = useState<number>(0);
+  const [ratePer, setRatePer] = useState<number>(0);
+  const [date, setDate] = useState<string | string[]>("");
+
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-    date = dateString as string;
+    setDate(dateString);
   };
-  // const [ratePer, setRatePer] = useState<number>(0);
-  // const [total, setTotal] = useState<number>(0);
+  const onChangeTotal: InputNumberProps["onChange"] = (values) => {
+    setTotal(values as number);
+  };
+  const onChangeRatePer: InputNumberProps["onChange"] = (values) => {
+    setRatePer(values as number);
+  };
+  useEffect(() => {
+    form.setFieldsValue({
+      amount: total * ratePer,
+    });
+  }, [total, ratePer, form]);
+
   const time = new Date().toLocaleTimeString();
 
-  // let total: number;
-  // let ratePer: number;
-  // const amount = total * ratePer;
-  // const handleTotalChange = (value: number | 0) => {
-  //   setTotal(value as number);
-  // };
-
-  // const handleRatePerChange = (value: number | 0) => {
-  //   setRatePer(value as number);
-  // };
-
-  // console.log("amount", amount);
   const onFinish = (values: TCollection) => {
     console.log("Received values of form: ", { ...values, time, date });
     // setAmount(values.ratePer * values.total)
@@ -45,7 +49,7 @@ const CollectionAdd = () => {
   };
 
   return (
-    <Form {...formItemLayout} onFinish={onFinish}>
+    <Form {...formItemLayout} onFinish={onFinish} form={form}>
       <CustomInputNumber
         label="SL No"
         name="slNo"
@@ -71,7 +75,7 @@ const CollectionAdd = () => {
         <InputNumber
           style={{ width: "100%" }}
           min={0}
-          // onChange={handleTotalChange}
+          onChange={onChangeTotal}
         />
       </Form.Item>
       <CustomInputNumber
@@ -115,17 +119,11 @@ const CollectionAdd = () => {
         <InputNumber
           style={{ width: "100%" }}
           min={0}
-          // onChange={handleRatePerChange}
+          onChange={onChangeRatePer}
         />
       </Form.Item>
       <Form.Item label="Amount" name="amount">
-        <InputNumber
-          style={{ width: "100%" }}
-          // min={0}
-          readOnly
-          // defaultValue={amount}
-          // value={amount}
-        />
+        <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
