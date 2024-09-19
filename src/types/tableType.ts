@@ -3,35 +3,9 @@ export type PaymentType = 'Monthly' | 'Daily' | 'Once';
 export type userRole = "admin" | "executive-director" | "managing-director" | "general-director" | "coordinator"
 export type TLine = "Line 1 / 3rd floor" | "Line 2 / 4th floor" | "Line 3 / 4th floor"
 export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Tank Top" | "Sweat Shirt" | "Trouser" | "Shorts" | "Romper/Keeper" | "Long Sleeve T-shirt"
-export type TDesignation = 'Supervisor'
-    | 'G.M'
-    | 'P.M'
-    | 'Ex. Accountant'
-    | 'Spervisor'
-    | 'Security'
-    | 'Cutting Master'
-    | 'Fin. Incharge'
-    | 'Mechanic'
-    | 'Operator'
-    | 'Folding'
-    | 'Check'
-    | 'Poly'
-    | 'Helper'
-    | 'Maid'
-    | 'Cleaner'
-    | 'Cut. Helper'
-    | 'Cutting Man';
+export type TDesignation = 'Supervisor' | 'G.M' | 'P.M' | 'Ex. Accountant' | 'Security' | 'Cutting Master' | 'Fin. Incharge' | 'Mechanic' | 'Operator' | 'Folding' | 'Check' | 'Poly' | 'Helper' | 'Maid' | 'Cleaner' | 'Cut. Helper' | 'Cutting Man';
 
-
-
-type TParticulars = 'Commission'
-    | 'Meal Cost'
-    | 'Machine Maintenance'
-    | 'Loading & Unloading'
-    | 'Rental Machine Bill'
-    | 'Sample Development Cost'
-    | 'Night Bill (STF)'
-    | 'Night Bill (WRK)';
+type TParticulars = 'Commission' | 'Meal Cost' | 'Machine Maintenance' | 'Loading & Unloading' | 'Rental Machine Bill' | 'Sample Development Cost' | 'Night Bill (STF)' | 'Night Bill (WRK)';
 export type TTravel = {
     slNo: number;
     date: Date;
@@ -105,7 +79,6 @@ export type TUSer = {
     address: string;
 }
 
-
 export type TFactory = {
     slNo: number;
     date: Date;
@@ -127,9 +100,9 @@ export type TLoan = {
     description: string;
     quantity: number;
     memoNo: string;
-    orderedBy: string;
-    payTo: string;
-    paymentType: PaymentType;
+    orderedBy: "M.D" | "Chairman";
+    payTo: "sarkar alliance opc" | "chairman" | "M.D";
+    paymentType: "bank" | "cash";
     unit: number;
     unitPrice: number;
     totalPrice: number;

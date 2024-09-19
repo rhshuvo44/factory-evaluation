@@ -1,5 +1,4 @@
 import { Button, DatePicker, DatePickerProps, Form, Select } from "antd";
-import { paymentOptions } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TLoan } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
@@ -17,6 +16,10 @@ const LoanAdd = () => {
     // and handle the response appropriately
     // You can use the following code as a reference:
   };
+
+  // orderedBy: "M.D" | "Chairman";
+  //   payTo: "sarkar alliance plc" | "chairman" | "M.D";
+
   return (
     <Form {...formItemLayout} onFinish={onFinish}>
       <CustomInputNumber
@@ -45,12 +48,37 @@ const LoanAdd = () => {
         name="memoNo"
         message="Please input! Memo No"
       />
-      <CustomInput
-        label="Orderer By"
-        name="ordererBy"
-        message="Please input! Orderer By"
-      />
-      <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
+      <Form.Item
+        label="Ordered By"
+        name="OrderedBy"
+        rules={[{ required: true, message: "Please select Ordered By! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue="Please select Ordered By"
+          options={[
+            { value: "M.D", label: "M.D" },
+            { value: "Chairman", label: "Chairman" },
+          ]}
+        />
+      </Form.Item>
+      <Form.Item
+        label="Pay to"
+        name="payTo"
+        rules={[{ required: true, message: "Please select Pay to! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue="Please select Pay to"
+          options={[
+            { value: "sarkar alliance opc", label: "Sarkar Alliance Opc" },
+            { value: "M.D", label: "M.D" },
+            { value: "Chairman", label: "Chairman" },
+          ]}
+        />
+      </Form.Item>
+
+      {/* <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />  */}
 
       <Form.Item
         label="Date"
@@ -67,8 +95,11 @@ const LoanAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="monthly"
-          options={paymentOptions}
+          defaultValue="Please select payment type"
+          options={[
+            { value: "bank", label: "Bank" },
+            { value: "cash", label: "Cash" },
+          ]}
         />
       </Form.Item>
       <CustomInputNumber

@@ -41,9 +41,9 @@ const LoanTable = () => {
       key: "memoNo",
     },
     {
-      title: "Orderer By",
-      dataIndex: "ordererBy",
-      key: "ordererBy",
+      title: "Ordered By",
+      dataIndex: "orderedBy",
+      key: "orderedBy",
     },
     {
       title: "Pay To",
