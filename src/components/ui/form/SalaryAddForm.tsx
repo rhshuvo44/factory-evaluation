@@ -2,11 +2,11 @@ import { PlusOutlined } from "@ant-design/icons";
 import type { GetProp, InputNumberProps, UploadFile, UploadProps } from "antd";
 import { Button, Form, Image, InputNumber, Select, Upload } from "antd";
 import { useEffect, useState } from "react";
-import { designationOption } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TSalary } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
+import { designationOption } from "../../../constants/Options";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -32,11 +32,8 @@ const SalaryAddForm = () => {
   const onChangeOverTime: InputNumberProps["onChange"] = (values) => {
     setOverTime(values as number);
   };
-  // const onChangeSalary: InputNumberProps["onBlur"] = (values) => {
-  //   setSalary(values);
-  // };
+
   useEffect(() => {
-    // const salary = form.getFieldValue("salary");
     form.setFieldsValue({
       salary: perDaySalary * 26,
       overTimeRate: perDaySalary / 10,
@@ -62,8 +59,6 @@ const SalaryAddForm = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
-  // const salary = perDaySalary * 26;
-  // const overTimeRate = salary / 10;
 
   const onFinish = (values: TSalary) => {
     console.log("Received values of form: ", {

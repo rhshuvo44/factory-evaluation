@@ -8,15 +8,13 @@ import {
   Select,
 } from "antd";
 import { useEffect, useState } from "react";
-import {
-  buyerParticularsOptions,
-  paymentOptions,
-} from "../../../constants/dropdownoptions";
+
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TBuyer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
+import { buyerParticularsOptions, paymentOptions } from "../../../constants/Options";
 
 const BuyerDevelopmentAdd = () => {
   const [form] = Form.useForm();

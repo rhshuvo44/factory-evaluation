@@ -12,8 +12,8 @@ import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
 import { formItemLayout } from "../../../constants/formItemLayout";
-import { paymentOptions } from "../../../constants/dropdownoptions";
 import { useEffect, useState } from "react";
+import { paymentOptions } from "../../../constants/Options";
 
 const FactoryDevelopmentAdd = () => {
   const [form] = Form.useForm();

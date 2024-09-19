@@ -1,9 +1,9 @@
 import { Button, Form, Input, Select } from "antd";
-import { userRoleOptions } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TUSer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomTextArea from "../../form/CustomTextArea";
+import { userRoleOptions } from "../../../constants/Options";
 
 const UserForm = () => {
   const onFinish = (values: TUSer) => {

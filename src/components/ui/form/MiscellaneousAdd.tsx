@@ -1,11 +1,11 @@
 import { Button, DatePicker, DatePickerProps, Form, InputNumber, InputNumberProps, Select } from "antd";
-import { paymentOptions } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TMiscellaneous } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
 import { useEffect, useState } from "react";
+import { paymentOptions } from "../../../constants/Options";
 
 const MiscellaneousAdd = () => {
   const [form] = Form.useForm();

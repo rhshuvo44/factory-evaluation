@@ -53,4 +53,3 @@ export const buyerParticularsOptions = [
     { value: "Night Bill (STF)", label: "Night Bill (STF)" },
     { value: "Night Bill (WRK)", label: "Night Bill (WRK)" },
 ]
-

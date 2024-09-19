@@ -10,11 +10,11 @@ import {
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useEffect, useState } from "react";
-import { styleOption } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TCollection } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
+import { styleOption } from "../../../constants/Options";
 
 const CollectionAdd = () => {
   dayjs.extend(customParseFormat);
