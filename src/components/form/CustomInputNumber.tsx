@@ -8,7 +8,7 @@ const CustomInputNumber = ({ name, label, message }: TInput) => {
       name={name}
       rules={[{ required: true, message: message }]}
     >
-      <InputNumber style={{ width: "100%" }} />
+      <InputNumber style={{ width: "100%" }} min={0} />
     </Form.Item>
   );
 };

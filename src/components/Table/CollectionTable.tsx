@@ -1,7 +1,7 @@
 import { Button, Table } from "antd";
-import { TCollection } from "../../types/tableType";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { TCollection } from "../../types/tableType";
 
 const CollectionTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,9 +36,14 @@ const CollectionTable = () => {
       key: "total",
     },
     {
-      title: "Challan ",
-      dataIndex: "challan",
-      key: "challan",
+      title: "Work Order No ",
+      dataIndex: "workOrderNo",
+      key: "workOrderNo",
+    },
+    {
+      title: "Line No ",
+      dataIndex: "lineNo",
+      key: "lineNo",
     },
     {
       title: "Challan NO",

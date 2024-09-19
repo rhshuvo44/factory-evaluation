@@ -1,7 +1,8 @@
 
-export type PaymentType = 'Monthly' | 'Day' | 'Once';
+export type PaymentType = 'Monthly' | 'Daily' | 'Once';
 export type userRole = "admin" | "executive-director" | "managing-director" | "general-director" | "coordinator"
-
+export type TLine = "Line 1 / 3rd floor" | "Line 2 / 4th floor" | "Line 3 / 4th floor"
+export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Tank Top" | "Sweat Shirt" | "Trouser" | "Shorts" | "Romper/Keeper" | "Long Sleeve T-shirt"
 export type TTravel = {
     slNo: number;
     date: Date;
@@ -107,11 +108,12 @@ export type TLoan = {
 
 export type TCollection = {
     slNo: number;
-    date: Date;
+    date: string;
     time: string;
-    style: string;
+    style: TStyle;
     total: number;
-    challan: string;
+    workOrderNo: number;
+    lineNo: TLine;
     chalanNo: number;
     ratePer: string;
     amount: number;

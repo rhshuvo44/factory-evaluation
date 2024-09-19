@@ -6,9 +6,9 @@ import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
 
 const TravellingForm = () => {
-  let date: any;
+  let date: string;
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-    date = dateString;
+    date = dateString as string;
   };
   const onFinish = (values: TTravel) => {
     console.log("Received values of form: ", { ...values, date });
