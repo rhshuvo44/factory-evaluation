@@ -1,5 +1,8 @@
 import { Button, DatePicker, DatePickerProps, Form, Select } from "antd";
-import { paymentOptions } from "../../../constants/dropdownoptions";
+import {
+  buyerParticularsOptions,
+  paymentOptions,
+} from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TBuyer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
@@ -25,11 +28,17 @@ const BuyerDevelopmentAdd = () => {
         message="Please input SL No"
       />
 
-      <CustomInput
+      <Form.Item
         label="Particulars"
         name="particulars"
-        message="Please input! Particulars"
-      />
+        rules={[{ required: true, message: "Please select Particulars! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue="Please select Particular"
+          options={buyerParticularsOptions}
+        />
+      </Form.Item>
       <CustomTextArea
         label="Description"
         name="description"

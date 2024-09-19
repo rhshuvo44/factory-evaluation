@@ -21,6 +21,17 @@ export type TDesignation = 'Supervisor'
     | 'Cleaner'
     | 'Cut. Helper'
     | 'Cutting Man';
+
+
+
+type TParticulars = 'Commission'
+    | 'Meal Cost'
+    | 'Machine Maintenance'
+    | 'Loading & Unloading'
+    | 'Rental Machine Bill'
+    | 'Sample Development Cost'
+    | 'Night Bill (STF)'
+    | 'Night Bill (WRK)';
 export type TTravel = {
     slNo: number;
     date: Date;
@@ -52,8 +63,8 @@ export type TMiscellaneous = {
 
 export type TBuyer = {
     slNo: number;
-    date: Date;
-    particulars: string;
+    date: string;
+    particulars: TParticulars;
     description: string;
     quantity: number
     buyerId: string;
