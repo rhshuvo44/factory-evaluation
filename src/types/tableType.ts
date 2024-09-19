@@ -125,9 +125,9 @@ export type TCollection = {
     amount: number;
 }
 export type TFixed = {
-    factoryRent: number;
-    honorary: number;
-    factoryRevenue: number;
+    factoryRent: TSubUtility;
+    honorary: TSubUtility;
+    factoryRevenue: TSubUtility;
 }
 
 export type TRunning = {

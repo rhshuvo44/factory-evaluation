@@ -5,7 +5,7 @@ import CustomInputNumber from "../../form/CustomInputNumber";
 
 const UtilityAddForm = () => {
   const onFinish = (values: TUtility) => {
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
     const { electricity, internet, water, others } = values;
     const internetBill: TSubUtility = {
       unitPrice: typeof internet === "number" ? internet / 30 : 0,

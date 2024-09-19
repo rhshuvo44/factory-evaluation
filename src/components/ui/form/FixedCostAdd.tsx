@@ -1,11 +1,31 @@
 import { Button, Form } from "antd";
 import { formItemLayout } from "../../../constants/formItemLayout";
-import { TFixed } from "../../../types/tableType";
+import { TFixed, TSubUtility } from "../../../types/tableType";
 import CustomInputNumber from "../../form/CustomInputNumber";
 
 const FixedCostAdd = () => {
   const onFinish = (values: TFixed) => {
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
+    const { factoryRent, factoryRevenue, honorary } = values;
+    const factoryRentBill: TSubUtility = {
+      unitPrice: typeof factoryRent === "number" ? factoryRent / 30 : 0,
+      totalPrice: typeof factoryRent === "number" ? factoryRent : 0,
+    };
+    const factoryRevenueBill: TSubUtility = {
+      unitPrice: typeof factoryRevenue === "number" ? factoryRevenue / 30 : 0,
+      totalPrice: typeof factoryRevenue === "number" ? factoryRevenue : 0,
+    };
+    const honoraryBill: TSubUtility = {
+      unitPrice: typeof honorary === "number" ? honorary / 30 : 0,
+      totalPrice: typeof honorary === "number" ? honorary : 0,
+    };
+
+    const fixedCost = {
+      factoryRent: factoryRentBill,
+      factoryRevenue: factoryRevenueBill,
+      honorary: honoraryBill,
+    };
+    console.log(fixedCost);
     //! Call your backend API to handle the login request
     // and handle the response appropriately
     // You can use the following code as a reference:
