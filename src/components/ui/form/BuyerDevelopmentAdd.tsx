@@ -4,9 +4,10 @@ import {
   DatePickerProps,
   Form,
   InputNumber,
+  InputNumberProps,
   Select,
 } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   buyerParticularsOptions,
   paymentOptions,
@@ -21,25 +22,28 @@ const BuyerDevelopmentAdd = () => {
   const [form] = Form.useForm();
   const [unit, setUnit] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(0);
-  let date: string;
+  const [date, setDate] = useState<string | string[]>("");
+
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-    date = dateString as string;
-    console.log("inside date: " + date);
+    setDate(dateString);
   };
   // console.log("outside date: " + date);
+  const onChangeUnit: InputNumberProps["onChange"] = (values) => {
+    setUnit(values as number);
+  };
+  console.log(unit);
+  const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
+    setUnitPrice(values as number);
+  };
+  useEffect(() => {
+    form.setFieldsValue({
+      totalPrice: unit * unitPrice,
+    });
+  }, [unit, unitPrice, form]);
 
-  const onChangeUnit = (values: any) => {
-    setUnit(values);
-  };
-  const onChangeUnitPrice = (values: any) => {
-    setUnitPrice(values);
-  };
-  form.setFieldsValue({
-    totalPrice: unit * unitPrice,
-  });
   const onFinish = (values: TBuyer) => {
     console.log("Received values of form: ", { ...values, date });
-    console.log(date);
+
     // Call your backend API to handle the login request
     // and handle the response appropriately
     // You can use the following code as a reference:
@@ -100,7 +104,7 @@ const BuyerDevelopmentAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="monthly"
+          defaultValue="Please select Payment"
           options={paymentOptions}
         />
       </Form.Item>
