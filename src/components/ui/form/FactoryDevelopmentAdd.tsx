@@ -4,11 +4,12 @@ import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { paymentOptions } from "../../../constants/dropdownoptions";
 
 const FactoryDevelopmentAdd = () => {
-  let date: any;
+  let date: string;
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-    date = dateString;
+    date = dateString as string;
   };
   const onFinish = (values: TFactory) => {
     console.log("Received values of form: ", { ...values, date });
@@ -67,11 +68,7 @@ const FactoryDevelopmentAdd = () => {
         <Select
           style={{ width: "100%" }}
           defaultValue="monthly"
-          options={[
-            { value: "monthly", label: "Monthly" },
-            { value: "day", label: "Day" },
-            { value: "once", label: "Once" },
-          ]}
+          options={paymentOptions}
         />
       </Form.Item>
       <CustomInputNumber

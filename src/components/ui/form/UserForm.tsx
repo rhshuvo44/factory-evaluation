@@ -1,4 +1,5 @@
 import { Button, Form, Input, Select } from "antd";
+import { userRoleOptions } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TUSer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
@@ -38,13 +39,7 @@ const UserForm = () => {
         <Select
           style={{ width: "100%" }}
           defaultValue="Select User Role"
-          options={[
-            { value: "admin", label: "Admin" },
-            { value: "executive-director", label: "Executive Director" },
-            { value: "managing-director", label: "Managing Director" },
-            { value: "general-director", label: "General Director" },
-            { value: "coordinator", label: "Coordinator" },
-          ]}
+          options={userRoleOptions}
         />
       </Form.Item>
       <CustomTextArea

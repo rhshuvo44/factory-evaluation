@@ -1,4 +1,5 @@
 import { Button, DatePicker, DatePickerProps, Form, Select } from "antd";
+import { paymentOptions } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TLoan } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
@@ -6,9 +7,9 @@ import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
 
 const LoanAdd = () => {
-  let date: any;
+  let date: string;
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-    date = dateString;
+    date = dateString as string;
   };
   const onFinish = (values: TLoan) => {
     console.log("Received values of form: ", { ...values, date });
@@ -67,11 +68,7 @@ const LoanAdd = () => {
         <Select
           style={{ width: "100%" }}
           defaultValue="monthly"
-          options={[
-            { value: "monthly", label: "Monthly" },
-            { value: "day", label: "Day" },
-            { value: "once", label: "Once" },
-          ]}
+          options={paymentOptions}
         />
       </Form.Item>
       <CustomInputNumber

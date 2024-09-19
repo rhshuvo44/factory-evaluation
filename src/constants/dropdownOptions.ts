@@ -29,3 +29,17 @@ export const designationOption = [
     { value: "Cutting Man", label: "Cutting Man" },
 
 ]
+
+export const paymentOptions = [
+    { value: "monthly", label: "Monthly" },
+    { value: "daily", label: "Daily" },
+    { value: "once", label: "Once" },
+]
+
+export const userRoleOptions = [
+    { value: "admin", label: "Admin" },
+    { value: "executive-director", label: "Executive Director" },
+    { value: "managing-director", label: "Managing Director" },
+    { value: "general-director", label: "General Director" },
+    { value: "coordinator", label: "Coordinator" },
+]

@@ -4,6 +4,7 @@ import { TTravel } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
+import { paymentOptions } from "../../../constants/dropdownoptions";
 
 const TravellingForm = () => {
   let date: string;
@@ -67,11 +68,7 @@ const TravellingForm = () => {
         <Select
           style={{ width: "100%" }}
           defaultValue="monthly"
-          options={[
-            { value: "monthly", label: "Monthly" },
-            { value: "day", label: "Day" },
-            { value: "once", label: "Once" },
-          ]}
+          options={paymentOptions}
         />
       </Form.Item>
       <CustomInputNumber

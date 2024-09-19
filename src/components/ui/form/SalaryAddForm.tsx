@@ -22,7 +22,7 @@ const SalaryAddForm = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  // const [perDaySalary, setPerDaySalary] = useState<number>(0);
+  const [perDaySalary, setPerDaySalary] = useState<number>(0);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -42,8 +42,8 @@ const SalaryAddForm = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
-  // const salary = perDaySalary * 26;
-  // const overTimeRate = salary / 10;
+  const salary = perDaySalary * 26;
+  const overTimeRate = salary / 10;
   
   const onFinish = (values: TSalary) => {
     console.log("Received values of form: ", {
