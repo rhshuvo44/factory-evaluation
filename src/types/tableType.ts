@@ -3,6 +3,24 @@ export type PaymentType = 'Monthly' | 'Daily' | 'Once';
 export type userRole = "admin" | "executive-director" | "managing-director" | "general-director" | "coordinator"
 export type TLine = "Line 1 / 3rd floor" | "Line 2 / 4th floor" | "Line 3 / 4th floor"
 export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Tank Top" | "Sweat Shirt" | "Trouser" | "Shorts" | "Romper/Keeper" | "Long Sleeve T-shirt"
+export type TDesignation = 'Supervisor'
+    | 'G.M'
+    | 'P.M'
+    | 'Ex. Accountant'
+    | 'Spervisor'
+    | 'Security'
+    | 'Cutting Master'
+    | 'Fin. Incharge'
+    | 'Mechanic'
+    | 'Operator'
+    | 'Folding'
+    | 'Check'
+    | 'Poly'
+    | 'Helper'
+    | 'Maid'
+    | 'Cleaner'
+    | 'Cut. Helper'
+    | 'Cutting Man';
 export type TTravel = {
     slNo: number;
     date: Date;
@@ -50,7 +68,7 @@ export type TSalary = {
     employeeId: number;
     employeeImg: string;
     name: string;
-    designation: string;
+    designation: TDesignation;
     workingDays: number
     status: boolean;
     perDaySalary: number;

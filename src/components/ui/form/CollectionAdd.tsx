@@ -12,7 +12,7 @@ import { formItemLayout } from "../../../constants/formItemLayout";
 import { TCollection } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
-import { styleOption } from "../../../constants/CollectionStyle";
+import { styleOption } from "../../../constants/dropdownoptions";
 
 const CollectionAdd = () => {
   dayjs.extend(customParseFormat);
@@ -52,7 +52,6 @@ const CollectionAdd = () => {
         message="Please input SL No"
       />
 
-      {/* <CustomInput label="Style" name="style" message="Please input! Style" /> */}
       <Form.Item
         label="Style"
         name="style"
