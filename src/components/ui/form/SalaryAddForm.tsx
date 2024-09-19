@@ -1,7 +1,7 @@
 import { PlusOutlined } from "@ant-design/icons";
-import type { GetProp, UploadFile, UploadProps } from "antd";
+import type { GetProp, InputNumberProps, UploadFile, UploadProps } from "antd";
 import { Button, Form, Image, InputNumber, Select, Upload } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { designationOption } from "../../../constants/dropdownoptions";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { TSalary } from "../../../types/tableType";
@@ -22,7 +22,27 @@ const SalaryAddForm = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [form] = Form.useForm();
   const [perDaySalary, setPerDaySalary] = useState<number>(0);
+  const [overTime, setOverTime] = useState<number>(0);
+
+  const onChangePerDaySalary: InputNumberProps["onChange"] = (values) => {
+    setPerDaySalary(values as number);
+  };
+  const onChangeOverTime: InputNumberProps["onChange"] = (values) => {
+    setOverTime(values as number);
+  };
+  // const onChangeSalary: InputNumberProps["onBlur"] = (values) => {
+  //   setSalary(values);
+  // };
+  useEffect(() => {
+    // const salary = form.getFieldValue("salary");
+    form.setFieldsValue({
+      salary: perDaySalary * 26,
+      overTimeRate: perDaySalary / 10,
+      grossPerDaySalary: perDaySalary * 26 + (perDaySalary * overTime) / 10,
+    });
+  }, [perDaySalary, overTime, form]);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -42,9 +62,9 @@ const SalaryAddForm = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
-  const salary = perDaySalary * 26;
-  const overTimeRate = salary / 10;
-  
+  // const salary = perDaySalary * 26;
+  // const overTimeRate = salary / 10;
+
   const onFinish = (values: TSalary) => {
     console.log("Received values of form: ", {
       ...values,
@@ -55,7 +75,7 @@ const SalaryAddForm = () => {
     // You can use the following code as a reference:
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish}>
+    <Form {...formItemLayout} onFinish={onFinish} form={form}>
       <CustomInputNumber
         label="Employee ID"
         name="employeeID"
@@ -79,28 +99,39 @@ const SalaryAddForm = () => {
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
 
-      <Form.Item label="Salary" name="salary" initialValue={salary}>
+      <Form.Item label="Salary" name="salary">
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
       <Form.Item
         label="Per Day Salary"
         name="perDaySalary"
-        rules={[{ required: true, message: "Please select Per Day Salary " }]}
+        rules={[{ required: true, message: "Please Input Per Day Salary " }]}
       >
-        <InputNumber style={{ width: "100%" }} />
+        <InputNumber
+          style={{ width: "100%" }}
+          min={0}
+          onChange={onChangePerDaySalary}
+        />
       </Form.Item>
 
-      <CustomInputNumber
+      {/* <CustomInputNumber
         label="Over Time"
         name="overTime"
         message="Please input! Over Time"
-      />
+      /> */}
+      <Form.Item
+        label="Over Time"
+        name="overTime"
+        rules={[{ required: true, message: "Please Input Over Time" }]}
+      >
+        <InputNumber style={{ width: "100%" }} onChange={onChangeOverTime} />
+      </Form.Item>
       <Form.Item label="Over Time Rate" name="overTimeRate">
-        <InputNumber style={{ width: "100%" }} disabled value={overTimeRate} />
+        <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
 
       <Form.Item label="Gross Per Day Salary" name="grossPerDaySalary">
-        <InputNumber style={{ width: "100%" }} disabled value={overTimeRate} />
+        <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
       <Form.Item
         rules={[{ required: false, message: "Please upload Employee image " }]}
