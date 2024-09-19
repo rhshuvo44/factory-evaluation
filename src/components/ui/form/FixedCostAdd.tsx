@@ -5,7 +5,6 @@ import CustomInputNumber from "../../form/CustomInputNumber";
 
 const FixedCostAdd = () => {
   const onFinish = (values: TFixed) => {
-    // console.log("Received values of form: ", values);
     const { factoryRent, factoryRevenue, honorary } = values;
     const factoryRentBill: TSubUtility = {
       unitPrice: typeof factoryRent === "number" ? factoryRent / 30 : 0,
