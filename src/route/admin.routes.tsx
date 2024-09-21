@@ -11,6 +11,8 @@ import Loan from "../pages/loan/Loan";
 import LoanForm from "../pages/loan/LoanForm";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
+import Production from "../pages/Production/Production";
+import ProductionAdd from "../pages/Production/ProductionAdd";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
@@ -167,12 +169,12 @@ export const adminPaths = [
       {
         name: "Add Production Report",
         path: "add_production_report",
-        element: "addProductionReport",
+        element: <ProductionAdd />,
       },
       {
         name: "All Production Report",
         path: "all_production_reports",
-        element: "all Production Report",
+        element: <Production />,
       },
     ],
   },

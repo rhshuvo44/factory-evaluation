@@ -7,13 +7,13 @@ import {
   InputNumberProps,
   Select,
 } from "antd";
+import { useEffect, useState } from "react";
+import { formItemLayout } from "../../../constants/formItemLayout";
+import { paymentOptions } from "../../../constants/Options";
 import { TFactory } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-import { formItemLayout } from "../../../constants/formItemLayout";
-import { useEffect, useState } from "react";
-import { paymentOptions } from "../../../constants/Options";
 
 const FactoryDevelopmentAdd = () => {
   const [form] = Form.useForm();
@@ -37,9 +37,6 @@ const FactoryDevelopmentAdd = () => {
   }, [unit, unitPrice, form]);
   const onFinish = (values: TFactory) => {
     console.log("Received values of form: ", { ...values, date });
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>

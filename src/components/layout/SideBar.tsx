@@ -1,21 +1,18 @@
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
+import { useState } from "react";
 import logo from "../../assets/image/logo.png";
+import { userRole } from "../../constants/userRole";
 import { adminPaths } from "../../route/admin.routes";
 import { coordinatorPaths } from "../../route/Coordinator.routes";
 import { executivePaths } from "../../route/ExecutiveDirector.routes";
 import { generalPaths } from "../../route/generalDirector.routes";
 import { managingPaths } from "../../route/ManagingDirector.routes";
 import { sidebarItemsGenerator } from "../../utilis/sidebarItemsGenerator";
-const userRole = {
-  ADMIN: "admin",
-  ExecutiveDirector: "executive-director",
-  ManagingDirector: "managing-director",
-  GeneralManager: "general-director",
-  Coordinator: "coordinator",
-};
 
 const SideBar = () => {
+  const [openKeys, setOpenKeys] = useState([]);
+
   // const token = useAppSelector(useCurrentToken);
   const user = {
     role: userRole.ADMIN,
@@ -63,6 +60,14 @@ const SideBar = () => {
       break;
   }
 
+  const handleOpenChange = (keys: []) => {
+    if (openKeys.length == 1) {
+      keys.shift();
+      setOpenKeys(keys);
+      return;
+    }
+    setOpenKeys(keys);
+  };
   return (
     <Sider
       style={{
@@ -82,6 +87,8 @@ const SideBar = () => {
         <img src={logo} alt="logo" />
       </div>
       <Menu
+        openKeys={openKeys}
+        onOpenChange={(keys: string[]) => handleOpenChange(keys as [])}
         theme="dark"
         mode="inline"
         defaultSelectedKeys={["4"]}
