@@ -1,7 +1,6 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { setUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/hook";
@@ -16,15 +15,13 @@ const Login = () => {
     const res = await login(values).unwrap();
 
     const user = verifyToken(res?.token);
-    
+
     dispatch(setUser({ user, token: res.token }));
-    if (res?.success === "true") {
-      // navigate(`${user?.role}/dashboard`, { replace: true });
-      toast.success(res?.message);
-    } else {
-      // Display an error message
-      toast.error(res?.message);
-    }
+    // if (res?.success === "true") {
+    //   navigate(`${user?.role}/dashboard`, { replace: true });
+    //   toast.success(res?.message);
+    // }
+    navigate(`/${user?.role}/dashboard`, { replace: true });
   };
 
   return (
