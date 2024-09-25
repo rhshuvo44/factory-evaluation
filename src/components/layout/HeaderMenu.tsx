@@ -2,26 +2,30 @@ import { Avatar, Button, Dropdown, Layout, MenuProps } from "antd";
 import { NavLink } from "react-router-dom";
 // import userImg from "../../assets/image/logo.png";
 import { UserOutlined } from "@ant-design/icons";
+import { logout } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/hook";
 const { Header } = Layout;
-const items: MenuProps["items"] = [
-  {
-    label: <NavLink to={`/me`}>Profile</NavLink>,
-    key: "profile",
-  },
-  {
-    label: "Settings",
-    key: "settings",
-  },
 
-  {
-    type: "divider",
-  },
-  {
-    label: <Button>Logout</Button>,
-    key: "logout",
-  },
-];
 const HeaderMenu = () => {
+  const dispatch = useAppDispatch();
+  const items: MenuProps["items"] = [
+    {
+      label: <NavLink to={`/me`}>Profile</NavLink>,
+      key: "profile",
+    },
+    {
+      label: "Settings",
+      key: "settings",
+    },
+
+    {
+      type: "divider",
+    },
+    {
+      label: <Button onClick={() => dispatch(logout())}>Logout</Button>,
+      key: "logout",
+    },
+  ];
   const date = new Date();
   return (
     <Header className="flex items-center gap-1 md:gap-5 justify-between">

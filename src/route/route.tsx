@@ -46,7 +46,11 @@ export const router = createBrowserRouter([
     children: routeGenerator(coordinatorPaths),
   },
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/",
+    element: <App />,
   },
 ]);

@@ -1,7 +1,6 @@
 import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetTravellingsQuery } from "../../redux/api/api";
 import { TFixed } from "../../types/tableType";
 import Loading from "../ui/Loading";
 
@@ -41,13 +40,13 @@ const FixedCostTable = () => {
       ),
     },
   ];
-  const { data, isError, isLoading } = useGetTravellingsQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
+  // const { data, isError, isLoading } = useGetTravellingsQuery({
+  //   limit: pageSize,
+  //   skip: (currentPage - 1) * pageSize,
+  // });
 
-  if (isLoading) return <Loading />;
-  if (isError) return <div>Error: {isError}</div>;
+  // if (isLoading) return <Loading />;
+  // if (isError) return <div>Error: {isError}</div>;
   return (
     <Table
       className="table-auto"
@@ -58,7 +57,7 @@ const FixedCostTable = () => {
       pagination={{
         current: currentPage,
         pageSize: pageSize,
-        total: data?.total,
+        // total: data?.total,
         onChange: (page, pageSize) => {
           setCurrentPage(page);
           setPageSize(pageSize);

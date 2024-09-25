@@ -81,13 +81,13 @@ const SalaryTable = () => {
       ),
     },
   ];
-  const { data, isError, isLoading } = useGetTravellingsQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
+  // const { data, isError, isLoading } = useGetTravellingsQuery({
+  //   limit: pageSize,
+  //   skip: (currentPage - 1) * pageSize,
+  // });
 
-  if (isLoading) return <Loading />;
-  if (isError) return <div>Error: {isError}</div>;
+  // if (isLoading) return <Loading />;
+  // if (isError) return <div>Error: {isError}</div>;
   return (
     <Table
       className="table-auto"
@@ -98,7 +98,7 @@ const SalaryTable = () => {
       pagination={{
         current: currentPage,
         pageSize: pageSize,
-        total: data?.total,
+        // total: data?.total,
         onChange: (page, pageSize) => {
           setCurrentPage(page);
           setPageSize(pageSize);

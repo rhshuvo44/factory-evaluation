@@ -1,9 +1,9 @@
 import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetTravellingsQuery } from "../../redux/api/api";
 import { TTravel } from "../../types/tableType";
 import Loading from "../ui/Loading";
+import { useGetAllTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 
 const TravellingTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,10 +82,11 @@ const TravellingTable = () => {
       ),
     },
   ];
-  const { data, isError, isLoading } = useGetTravellingsQuery({
+  const { data, isError, isLoading } = useGetAllTravellingsQuery({
     limit: pageSize,
     skip: (currentPage - 1) * pageSize,
   });
+  console.log(data);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
@@ -94,12 +95,12 @@ const TravellingTable = () => {
       className="table-auto"
       bordered
       columns={colums}
-      dataSource={data?.travelling}
+      // dataSource={data?.travelling}
       rowKey="id"
       pagination={{
         current: currentPage,
         pageSize: pageSize,
-        total: data?.total,
+        // total: data?.total,
         onChange: (page, pageSize) => {
           setCurrentPage(page);
           setPageSize(pageSize);

@@ -1,30 +1,34 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import login from "../styles/login.module.css";
+import { toast } from "sonner";
+import { useLoginMutation } from "../redux/features/auth/authApi";
+import { setUser } from "../redux/features/auth/authSlice";
+import { useAppDispatch } from "../redux/hook";
 import { TLogin } from "../types";
+import { verifyToken } from "../utilis/verifyToken";
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [login] = useLoginMutation();
 
-  const onFinish = (values: TLogin) => {
-    console.log("Received values of form: ", values);
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
-    if (values.username === "admin" && values.password === "admin") {
-      navigate("/admin/dashboard", { replace: true });
-    } else if (
-      values.username === "executive" &&
-      values.password === "executive"
-    ) {
-      navigate("/executive-director/dashboard", { replace: true });
+  const onFinish = async (values: TLogin) => {
+    const res = await login(values).unwrap();
+
+    const user = verifyToken(res?.token);
+    
+    dispatch(setUser({ user, token: res.token }));
+    if (res?.success === "true") {
+      // navigate(`${user?.role}/dashboard`, { replace: true });
+      toast.success(res?.message);
     } else {
       // Display an error message
-      alert("Invalid username or password");
+      toast.error(res?.message);
     }
   };
+
   return (
-    <div className={login.section}>
+    <div className="flex items-center justify-center h-[100vh]">
       <Form
         name="login"
         initialValues={{ remember: true }}
