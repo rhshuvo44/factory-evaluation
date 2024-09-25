@@ -1,9 +1,9 @@
 import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGetAllTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 import { TTravel } from "../../types/tableType";
 import Loading from "../ui/Loading";
-import { useGetAllTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 
 const TravellingTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,9 +12,9 @@ const TravellingTable = () => {
 
   const colums = [
     {
-      title: "SL No",
-      dataIndex: "SL No",
-      key: "SL No",
+      title: "SL",
+      dataIndex: "slNo",
+      key: "slNo",
     },
 
     {
@@ -39,23 +39,23 @@ const TravellingTable = () => {
     },
     {
       title: "Buyer ID",
-      dataIndex: "buyer ID",
-      key: "buyer ID",
+      dataIndex: "buyerId",
+      key: "buyerId",
     },
     {
       title: "Order No",
-      dataIndex: "order No",
-      key: "order No",
+      dataIndex: "orderNo",
+      key: "orderNo",
     },
     {
       title: "Pay To",
-      dataIndex: "pay",
-      key: "pay",
+      dataIndex: "payTo",
+      key: "payTo",
     },
     {
       title: "Payment Type",
-      dataIndex: "payment",
-      key: "payment",
+      dataIndex: "paymentType",
+      key: "paymentType",
     },
     {
       title: "Unit",
@@ -64,19 +64,19 @@ const TravellingTable = () => {
     },
     {
       title: "Unit Price",
-      dataIndex: "unit price",
-      key: "unit price",
+      dataIndex: "unitPrice",
+      key: "unitPrice",
     },
     {
       title: "Total Price",
-      dataIndex: "total price",
-      key: "total price",
+      dataIndex: "totalPrice",
+      key: "totalPrice",
     },
     {
       title: "Action",
       key: "action",
       render: (_: number, record: TTravel) => (
-        <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
+        <Button type="link" onClick={() => navigate(`/product/${record._id}`)}>
           View Details
         </Button>
       ),
@@ -86,7 +86,6 @@ const TravellingTable = () => {
     limit: pageSize,
     skip: (currentPage - 1) * pageSize,
   });
- console.log(data);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
@@ -95,12 +94,12 @@ const TravellingTable = () => {
       className="table-auto"
       bordered
       columns={colums}
-      // dataSource={data?.travelling}
+      dataSource={data?.data?.result}
       rowKey="id"
       pagination={{
         current: currentPage,
         pageSize: pageSize,
-        // total: data?.total,
+        total: data?.total,
         onChange: (page, pageSize) => {
           setCurrentPage(page);
           setPageSize(pageSize);

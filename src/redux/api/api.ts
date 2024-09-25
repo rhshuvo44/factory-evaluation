@@ -22,10 +22,9 @@ const baseQuery = fetchBaseQuery({
         if (token) {
             // headers.set('authorization', `Bearer ${token}`);
             headers.set('authorization', `Bearer ${token}`)
-            console.log(headers.authorization);
+            
         }
 
-        console.log(headers);
         return headers;
     },
 });
@@ -36,7 +35,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
     let result = await baseQuery(args, api, extraOptions);
-console.log(result);
+
     if (result?.error?.status === 404) {
         toast.error(result.error.data.message);
     }
@@ -54,7 +53,7 @@ console.log(result);
         });
 
         const data = await res.json();
-        console.log("data: " + data);
+        
         if (data?.token) {
             const user = (api.getState() as RootState).auth.user;
 

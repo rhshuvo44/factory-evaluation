@@ -8,13 +8,14 @@ import {
   Select,
 } from "antd";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { paymentOptions } from "../../../constants/Options";
 import { useCreateTravelMutation } from "../../../redux/features/travelling/travellingApi";
 import { TTravel } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
-import CustomTextArea from "../../form/CustomTextArea";
 import CustomInputNumber from "../../form/CustomInputNumber";
+import CustomTextArea from "../../form/CustomTextArea";
 
 const TravellingForm = () => {
   const [form] = Form.useForm();
@@ -36,9 +37,10 @@ const TravellingForm = () => {
       totalPrice: unit * unitPrice,
     });
   }, [unit, unitPrice, form]);
-  const onFinish = (values: TTravel) => {
-    console.log("Received values of form: ", { ...values, date });
-    createTravel({ ...values, date });
+  const onFinish = async (values: TTravel) => {
+    const res = await createTravel({ ...values, date }).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success("Create Travelling Allowance successfully");
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>

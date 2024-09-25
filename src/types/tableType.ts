@@ -11,7 +11,7 @@ export type TSubUtility = {
     totalPrice: number;
 }
 export type TTravel = {
-
+    _id?: string;
     date: Date;
     particulars: string;
     description: string;
@@ -98,7 +98,7 @@ export type TFactory = {
     totalPrice: number;
 }
 export type TLoan = {
-   date: Date;
+    date: Date;
     particulars: string;
     description: string;
     quantity: number;

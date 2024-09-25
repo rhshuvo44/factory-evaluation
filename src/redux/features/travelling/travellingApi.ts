@@ -5,7 +5,7 @@ import { baseApi } from "../../api/api";
 const travelApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllTravellings: builder.query<{ travelling: TTravel[]; total: number }, { limit: number; skip: number }>({
-            query: ({ limit, skip }) => ({ url: `/travelling-allowance?limit=${limit}&skip=${skip}`, method: 'GET' }),
+            query: ({ limit, skip }) => ({ url: `/travelling-allowance`, method: 'GET' }),
         }),
         createTravel: builder.mutation({
             query: (travellingData) => ({
