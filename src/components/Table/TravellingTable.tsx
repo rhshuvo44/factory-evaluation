@@ -86,7 +86,7 @@ const TravellingTable = () => {
     limit: pageSize,
     skip: (currentPage - 1) * pageSize,
   });
-  console.log(data);
+ console.log(data);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;

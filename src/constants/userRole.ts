@@ -5,3 +5,8 @@ export const userRole = {
     GeneralManager: "general-director",
     Coordinator: "coordinator",
 };
+// executiveDirector: 'executiveDirector',
+// managingDirector: 'managingDirector',
+// generalManager: 'generalManager',
+// coordinator: 'coordinator',
+// admin: 'admin',

@@ -11,13 +11,13 @@ export type TSubUtility = {
     totalPrice: number;
 }
 export type TTravel = {
-    slNo: number;
+
     date: Date;
     particulars: string;
     description: string;
     remark?: string;
-    buyerId: string;
-    orderNo: string;
+    buyerId: number;
+    orderNo: number;
     payTo: string;
     paymentType: PaymentType;
     unit: number;
@@ -98,8 +98,7 @@ export type TFactory = {
     totalPrice: number;
 }
 export type TLoan = {
-    slNo: number;
-    date: Date;
+   date: Date;
     particulars: string;
     description: string;
     quantity: number;

@@ -9,6 +9,7 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { useLoginMutation } from "../../../redux/features/auth/authApi";
 import { TLoan } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
@@ -19,7 +20,7 @@ const LoanAdd = () => {
   const [unit, setUnit] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
-
+  const [createLoan] = useLoginMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -39,16 +40,11 @@ const LoanAdd = () => {
     // Call your backend API to handle the login request
     // and handle the response appropriately
     // You can use the following code as a reference:
+    createLoan({ ...values, date });
   };
 
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInputNumber
-        label="SL No"
-        name="slNo"
-        message="Please input SL No"
-      />
-
       <CustomInput
         label="Particulars"
         name="particulars"
@@ -59,12 +55,12 @@ const LoanAdd = () => {
         name="description"
         message="Please input! Description"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Quantity"
         name="quantity"
         message="Please input! Quantity"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Memo No"
         name="memoNo"
         message="Please input! Memo No"

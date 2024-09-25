@@ -9,18 +9,19 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { paymentOptions } from "../../../constants/Options";
+import { useCreateTravelMutation } from "../../../redux/features/travelling/travellingApi";
 import { TTravel } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
-import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-import { paymentOptions } from "../../../constants/Options";
+import CustomInputNumber from "../../form/CustomInputNumber";
 
 const TravellingForm = () => {
   const [form] = Form.useForm();
   const [unit, setUnit] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
-
+  const [createTravel] = useCreateTravelMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -37,18 +38,10 @@ const TravellingForm = () => {
   }, [unit, unitPrice, form]);
   const onFinish = (values: TTravel) => {
     console.log("Received values of form: ", { ...values, date });
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
+    createTravel({ ...values, date });
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInputNumber
-        label="SL No"
-        name="slNo"
-        message="Please input SL No"
-      />
-
       <CustomInput
         label="Particulars"
         name="particulars"
@@ -64,12 +57,12 @@ const TravellingForm = () => {
         name="remark"
         message="Please input! Remark"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Buyer ID"
         name="buyerId"
         message="Please input! Buyer ID"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Order No"
         name="orderNo"
         message="Please input! Order No"

@@ -12,15 +12,20 @@ import { logout, setUser } from '../features/auth/authSlice';
 import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://factory-backend.vercel.app/api/',
+    baseUrl: 'https://factory-backend.vercel.app/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
-
+        if (!headers.has("Content-Type")) {
+            headers.set("Content-Type", "application/json");
+        }
         if (token) {
-            headers.set('authorization', `${token}`);
+            // headers.set('authorization', `Bearer ${token}`);
+            headers.set('authorization', `Bearer ${token}`)
+            console.log(headers.authorization);
         }
 
+        console.log(headers);
         return headers;
     },
 });
@@ -31,7 +36,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
     let result = await baseQuery(args, api, extraOptions);
-
+console.log(result);
     if (result?.error?.status === 404) {
         toast.error(result.error.data.message);
     }
@@ -49,7 +54,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         });
 
         const data = await res.json();
-
+        console.log("data: " + data);
         if (data?.token) {
             const user = (api.getState() as RootState).auth.user;
 

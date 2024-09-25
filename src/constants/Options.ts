@@ -31,9 +31,9 @@ export const designationOption = [
 ]
 
 export const paymentOptions = [
-    { value: "monthly", label: "Monthly" },
-    { value: "daily", label: "Daily" },
-    { value: "once", label: "Once" },
+    { value: "Monthly", label: "Monthly" },
+    { value: "Daily", label: "Daily" },
+    { value: "Once", label: "Once" },
 ]
 
 export const userRoleOptions = [
