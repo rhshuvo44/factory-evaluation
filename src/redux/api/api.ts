@@ -56,14 +56,12 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         console.log("fresh", data);
         if (data?.token) {
             const user = (api.getState() as RootState).auth.user;
-
             api.dispatch(
                 setUser({
                     user,
                     token: data?.token,
                 })
             );
-
             result = await baseQuery(args, api, extraOptions);
         } else {
             api.dispatch(logout());
@@ -76,6 +74,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQueryWithRefreshToken,
-    // tagTypes: ['semester', 'courses', 'offeredCourse'],
+    tagTypes: ['travelling', 'utility', 'employee', 'loan', 'miscellaneous', 'collection', 'buyer', 'factory', 'user'],
     endpoints: () => ({}),
 });

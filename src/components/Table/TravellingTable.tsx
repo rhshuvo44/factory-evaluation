@@ -93,7 +93,7 @@ const TravellingTable = () => {
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
-  console.log(data);
+
   return (
     <div>
       <div className="flex  items-center justify-between mb-2">
