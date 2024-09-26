@@ -9,19 +9,24 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import {
+  buyerParticularsOptions,
+  paymentOptions,
+} from "../../../constants/Options";
+import { useCreateBuyerDevelopmentMutation } from "../../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { TBuyer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-import { buyerParticularsOptions, paymentOptions } from "../../../constants/Options";
 
 const BuyerDevelopmentAdd = () => {
   const [form] = Form.useForm();
   const [unit, setUnit] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
-
+  const [createBuyerDevelopmentMutation] = useCreateBuyerDevelopmentMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -37,21 +42,16 @@ const BuyerDevelopmentAdd = () => {
     });
   }, [unit, unitPrice, form]);
 
-  const onFinish = (values: TBuyer) => {
-    console.log("Received values of form: ", { ...values, date });
-
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
+  const onFinish = async (values: TBuyer) => {
+    const res = await createBuyerDevelopmentMutation({
+      ...values,
+      date,
+    }).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success("Create Buyer Development Cost successfully");
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInputNumber
-        label="SL No"
-        name="slNo"
-        message="Please input SL No"
-      />
-
       <Form.Item
         label="Particulars"
         name="particulars"
@@ -73,12 +73,17 @@ const BuyerDevelopmentAdd = () => {
         name="quantity"
         message="Please input! Quantity"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Buyer ID"
         name="buyerId"
         message="Please input! Buyer ID"
       />
-      <CustomInput
+      <CustomInputNumber
+        label="Memo No"
+        name="memoNo"
+        message="Please input! Memo No"
+      />
+      <CustomInputNumber
         label="Order No"
         name="orderNo"
         message="Please input! Order No"

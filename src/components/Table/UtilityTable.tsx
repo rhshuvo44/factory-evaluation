@@ -2,6 +2,8 @@ import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TUtility } from "../../types/tableType";
+import { useGetAllUtilityQuery } from "../../redux/features/utility/utilityApi";
+import Loading from "../ui/Loading";
 
 const UtilityTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,19 +45,17 @@ const UtilityTable = () => {
       ),
     },
   ];
-  // const { data, isError, isLoading } = useGetTravellingsQuery({
-  //   limit: pageSize,
-  //   skip: (currentPage - 1) * pageSize,
-  // });
+  const { data, isError, isLoading } = useGetAllUtilityQuery(undefined);
 
-  // if (isLoading) return <Loading />;
-  // if (isError) return <div>Error: {isError}</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error: {isError}</div>;
+  console.log(data.data.result);
   return (
     <Table
       className="table-auto"
       bordered
       columns={colums}
-      //   dataSource={data}
+      // dataSource={data.data.result}
       rowKey="id"
       pagination={{
         current: currentPage,

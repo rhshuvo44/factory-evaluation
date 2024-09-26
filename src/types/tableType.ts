@@ -5,7 +5,14 @@ export type TLine = "Line 1 / 3rd floor" | "Line 2 / 4th floor" | "Line 3 / 4th 
 export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Tank Top" | "Sweat Shirt" | "Trouser" | "Shorts" | "Romper/Keeper" | "Long Sleeve T-shirt"
 export type TDesignation = 'Supervisor' | 'G.M' | 'P.M' | 'Ex. Accountant' | 'Security' | 'Cutting Master' | 'Fin. Incharge' | 'Mechanic' | 'Operator' | 'Folding' | 'Check' | 'Poly' | 'Helper' | 'Maid' | 'Cleaner' | 'Cut. Helper' | 'Cutting Man';
 
-type TParticulars = 'Commission' | 'Meal Cost' | 'Machine Maintenance' | 'Loading & Unloading' | 'Rental Machine Bill' | 'Sample Development Cost' | 'Night Bill (STF)' | 'Night Bill (WRK)';
+type TParticulars = 'Commission'
+    | 'Meal cost'
+    | 'Machine Maintenance'
+    | 'Loading & Unloading'
+    | 'Rental Machine Bill'
+    | 'Sample Development cost'
+    | 'Night Bill (STF)'
+    | 'Night Bill (WRK)';
 export type TSubUtility = {
     unitPrice: number;
     totalPrice: number;
@@ -40,13 +47,14 @@ export type TMiscellaneous = {
 }
 
 export type TBuyer = {
-    slNo: number;
+    _id?: string;
     date: string;
     particulars: TParticulars;
     description: string;
     quantity: number
-    buyerId: string;
-    orderNo: string;
+    buyerId: number;
+    memoNo: number;
+    orderNo: number;
     payTo: string;
     paymentType: PaymentType;
     unit: number;
@@ -67,10 +75,10 @@ export type TSalary = {
 }
 
 export type TUtility = {
-    internet: TSubUtility;
-    water: TSubUtility;
-    electricity: TSubUtility;
-    others?: TSubUtility;
+    internet: TSubUtility[];
+    water: TSubUtility[];
+    electricity: TSubUtility[];
+    others?: TSubUtility[];
 }
 
 export type TUSer = {

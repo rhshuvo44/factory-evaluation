@@ -11,10 +11,15 @@ const utilityApi = baseApi.injectEndpoints({
                 body: data,
             }),
         }),
+        getAllUtility: builder.query({
+            query: () => (
+                { url: `/utility`, method: 'GET' }
+            ), providesTags: ['Utility'],
+        })
     })
 });
 
 
 
 
-export const { useCreateUtilityMutation } = utilityApi;
+export const { useCreateUtilityMutation, useGetAllUtilityQuery } = utilityApi;
