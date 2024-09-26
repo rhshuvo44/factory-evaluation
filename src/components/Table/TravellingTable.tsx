@@ -8,7 +8,7 @@ import SectionTitle from "../ui/SectionTitle";
 
 const TravellingTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(3);
   const navigate = useNavigate();
 
   const colums = [

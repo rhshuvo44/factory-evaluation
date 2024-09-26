@@ -6,6 +6,7 @@ import { TSubUtility, TUtility } from "../../../types/tableType";
 import CustomInputNumber from "../../form/CustomInputNumber";
 
 const UtilityAddForm = () => {
+  const [form] = Form.useForm();
   const [createUtility] = useCreateUtilityMutation();
   const date = new Date().toLocaleDateString();
 
@@ -36,6 +37,7 @@ const UtilityAddForm = () => {
     const res = await createUtility({ ...utility, date }).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Create Utility successfully");
+    form.resetFields();
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish}>

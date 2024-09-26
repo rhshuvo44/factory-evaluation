@@ -8,7 +8,6 @@ const buyerDevelopmentApi = baseApi.injectEndpoints({
             query: () => ({
                 url: '/buyer-development',
                 method: 'GET',
-
             }),
             providesTags: ['Buyer Development'],
         }),

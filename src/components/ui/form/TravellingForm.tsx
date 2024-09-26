@@ -48,6 +48,7 @@ const TravellingForm = () => {
     const res = await createTravel({ ...values, date }).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Create Travelling Allowance successfully");
+    form.resetFields();
   };
   return (
     <Form

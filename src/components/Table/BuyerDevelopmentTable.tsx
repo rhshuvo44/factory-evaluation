@@ -8,15 +8,8 @@ import SectionTitle from "../ui/SectionTitle";
 
 const BuyerDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(3);
   const navigate = useNavigate();
-  // memoNo
-  // orderNo
-  // payTo
-  // paymentType
-  // totalPrice
-  // unitPrice
-
   const colums = [
     {
       title: "SL",
@@ -83,7 +76,7 @@ const BuyerDevelopmentTable = () => {
       title: "Action",
       key: "action",
       render: (_: number, record: TBuyer) => (
-        <Button type="link" onClick={() => navigate(`/product/${record._id}`)}>
+        <Button type="link" onClick={() => navigate(`/${record._id}`)}>
           Edit
         </Button>
       ),

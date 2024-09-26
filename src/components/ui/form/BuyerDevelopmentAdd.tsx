@@ -49,6 +49,7 @@ const BuyerDevelopmentAdd = () => {
     }).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Create Buyer Development Cost successfully");
+    form.resetFields();
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>

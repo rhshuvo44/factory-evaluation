@@ -45,11 +45,11 @@ export const userRoleOptions = [
 ]
 export const buyerParticularsOptions = [
     { value: "Commission", label: "Commission" },
-    { value: "Meal Cost", label: "Meal Cost" },
-    { value: "Machine Maintenance'", label: "Machine Maintenance'" },
+    { value: "Meal cost", label: "Meal Cost" },
+    { value: "Machine Maintenance", label: "Machine Maintenance" },
     { value: "Loading & Unloading", label: "Loading & Unloading" },
     { value: "Rental Machine Bill", label: "Rental Machine Bill" },
-    { value: "Sample Development Cost", label: "Sample Development Cost" },
+    { value: "Sample Development cost", label: "Sample Development Cost" },
     { value: "Night Bill (STF)", label: "Night Bill (STF)" },
     { value: "Night Bill (WRK)", label: "Night Bill (WRK)" },
 ]
