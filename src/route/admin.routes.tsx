@@ -172,6 +172,11 @@ export const adminPaths = [
         element: <ProductionAdd />,
       },
       {
+        // name: "Add Production Report",
+        path: ":/id",
+        element: <ProductionAdd />,
+      },
+      {
         name: "All Production Report",
         path: "all_production_reports",
         element: <Production />,

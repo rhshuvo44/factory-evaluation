@@ -6,11 +6,8 @@ const travelApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllTravellings: builder.query({
             query: () => (
-
                 { url: `/travelling-allowance`, method: 'GET' }
-
-
-            ),
+            ), providesTags: ['Travelling'],
         }),
         createTravel: builder.mutation({
             query: (travellingData) => ({

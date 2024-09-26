@@ -1,38 +1,43 @@
 import { Button, Form, InputNumber } from "antd";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { useCreateUtilityMutation } from "../../../redux/features/utility/utilityApi";
 import { TSubUtility, TUtility } from "../../../types/tableType";
 import CustomInputNumber from "../../form/CustomInputNumber";
 
 const UtilityAddForm = () => {
-  const onFinish = (values: TUtility) => {
+  const [createUtility] = useCreateUtilityMutation();
+ const date= new Date().toLocaleDateString()
+ 
+  const onFinish = async (values: TUtility) => {
     // console.log("Received values of form: ", values);
     const { electricity, internet, water, others } = values;
-    const internetBill: TSubUtility = {
+    const internetBill: TSubUtility[] = [{
       unitPrice: typeof internet === "number" ? internet / 30 : 0,
       totalPrice: typeof internet === "number" ? internet : 0,
-    };
-    const waterBill: TSubUtility = {
+    }];
+    const waterBill: TSubUtility[] = [{
       unitPrice: typeof water === "number" ? water / 30 : 0,
       totalPrice: typeof water === "number" ? water : 0,
-    };
-    const electricityBill: TSubUtility = {
+    }];
+    const electricityBill: TSubUtility[] = [{
       unitPrice: typeof electricity === "number" ? electricity / 30 : 0,
       totalPrice: typeof electricity === "number" ? electricity : 0,
-    };
-    const othersBill: TSubUtility = {
+    }];
+    const othersBill: TSubUtility[] = [{
       unitPrice: typeof others === "number" ? others / 30 : 0,
       totalPrice: typeof others === "number" ? others : 0,
-    };
+    }];
     const utility = {
       internet: internetBill,
       water: waterBill,
       electricity: electricityBill,
       others: othersBill,
     };
-    console.log(utility);
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
+    const res = await createUtility({...utility,date}).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success("Create Utility successfully");
+  
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish}>

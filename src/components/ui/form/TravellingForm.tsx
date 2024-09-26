@@ -32,6 +32,13 @@ const TravellingForm = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
+
+  // const initialValues = [{ particulars: "default value" }];
+  // const { data, isError, isLoading } = useUpdateTravellingMutation({
+  //   limit: pageSize,
+  //   skip: (currentPage - 1) * pageSize,
+  // });
+
   useEffect(() => {
     form.setFieldsValue({
       totalPrice: unit * unitPrice,
@@ -43,7 +50,12 @@ const TravellingForm = () => {
     toast.success("Create Travelling Allowance successfully");
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form
+      {...formItemLayout}
+      onFinish={onFinish}
+      form={form}
+      initialValues={{ particulars: "default value" }}
+    >
       <CustomInput
         label="Particulars"
         name="particulars"

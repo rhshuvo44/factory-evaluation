@@ -9,7 +9,6 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { formItemLayout } from "../../../constants/formItemLayout";
-import { useLoginMutation } from "../../../redux/features/auth/authApi";
 import { TLoan } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
@@ -20,7 +19,7 @@ const LoanAdd = () => {
   const [unit, setUnit] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
-  const [createLoan] = useLoginMutation();
+
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -37,10 +36,6 @@ const LoanAdd = () => {
   }, [unit, unitPrice, form]);
   const onFinish = (values: TLoan) => {
     console.log("Received values of form: ", { ...values, date });
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
-    createLoan({ ...values, date });
   };
 
   return (

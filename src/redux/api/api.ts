@@ -35,7 +35,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
     let result = await baseQuery(args, api, extraOptions);
-
     if (result?.error?.status === 404) {
         toast.error("not found");
     }
@@ -74,6 +73,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQueryWithRefreshToken,
-    tagTypes: ['travelling', 'utility', 'employee', 'loan', 'miscellaneous', 'collection', 'buyer', 'factory', 'user'],
+    tagTypes: ['Travelling', 'Utility', 'employee', 'loan', 'miscellaneous', 'collection', 'buyer', 'factory', 'user',"Loan"],
     endpoints: () => ({}),
 });

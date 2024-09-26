@@ -77,19 +77,13 @@ const TravellingTable = () => {
       title: "Action",
       key: "action",
       render: (_: number, record: TTravel) => (
-        <Button
-          type="link"
-          onClick={() => navigate(`/travelling-allowance/${record._id}`)}
-        >
+        <Button type="link" onClick={() => navigate(`${record._id}`)}>
           Edit
         </Button>
       ),
     },
   ];
-  const { data, isError, isLoading } = useGetAllTravellingsQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
+  const { data, isError, isLoading } = useGetAllTravellingsQuery(undefined);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
@@ -100,7 +94,7 @@ const TravellingTable = () => {
         <SectionTitle title=" Travelling Allowance" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :
-          <span className="text-red-500">{data?.data?.totalPrice}</span>
+          <span className="text-red-500"> {data?.data?.totalPrice}</span>
         </div>
       </div>
       <div className="responsive-table-container">

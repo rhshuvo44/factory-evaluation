@@ -78,11 +78,8 @@ const LoanTable = () => {
     //   ),
     // },
   ];
-  // const { data, isError, isLoading } = useGetAllLoanQuery({
-  //   limit: pageSize,
-  //   skip: (currentPage - 1) * pageSize,
-  // });
-  // console.log(data);
+  // const { data, isError, isLoading, error } = useGetAllLoanQuery(undefined);
+  // console.log(data, isError, isLoading, error);
   // if (isLoading) return <Loading />;
   // if (isError) return <div>Error: {isError}</div>;
   return (
