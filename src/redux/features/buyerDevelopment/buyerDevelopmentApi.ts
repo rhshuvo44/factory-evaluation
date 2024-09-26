@@ -4,6 +4,14 @@ import { baseApi } from "../../api/api";
 const buyerDevelopmentApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
 
+        getAllBuyerDevelopment: builder.query({
+            query: () => ({
+                url: '/buyer-development',
+                method: 'GET',
+
+            }),
+            providesTags: ['Buyer Development'],
+        }),
         createBuyerDevelopment: builder.mutation({
             query: (travellingData) => ({
                 url: '/buyer-development',
@@ -19,4 +27,4 @@ const buyerDevelopmentApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateBuyerDevelopmentMutation } = buyerDevelopmentApi;
+export const { useCreateBuyerDevelopmentMutation, useGetAllBuyerDevelopmentQuery } = buyerDevelopmentApi;

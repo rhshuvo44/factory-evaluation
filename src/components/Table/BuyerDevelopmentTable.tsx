@@ -1,18 +1,27 @@
 import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGetAllBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { TBuyer } from "../../types/tableType";
+import Loading from "../ui/Loading";
+import SectionTitle from "../ui/SectionTitle";
 
 const BuyerDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const navigate = useNavigate();
+  // memoNo
+  // orderNo
+  // payTo
+  // paymentType
+  // totalPrice
+  // unitPrice
 
   const colums = [
     {
-      title: "SL No",
-      dataIndex: "SL No",
-      key: "SL No",
+      title: "SL",
+      dataIndex: "slNo",
+      key: "slNo",
     },
 
     {
@@ -37,23 +46,23 @@ const BuyerDevelopmentTable = () => {
     },
     {
       title: "Buyer ID",
-      dataIndex: "buyer ID",
-      key: "buyer ID",
+      dataIndex: "buyerId",
+      key: "buyerId",
     },
     {
       title: "Order No",
-      dataIndex: "order No",
-      key: "order No",
+      dataIndex: "orderNo",
+      key: "orderNo",
     },
     {
       title: "Pay To",
-      dataIndex: "pay",
-      key: "pay",
+      dataIndex: "payTo",
+      key: "payTo",
     },
     {
       title: "Payment Type",
-      dataIndex: "payment",
-      key: "payment",
+      dataIndex: "paymentType",
+      key: "paymentType",
     },
     {
       title: "Unit",
@@ -62,48 +71,57 @@ const BuyerDevelopmentTable = () => {
     },
     {
       title: "Unit Price",
-      dataIndex: "unit price",
-      key: "unit price",
+      dataIndex: "unitPrice",
+      key: "unitPrice",
     },
     {
       title: "Total Price",
-      dataIndex: "total price",
-      key: "total price",
+      dataIndex: "totalPrice",
+      key: "totalPrice",
     },
     {
       title: "Action",
       key: "action",
       render: (_: number, record: TBuyer) => (
-        <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
-          View Details
+        <Button type="link" onClick={() => navigate(`/product/${record._id}`)}>
+          Edit
         </Button>
       ),
     },
   ];
-  // const { data, isError, isLoading } = useGetTravellingsQuery({
-  //   limit: pageSize,
-  //   skip: (currentPage - 1) * pageSize,
-  // });
-
-  // if (isLoading) return <Loading />;
-  // if (isError) return <div>Error: {isError}</div>;
+  const { data, isError, isLoading } = useGetAllBuyerDevelopmentQuery({
+    undefined,
+  });
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error: {isError}</div>;
   return (
-    <Table
-      className="table-auto"
-      bordered
-      columns={colums}
-      //   dataSource={data}
-      rowKey="id"
-      pagination={{
-        current: currentPage,
-        pageSize: pageSize,
-        // total: data?.total,
-        onChange: (page, pageSize) => {
-          setCurrentPage(page);
-          setPageSize(pageSize);
-        },
-      }}
-    />
+    <div>
+      <div className="flex  items-center justify-between mb-2">
+        <SectionTitle title="Buyer Development cost" />
+        <div className="text-sm md:text-lg lg:text-3xl font-bold">
+          Total cost :
+          <span className="text-red-500"> {data?.data?.totalPrice}</span>
+        </div>
+      </div>
+      <div className="responsive-table-container">
+        <Table
+          className="table-auto"
+          bordered
+          columns={colums}
+          dataSource={data?.data?.result}
+          rowKey="_id"
+          pagination={{
+            current: currentPage,
+            pageSize: pageSize,
+            // total: data?.data.meta.total,
+            onChange: (page, pageSize) => {
+              setCurrentPage(page);
+              setPageSize(pageSize);
+            },
+          }}
+        />
+      </div>
+    </div>
   );
 };
 
