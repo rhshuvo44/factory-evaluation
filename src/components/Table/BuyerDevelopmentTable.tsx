@@ -2,7 +2,6 @@ import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TBuyer } from "../../types/tableType";
-import Loading from "../ui/Loading";
 
 const BuyerDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,7 +92,7 @@ const BuyerDevelopmentTable = () => {
       className="table-auto"
       bordered
       columns={colums}
-    //   dataSource={data}
+      //   dataSource={data}
       rowKey="id"
       pagination={{
         current: currentPage,

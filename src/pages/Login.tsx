@@ -3,7 +3,7 @@ import { Button, Flex, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useLoginMutation } from "../redux/features/auth/authApi";
-import { setUser } from "../redux/features/auth/authSlice";
+import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/hook";
 import { TLogin } from "../types";
 import { verifyToken } from "../utilis/verifyToken";
@@ -16,16 +16,14 @@ const Login = () => {
     try {
       const res = await login(values).unwrap();
 
-      const user = verifyToken(res?.token);
-
+      const user = verifyToken(res?.token) as TUser;
       dispatch(setUser({ user, token: res.token }));
-      
+
       toast.success(res?.message);
       navigate(`/${user?.role}/dashboard`, { replace: true });
     } catch (error) {
-     console.log(error);
+      console.log(error);
     }
-
   };
 
   return (

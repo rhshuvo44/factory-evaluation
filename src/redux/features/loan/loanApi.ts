@@ -20,4 +20,4 @@ const loanApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateLoanMutation, useGetAllLoanQuery } = loanApi;
+export const { useCreateLoanMutation } = loanApi;

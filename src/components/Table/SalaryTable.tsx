@@ -1,9 +1,7 @@
 import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetTravellingsQuery } from "../../redux/api/api";
 import { TSalary } from "../../types/tableType";
-import Loading from "../ui/Loading";
 
 const SalaryTable = () => {
   const [currentPage, setCurrentPage] = useState(1);

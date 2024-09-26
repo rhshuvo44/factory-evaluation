@@ -3,7 +3,7 @@ import Sider from "antd/es/layout/Sider";
 import { useState } from "react";
 import logo from "../../assets/image/logo.png";
 import { userRole } from "../../constants/userRole";
-import { useCurrentToken } from "../../redux/features/auth/authSlice";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import { useAppSelector } from "../../redux/hook";
 import { adminPaths } from "../../route/admin.routes";
 import { coordinatorPaths } from "../../route/Coordinator.routes";
@@ -17,16 +17,9 @@ const SideBar = () => {
   const [openKeys, setOpenKeys] = useState([]);
 
   const token = useAppSelector(useCurrentToken);
-  // const user = {
-  //   role: userRole.ADMIN,
-  //   // role: userRole.ExecutiveDirector,
-  //   // role: userRole.ManagingDirector,
-  //   // role: userRole.GeneralManager,
-  //   // role: userRole.Coordinator,
-  // };
   let user;
   if (token) {
-    user = verifyToken(token);
+    user = verifyToken(token) as TUser;
   }
   let sidebarItems;
 
@@ -76,7 +69,7 @@ const SideBar = () => {
       style={{
         width: "100%",
       }}
-      width={250}
+      // width={250}
       breakpoint="lg"
       collapsedWidth="0"
       onBreakpoint={(broken) => {

@@ -2,7 +2,6 @@ import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TFixed } from "../../types/tableType";
-import Loading from "../ui/Loading";
 
 const FixedCostTable = () => {
   const [currentPage, setCurrentPage] = useState(1);

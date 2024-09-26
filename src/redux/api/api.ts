@@ -22,7 +22,7 @@ const baseQuery = fetchBaseQuery({
         if (token) {
             // headers.set('authorization', `Bearer ${token}`);
             headers.set('authorization', `Bearer ${token}`)
-            
+
         }
 
         return headers;
@@ -37,10 +37,10 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     let result = await baseQuery(args, api, extraOptions);
 
     if (result?.error?.status === 404) {
-        toast.error(result.error.data.message);
+        toast.error("not found");
     }
     if (result?.error?.status === 403) {
-        toast.error(result.error.data.message);
+        toast.error("forbidden")
 
     }
     if (result?.error?.status === 401) {
@@ -53,7 +53,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         });
 
         const data = await res.json();
-        
+        console.log("fresh", data);
         if (data?.token) {
             const user = (api.getState() as RootState).auth.user;
 

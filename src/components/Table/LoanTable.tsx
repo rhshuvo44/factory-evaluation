@@ -1,14 +1,10 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetAllLoanQuery } from "../../redux/features/loan/loanApi";
-import { TLoan } from "../../types/tableType";
-import Loading from "../ui/Loading";
 
 const LoanTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const colums = [
     {
@@ -72,34 +68,34 @@ const LoanTable = () => {
       dataIndex: "total price",
       key: "total price",
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (_: number, record: TLoan) => (
-        <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
-          View Details
-        </Button>
-      ),
-    },
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   render: (_: number, record: TLoan) => (
+    //     <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
+    //       View Details
+    //     </Button>
+    //   ),
+    // },
   ];
-  const { data, isError, isLoading } = useGetAllLoanQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
-  console.log(data);
-  if (isLoading) return <Loading />;
-  if (isError) return <div>Error: {isError}</div>;
+  // const { data, isError, isLoading } = useGetAllLoanQuery({
+  //   limit: pageSize,
+  //   skip: (currentPage - 1) * pageSize,
+  // });
+  // console.log(data);
+  // if (isLoading) return <Loading />;
+  // if (isError) return <div>Error: {isError}</div>;
   return (
     <Table
       className="table-auto"
       bordered
       columns={colums}
-      dataSource={data}
+      // dataSource={data}
       rowKey="id"
       pagination={{
         current: currentPage,
         pageSize: pageSize,
-        total: data?.total,
+        // total: data?.total,
         onChange: (page, pageSize) => {
           setCurrentPage(page);
           setPageSize(pageSize);

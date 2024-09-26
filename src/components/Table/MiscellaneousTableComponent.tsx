@@ -48,7 +48,7 @@ const MiscellaneousTableComponent = () => {
       title: "Action",
       key: "action",
       render: (_: number, record: TTravel) => (
-        <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
+        <Button type="link" onClick={() => navigate(`/product/${record}`)}>
           View Details
         </Button>
       ),

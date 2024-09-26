@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetAllTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 import { TTravel } from "../../types/tableType";
 import Loading from "../ui/Loading";
+import SectionTitle from "../ui/SectionTitle";
 
 const TravellingTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,8 +77,11 @@ const TravellingTable = () => {
       title: "Action",
       key: "action",
       render: (_: number, record: TTravel) => (
-        <Button type="link" onClick={() => navigate(`/product/${record._id}`)}>
-          View Details
+        <Button
+          type="link"
+          onClick={() => navigate(`/travelling-allowance/${record._id}`)}
+        >
+          Edit
         </Button>
       ),
     },
@@ -89,23 +93,35 @@ const TravellingTable = () => {
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
+  console.log(data);
   return (
-    <Table
-      className="table-auto"
-      bordered
-      columns={colums}
-      dataSource={data?.data?.result}
-      rowKey="id"
-      pagination={{
-        current: currentPage,
-        pageSize: pageSize,
-        total: data?.total,
-        onChange: (page, pageSize) => {
-          setCurrentPage(page);
-          setPageSize(pageSize);
-        },
-      }}
-    />
+    <div>
+      <div className="flex  items-center justify-between mb-2">
+        <SectionTitle title=" Travelling Allowance" />
+        <div className="text-sm md:text-lg lg:text-3xl font-bold">
+          Total cost :
+          <span className="text-red-500">{data?.data?.totalPrice}</span>
+        </div>
+      </div>
+      <div className="responsive-table-container">
+        <Table
+          className="table-auto"
+          bordered
+          columns={colums}
+          dataSource={data?.data?.result}
+          rowKey="_id"
+          pagination={{
+            current: currentPage,
+            pageSize: pageSize,
+            // total: data?.data.meta.total,
+            onChange: (page, pageSize) => {
+              setCurrentPage(page);
+              setPageSize(pageSize);
+            },
+          }}
+        />
+      </div>
+    </div>
   );
 };
 
