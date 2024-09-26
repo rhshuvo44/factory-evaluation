@@ -97,10 +97,10 @@ export type TFactory = {
     particulars: string;
     description: string;
     quantity: number;
-    memoNo: string;
-    orderedBy: string;
-    payTo: string;
-    paymentType: PaymentType;
+    memoNo: number;
+    orderedBy: 'M.D' | 'Chairman';
+    payTo: 'M.D' | 'Chairman' | 'Sarkar Alliance OPC';
+    paymentType: 'Bank' | 'Cash';
     unit: number;
     unitPrice: number;
     totalPrice: number;

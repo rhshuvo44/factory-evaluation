@@ -8,8 +8,9 @@ import {
   Select,
 } from "antd";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
-import { paymentOptions } from "../../../constants/Options";
+import { useCreateFactoryDevelopMutation } from "../../../redux/features/Factory development/factoryDevelopmentApi";
 import { TFactory } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
@@ -20,7 +21,7 @@ const FactoryDevelopmentAdd = () => {
   const [unit, setUnit] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
-
+  const [createFactoryDevelop] = useCreateFactoryDevelopMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -35,17 +36,14 @@ const FactoryDevelopmentAdd = () => {
       totalPrice: unit * unitPrice,
     });
   }, [unit, unitPrice, form]);
-  const onFinish = (values: TFactory) => {
-    console.log("Received values of form: ", { ...values, date });
+  const onFinish = async (values: TFactory) => {
+    const res = await createFactoryDevelop({ ...values, date }).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success("Create Factory Development successfully");
+    form.resetFields();
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInputNumber
-        label="SL No"
-        name="slNo"
-        message="Please input SL No"
-      />
-
       <CustomInput
         label="Particulars"
         name="particulars"
@@ -56,22 +54,45 @@ const FactoryDevelopmentAdd = () => {
         name="description"
         message="Please input! Description"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Quantity"
         name="quantity"
         message="Please input! Quantity"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Memo No"
         name="memoNo"
         message="Please input! Memo No"
       />
-      <CustomInput
-        label="Orderer By"
-        name="ordererBy"
-        message="Please input! Orderer By"
-      />
-      <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
+      <Form.Item
+        label="Ordered By"
+        name="orderedBy"
+        rules={[{ required: true, message: "Please select Ordered By! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue="Please select Ordered By"
+          options={[
+            { value: "M.D", label: "M.D" },
+            { value: "Chairman", label: "Chairman" },
+          ]}
+        />
+      </Form.Item>
+      <Form.Item
+        label="Pay to"
+        name="payTo"
+        rules={[{ required: true, message: "Please select Pay to! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue="Please select Pay to"
+          options={[
+            { value: "Sarkar Alliance OPC", label: "Sarkar Alliance OPC" },
+            { value: "M.D", label: "M.D" },
+            { value: "Chairman", label: "Chairman" },
+          ]}
+        />
+      </Form.Item>
 
       <Form.Item
         label="Date"
@@ -87,8 +108,11 @@ const FactoryDevelopmentAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select Payment Type"
-          options={paymentOptions}
+          defaultValue="Please select payment type"
+          options={[
+            { value: "Bank", label: "Bank" },
+            { value: "Cash", label: "Cash" },
+          ]}
         />
       </Form.Item>
       <Form.Item
