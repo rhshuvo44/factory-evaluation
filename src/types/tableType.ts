@@ -108,6 +108,7 @@ export type TFactory = {
     totalPrice: number;
 }
 export type TLoan = {
+    _id?: string;
     date: Date;
     particulars: string;
     description: string;
