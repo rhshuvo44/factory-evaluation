@@ -8,7 +8,7 @@ import SectionTitle from "../ui/SectionTitle";
 
 const TravellingTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(6);
   const navigate = useNavigate();
 
   const colums = [
@@ -74,11 +74,20 @@ const TravellingTable = () => {
       key: "totalPrice",
     },
     {
-      title: "Action",
-      key: "action",
+      title: "Update",
+      key: "update",
       render: (_: number, record: TTravel) => (
         <Button type="link" onClick={() => navigate(`${record._id}`)}>
           Edit
+        </Button>
+      ),
+    },
+    {
+      title: "Delete",
+      key: "delete",
+      render: (_: number, record: TTravel) => (
+        <Button danger type="primary" onClick={() => navigate(`${record._id}`)}>
+          Deleted
         </Button>
       ),
     },
@@ -101,6 +110,7 @@ const TravellingTable = () => {
         <Table
           className="table-auto"
           bordered
+          size="small"
           columns={colums}
           dataSource={data?.data?.result}
           rowKey="_id"

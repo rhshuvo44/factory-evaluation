@@ -1,7 +1,9 @@
 import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGetAllFactoryDevelopsQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
 import { TFactory } from "../../types/tableType";
+import Loading from "../ui/Loading";
 
 const FactoryDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -11,8 +13,8 @@ const FactoryDevelopmentTable = () => {
   const colums = [
     {
       title: "SL No",
-      dataIndex: "SL No",
-      key: "SL No",
+      dataIndex: "slNo",
+      key: "slNo",
     },
 
     {
@@ -41,19 +43,19 @@ const FactoryDevelopmentTable = () => {
       key: "memoNo",
     },
     {
-      title: "Orderer By",
-      dataIndex: "ordererBy",
-      key: "ordererBy",
+      title: "Ordered By",
+      dataIndex: "orderedBy",
+      key: "orderedBy",
     },
     {
       title: "Pay To",
-      dataIndex: "pay",
-      key: "pay",
+      dataIndex: "payTo",
+      key: "payTo",
     },
     {
       title: "Payment Type",
-      dataIndex: "payment",
-      key: "payment",
+      dataIndex: "paymentType",
+      key: "paymentType",
     },
     {
       title: "Unit",
@@ -62,38 +64,36 @@ const FactoryDevelopmentTable = () => {
     },
     {
       title: "Unit Price",
-      dataIndex: "unit price",
-      key: "unit price",
+      dataIndex: "unitPrice",
+      key: "unitPrice",
     },
     {
       title: "Total Price",
-      dataIndex: "total price",
-      key: "total price",
+      dataIndex: "totalPrice",
+      key: "totalPrice",
     },
     {
       title: "Action",
       key: "action",
       render: (_: number, record: TFactory) => (
         <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
-          View Details
+          Edit
         </Button>
       ),
     },
   ];
-  // const { data, isError, isLoading } = useGetTravellingsQuery({
-  //   limit: pageSize,
-  //   skip: (currentPage - 1) * pageSize,
-  // });
+  const { data, isError, isLoading } = useGetAllFactoryDevelopsQuery(undefined);
 
-  // if (isLoading) return <Loading />;
-  // if (isError) return <div>Error: {isError}</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error: {isError}</div>;
   return (
     <Table
       className="table-auto"
       bordered
       columns={colums}
-      //   dataSource={data}
+      dataSource={data?.data?.result}
       rowKey="id"
+      size="small"
       pagination={{
         current: currentPage,
         pageSize: pageSize,
