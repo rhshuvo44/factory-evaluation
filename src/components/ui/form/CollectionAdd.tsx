@@ -10,11 +10,12 @@ import {
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
-import { TCollection } from "../../../types/tableType";
-import CustomInput from "../../form/CustomInput";
-import CustomInputNumber from "../../form/CustomInputNumber";
 import { styleOption } from "../../../constants/Options";
+import { useCreateCollectionMutation } from "../../../redux/features/collection/collectionApi";
+import { TCollection } from "../../../types/tableType";
+import CustomInputNumber from "../../form/CustomInputNumber";
 
 const CollectionAdd = () => {
   dayjs.extend(customParseFormat);
@@ -22,6 +23,7 @@ const CollectionAdd = () => {
   const [total, setTotal] = useState<number>(0);
   const [ratePer, setRatePer] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
+  const [createCollectionMutation] = useCreateCollectionMutation();
 
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
@@ -40,22 +42,19 @@ const CollectionAdd = () => {
 
   const time = new Date().toLocaleTimeString();
 
-  const onFinish = (values: TCollection) => {
-    console.log("Received values of form: ", { ...values, time, date });
-    // setAmount(values.ratePer * values.total)
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
+  const onFinish = async (values: TCollection) => {
+    const res = await createCollectionMutation({
+      ...values,
+      time,
+      date,
+    }).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success("Create successfully");
+    form.resetFields();
   };
 
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInputNumber
-        label="SL No"
-        name="slNo"
-        message="Please input SL No"
-      />
-
       <Form.Item
         label="Style"
         name="style"
@@ -83,7 +82,7 @@ const CollectionAdd = () => {
         name="workOrderNo"
         message="Please input! Work Order No"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Challan No"
         name="challanNo"
         message="Please input! Challan No"

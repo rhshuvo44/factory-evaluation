@@ -123,7 +123,7 @@ export type TLoan = {
 }
 
 export type TCollection = {
-    slNo: number;
+    _id?: string;
     date: string;
     time: string;
     style: TStyle;
