@@ -8,7 +8,9 @@ import {
   Select,
 } from "antd";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { useCreateLoanMutation } from "../../../redux/features/loan/loanApi";
 import { TLoan } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
@@ -19,7 +21,7 @@ const LoanAdd = () => {
   const [unit, setUnit] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
-
+  const [createLoanMutation] = useCreateLoanMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -34,8 +36,16 @@ const LoanAdd = () => {
       totalPrice: unit * unitPrice,
     });
   }, [unit, unitPrice, form]);
-  const onFinish = (values: TLoan) => {
+  const onFinish = async (values: TLoan) => {
     console.log("Received values of form: ", { ...values, date });
+
+    const res = await createLoanMutation({
+      ...values,
+      date,
+    }).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success(res.message);
+    form.resetFields();
   };
 
   return (
@@ -62,7 +72,7 @@ const LoanAdd = () => {
       />
       <Form.Item
         label="Ordered By"
-        name="OrderedBy"
+        name="orderedBy"
         rules={[{ required: true, message: "Please select Ordered By! " }]}
       >
         <Select
@@ -107,8 +117,8 @@ const LoanAdd = () => {
           style={{ width: "100%" }}
           defaultValue="Please select payment type"
           options={[
-            { value: "bank", label: "Bank" },
-            { value: "cash", label: "Cash" },
+            { value: "Bank", label: "Bank" },
+            { value: "Cash", label: "Cash" },
           ]}
         />
       </Form.Item>

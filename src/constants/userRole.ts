@@ -2,6 +2,6 @@ export const userRole = {
     ADMIN: "admin",
     ExecutiveDirector: "executiveDirector",
     ManagingDirector: "managingDirector",
-    GeneralManager: "generalManager",
+    GeneralDirector: "generalDirector",
     Coordinator: "coordinator",
 };

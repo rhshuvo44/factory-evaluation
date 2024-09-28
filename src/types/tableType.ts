@@ -1,6 +1,6 @@
 
 export type PaymentType = 'Monthly' | 'Daily' | 'Once';
-export type userRole = "admin" | "executiveDirector" | "managingDirector" | "generalManager" | "coordinator"
+export type userRole = "admin" | "executive-director" | "managing-irector" | "general-manager" | "coordinator"
 export type TLine = "Line 1 / 3rd floor" | "Line 2 / 4th floor" | "Line 3 / 4th floor"
 export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Tank Top" | "Sweat Shirt" | "Trouser" | "Shorts" | "Romper/Keeper" | "Long Sleeve T-shirt"
 export type TDesignation = 'Supervisor' | 'G.M' | 'P.M' | 'Ex. Accountant' | 'Security' | 'Cutting Master' | 'Fin. Incharge' | 'Mechanic' | 'Operator' | 'Folding' | 'Check' | 'Poly' | 'Helper' | 'Maid' | 'Cleaner' | 'Cut. Helper' | 'Cutting Man';

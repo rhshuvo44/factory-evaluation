@@ -21,7 +21,6 @@ const SideBar = () => {
   if (token) {
     user = verifyToken(token) as TUser;
   }
-  console.log(user!.role);
   let sidebarItems;
 
   switch (user!.role) {
@@ -29,7 +28,6 @@ const SideBar = () => {
       sidebarItems = sidebarItemsGenerator(adminPaths, userRole.ADMIN);
       break;
     case userRole.ExecutiveDirector:
-      console.log("object");
       sidebarItems = sidebarItemsGenerator(
         executivePaths,
         userRole.ExecutiveDirector
@@ -41,10 +39,10 @@ const SideBar = () => {
         userRole.ManagingDirector
       );
       break;
-    case userRole.GeneralManager:
+    case userRole.GeneralDirector:
       sidebarItems = sidebarItemsGenerator(
         generalPaths,
-        userRole.GeneralManager
+        userRole.GeneralDirector
       );
       break;
     case userRole.Coordinator:

@@ -2,6 +2,7 @@ import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeletedTravelMutation,
@@ -93,27 +94,37 @@ const TravellingTable = () => {
       key: "totalPrice",
     },
 
-    ...(user?.role === "admin" || user?.role === "executiveDirector") ? [{
-      title: "Action",
-      key: "action",
-      render: (item: TTravel) => {
-        return (
-          <Space>
-            <Link to={`/${user!.role}/travel_allowance/${item._id}`}>Edit</Link>
-            {user!.role === "admin" && (
-              <Button danger onClick={() => handleDeleted(item._id as string)}>
-                Delete
-              </Button>
-            )}
-          </Space>
-        );
-      },
-    }]:[]
+    ...(user?.role === userRole.ADMIN ||
+    user?.role === userRole.ExecutiveDirector
+      ? [
+          {
+            title: "Action",
+            key: "action",
+            render: (item: TTravel) => {
+              return (
+                <Space>
+                  <Link to={`/${user!.role}/travel_allowance/${item._id}`}>
+                    Edit
+                  </Link>
+                  {user!.role === "admin" && (
+                    <Button
+                      danger
+                      onClick={() => handleDeleted(item._id as string)}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                </Space>
+              );
+            },
+          },
+        ]
+      : []),
   ];
   const { data, isError, isLoading } = useGetAllTravellingsQuery(undefined);
 
   if (isLoading) return <Loading />;
-  if (isError) return <div>Error: {isError}</div>;
+  if (isError) return <div> {toast.error(isError)}</div>;
 
   return (
     <div>
@@ -131,7 +142,7 @@ const TravellingTable = () => {
           size="small"
           columns={colums}
           dataSource={data?.data?.result}
-          rowKey="_id"
+          rowKey="slNo"
           pagination={{
             current: currentPage,
             pageSize: pageSize,

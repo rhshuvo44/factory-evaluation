@@ -2,17 +2,27 @@ import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeleteUserMutation,
   useGetUserQuery,
 } from "../../redux/features/user/userApi";
-import { TUSer } from "../../types/tableType";
+import { useAppSelector } from "../../redux/hook";
+import { TUSer } from "../../types";
+import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 
 const UserTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(7);
   const [deleteUser] = useDeleteUserMutation();
+  const token = useAppSelector(useCurrentToken);
+
+  let user;
+
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
   const handleDeleted = async (id: string) => {
     const res = await deleteUser(id);
     if (res?.data?.success) {
@@ -51,20 +61,28 @@ const UserTable = () => {
       dataIndex: "address",
       key: "address",
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (item: TUSer) => {
-        return (
-          <Space>
-            <Link to={`/admin/travel_allowance/${item._id}`}>Edit</Link>
-            <Button danger onClick={() => handleDeleted(item._id as string)}>
-              Deleted
-            </Button>
-          </Space>
-        );
-      },
-    },
+    ...(user?.role === "admin"
+      ? [
+          {
+            title: "Action",
+            key: "action",
+            render: (item: TUSer) => {
+              return (
+                <Space>
+                  <Link to={`/${user!.role}/user/${item._id}`}>Edit</Link>
+
+                  <Button
+                    danger
+                    onClick={() => handleDeleted(item._id as string)}
+                  >
+                    Delete
+                  </Button>
+                </Space>
+              );
+            },
+          },
+        ]
+      : []),
   ];
   const { data, isError, isLoading } = useGetUserQuery(undefined);
 

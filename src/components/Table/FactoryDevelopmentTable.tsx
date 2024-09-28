@@ -2,16 +2,27 @@ import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { userRole } from "../../constants/userRole";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeletedFactoryMutation,
   useGetAllFactoryDevelopsQuery,
 } from "../../redux/features/Factory development/factoryDevelopmentApi";
+import { useAppSelector } from "../../redux/hook";
 import { TFactory } from "../../types/tableType";
+import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 
 const FactoryDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
+  const token = useAppSelector(useCurrentToken);
+
+  let user;
+
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
   const [deletedFactory] = useDeletedFactoryMutation();
   const handleDeleted = async (id: string) => {
     const res = await deletedFactory(id);
@@ -81,20 +92,33 @@ const FactoryDevelopmentTable = () => {
       dataIndex: "totalPrice",
       key: "totalPrice",
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (item: TFactory) => {
-        return (
-          <Space>
-            <Link type="link" to={`/admin/travel_allowance/${item._id}`}>Edit</Link>
-            <Button danger onClick={() => handleDeleted(item._id as string)}>
-              Deleted
-            </Button>
-          </Space>
-        );
-      },
-    },
+
+    ...(user?.role === userRole.ADMIN ||
+    user?.role === userRole.ExecutiveDirector
+      ? [
+          {
+            title: "Action",
+            key: "action",
+            render: (item: TFactory) => {
+              return (
+                <Space>
+                  <Link to={`/${user!.role}/travel_allowance/${item._id}`}>
+                    Edit
+                  </Link>
+                  {user!.role === "admin" && (
+                    <Button
+                      danger
+                      onClick={() => handleDeleted(item._id as string)}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                </Space>
+              );
+            },
+          },
+        ]
+      : []),
   ];
   const { data, isError, isLoading } = useGetAllFactoryDevelopsQuery(undefined);
 
