@@ -38,9 +38,9 @@ export const paymentOptions = [
 
 export const userRoleOptions = [
     { value: "admin", label: "Admin" },
-    { value: "executive-director", label: "Executive Director" },
-    { value: "managing-director", label: "Managing Director" },
-    { value: "general-director", label: "General Director" },
+    { value: "executiveDirector", label: "Executive Director" },
+    { value: "managingDirector", label: "Managing Director" },
+    { value: "generalDirector", label: "General Director" },
     { value: "coordinator", label: "Coordinator" },
 ]
 export const buyerParticularsOptions = [

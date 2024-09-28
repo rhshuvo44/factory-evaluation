@@ -27,17 +27,17 @@ export const router = createBrowserRouter([
     children: routeGenerator(adminPaths),
   },
   {
-    path: "/executive-director",
+    path: "/executiveDirector",
     element: <App />,
     children: routeGenerator(executivePaths),
   },
   {
-    path: "/managing-director",
+    path: "/managingDirector",
     element: <App />,
     children: routeGenerator(managingPaths),
   },
   {
-    path: "/general-director",
+    path: "/generalDirector",
     element: <App />,
     children: routeGenerator(generalPaths),
   },

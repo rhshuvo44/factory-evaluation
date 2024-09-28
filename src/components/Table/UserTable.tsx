@@ -1,12 +1,24 @@
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import {
+  useDeleteUserMutation,
+  useGetUserQuery,
+} from "../../redux/features/user/userApi";
 import { TUSer } from "../../types/tableType";
+import Loading from "../ui/Loading";
 
 const UserTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
-  const navigate = useNavigate();
+  const [pageSize, setPageSize] = useState(7);
+  const [deleteUser] = useDeleteUserMutation();
+  const handleDeleted = async (id: string) => {
+    const res = await deleteUser(id);
+    if (res?.data?.success) {
+      toast.success(res?.data?.message);
+    }
+  };
 
   const colums = [
     {
@@ -42,26 +54,29 @@ const UserTable = () => {
     {
       title: "Action",
       key: "action",
-      render: (_: number, record: TUSer) => (
-        <Button type="link" onClick={() => navigate(`/user/${record.email}`)}>
-          View Details
-        </Button>
-      ),
+      render: (item: TUSer) => {
+        return (
+          <Space>
+            <Link to={`/admin/travel_allowance/${item._id}`}>Edit</Link>
+            <Button danger onClick={() => handleDeleted(item._id as string)}>
+              Deleted
+            </Button>
+          </Space>
+        );
+      },
     },
   ];
-  // const { data, isError, isLoading } = useGetTravellingsQuery({
-  //   limit: pageSize,
-  //   skip: (currentPage - 1) * pageSize,
-  // });
+  const { data, isError, isLoading } = useGetUserQuery(undefined);
 
-  // if (isLoading) return <Loading />;
-  // if (isError) return <div>Error: {isError}</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error: {isError}</div>;
+  // console.log();
   return (
     <Table
       className="table-auto"
       bordered
       columns={colums}
-      //   dataSource={data?.travelling}
+      dataSource={data?.data?.result}
       rowKey="id"
       pagination={{
         current: currentPage,

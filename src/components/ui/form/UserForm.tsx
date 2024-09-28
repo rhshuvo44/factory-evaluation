@@ -1,16 +1,20 @@
 import { Button, Form, Input, Select } from "antd";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { userRoleOptions } from "../../../constants/Options";
+import { useCreateUserMutation } from "../../../redux/features/user/userApi";
 import { TUSer } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomTextArea from "../../form/CustomTextArea";
-import { userRoleOptions } from "../../../constants/Options";
 
 const UserForm = () => {
-  const onFinish = (values: TUSer) => {
-    console.log("Received values of form: ", values);
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
+  const [form] = Form.useForm();
+  const [createUser] = useCreateUserMutation();
+  const onFinish = async (values: TUSer) => {
+    const res = await createUser(values).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success("Create User successfully");
+    form.resetFields();
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish}>
@@ -33,7 +37,7 @@ const UserForm = () => {
       <CustomInput label="Phone" name="phone" message="Please input Phone" />
       <Form.Item
         label="User Role"
-        name="userRole"
+        name="role"
         rules={[{ required: true, message: "Please select User Role! " }]}
       >
         <Select
