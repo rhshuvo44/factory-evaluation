@@ -23,8 +23,13 @@ const travelApi = baseApi.injectEndpoints({
                 body: data,
             }),
         }),
-        deletedTravel: builder.mutation<TTravel, number>({
-            query: (id) => ({ url: `/travelling-allowance/${id}`, method: "DELETE" }),
+        deletedTravel: builder.mutation({
+            query: (id) => (
+                {
+                    url: `/travelling-allowance/${id}`, method: "DELETE" 
+                    
+                   
+                }),
         }),
     })
 });

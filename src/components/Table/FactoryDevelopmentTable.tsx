@@ -1,15 +1,24 @@
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetAllFactoryDevelopsQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import {
+  useDeletedFactoryMutation,
+  useGetAllFactoryDevelopsQuery,
+} from "../../redux/features/Factory development/factoryDevelopmentApi";
 import { TFactory } from "../../types/tableType";
 import Loading from "../ui/Loading";
 
 const FactoryDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
-  const navigate = useNavigate();
-
+  const [pageSize, setPageSize] = useState(6);
+  const [deletedFactory] = useDeletedFactoryMutation();
+  const handleDeleted = async (id: string) => {
+    const res = await deletedFactory(id);
+    if (res.data.success) {
+      toast("Factory Development deleted successfully.");
+    }
+  };
   const colums = [
     {
       title: "SL No",
@@ -75,11 +84,16 @@ const FactoryDevelopmentTable = () => {
     {
       title: "Action",
       key: "action",
-      render: (_: number, record: TFactory) => (
-        <Button type="link" onClick={() => navigate(`/product/${record.slNo}`)}>
-          Edit
-        </Button>
-      ),
+      render: (item: TFactory) => {
+        return (
+          <Space>
+            <Link type="link" to={`/admin/travel_allowance/${item._id}`}>Edit</Link>
+            <Button danger onClick={() => handleDeleted(item._id as string)}>
+              Deleted
+            </Button>
+          </Space>
+        );
+      },
     },
   ];
   const { data, isError, isLoading } = useGetAllFactoryDevelopsQuery(undefined);

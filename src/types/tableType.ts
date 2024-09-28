@@ -92,6 +92,7 @@ export type TUSer = {
 }
 
 export type TFactory = {
+    _id?: string;
     slNo: number;
     date: Date;
     particulars: string;

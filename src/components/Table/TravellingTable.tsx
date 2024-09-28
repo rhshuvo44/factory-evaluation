@@ -1,7 +1,11 @@
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetAllTravellingsQuery } from "../../redux/features/travelling/travellingApi";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import {
+  useDeletedTravelMutation,
+  useGetAllTravellingsQuery,
+} from "../../redux/features/travelling/travellingApi";
 import { TTravel } from "../../types/tableType";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
@@ -9,8 +13,13 @@ import SectionTitle from "../ui/SectionTitle";
 const TravellingTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
-  const navigate = useNavigate();
-
+  const [deletedTravel] = useDeletedTravelMutation();
+  const handleDeleted = async (id: string) => {
+    const res = await deletedTravel(id);
+    if (res.data.success) {
+      toast.success("Factory Development deleted successfully.");
+    }
+  };
   const colums = [
     {
       title: "SL",
@@ -73,23 +82,20 @@ const TravellingTable = () => {
       dataIndex: "totalPrice",
       key: "totalPrice",
     },
+
     {
-      title: "Update",
-      key: "update",
-      render: (_: number, record: TTravel) => (
-        <Button type="link" onClick={() => navigate(`${record._id}`)}>
-          Edit
-        </Button>
-      ),
-    },
-    {
-      title: "Delete",
-      key: "delete",
-      render: (_: number, record: TTravel) => (
-        <Button danger type="primary" onClick={() => navigate(`${record._id}`)}>
-          Deleted
-        </Button>
-      ),
+      title: "Action",
+      key: "action",
+      render: (item: TTravel) => {
+        return (
+          <Space>
+            <Link to={`/admin/travel_allowance/${item._id}`}>Edit</Link>
+            <Button danger onClick={() => handleDeleted(item._id as string)}>
+              Deleted
+            </Button>
+          </Space>
+        );
+      },
     },
   ];
   const { data, isError, isLoading } = useGetAllTravellingsQuery(undefined);

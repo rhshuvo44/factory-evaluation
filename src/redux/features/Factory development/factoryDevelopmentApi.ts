@@ -12,7 +12,13 @@ const factoryDevelopmentApi = baseApi.injectEndpoints({
                 body: data,
             }),
         }),
+        deletedFactory: builder.mutation({
+            query: (id) => ({
+                url: `/factory-development/${id}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 })
 
-export const { useCreateFactoryDevelopMutation, useGetAllFactoryDevelopsQuery } = factoryDevelopmentApi 
+export const { useCreateFactoryDevelopMutation, useGetAllFactoryDevelopsQuery, useDeletedFactoryMutation } = factoryDevelopmentApi 
