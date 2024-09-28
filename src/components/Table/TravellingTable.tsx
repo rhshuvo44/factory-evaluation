@@ -93,14 +93,13 @@ const TravellingTable = () => {
       key: "totalPrice",
     },
 
-    {
+    ...(user?.role === "admin" || user?.role === "executiveDirector") ? [{
       title: "Action",
       key: "action",
       render: (item: TTravel) => {
         return (
           <Space>
-            <Link to={`/admin/travel_allowance/${item._id}`}>Edit</Link>
-
+            <Link to={`/${user!.role}/travel_allowance/${item._id}`}>Edit</Link>
             {user!.role === "admin" && (
               <Button danger onClick={() => handleDeleted(item._id as string)}>
                 Delete
@@ -109,7 +108,7 @@ const TravellingTable = () => {
           </Space>
         );
       },
-    },
+    }]:[]
   ];
   const { data, isError, isLoading } = useGetAllTravellingsQuery(undefined);
 
@@ -119,7 +118,7 @@ const TravellingTable = () => {
   return (
     <div>
       <div className="flex  items-center justify-between mb-2">
-        <SectionTitle title=" Travelling Allowance" />
+        <SectionTitle title="Travelling Allowance" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :
           <span className="text-red-500"> {data?.data?.totalPrice}</span>

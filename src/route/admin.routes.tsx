@@ -37,7 +37,7 @@ export const adminPaths = [
         element: <TravellingAllowanceForm />,
       },
       {
-        path: "travel_allowance:/id",
+        path: "travel_allowance/:id",
         element: <TravellingAllowanceForm />,
       },
       {
