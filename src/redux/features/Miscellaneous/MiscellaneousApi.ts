@@ -12,8 +12,14 @@ const miscellaneousApi = baseApi.injectEndpoints({
                 body: data,
             }),
         }),
+        deleteMiscellaneous: builder.mutation({
+            query: (id) => ({
+                url: `/miscellaneous/${id}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 });
 
 
-export const { useGetAllMiscellaneousQuery, useCreateMiscellaneousMutation } = miscellaneousApi;
+export const { useGetAllMiscellaneousQuery, useCreateMiscellaneousMutation, useDeleteMiscellaneousMutation } = miscellaneousApi;

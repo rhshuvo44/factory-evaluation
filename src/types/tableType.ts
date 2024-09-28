@@ -32,7 +32,7 @@ export type TTravel = {
     totalPrice: number;
 }
 export type TMiscellaneous = {
-    slNo: number;
+    _id?: string;
     date: Date;
     particulars: string;
     description: string;
