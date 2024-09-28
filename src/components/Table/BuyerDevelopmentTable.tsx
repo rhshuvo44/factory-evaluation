@@ -1,15 +1,25 @@
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetAllBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import {
+  useDeleteBuyerDevelopmentMutation,
+  useGetAllBuyerDevelopmentQuery,
+} from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { TBuyer } from "../../types/tableType";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
 const BuyerDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(3);
-  const navigate = useNavigate();
+  const [pageSize, setPageSize] = useState(6);
+  const [deleteBuyerDevelopment] = useDeleteBuyerDevelopmentMutation();
+  const handleDeleted = async (id: string) => {
+    const res = await deleteBuyerDevelopment(id);
+    if (res.data.success) {
+      toast.success("Buyer Development deleted successfully.");
+    }
+  };
   const colums = [
     {
       title: "SL",
@@ -75,11 +85,16 @@ const BuyerDevelopmentTable = () => {
     {
       title: "Action",
       key: "action",
-      render: (_: number, record: TBuyer) => (
-        <Button type="link" onClick={() => navigate(`/${record._id}`)}>
-          Edit
-        </Button>
-      ),
+      render: (item: TBuyer) => {
+        return (
+          <Space>
+            <Link to={`/admin/travel_allowance/${item._id}`}>Edit</Link>
+            <Button danger onClick={() => handleDeleted(item._id as string)}>
+              Deleted
+            </Button>
+          </Space>
+        );
+      },
     },
   ];
   const { data, isError, isLoading } = useGetAllBuyerDevelopmentQuery({
@@ -98,6 +113,7 @@ const BuyerDevelopmentTable = () => {
       </div>
       <div className="responsive-table-container">
         <Table
+        size="small"
           className="table-auto"
           bordered
           columns={colums}

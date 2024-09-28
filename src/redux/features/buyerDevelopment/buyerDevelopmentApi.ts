@@ -18,6 +18,13 @@ const buyerDevelopmentApi = baseApi.injectEndpoints({
                 body: travellingData,
             }),
         }),
+        deleteBuyerDevelopment: builder.mutation({
+            query: (id) => ({
+                url: `/buyer-development/${id}`,
+                method: 'DELETE',
+
+            }),
+        }),
 
 
     })
@@ -26,4 +33,4 @@ const buyerDevelopmentApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateBuyerDevelopmentMutation, useGetAllBuyerDevelopmentQuery } = buyerDevelopmentApi;
+export const { useCreateBuyerDevelopmentMutation, useGetAllBuyerDevelopmentQuery, useDeleteBuyerDevelopmentMutation } = buyerDevelopmentApi;

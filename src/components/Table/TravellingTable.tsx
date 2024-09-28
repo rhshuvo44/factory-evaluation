@@ -17,7 +17,7 @@ const TravellingTable = () => {
   const handleDeleted = async (id: string) => {
     const res = await deletedTravel(id);
     if (res.data.success) {
-      toast.success("Factory Development deleted successfully.");
+      toast.success("Travelling Allowance deleted successfully.");
     }
   };
   const colums = [
