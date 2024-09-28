@@ -1,17 +1,28 @@
-import { Button, DatePicker, DatePickerProps, Form, InputNumber, InputNumberProps, Select } from "antd";
+import {
+  Button,
+  DatePicker,
+  DatePickerProps,
+  Form,
+  InputNumber,
+  InputNumberProps,
+  Select,
+} from "antd";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { paymentOptions } from "../../../constants/Options";
+import { useCreateMiscellaneousMutation } from "../../../redux/features/Miscellaneous/MiscellaneousApi";
 import { TMiscellaneous } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-import { useEffect, useState } from "react";
-import { paymentOptions } from "../../../constants/Options";
 
 const MiscellaneousAdd = () => {
   const [form] = Form.useForm();
   const [unit, setUnit] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
+  const [createMiscellaneousMutation] = useCreateMiscellaneousMutation();
 
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
@@ -27,20 +38,14 @@ const MiscellaneousAdd = () => {
       totalPrice: unit * unitPrice,
     });
   }, [unit, unitPrice, form]);
-  const onFinish = (values: TMiscellaneous) => {
-    console.log("Received values of form: ", { ...values, date });
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
+  const onFinish = async (values: TMiscellaneous) => {
+    const res = await createMiscellaneousMutation({ ...values, date }).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success(res.message);
+    form.resetFields();
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInputNumber
-        label="SL No"
-        name="slNo"
-        message="Please input SL No"
-      />
-
       <CustomInput
         label="Particulars"
         name="particulars"
@@ -56,12 +61,12 @@ const MiscellaneousAdd = () => {
         name="remark"
         message="Please input! Remark"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Buyer ID"
         name="buyerId"
         message="Please input! Buyer ID"
       />
-      <CustomInput
+      <CustomInputNumber
         label="Order No"
         name="orderNo"
         message="Please input! Order No"

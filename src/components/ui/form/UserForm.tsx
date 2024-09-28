@@ -17,7 +17,7 @@ const UserForm = () => {
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish}>
+    <Form {...formItemLayout} onFinish={onFinish} form={form}>
       <CustomInput label="Name" name="name" message="Please input Name" />
       <CustomInput
         label="Username"

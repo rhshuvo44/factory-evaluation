@@ -37,8 +37,8 @@ export type TMiscellaneous = {
     particulars: string;
     description: string;
     remark?: string;
-    buyerId: string;
-    orderNo: string;
+    buyerId: number;
+    orderNo: number;
     payTo: string;
     paymentType: PaymentType;
     unit: number;
