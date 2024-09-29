@@ -14,6 +14,7 @@ const travelApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: travellingData,
             }),
+            invalidatesTags: ['Travelling'],
         }),
         updateTravelling: builder.mutation({
             query: (data) => ({
@@ -21,6 +22,7 @@ const travelApi = baseApi.injectEndpoints({
                 method: 'PATCH',
                 body: data.data,
             }),
+            invalidatesTags: ['Travelling'],
         }),
         singleTravelling: builder.query({
             query: (id) => ({
@@ -32,6 +34,7 @@ const travelApi = baseApi.injectEndpoints({
             query: (id) => ({
                 url: `/travelling-allowance/${id}`, method: "DELETE"
             }),
+            invalidatesTags: ['Travelling'],
         }),
     })
 });

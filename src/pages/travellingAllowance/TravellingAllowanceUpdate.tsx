@@ -1,6 +1,6 @@
 import { Button, Form, InputNumber, InputNumberProps } from "antd";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import CustomInput from "../../components/form/CustomInput";
 import CustomInputNumber from "../../components/form/CustomInputNumber";
@@ -16,6 +16,7 @@ import { TTravelUpdate } from "../../types";
 const TravellingAllowanceUpdate = () => {
   const [form] = Form.useForm();
   const location = useLocation();
+  const navigate = useNavigate();
   const id: string = location.pathname.split("/")[3];
   const { data, isLoading } = useSingleTravellingQuery(id);
   const [updateTravelling] = useUpdateTravellingMutation();
@@ -37,9 +38,9 @@ const TravellingAllowanceUpdate = () => {
     particulars: result?.particulars,
     payTo: result?.payTo,
     remark: result?.remark,
-    totalPrice: result?.totalPrice,
     unit: result?.unit,
     unitPrice: result?.unitPrice,
+    totalPrice: result?.totalPrice,
   };
 
   useEffect(() => {
@@ -52,13 +53,12 @@ const TravellingAllowanceUpdate = () => {
   const onFinish = async (values: TTravelUpdate) => {
     const updateData = {
       id,
-      data: {...values },
+      data: { ...values },
     };
-    // console.log(updateData);
     const res = await updateTravelling(updateData).unwrap();
-    // console.log(res);
     if (!res.success) return toast.error(res.message);
     toast.success("Update Travelling Allowance successfully");
+    navigate(-1);
   };
   return (
     <Form
@@ -118,7 +118,11 @@ const TravellingAllowanceUpdate = () => {
       </Form.Item>
 
       <Form.Item label="Total Price" name="totalPrice">
-        <InputNumber style={{ width: "100%" }} disabled />
+        <InputNumber
+          defaultValue={result.totalPrice}
+          style={{ width: "100%" }}
+          disabled
+        />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
