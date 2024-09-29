@@ -1,32 +1,28 @@
-import {
-  Button,
-  DatePicker,
-  DatePickerProps,
-  Form,
-  InputNumber,
-  InputNumberProps,
-  Select,
-} from "antd";
+import { Button, Form, InputNumber, InputNumberProps } from "antd";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { toast } from "sonner";
-import { formItemLayout } from "../../../constants/formItemLayout";
-import { paymentOptions } from "../../../constants/Options";
-import { useCreateTravelMutation } from "../../../redux/features/travelling/travellingApi";
-import { TTravel } from "../../../types/tableType";
-import CustomInput from "../../form/CustomInput";
-import CustomInputNumber from "../../form/CustomInputNumber";
-import CustomTextArea from "../../form/CustomTextArea";
+import CustomInput from "../../components/form/CustomInput";
+import CustomInputNumber from "../../components/form/CustomInputNumber";
+import CustomTextArea from "../../components/form/CustomTextArea";
+import Loading from "../../components/ui/Loading";
+import { formItemLayout } from "../../constants/formItemLayout";
+import {
+  useSingleTravellingQuery,
+  useUpdateTravellingMutation,
+} from "../../redux/features/travelling/travellingApi";
+import { TTravelUpdate } from "../../types";
 
-const TravellingForm = () => {
+const TravellingAllowanceUpdate = () => {
   const [form] = Form.useForm();
-  const [unit, setUnit] = useState<number>(0);
-  const [unitPrice, setUnitPrice] = useState<number>(0);
-  const [date, setDate] = useState<string | string[]>("");
+  const location = useLocation();
+  const id: string = location.pathname.split("/")[3];
+  const { data, isLoading } = useSingleTravellingQuery(id);
+  const [updateTravelling] = useUpdateTravellingMutation();
+  const result = data?.data;
+  const [unit, setUnit] = useState<number>(result?.unit);
+  const [unitPrice, setUnitPrice] = useState<number>(result?.unitPrice);
 
-  const [createTravel] = useCreateTravelMutation();
-  const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-    setDate(dateString);
-  };
   const onChangeUnit: InputNumberProps["onChange"] = (values) => {
     setUnit(values as number);
   };
@@ -34,20 +30,43 @@ const TravellingForm = () => {
     setUnitPrice(values as number);
   };
 
+  const initialValues = {
+    buyerId: result?.buyerId,
+    description: result?.description,
+    orderNo: result?.orderNo,
+    particulars: result?.particulars,
+    payTo: result?.payTo,
+    remark: result?.remark,
+    totalPrice: result?.totalPrice,
+    unit: result?.unit,
+    unitPrice: result?.unitPrice,
+  };
+
   useEffect(() => {
     form.setFieldsValue({
       totalPrice: unit * unitPrice,
     });
   }, [unit, unitPrice, form]);
+  if (isLoading) return <Loading />;
 
-  const onFinish = async (values: TTravel) => {
-    const res = await createTravel({ ...values, date }).unwrap();
+  const onFinish = async (values: TTravelUpdate) => {
+    const updateData = {
+      id,
+      data: {...values },
+    };
+    // console.log(updateData);
+    const res = await updateTravelling(updateData).unwrap();
+    // console.log(res);
     if (!res.success) return toast.error(res.message);
-    toast.success("Create Travelling Allowance successfully");
-    form.resetFields();
+    toast.success("Update Travelling Allowance successfully");
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form
+      {...formItemLayout}
+      onFinish={onFinish}
+      form={form}
+      initialValues={initialValues}
+    >
       <CustomInput
         label="Particulars"
         name="particulars"
@@ -74,26 +93,6 @@ const TravellingForm = () => {
         message="Please input! Order No"
       />
       <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
-
-      <Form.Item
-        label="Date"
-        name="date"
-        rules={[{ required: true, message: "Please input! Date" }]}
-      >
-        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
-      </Form.Item>
-
-      <Form.Item
-        label="Payment Type"
-        name="paymentType"
-        rules={[{ required: true, message: "Please select Payment type! " }]}
-      >
-        <Select
-          style={{ width: "100%" }}
-          defaultValue="Please select Payment Type"
-          options={paymentOptions}
-        />
-      </Form.Item>
       <Form.Item
         label="Unit"
         name="unit"
@@ -131,4 +130,4 @@ const TravellingForm = () => {
   );
 };
 
-export default TravellingForm;
+export default TravellingAllowanceUpdate;

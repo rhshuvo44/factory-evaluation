@@ -31,6 +31,20 @@ export type TTravel = {
     unitPrice: number;
     totalPrice: number;
 }
+export type TTravelUpdate = {
+    _id?: string;
+    date?: Date;
+    particulars?: string;
+    description?: string;
+    remark?: string;
+    buyerId?: number;
+    orderNo?: number;
+    payTo?: string;
+    paymentType?: PaymentType;
+    unit?: number;
+    unitPrice?: number;
+    totalPrice?: number;
+}
 export type TMiscellaneous = {
     _id?: string;
     date: Date;

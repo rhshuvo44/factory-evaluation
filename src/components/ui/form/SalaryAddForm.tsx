@@ -3,10 +3,9 @@ import type { GetProp, InputNumberProps, UploadFile, UploadProps } from "antd";
 import { Button, Form, Image, InputNumber, Select, Upload } from "antd";
 import { useEffect, useState } from "react";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { designationOption } from "../../../constants/Options";
 import { TSalary } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
-import CustomInputNumber from "../../form/CustomInputNumber";
-import { designationOption } from "../../../constants/Options";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -71,12 +70,6 @@ const SalaryAddForm = () => {
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInputNumber
-        label="Employee ID"
-        name="employeeID"
-        message="Please input Employee ID"
-      />
-
       <CustomInput label="Name" name="name" message="Please input! Name" />
 
       <Form.Item
@@ -109,11 +102,6 @@ const SalaryAddForm = () => {
         />
       </Form.Item>
 
-      {/* <CustomInputNumber
-        label="Over Time"
-        name="overTime"
-        message="Please input! Over Time"
-      /> */}
       <Form.Item
         label="Over Time"
         name="overTime"
@@ -132,7 +120,7 @@ const SalaryAddForm = () => {
         rules={[{ required: false, message: "Please upload Employee image " }]}
       >
         <Upload
-          action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+          // action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
           listType="picture-card"
           fileList={fileList}
           onPreview={handlePreview}

@@ -17,6 +17,8 @@ import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
+import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAllowanceUpdate";
+
 import AddUser from "../pages/user management/AddUser";
 import AllUsers from "../pages/user management/AllUsers";
 import Utility from "../pages/utility/Utility";
@@ -38,7 +40,7 @@ export const adminPaths = [
       },
       {
         path: "travel_allowance/:id",
-        element: <TravellingAllowanceForm />,
+        element: <TravellingAllowanceUpdate />,
       },
       {
         name: "All Travel Allowance",

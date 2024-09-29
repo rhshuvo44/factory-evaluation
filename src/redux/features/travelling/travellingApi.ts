@@ -1,4 +1,3 @@
-import { TTravel } from "../../../types/tableType";
 import { baseApi } from "../../api/api";
 
 
@@ -16,20 +15,23 @@ const travelApi = baseApi.injectEndpoints({
                 body: travellingData,
             }),
         }),
-        updateTravelling: builder.mutation<TTravel, { id: number; data: Partial<TTravel> }>({
-            query: ({ id, data }) => ({
-                url: `/travelling-allowance/${id}`,
+        updateTravelling: builder.mutation({
+            query: (data) => ({
+                url: `/travelling-allowance/${data.id}`,
                 method: 'PATCH',
-                body: data,
+                body: data.data,
+            }),
+        }),
+        singleTravelling: builder.query({
+            query: (id) => ({
+                url: `/travelling-allowance/${id}`,
+                method: 'GET',
             }),
         }),
         deletedTravel: builder.mutation({
-            query: (id) => (
-                {
-                    url: `/travelling-allowance/${id}`, method: "DELETE" 
-                    
-                   
-                }),
+            query: (id) => ({
+                url: `/travelling-allowance/${id}`, method: "DELETE"
+            }),
         }),
     })
 });
@@ -37,4 +39,4 @@ const travelApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateTravelMutation, useGetAllTravellingsQuery, useUpdateTravellingMutation, useDeletedTravelMutation } = travelApi;
+export const { useCreateTravelMutation, useGetAllTravellingsQuery, useUpdateTravellingMutation, useDeletedTravelMutation, useSingleTravellingQuery } = travelApi;
