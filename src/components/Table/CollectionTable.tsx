@@ -1,9 +1,13 @@
 import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
-import { useGetAllCollectionsQuery } from "../../redux/features/collection/collectionApi";
+import {
+  useDeletedCollectionMutation,
+  useGetAllCollectionsQuery,
+} from "../../redux/features/collection/collectionApi";
 import { useAppSelector } from "../../redux/hook";
 import { TCollection } from "../../types/tableType";
 import { verifyToken } from "../../utilis/verifyToken";
@@ -20,13 +24,13 @@ const CollectionTable = () => {
   if (token) {
     user = verifyToken(token) as TUser;
   }
-  // const [deleteBuyerDevelopment] = useDeleteBuyerDevelopmentMutation();
-  // const handleDeleted = async (id: string) => {
-  //   const res = await deleteBuyerDevelopment(id);
-  //   if (res.data.success) {
-  //     toast.success("Buyer Development deleted successfully.");
-  //   }
-  // };
+  const [deleteCollection] = useDeletedCollectionMutation();
+  const handleDeleted = async (id: string) => {
+    const res = await deleteCollection(id);
+    if (res.data.success) {
+      toast.success("Collection deleted successfully.");
+    }
+  };
 
   const colums = [
     {
@@ -94,7 +98,7 @@ const CollectionTable = () => {
                   {user!.role === "admin" && (
                     <Button
                       danger
-                      // onClick={() => handleDeleted(item._id as string)}
+                      onClick={() => handleDeleted(item._id as string)}
                     >
                       Delete
                     </Button>
