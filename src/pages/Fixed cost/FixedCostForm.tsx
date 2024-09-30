@@ -5,9 +5,7 @@ const FixedCostForm = () => {
   return (
     <>
       <SectionTitle title=" Factory Fixed Cost Add" />
-      <div className="responsive-table-container">
-        <FixedCostAdd />
-      </div>
+      <FixedCostAdd />
     </>
   );
 };

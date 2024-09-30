@@ -16,6 +16,7 @@ import {
   useUpdateBuyerDevelopmentMutation,
 } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { TBuyer } from "../../types";
+import SectionTitle from "../../components/ui/SectionTitle";
 
 const BuyerDevelopmentUpdate = () => {
   const [form] = Form.useForm();
@@ -73,99 +74,100 @@ const BuyerDevelopmentUpdate = () => {
     navigate(-1);
   };
   return (
-    <Form
-      {...formItemLayout}
-      onFinish={onFinish}
-      form={form}
-      initialValues={initialValues}
-    >
-      <Form.Item
-        label="Particulars"
-        name="particulars"
-        rules={[{ required: true, message: "Please select Particulars! " }]}
+    <>
+      <SectionTitle title="Buyer Development update" />
+      <Form
+        {...formItemLayout}
+        onFinish={onFinish}
+        form={form}
+        initialValues={initialValues}
       >
-        <Select
-          style={{ width: "100%" }}
-          options={buyerParticularsOptions}
+        <Form.Item
+          label="Particulars"
+          name="particulars"
+          rules={[{ required: true, message: "Please select Particulars! " }]}
+        >
+          <Select style={{ width: "100%" }} options={buyerParticularsOptions} />
+        </Form.Item>
+        <CustomTextArea
+          label="Description"
+          name="description"
+          message="Please input! Description"
         />
-      </Form.Item>
-      <CustomTextArea
-        label="Description"
-        name="description"
-        message="Please input! Description"
-      />
-      <CustomInputNumber
-        label="Quantity"
-        name="quantity"
-        message="Please input! Quantity"
-      />
-      <CustomInputNumber
-        label="Buyer ID"
-        name="buyerId"
-        message="Please input! Buyer ID"
-      />
-      <CustomInputNumber
-        label="Memo No"
-        name="memoNo"
-        message="Please input! Memo No"
-      />
-      <CustomInputNumber
-        label="Order No"
-        name="orderNo"
-        message="Please input! Order No"
-      />
-      <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
+        <CustomInputNumber
+          label="Quantity"
+          name="quantity"
+          message="Please input! Quantity"
+        />
+        <CustomInputNumber
+          label="Buyer ID"
+          name="buyerId"
+          message="Please input! Buyer ID"
+        />
+        <CustomInputNumber
+          label="Memo No"
+          name="memoNo"
+          message="Please input! Memo No"
+        />
+        <CustomInputNumber
+          label="Order No"
+          name="orderNo"
+          message="Please input! Order No"
+        />
+        <CustomInput
+          label="Pay to"
+          name="payTo"
+          message="Please input! Pay to"
+        />
 
-      {/* <Form.Item
+        {/* <Form.Item
         label="Date"
         name="date"
         rules={[{ required: true, message: "Please input! Date" }]}
       >
         <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
       </Form.Item> */}
-      <Form.Item
-        label="Payment Type"
-        name="paymentType"
-        rules={[{ required: true, message: "Please select Payment Type! " }]}
-      >
-        <Select
-          style={{ width: "100%" }}
-          options={paymentOptions}
-        />
-      </Form.Item>
-      <Form.Item
-        label="Unit"
-        name="unit"
-        rules={[{ required: true, message: "Please Input Unit! " }]}
-      >
-        <InputNumber
-          style={{ width: "100%" }}
-          min={0}
-          onChange={onChangeUnit}
-        />
-      </Form.Item>
+        <Form.Item
+          label="Payment Type"
+          name="paymentType"
+          rules={[{ required: true, message: "Please select Payment Type! " }]}
+        >
+          <Select style={{ width: "100%" }} options={paymentOptions} />
+        </Form.Item>
+        <Form.Item
+          label="Unit"
+          name="unit"
+          rules={[{ required: true, message: "Please Input Unit! " }]}
+        >
+          <InputNumber
+            style={{ width: "100%" }}
+            min={0}
+            onChange={onChangeUnit}
+          />
+        </Form.Item>
 
-      <Form.Item
-        label="Unit Price"
-        name="unitPrice"
-        rules={[{ required: true, message: "Please Input Unit Price! " }]}
-      >
-        <InputNumber
-          style={{ width: "100%" }}
-          min={0}
-          onChange={onChangeUnitPrice}
-        />
-      </Form.Item>
-      <Form.Item label="Total Price" name="totalPrice">
-        <InputNumber style={{ width: "100%" }} disabled />
-      </Form.Item>
+        <Form.Item
+          label="Unit Price"
+          name="unitPrice"
+          rules={[{ required: true, message: "Please Input Unit Price! " }]}
+        >
+          <InputNumber
+            style={{ width: "100%" }}
+            min={0}
+            onChange={onChangeUnitPrice}
+          />
+        </Form.Item>
+        <Form.Item label="Total Price" name="totalPrice">
+          <InputNumber style={{ width: "100%" }} disabled />
+        </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </>
   );
 };
 
