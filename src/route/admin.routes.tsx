@@ -11,6 +11,7 @@ import FixedCost from "../pages/Fixed cost/FixedCost";
 import FixedCostForm from "../pages/Fixed cost/FixedCostForm";
 import Loan from "../pages/loan/Loan";
 import LoanForm from "../pages/loan/LoanForm";
+import LoanUpdate from "../pages/loan/LoanUpdate";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
@@ -133,6 +134,10 @@ export const adminPaths = [
         element: <LoanForm />,
       },
       {
+        path: "loan/:id",
+        element: <LoanUpdate />,
+      },
+      {
         name: "All Loan Return",
         path: "all_loan",
         element: <Loan />,
@@ -194,7 +199,7 @@ export const adminPaths = [
       },
       {
         // name: "Add Production Report",
-        path: ":/id",
+        path: "production_report/:id",
         element: <ProductionAdd />,
       },
       {

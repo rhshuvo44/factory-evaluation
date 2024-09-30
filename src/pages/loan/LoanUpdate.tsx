@@ -8,20 +8,20 @@ import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
 import { formItemLayout } from "../../constants/formItemLayout";
 import {
-  useSingleFactoryDevelopsQuery,
-  useUpdateFactoryDevelopsMutation,
-} from "../../redux/features/Factory development/factoryDevelopmentApi";
-import { TFactory } from "../../types";
+  useSingleLoanQuery,
+  useUpdateLoanMutation,
+} from "../../redux/features/loan/loanApi";
+import { TLoan } from "../../types";
 
-const FactoryDevelopmentUpdate = () => {
+const LoanUpdate = () => {
   const [form] = Form.useForm();
   const location = useLocation();
   const navigate = useNavigate();
   // const [date, setDate] = useState<string | string[]>("");
 
   const id: string = location.pathname.split("/")[3];
-  const { data, isLoading } = useSingleFactoryDevelopsQuery(id);
-  const [updateFactoryDevelops] = useUpdateFactoryDevelopsMutation();
+  const { data, isLoading } = useSingleLoanQuery(id);
+  const [updateLoan] = useUpdateLoanMutation();
   const result = data?.data;
   const [unit, setUnit] = useState<number>(result?.unit);
   const [unitPrice, setUnitPrice] = useState<number>(result?.unitPrice);
@@ -39,7 +39,6 @@ const FactoryDevelopmentUpdate = () => {
       totalPrice: unit * unitPrice || result?.totalPrice,
     });
   }, [unit, unitPrice, form, result?.totalPrice]);
-  console.log(result);
 
   //   date
 
@@ -61,15 +60,15 @@ const FactoryDevelopmentUpdate = () => {
 
   if (isLoading) return <Loading />;
 
-  const onFinish = async (values: TFactory) => {
+  const onFinish = async (values: TLoan) => {
     const totalPrice = isNaN(values.totalPrice) ? 0 : values.totalPrice;
     const updateData = {
       id,
       data: { ...values, totalPrice },
     };
-    const res = await updateFactoryDevelops(updateData).unwrap();
+    const res = await updateLoan(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
-    toast.success("Update Factory Development successfully");
+    toast.success("Update Loan Return successfully");
     navigate(-1);
   };
   return (
@@ -122,7 +121,7 @@ const FactoryDevelopmentUpdate = () => {
           style={{ width: "100%" }}
           defaultValue="Please select Pay to"
           options={[
-            { value: "Sarkar Alliance OPC", label: "Sarkar Alliance OPC" },
+            { value: "sarkar alliance opc", label: "Sarkar Alliance Opc" },
             { value: "M.D", label: "M.D" },
             { value: "Chairman", label: "Chairman" },
           ]}
@@ -136,6 +135,7 @@ const FactoryDevelopmentUpdate = () => {
       >
         <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
       </Form.Item> */}
+
       <Form.Item
         label="Payment Type"
         name="paymentType"
@@ -150,6 +150,7 @@ const FactoryDevelopmentUpdate = () => {
           ]}
         />
       </Form.Item>
+
       <Form.Item
         label="Unit"
         name="unit"
@@ -186,4 +187,4 @@ const FactoryDevelopmentUpdate = () => {
   );
 };
 
-export default FactoryDevelopmentUpdate;
+export default LoanUpdate;

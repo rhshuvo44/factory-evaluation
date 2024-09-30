@@ -12,22 +12,29 @@ const loanApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: data,
             }),
+            invalidatesTags: ['Loan'],
         }),
-
-        singleLoan: builder.mutation({
+        singleLoan: builder.query({
             query: (id) => ({
                 url: `/loan-return/${id}`,
-                method: 'PUT',
-
+                method: 'GET',
             }),
+        }),
+        updateLoan: builder.mutation({
+            query: (data) => ({
+                url: `/loan-return/${data.id}`,
+                method: 'PATCH',
+                body: data.data,
+            }),
+            invalidatesTags: ['Loan'],
         }),
         deleteLoan: builder.mutation({
             query: (id) => ({
                 url: `/loan-return/${id}`,
                 method: 'DELETE',
-
             }),
+            invalidatesTags: ['Loan'],
         }),
     }),
 });
-export const { useGetAllLoansQuery, useCreateLoanMutation, useDeleteLoanMutation } = loanApi
+export const { useGetAllLoansQuery, useCreateLoanMutation, useDeleteLoanMutation, useSingleLoanQuery, useUpdateLoanMutation } = loanApi
