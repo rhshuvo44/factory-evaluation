@@ -1,4 +1,4 @@
-import { Button, Form, InputNumber, InputNumberProps } from "antd";
+import { Button, Form, InputNumber, InputNumberProps, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -7,11 +7,12 @@ import CustomInputNumber from "../../components/form/CustomInputNumber";
 import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
 import { formItemLayout } from "../../constants/formItemLayout";
+import { paymentOptions } from "../../constants/Options";
 import {
   useSingleTravellingQuery,
   useUpdateTravellingMutation,
 } from "../../redux/features/travelling/travellingApi";
-import { TTravelUpdate } from "../../types";
+import { TTravel } from "../../types";
 
 const TravellingAllowanceUpdate = () => {
   const [form] = Form.useForm();
@@ -30,30 +31,31 @@ const TravellingAllowanceUpdate = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
-
+  useEffect(() => {
+    form.setFieldsValue({
+      totalPrice: unit * unitPrice || result?.totalPrice,
+    });
+  }, [unit, unitPrice, form, result?.totalPrice]);
   const initialValues = {
     buyerId: result?.buyerId,
     description: result?.description,
     orderNo: result?.orderNo,
     particulars: result?.particulars,
     payTo: result?.payTo,
+    paymentType: result?.paymentType,
     remark: result?.remark,
     unit: result?.unit,
     unitPrice: result?.unitPrice,
     totalPrice: result?.totalPrice,
   };
 
-  useEffect(() => {
-    form.setFieldsValue({
-      totalPrice: unit * unitPrice,
-    });
-  }, [unit, unitPrice, form]);
   if (isLoading) return <Loading />;
 
-  const onFinish = async (values: TTravelUpdate) => {
+  const onFinish = async (values: TTravel) => {
+    const totalPrice = isNaN(values.totalPrice) ? 0 : values.totalPrice;
     const updateData = {
       id,
-      data: { ...values },
+      data: { ...values, totalPrice },
     };
     const res = await updateTravelling(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
@@ -62,9 +64,9 @@ const TravellingAllowanceUpdate = () => {
   };
   return (
     <Form
+      form={form}
       {...formItemLayout}
       onFinish={onFinish}
-      form={form}
       initialValues={initialValues}
     >
       <CustomInput
@@ -94,6 +96,17 @@ const TravellingAllowanceUpdate = () => {
       />
       <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
       <Form.Item
+        label="Payment Type"
+        name="paymentType"
+        rules={[{ required: true, message: "Please select Payment Type! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue={result.paymentType}
+          options={paymentOptions}
+        />
+      </Form.Item>
+      <Form.Item
         label="Unit"
         name="unit"
         rules={[{ required: true, message: "Please Input Unit! " }]}
@@ -120,7 +133,6 @@ const TravellingAllowanceUpdate = () => {
       <Form.Item
         label="Total Price"
         name="totalPrice"
-        initialValue={result?.totalPrice}
       >
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>

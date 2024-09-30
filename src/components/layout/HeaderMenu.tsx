@@ -4,9 +4,20 @@ import { NavLink } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { logout } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hook";
+import { useGetMeQuery } from "../../redux/features/user/userApi";
 const { Header } = Layout;
 
 const HeaderMenu = () => {
+  // const token = useAppSelector(useCurrentToken);
+
+  // let user;
+
+  // if (token) {
+  //   user = verifyToken(token) as TUser;
+  // }
+
+  const { data } = useGetMeQuery(undefined);
+  // console.log(data?.data?.name);
   const dispatch = useAppDispatch();
   const items: MenuProps["items"] = [
     {
@@ -31,7 +42,7 @@ const HeaderMenu = () => {
     <Header className="flex items-center gap-1 md:gap-5 justify-between">
       <div className="flex items-center md:px-8 text-white justify-center">
         <h3 className="text-sm md:font-bold md:text-2xl lg:text-3xl capitalize text-primary md:mr-3">
-          Hello Ripon,
+          Hello {data?.data?.name},
         </h3>
         <p className="hidden md:block lg:mt-3"> {date.toDateString()}</p>
       </div>

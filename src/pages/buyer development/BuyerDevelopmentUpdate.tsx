@@ -15,7 +15,7 @@ import {
   useSingleBuyerDevelopmentQuery,
   useUpdateBuyerDevelopmentMutation,
 } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
-import { TBuyerUpdate } from "../../types";
+import { TBuyer } from "../../types";
 
 const BuyerDevelopmentUpdate = () => {
   const [form] = Form.useForm();
@@ -34,6 +34,11 @@ const BuyerDevelopmentUpdate = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
+  useEffect(() => {
+    form.setFieldsValue({
+      totalPrice: unit * unitPrice || result?.totalPrice,
+    });
+  }, [unit, unitPrice, form, result?.totalPrice]);
   const initialValues = {
     buyerId: result?.buyerId,
     description: result?.description,
@@ -48,23 +53,15 @@ const BuyerDevelopmentUpdate = () => {
     totalPrice: result?.totalPrice,
   };
   // date
-  useEffect(() => {
-    form.setFieldsValue({
-      totalPrice: unit * unitPrice,
-    });
-  }, [unit, unitPrice, form]);
-
-  // console.log(initialValues);
 
   if (isLoading) return <Loading />;
 
-  const onFinish = async (values: TBuyerUpdate) => {
-    console.log(values);
+  const onFinish = async (values: TBuyer) => {
+    const totalPrice = isNaN(values.totalPrice) ? 0 : values.totalPrice;
     const updateData = {
       id,
-      data: { ...values },
+      data: { ...values, totalPrice },
     };
-    // console.log(updateData, values);
     const res = await updateBuyerDevelopment(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Update Buyer Development successfully");
@@ -156,11 +153,7 @@ const BuyerDevelopmentUpdate = () => {
           onChange={onChangeUnitPrice}
         />
       </Form.Item>
-      <Form.Item
-        label="Total Price"
-        name="totalPrice"
-        initialValue={result?.totalPrice}
-      >
+      <Form.Item label="Total Price" name="totalPrice">
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
 
