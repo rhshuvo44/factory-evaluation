@@ -2,6 +2,7 @@ import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeleteMiscellaneousMutation,
@@ -94,23 +95,30 @@ const MiscellaneousTableComponent = () => {
       dataIndex: "unitPrice",
       key: "unitPrice",
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (item: TMiscellaneous) => {
-        return (
-          <Space>
-            <Link to={`/admin/travel_allowance/${item._id}`}>Edit</Link>
-
-            {user!.role === "admin" && (
-              <Button danger onClick={() => handleDeleted(item._id as string)}>
-                Delete
-              </Button>
-            )}
-          </Space>
-        );
-      },
-    },
+    ...(user?.role === userRole.ADMIN ||
+    user?.role === userRole.ExecutiveDirector
+      ? [
+          {
+            title: "Action",
+            key: "action",
+            render: (item: TMiscellaneous) => {
+              return (
+                <Space>
+                  <Link to={`/${user!.role}/misc_cost/${item._id}`}>Edit</Link>
+                  {user!.role === "admin" && (
+                    <Button
+                      danger
+                      onClick={() => handleDeleted(item._id as string)}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                </Space>
+              );
+            },
+          },
+        ]
+      : []),
   ];
   const { data, isError, isLoading } = useGetAllMiscellaneousQuery(undefined);
   // console.log(data?.data?.result);

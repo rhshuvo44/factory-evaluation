@@ -11,6 +11,7 @@ import Loan from "../pages/loan/Loan";
 import LoanForm from "../pages/loan/LoanForm";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
+import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
 import Production from "../pages/Production/Production";
 import ProductionAdd from "../pages/Production/ProductionAdd";
 import Salary from "../pages/salary/Salary";
@@ -56,6 +57,10 @@ export const adminPaths = [
         name: "Add Miscellaneous cost",
         path: "add_misc_cost",
         element: <MiscellaneousForm />,
+      },
+      {
+        path: "misc_cost/:id",
+        element: <MiscellaneousUpdate />,
       },
       {
         name: "All Miscellaneous cost",
