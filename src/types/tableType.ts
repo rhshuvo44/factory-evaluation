@@ -117,7 +117,7 @@ export type TLoan = {
     quantity: number;
     memoNo: string;
     orderedBy: "M.D" | "Chairman";
-    payTo: "sarkar alliance opc" | "chairman" | "M.D";
+    payTo: "Sarkar Alliance OPC" | "chairman" | "M.D";
     paymentType: "bank" | "cash";
     unit: number;
     unitPrice: number;

@@ -35,7 +35,7 @@ const MiscellaneousTableComponent = () => {
 
   const columns = [
     {
-      title: "Sl",
+      title: "SL",
       dataIndex: "slNo",
       key: "slNo",
     },

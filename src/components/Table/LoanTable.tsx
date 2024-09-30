@@ -34,7 +34,7 @@ const LoanTable = () => {
   };
   const colums = [
     {
-      title: "SL No",
+      title: "SL",
       dataIndex: "slNo",
       key: "slNo",
     },

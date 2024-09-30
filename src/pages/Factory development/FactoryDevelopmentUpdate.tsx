@@ -39,7 +39,7 @@ const FactoryDevelopmentUpdate = () => {
       totalPrice: unit * unitPrice || result?.totalPrice,
     });
   }, [unit, unitPrice, form, result?.totalPrice]);
-  console.log(result);
+ 
 
   //   date
 

@@ -93,6 +93,7 @@ const UserTable = () => {
     <Table
       className="table-auto"
       bordered
+      size="small"
       columns={colums}
       dataSource={data?.data?.result}
       rowKey="id"

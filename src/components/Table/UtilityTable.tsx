@@ -1,8 +1,8 @@
 import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TUtility } from "../../types/tableType";
 import { useGetAllUtilityQuery } from "../../redux/features/utility/utilityApi";
+import { TUtility } from "../../types/tableType";
 import Loading from "../ui/Loading";
 
 const UtilityTable = () => {
@@ -54,6 +54,7 @@ const UtilityTable = () => {
     <Table
       className="table-auto"
       bordered
+      size="small"
       columns={colums}
       // dataSource={data.data.result}
       rowKey="id"

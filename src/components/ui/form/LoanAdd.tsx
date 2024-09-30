@@ -93,7 +93,7 @@ const LoanAdd = () => {
           style={{ width: "100%" }}
           defaultValue="Please select Pay to"
           options={[
-            { value: "sarkar alliance opc", label: "Sarkar Alliance Opc" },
+            { value: "Sarkar Alliance OPC", label: "Sarkar Alliance Opc" },
             { value: "M.D", label: "M.D" },
             { value: "Chairman", label: "Chairman" },
           ]}

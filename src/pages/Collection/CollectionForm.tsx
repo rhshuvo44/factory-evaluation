@@ -5,7 +5,7 @@ const CollectionForm = () => {
   return (
     <>
       <SectionTitle title=" Collection Add Form" />
-      <div className="responsive-table-container">
+      <div>
         <CollectionAdd />
       </div>
     </>

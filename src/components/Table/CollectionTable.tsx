@@ -30,7 +30,7 @@ const CollectionTable = () => {
 
   const colums = [
     {
-      title: "SL No",
+      title: "SL",
       dataIndex: "slNo",
       key: "slNo",
     },
@@ -90,9 +90,7 @@ const CollectionTable = () => {
             render: (item: TCollection) => {
               return (
                 <Space>
-                  <Link to={`/${user!.role}/travel_allowance/${item._id}`}>
-                    Edit
-                  </Link>
+                  <Link to={`/${user!.role}/collection/${item._id}`}>Edit</Link>
                   {user!.role === "admin" && (
                     <Button
                       danger
