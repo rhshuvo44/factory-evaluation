@@ -1,4 +1,4 @@
-import { Button, Form, InputNumber, InputNumberProps } from "antd";
+import { Button, Form, InputNumber, InputNumberProps, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -8,18 +8,22 @@ import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
 import { formItemLayout } from "../../constants/formItemLayout";
 import {
-  useSingleTravellingQuery,
-  useUpdateTravellingMutation,
-} from "../../redux/features/travelling/travellingApi";
-import { TTravelUpdate } from "../../types";
+  buyerParticularsOptions,
+  paymentOptions,
+} from "../../constants/Options";
+import {
+  useSingleBuyerDevelopmentQuery,
+  useUpdateBuyerDevelopmentMutation,
+} from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
+import { TBuyerUpdate } from "../../types";
 
-const TravellingAllowanceUpdate = () => {
+const BuyerDevelopmentUpdate = () => {
   const [form] = Form.useForm();
   const location = useLocation();
   const navigate = useNavigate();
   const id: string = location.pathname.split("/")[3];
-  const { data, isLoading } = useSingleTravellingQuery(id);
-  const [updateTravelling] = useUpdateTravellingMutation();
+  const { data, isLoading } = useSingleBuyerDevelopmentQuery(id);
+  const [updateBuyerDevelopment] = useUpdateBuyerDevelopmentMutation();
   const result = data?.data;
   const [unit, setUnit] = useState<number>(result?.unit);
   const [unitPrice, setUnitPrice] = useState<number>(result?.unitPrice);
@@ -30,34 +34,40 @@ const TravellingAllowanceUpdate = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
-
   const initialValues = {
     buyerId: result?.buyerId,
     description: result?.description,
     orderNo: result?.orderNo,
     particulars: result?.particulars,
+    paymentType: result?.paymentType,
+    quantity: result?.quantity,
+    memoNo: result?.memoNo,
     payTo: result?.payTo,
-    remark: result?.remark,
     unit: result?.unit,
     unitPrice: result?.unitPrice,
     totalPrice: result?.totalPrice,
   };
-
+  // date
   useEffect(() => {
     form.setFieldsValue({
       totalPrice: unit * unitPrice,
     });
   }, [unit, unitPrice, form]);
+
+  // console.log(initialValues);
+
   if (isLoading) return <Loading />;
 
-  const onFinish = async (values: TTravelUpdate) => {
+  const onFinish = async (values: TBuyerUpdate) => {
+    console.log(values);
     const updateData = {
       id,
       data: { ...values },
     };
-    const res = await updateTravelling(updateData).unwrap();
+    // console.log(updateData, values);
+    const res = await updateBuyerDevelopment(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
-    toast.success("Update Travelling Allowance successfully");
+    toast.success("Update Buyer Development successfully");
     navigate(-1);
   };
   return (
@@ -67,20 +77,26 @@ const TravellingAllowanceUpdate = () => {
       form={form}
       initialValues={initialValues}
     >
-      <CustomInput
+      <Form.Item
         label="Particulars"
         name="particulars"
-        message="Please input! Particulars"
-      />
+        rules={[{ required: true, message: "Please select Particulars! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue={result.particulars}
+          options={buyerParticularsOptions}
+        />
+      </Form.Item>
       <CustomTextArea
         label="Description"
         name="description"
         message="Please input! Description"
       />
-      <CustomInput
-        label="Remark"
-        name="remark"
-        message="Please input! Remark"
+      <CustomInputNumber
+        label="Quantity"
+        name="quantity"
+        message="Please input! Quantity"
       />
       <CustomInputNumber
         label="Buyer ID"
@@ -88,11 +104,35 @@ const TravellingAllowanceUpdate = () => {
         message="Please input! Buyer ID"
       />
       <CustomInputNumber
+        label="Memo No"
+        name="memoNo"
+        message="Please input! Memo No"
+      />
+      <CustomInputNumber
         label="Order No"
         name="orderNo"
         message="Please input! Order No"
       />
       <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
+
+      {/* <Form.Item
+        label="Date"
+        name="date"
+        rules={[{ required: true, message: "Please input! Date" }]}
+      >
+        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
+      </Form.Item> */}
+      <Form.Item
+        label="Payment Type"
+        name="paymentType"
+        rules={[{ required: true, message: "Please select Payment Type! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue={result.paymentType}
+          options={paymentOptions}
+        />
+      </Form.Item>
       <Form.Item
         label="Unit"
         name="unit"
@@ -116,7 +156,6 @@ const TravellingAllowanceUpdate = () => {
           onChange={onChangeUnitPrice}
         />
       </Form.Item>
-
       <Form.Item
         label="Total Price"
         name="totalPrice"
@@ -134,4 +173,4 @@ const TravellingAllowanceUpdate = () => {
   );
 };
 
-export default TravellingAllowanceUpdate;
+export default BuyerDevelopmentUpdate;

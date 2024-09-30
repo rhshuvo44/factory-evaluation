@@ -1,5 +1,6 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
+import BuyerDevelopmentUpdate from "../pages/buyer development/BuyerDevelopmentUpdate";
 import Collection from "../pages/Collection/Collection";
 import CollectionForm from "../pages/Collection/CollectionForm";
 import Dashboard from "../pages/Dashboard";
@@ -76,6 +77,10 @@ export const adminPaths = [
         name: "Add Buyer Development cost",
         path: "add_buyer_development",
         element: <BuyerDevelopmentForm />,
+      },
+      {
+        path: "buyer_development/:id",
+        element: <BuyerDevelopmentUpdate />,
       },
       {
         name: "All Buyer Development cost",

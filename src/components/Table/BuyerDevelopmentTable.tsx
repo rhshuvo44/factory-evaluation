@@ -2,17 +2,17 @@ import { Button, Space, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { userRole } from "../../constants/userRole";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeleteBuyerDevelopmentMutation,
   useGetAllBuyerDevelopmentQuery,
 } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
+import { useAppSelector } from "../../redux/hook";
 import { TBuyer } from "../../types/tableType";
+import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
-import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
-import { useAppSelector } from "../../redux/hook";
-import { verifyToken } from "../../utilis/verifyToken";
-import { userRole } from "../../constants/userRole";
 
 const BuyerDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,33 +93,33 @@ const BuyerDevelopmentTable = () => {
       dataIndex: "totalPrice",
       key: "totalPrice",
     },
-    
+
     ...(user?.role === userRole.ADMIN ||
-      user?.role === userRole.ExecutiveDirector
-        ? [
-            {
-              title: "Action",
-              key: "action",
-              render: (item: TBuyer) => {
-                return (
-                  <Space>
-                    <Link to={`/${user!.role}/travel_allowance/${item._id}`}>
-                      Edit
-                    </Link>
-                    {user!.role === "admin" && (
-                      <Button
-                        danger
-                        onClick={() => handleDeleted(item._id as string)}
-                      >
-                        Delete
-                      </Button>
-                    )}
-                  </Space>
-                );
-              },
+    user?.role === userRole.ExecutiveDirector
+      ? [
+          {
+            title: "Action",
+            key: "action",
+            render: (item: TBuyer) => {
+              return (
+                <Space>
+                  <Link to={`/${user!.role}/buyer_development/${item._id}`}>
+                    Edit
+                  </Link>
+                  {user!.role === "admin" && (
+                    <Button
+                      danger
+                      onClick={() => handleDeleted(item._id as string)}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                </Space>
+              );
             },
-          ]
-        : []),
+          },
+        ]
+      : []),
   ];
   const { data, isError, isLoading } = useGetAllBuyerDevelopmentQuery({
     undefined,
@@ -137,7 +137,7 @@ const BuyerDevelopmentTable = () => {
       </div>
       <div className="responsive-table-container">
         <Table
-        size="small"
+          size="small"
           className="table-auto"
           bordered
           columns={colums}

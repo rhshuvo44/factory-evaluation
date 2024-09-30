@@ -19,7 +19,7 @@ const MiscellaneousUpdate = () => {
   const navigate = useNavigate();
   const id: string = location.pathname.split("/")[3];
   const { data, isLoading } = useGetSingleMiscellaneousQuery(id);
-  const [updateTravelling] = useUpdateMiscellaneousMutation();
+  const [updateMiscellaneous] = useUpdateMiscellaneousMutation();
   const result = data?.data;
   const [unit, setUnit] = useState<number>(result?.unit);
   const [unitPrice, setUnitPrice] = useState<number>(result?.unitPrice);
@@ -30,19 +30,7 @@ const MiscellaneousUpdate = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
-  // console.log(data);
-  // buyerId
-  // date ----
-  // description
-  // orderNo
-  // particulars
-  // payTo
-  // paymentType ----
-  // remark
-  // totalPrice
-  // unit
-  // unitPrice
-  console.log(data?.data?.result?.buyerId);
+
   const initialValues = {
     buyerId: result?.buyerId,
     description: result?.description,
@@ -67,7 +55,7 @@ const MiscellaneousUpdate = () => {
       id,
       data: { ...values },
     };
-    const res = await updateTravelling(updateData).unwrap();
+    const res = await updateMiscellaneous(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Update Miscellaneous successfully");
     navigate(-1);
@@ -99,6 +87,7 @@ const MiscellaneousUpdate = () => {
         name="buyerId"
         message="Please input! Buyer ID"
       />
+
       <CustomInputNumber
         label="Order No"
         name="orderNo"
@@ -129,9 +118,13 @@ const MiscellaneousUpdate = () => {
         />
       </Form.Item>
 
-      <Form.Item label="Total Price" name="totalPrice">
+      <Form.Item
+        label="Total Price"
+        name="totalPrice"
+        initialValue={result?.totalPrice}
+      >
         <InputNumber
-          defaultValue={result.totalPrice}
+          // defaultValue={result.totalPrice}
           style={{ width: "100%" }}
           disabled
         />

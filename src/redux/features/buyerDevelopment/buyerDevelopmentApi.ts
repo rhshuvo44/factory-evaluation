@@ -17,12 +17,27 @@ const buyerDevelopmentApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: travellingData,
             }),
+            invalidatesTags: ['Buyer Development'],
         }),
         deleteBuyerDevelopment: builder.mutation({
             query: (id) => ({
                 url: `/buyer-development/${id}`,
                 method: 'DELETE',
-
+            }),
+            invalidatesTags: ['Buyer Development'],
+        }),
+        updateBuyerDevelopment: builder.mutation({
+            query: (data) => ({
+                url: `/buyer-development/${data.id}`,
+                method: 'PATCH',
+                body: data.data,
+            }),
+            invalidatesTags: ['Buyer Development'],
+        }),
+        singleBuyerDevelopment: builder.query({
+            query: (id) => ({
+                url: `/buyer-development/${id}`,
+                method: 'GET',
             }),
         }),
 
@@ -33,4 +48,4 @@ const buyerDevelopmentApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateBuyerDevelopmentMutation, useGetAllBuyerDevelopmentQuery, useDeleteBuyerDevelopmentMutation } = buyerDevelopmentApi;
+export const { useCreateBuyerDevelopmentMutation, useGetAllBuyerDevelopmentQuery, useDeleteBuyerDevelopmentMutation, useUpdateBuyerDevelopmentMutation, useSingleBuyerDevelopmentQuery } = buyerDevelopmentApi;

@@ -75,6 +75,21 @@ export type TBuyer = {
     unitPrice: number;
     totalPrice: number;
 }
+export type TBuyerUpdate = {
+    _id?: string;
+    date?: string;
+    particulars?: TParticulars;
+    description?: string;
+    quantity?: number
+    buyerId?: number;
+    memoNo?: number;
+    orderNo?: number;
+    payTo?: string;
+    paymentType?: PaymentType;
+    unit?: number;
+    unitPrice?: number;
+    totalPrice?: number;
+}
 export type TSalary = {
     employeeId: number;
     employeeImg: string;
