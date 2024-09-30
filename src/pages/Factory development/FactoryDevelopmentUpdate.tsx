@@ -8,24 +8,20 @@ import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
 import { formItemLayout } from "../../constants/formItemLayout";
 import {
-  buyerParticularsOptions,
-  paymentOptions,
-} from "../../constants/Options";
-import {
-  useSingleBuyerDevelopmentQuery,
-  useUpdateBuyerDevelopmentMutation,
-} from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
+  useSingleFactoryDevelopsQuery,
+  useUpdateFactoryDevelopsMutation,
+} from "../../redux/features/Factory development/factoryDevelopmentApi";
 import { TBuyer } from "../../types";
 
-const BuyerDevelopmentUpdate = () => {
+const FactoryDevelopmentUpdate = () => {
   const [form] = Form.useForm();
   const location = useLocation();
   const navigate = useNavigate();
   // const [date, setDate] = useState<string | string[]>("");
 
   const id: string = location.pathname.split("/")[3];
-  const { data, isLoading } = useSingleBuyerDevelopmentQuery(id);
-  const [updateBuyerDevelopment] = useUpdateBuyerDevelopmentMutation();
+  const { data, isLoading } = useSingleFactoryDevelopsQuery(id);
+  const [updateFactoryDevelops] = useUpdateFactoryDevelopsMutation();
   const result = data?.data;
   const [unit, setUnit] = useState<number>(result?.unit);
   const [unitPrice, setUnitPrice] = useState<number>(result?.unitPrice);
@@ -43,13 +39,18 @@ const BuyerDevelopmentUpdate = () => {
       totalPrice: unit * unitPrice || result?.totalPrice,
     });
   }, [unit, unitPrice, form, result?.totalPrice]);
+  console.log(result);
+
+  //   date
+ 
+
   const initialValues = {
-    buyerId: result?.buyerId,
     description: result?.description,
     // date: result?.date,
     orderNo: result?.orderNo,
     particulars: result?.particulars,
     paymentType: result?.paymentType,
+    orderedBy: result?.orderedBy,
     quantity: result?.quantity,
     memoNo: result?.memoNo,
     payTo: result?.payTo,
@@ -67,7 +68,7 @@ const BuyerDevelopmentUpdate = () => {
       id,
       data: { ...values, totalPrice },
     };
-    const res = await updateBuyerDevelopment(updateData).unwrap();
+    const res = await updateFactoryDevelops(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Update Buyer Development successfully");
     navigate(-1);
@@ -79,16 +80,11 @@ const BuyerDevelopmentUpdate = () => {
       form={form}
       initialValues={initialValues}
     >
-      <Form.Item
+      <CustomInput
         label="Particulars"
         name="particulars"
-        rules={[{ required: true, message: "Please select Particulars! " }]}
-      >
-        <Select
-          style={{ width: "100%" }}
-          options={buyerParticularsOptions}
-        />
-      </Form.Item>
+        message="Please input! Particulars"
+      />
       <CustomTextArea
         label="Description"
         name="description"
@@ -100,21 +96,39 @@ const BuyerDevelopmentUpdate = () => {
         message="Please input! Quantity"
       />
       <CustomInputNumber
-        label="Buyer ID"
-        name="buyerId"
-        message="Please input! Buyer ID"
-      />
-      <CustomInputNumber
         label="Memo No"
         name="memoNo"
         message="Please input! Memo No"
       />
-      <CustomInputNumber
-        label="Order No"
-        name="orderNo"
-        message="Please input! Order No"
-      />
-      <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
+      <Form.Item
+        label="Ordered By"
+        name="orderedBy"
+        rules={[{ required: true, message: "Please select Ordered By! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue="Please select Ordered By"
+          options={[
+            { value: "M.D", label: "M.D" },
+            { value: "Chairman", label: "Chairman" },
+          ]}
+        />
+      </Form.Item>
+      <Form.Item
+        label="Pay to"
+        name="payTo"
+        rules={[{ required: true, message: "Please select Pay to! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue="Please select Pay to"
+          options={[
+            { value: "Sarkar Alliance OPC", label: "Sarkar Alliance OPC" },
+            { value: "M.D", label: "M.D" },
+            { value: "Chairman", label: "Chairman" },
+          ]}
+        />
+      </Form.Item>
 
       {/* <Form.Item
         label="Date"
@@ -126,11 +140,15 @@ const BuyerDevelopmentUpdate = () => {
       <Form.Item
         label="Payment Type"
         name="paymentType"
-        rules={[{ required: true, message: "Please select Payment Type! " }]}
+        rules={[{ required: true, message: "Please select Payment type! " }]}
       >
         <Select
           style={{ width: "100%" }}
-          options={paymentOptions}
+          defaultValue="Please select payment type"
+          options={[
+            { value: "Bank", label: "Bank" },
+            { value: "Cash", label: "Cash" },
+          ]}
         />
       </Form.Item>
       <Form.Item
@@ -169,4 +187,4 @@ const BuyerDevelopmentUpdate = () => {
   );
 };
 
-export default BuyerDevelopmentUpdate;
+export default FactoryDevelopmentUpdate;

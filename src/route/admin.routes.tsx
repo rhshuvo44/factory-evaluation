@@ -6,6 +6,7 @@ import CollectionForm from "../pages/Collection/CollectionForm";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
+import FactoryDevelopmentUpdate from "../pages/Factory development/FactoryDevelopmentUpdate";
 import FixedCost from "../pages/Fixed cost/FixedCost";
 import FixedCostForm from "../pages/Fixed cost/FixedCostForm";
 import Loan from "../pages/loan/Loan";
@@ -111,6 +112,10 @@ export const adminPaths = [
         name: "Add Factory Development cost",
         path: "add_factory_development",
         element: <FactoryDevelopmentForm />,
+      },
+      {
+        path: "factory_development/:id",
+        element: <FactoryDevelopmentUpdate />,
       },
       {
         name: "All Factory Development cost",

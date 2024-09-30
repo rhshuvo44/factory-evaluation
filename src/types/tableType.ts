@@ -31,20 +31,7 @@ export type TTravel = {
     unitPrice: number;
     totalPrice: number;
 }
-export type TTravelUpdate = {
-    _id?: string;
-    date?: Date;
-    particulars?: string;
-    description?: string;
-    remark?: string;
-    buyerId?: number;
-    orderNo?: number;
-    payTo?: string;
-    paymentType?: PaymentType;
-    unit?: number;
-    unitPrice?: number;
-    totalPrice?: number;
-}
+
 export type TMiscellaneous = {
     _id?: string;
     date: Date;
@@ -75,21 +62,7 @@ export type TBuyer = {
     unitPrice: number;
     totalPrice: number;
 }
-export type TBuyerUpdate = {
-    _id?: string;
-    date?: string;
-    particulars?: TParticulars;
-    description?: string;
-    quantity?: number
-    buyerId?: number;
-    memoNo?: number;
-    orderNo?: number;
-    payTo?: string;
-    paymentType?: PaymentType;
-    unit?: number;
-    unitPrice?: number;
-    totalPrice?: number;
-}
+
 export type TSalary = {
     employeeId: number;
     employeeImg: string;

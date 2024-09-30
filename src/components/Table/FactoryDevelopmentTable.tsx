@@ -102,7 +102,7 @@ const FactoryDevelopmentTable = () => {
             render: (item: TFactory) => {
               return (
                 <Space>
-                  <Link to={`/${user!.role}/travel_allowance/${item._id}`}>
+                  <Link to={`/${user!.role}/factory_development/${item._id}`}>
                     Edit
                   </Link>
                   {user!.role === "admin" && (

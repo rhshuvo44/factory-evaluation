@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 // import userImg from "../../assets/image/logo.png";
 import { UserOutlined } from "@ant-design/icons";
 import { logout } from "../../redux/features/auth/authSlice";
-import { useAppDispatch } from "../../redux/hook";
 import { useGetMeQuery } from "../../redux/features/user/userApi";
+import { useAppDispatch } from "../../redux/hook";
 const { Header } = Layout;
 
 const HeaderMenu = () => {
