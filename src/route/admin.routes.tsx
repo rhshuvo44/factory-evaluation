@@ -154,6 +154,10 @@ export const adminPaths = [
         element: <UtilityForm />,
       },
       {
+        path: "utility/:id",
+        element: <UtilityForm />,
+      },
+      {
         name: "All Utility Bill",
         path: "all_bill",
         element: <Utility />,

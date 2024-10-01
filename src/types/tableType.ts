@@ -77,6 +77,7 @@ export type TSalary = {
 }
 
 export type TUtility = {
+    _id?: string;
     internet: TSubUtility[];
     water: TSubUtility[];
     electricity: TSubUtility[];
