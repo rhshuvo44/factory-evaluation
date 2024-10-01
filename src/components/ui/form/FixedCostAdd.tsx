@@ -1,10 +1,15 @@
 import { Button, Form } from "antd";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { useCreateFixedCostMutation } from "../../../redux/features/fixedCost/fixedCostApi";
 import { TFixed, TSubUtility } from "../../../types/tableType";
 import CustomInputNumber from "../../form/CustomInputNumber";
 
 const FixedCostAdd = () => {
-  const onFinish = (values: TFixed) => {
+  const [form] = Form.useForm();
+  const [createFixedCost] = useCreateFixedCostMutation();
+  const date = new Date().toLocaleDateString();
+  const onFinish = async (values: TFixed) => {
     const { factoryRent, factoryRevenue, honorary } = values;
     const factoryRentBill: TSubUtility = {
       unitPrice: typeof factoryRent === "number" ? factoryRent / 30 : 0,
@@ -20,18 +25,18 @@ const FixedCostAdd = () => {
     };
 
     const fixedCost = {
-      factoryRent: factoryRentBill,
-      factoryRevenue: factoryRevenueBill,
-      honorary: honoraryBill,
+      factoryRent: [factoryRentBill],
+      factoryRevenue: [factoryRevenueBill],
+      honorary: [honoraryBill],
     };
-    console.log(fixedCost);
-    //! Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
+    const res = await createFixedCost({ ...fixedCost, date }).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success("Create Utility successfully");
+    form.resetFields();
   };
 
   return (
-    <Form {...formItemLayout} onFinish={onFinish}>
+    <Form {...formItemLayout} form={form} onFinish={onFinish}>
       <CustomInputNumber
         label="Factory Rent"
         name="factoryRent"

@@ -138,6 +138,7 @@ export type TCollection = {
     amount: number;
 }
 export type TFixed = {
+    _id?: string;
     factoryRent: TSubUtility;
     honorary: TSubUtility;
     factoryRevenue: TSubUtility;

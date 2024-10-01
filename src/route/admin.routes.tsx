@@ -193,6 +193,10 @@ export const adminPaths = [
         element: <FixedCostForm />,
       },
       {
+        path: "fixed-cost/:id",
+        element: <FixedCostForm />,
+      },
+      {
         name: "All Fixed cost",
         path: "all_fixed_cost",
         element: <FixedCost />,

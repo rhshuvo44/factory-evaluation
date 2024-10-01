@@ -1,68 +1,116 @@
-import { Button, Table } from "antd";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { TFixed } from "../../types/tableType";
+import { Button, Space, Table } from "antd";
+import Column from "antd/es/table/Column";
+import ColumnGroup from "antd/es/table/ColumnGroup";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
+import {
+  useDeletedFixedCostMutation,
+  useGetAllFixedCostQuery,
+} from "../../redux/features/fixedCost/fixedCostApi";
+import { useAppSelector } from "../../redux/hook";
+import { TFixed } from "../../types";
+import { verifyToken } from "../../utilis/verifyToken";
+import Loading from "../ui/Loading";
+import SectionTitle from "../ui/SectionTitle";
 
 const FixedCostTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
-  const navigate = useNavigate();
+  const [deleteUtility] = useDeletedFixedCostMutation();
+  const token = useAppSelector(useCurrentToken);
 
-  const colums = [
-    {
-      title: "Factory Rent",
-      dataIndex: "factoryRent",
-      key: "factoryRent",
-    },
+  let user;
 
-    {
-      title: "Honorary",
-      dataIndex: "honorary",
-      key: "honorary",
-    },
-    {
-      title: "Factory Revenue",
-      dataIndex: "factoryRevenue",
-      key: "factoryRevenue",
-    },
-
-    {
-      title: "Action",
-      key: "action",
-      render: (_: number, record: TFixed) => (
-        <Button
-          type="link"
-          onClick={() => navigate(`/product/${record.factoryRent}`)}
-        >
-          View Details
-        </Button>
-      ),
-    },
-  ];
-  // const { data, isError, isLoading } = useGetTravellingsQuery({
-  //   limit: pageSize,
-  //   skip: (currentPage - 1) * pageSize,
-  // });
-
-  // if (isLoading) return <Loading />;
-  // if (isError) return <div>Error: {isError}</div>;
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
+  const handleDeleted = async (id: string) => {
+    const res = await deleteUtility(id);
+    if (res?.data?.success) {
+      toast.success(res?.data?.message);
+    }
+  };
+  const { data, isError, isLoading } = useGetAllFixedCostQuery(undefined);
+  console.log(data?.data?.result);
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error: {isError}</div>;
   return (
-    <Table
-      className="table-auto"
-      bordered
-      columns={colums}
-      //   dataSource={data}
-      rowKey="id"
-      pagination={{
-        current: currentPage,
-        pageSize: pageSize,
-        // total: data?.total,
-        onChange: (page, pageSize) => {
-          setCurrentPage(page);
-          setPageSize(pageSize);
-        },
-      }}
-    />
+    <div>
+      <div className="flex  items-center justify-between mb-2">
+        <SectionTitle title="Fixed Cost Table" />
+        <div className="text-sm md:text-lg lg:text-3xl font-bold">
+          Total cost :
+          <span className="text-red-500"> {data?.data?.totalPrice}</span>
+        </div>
+      </div>
+      <div className="responsive-table-container">
+        <Table<TFixed> size="small" dataSource={data?.data?.result}>
+          <Column
+            title="SL"
+            key="slNo"
+            render={(_, record) => record.slNo || "N/A"}
+          />
+          <ColumnGroup title="Factory Rent">
+            <Column
+              title="Unit Price"
+              render={(_, record) => record.factoryRent[0]?.unitPrice || "N/A"}
+              key="unitPrice"
+            />
+            <Column
+              title="Total Price"
+              render={(_, record) => record.factoryRent[0]?.totalPrice || "N/A"}
+              key="totalPrice"
+            />
+          </ColumnGroup>
+
+          <ColumnGroup title="Factory Revenue">
+            <Column
+              title="Unit Price"
+              key="factoryRevenueUnitPrice"
+              render={(_, record) =>
+                record.factoryRevenue[0]?.unitPrice || "N/A"
+              }
+            />
+            <Column
+              title="Total Price"
+              key="factoryRevenueTotalPrice"
+              render={(_, record) =>
+                record.factoryRevenue[0]?.totalPrice || "N/A"
+              }
+            />
+          </ColumnGroup>
+
+          <ColumnGroup title="Honorary">
+            <Column
+              title="Unit Price"
+              key="honoraryUnitPrice"
+              render={(_, record) => record.honorary[0]?.unitPrice || "N/A"}
+            />
+            <Column
+              title="Total Price"
+              key="honoraryTotalPrice"
+              render={(_, record) => record.honorary[0]?.totalPrice || "N/A"}
+            />
+          </ColumnGroup>
+          {user?.role === "admin" && (
+            <Column
+              title="Action"
+              key="action"
+              render={(item: TFixed) => (
+                <Space>
+                  <Link to={`/${user!.role}/fixed-cost/${item._id}`}>Edit</Link>
+                  <Button
+                    danger
+                    onClick={() => handleDeleted(item._id as string)}
+                  >
+                    Delete
+                  </Button>
+                </Space>
+              )}
+            />
+          )}
+        </Table>
+      </div>
+    </div>
   );
 };
 
