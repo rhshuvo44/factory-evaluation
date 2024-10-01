@@ -28,6 +28,7 @@ import AddUser from "../pages/user management/AddUser";
 import AllUsers from "../pages/user management/AllUsers";
 import Utility from "../pages/utility/Utility";
 import UtilityForm from "../pages/utility/UtilityForm";
+import UtilityUpdate from "../pages/utility/UtilityUpdate";
 
 export const adminPaths = [
   {
@@ -155,7 +156,7 @@ export const adminPaths = [
       },
       {
         path: "utility/:id",
-        element: <UtilityForm />,
+        element: <UtilityUpdate />,
       },
       {
         name: "All Utility Bill",

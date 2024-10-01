@@ -33,7 +33,6 @@ const UtilityTable = () => {
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
-  console.log(data?.data);
   return (
     <div>
       <div className="flex  items-center justify-between mb-2">
@@ -45,6 +44,11 @@ const UtilityTable = () => {
       </div>
       <div className="responsive-table-container">
         <Table<TUtility> size="small" dataSource={data?.data?.result}>
+          <Column
+            title="SL"
+            key="slNo"
+            render={(_, record) => record.slNo || "N/A"}
+          />
           <ColumnGroup title="Electricity">
             <Column
               title="Unit Price"
