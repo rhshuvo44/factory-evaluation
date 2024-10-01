@@ -32,19 +32,23 @@ const CollectionUpdate = () => {
   };
 
   useEffect(() => {
+    const totalValue = total || result?.total;
+    const rateValue = ratePer || result?.ratePer;
+    const calculatedAmount =
+      total || ratePer ? totalValue * rateValue : result?.amount;
     form.setFieldsValue({
-      amount: total * ratePer || result?.amount,
+      amount: calculatedAmount,
     });
-  }, [total, ratePer, form, result?.amount]);
+  }, [total, ratePer, form, result]);
 
   const initialValues = {
-    amount: result?.amount,
     challanNo: result?.challanNo,
     lineNo: result?.lineNo,
     ratePer: result?.ratePer,
     style: result?.style,
     total: result?.total,
     workOrderNo: result?.workOrderNo,
+    amount: result?.amount,
   };
   // date
 
@@ -130,8 +134,17 @@ const CollectionUpdate = () => {
             onChange={onChangeRatePer}
           />
         </Form.Item>
-        <Form.Item label="Amount" name="amount">
-          <InputNumber style={{ width: "100%" }} disabled />
+        <Form.Item
+          label="Amount"
+          name="amount"
+
+          // initialValue={result?.amount}
+        >
+          <InputNumber
+            style={{ width: "100%" }}
+            disabled
+            // defaultValue={result?.amount}
+          />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 6, span: 16 }}>

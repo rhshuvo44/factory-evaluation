@@ -35,13 +35,17 @@ const LoanUpdate = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
-  useEffect(() => {
-    form.setFieldsValue({
-      totalPrice: unit * unitPrice || result?.totalPrice,
-    });
-  }, [unit, unitPrice, form, result?.totalPrice]);
+  
 
-  //   date
+  useEffect(() => {
+    const unitValue = unit || result?.unit;
+    const unitPriceValue = unitPrice || result?.unitPrice;
+    const calculatedAmount =
+      unit || unitPrice ? unitValue * unitPriceValue : result?.totalPrice;
+    form.setFieldsValue({
+      totalPrice: calculatedAmount,
+    });
+  }, [unit, unitPrice, form, result]);
 
   const initialValues = {
     description: result?.description,

@@ -6,6 +6,7 @@ import CustomInput from "../../components/form/CustomInput";
 import CustomInputNumber from "../../components/form/CustomInputNumber";
 import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
+import SectionTitle from "../../components/ui/SectionTitle";
 import { formItemLayout } from "../../constants/formItemLayout";
 import {
   buyerParticularsOptions,
@@ -16,7 +17,6 @@ import {
   useUpdateBuyerDevelopmentMutation,
 } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { TBuyer } from "../../types";
-import SectionTitle from "../../components/ui/SectionTitle";
 
 const BuyerDevelopmentUpdate = () => {
   const [form] = Form.useForm();
@@ -39,11 +39,16 @@ const BuyerDevelopmentUpdate = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
+
   useEffect(() => {
+    const unitValue = unit || result?.unit;
+    const unitPriceValue = unitPrice || result?.unitPrice;
+    const calculatedAmount =
+      unit || unitPrice ? unitValue * unitPriceValue : result?.totalPrice;
     form.setFieldsValue({
-      totalPrice: unit * unitPrice || result?.totalPrice,
+      totalPrice: calculatedAmount,
     });
-  }, [unit, unitPrice, form, result?.totalPrice]);
+  }, [unit, unitPrice, form, result]);
   const initialValues = {
     buyerId: result?.buyerId,
     description: result?.description,
