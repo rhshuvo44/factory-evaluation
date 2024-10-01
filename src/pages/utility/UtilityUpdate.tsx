@@ -15,7 +15,6 @@ const UtilityUpdate = () => {
   const [form] = Form.useForm();
   const location = useLocation();
   const navigate = useNavigate();
-  // const [date, setDate] = useState<string | string[]>("");
 
   const id: string = location.pathname.split("/")[3];
   const { data, isLoading } = useSingleUtilityQuery(id);
@@ -26,7 +25,6 @@ const UtilityUpdate = () => {
     water: data?.data.water[0].totalPrice,
     others: data?.data.others[0].totalPrice,
   };
-  // date
 
   if (isLoading) return <Loading />;
   const onFinish = async (values: TUtility) => {
@@ -59,7 +57,7 @@ const UtilityUpdate = () => {
     };
     const res = await updateUtility(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
-    toast.success("Update Loan Return successfully");
+    toast.success("Update Utility Bills successfully");
     navigate(-1);
   };
   return (

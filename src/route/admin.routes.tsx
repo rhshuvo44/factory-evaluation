@@ -10,6 +10,7 @@ import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopm
 import FactoryDevelopmentUpdate from "../pages/Factory development/FactoryDevelopmentUpdate";
 import FixedCost from "../pages/Fixed cost/FixedCost";
 import FixedCostForm from "../pages/Fixed cost/FixedCostForm";
+import FixedCostUpdate from "../pages/Fixed cost/FixedCostUpdate";
 import Loan from "../pages/loan/Loan";
 import LoanForm from "../pages/loan/LoanForm";
 import LoanUpdate from "../pages/loan/LoanUpdate";
@@ -194,7 +195,7 @@ export const adminPaths = [
       },
       {
         path: "fixed-cost/:id",
-        element: <FixedCostForm />,
+        element: <FixedCostUpdate />,
       },
       {
         name: "All Fixed cost",

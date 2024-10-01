@@ -30,7 +30,6 @@ const FixedCostTable = () => {
     }
   };
   const { data, isError, isLoading } = useGetAllFixedCostQuery(undefined);
-  console.log(data?.data?.result);
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
