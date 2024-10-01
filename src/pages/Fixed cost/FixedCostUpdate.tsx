@@ -10,7 +10,7 @@ import {
   useUpdateFixedCostMutation,
 } from "../../redux/features/fixedCost/fixedCostApi";
 import { TFixed, TSubUtility } from "../../types";
-
+import { useEffect } from "react";
 
 const FixedCostUpdate = () => {
   const [form] = Form.useForm();
@@ -26,7 +26,11 @@ const FixedCostUpdate = () => {
     honorary: data?.data.honorary[0].totalPrice,
   };
 
-  
+  useEffect(() => {
+    if (!data) {
+      form.resetFields();
+    }
+  }, [data, form]);
 
   if (isLoading) return <Loading />;
   const onFinish = async (values: TFixed) => {

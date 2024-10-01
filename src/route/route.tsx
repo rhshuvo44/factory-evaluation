@@ -9,6 +9,8 @@ import { coordinatorPaths } from "./Coordinator.routes";
 import { executivePaths } from "./ExecutiveDirector.routes";
 import { generalPaths } from "./generalDirector.routes";
 import { managingPaths } from "./ManagingDirector.routes";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
+import { userRole } from "../constants/userRole";
 
 export const router = createBrowserRouter([
   {
@@ -23,27 +25,47 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <App />,
+    element: (
+      <ProtectedRoute role={userRole.ADMIN}>
+        <App />
+      </ProtectedRoute>
+    ),
     children: routeGenerator(adminPaths),
   },
   {
     path: "/executiveDirector",
-    element: <App />,
+    element: (
+      <ProtectedRoute role={userRole.ExecutiveDirector}>
+        <App />
+      </ProtectedRoute>
+    ),
     children: routeGenerator(executivePaths),
   },
   {
     path: "/managingDirector",
-    element: <App />,
+    element: (
+      <ProtectedRoute role={userRole.ManagingDirector}>
+        <App />
+      </ProtectedRoute>
+    ),
     children: routeGenerator(managingPaths),
   },
   {
     path: "/generalDirector",
-    element: <App />,
+    element: (
+      <ProtectedRoute role={userRole.GeneralDirector}>
+        <App />
+      </ProtectedRoute>
+    ),
     children: routeGenerator(generalPaths),
   },
   {
     path: "/coordinator",
-    element: <App />,
+    element: (
+      <ProtectedRoute role={userRole.Coordinator}>
+        <App />
+      </ProtectedRoute>
+    ),
     children: routeGenerator(coordinatorPaths),
   },
   {

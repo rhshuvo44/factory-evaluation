@@ -2,8 +2,10 @@ import { PlusOutlined } from "@ant-design/icons";
 import type { GetProp, InputNumberProps, UploadFile, UploadProps } from "antd";
 import { Button, Form, Image, InputNumber, Select, Upload } from "antd";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { designationOption } from "../../../constants/Options";
+import { useCreateEmployeeMutation } from "../../../redux/features/employee/employeeApi";
 import { TSalary } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 
@@ -25,6 +27,7 @@ const SalaryAddForm = () => {
   const [perDaySalary, setPerDaySalary] = useState<number>(0);
   const [overTime, setOverTime] = useState<number>(0);
 
+  const [createEmployee] = useCreateEmployeeMutation();
   const onChangePerDaySalary: InputNumberProps["onChange"] = (values) => {
     setPerDaySalary(values as number);
   };
@@ -49,8 +52,11 @@ const SalaryAddForm = () => {
     setPreviewOpen(true);
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    console.log(fileList);
+    console.log(newFileList);
     setFileList(newFileList);
+  };
 
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
@@ -59,14 +65,14 @@ const SalaryAddForm = () => {
     </button>
   );
 
-  const onFinish = (values: TSalary) => {
-    console.log("Received values of form: ", {
+  const onFinish = async (values: TSalary) => {
+    const res = await createEmployee({
       ...values,
       employeeImg: previewImage,
-    });
-    // Call your backend API to handle the login request
-    // and handle the response appropriately
-    // You can use the following code as a reference:
+    }).unwrap();
+    if (!res.success) return toast.error(res.message);
+    toast.success("Create successfully");
+    form.resetFields();
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>

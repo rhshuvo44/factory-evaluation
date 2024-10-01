@@ -3,25 +3,25 @@ import { baseApi } from "../../api/api";
 const employeeApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllEmployees: builder.query({
-            query: () => ({ url: '/employees', method: 'GET' }), providesTags: ['Employee'],
+            query: () => ({ url: '/employee', method: 'GET' }), providesTags: ['Employee'],
         }),
         createEmployee: builder.mutation({
             query: (data) => ({
-                url: '/employees',
+                url: '/employee',
                 method: 'POST',
                 body: data,
             }),
         }),
         updateEmployee: builder.mutation({
             query: (data) => ({
-                url: `/employees/${data.id}`,
+                url: `/employee/${data.id}`,
                 method: 'PUT',
                 body: data,
             }),
         }),
         deleteEmployee: builder.mutation({
             query: (id) => ({
-                url: `/employees/${id}`,
+                url: `/employee/${id}`,
                 method: 'DELETE',
             }),
         }),
