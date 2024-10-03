@@ -22,9 +22,10 @@ export type TTravel = {
     date: Date;
     particulars: string;
     description: string;
-    remark?: string;
+    remark: string;
     buyerId: number;
     orderNo: number;
+    memoNo: number;
     payTo: string;
     paymentType: PaymentType;
     unit: number;

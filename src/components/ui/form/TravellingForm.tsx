@@ -45,6 +45,7 @@ const TravellingForm = () => {
     if (!res.success) return toast.error(res.message);
     toast.success("Create Travelling Allowance successfully");
     form.resetFields();
+    console.log(res);
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
@@ -72,6 +73,11 @@ const TravellingForm = () => {
         label="Order No"
         name="orderNo"
         message="Please input! Order No"
+      />
+      <CustomInputNumber
+        label="Memo No"
+        name="memoNo"
+        message="Please input! Memo No"
       />
       <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
 

@@ -35,12 +35,12 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
     let result = await baseQuery(args, api, extraOptions);
+
     if (result?.error?.status === 404) {
-        toast.error("not found");
+        toast.error(result.error?.data?.message);
     }
     if (result?.error?.status === 403) {
-        toast.error("forbidden")
-
+        toast.error(result.error?.data?.message)
     }
     if (result?.error?.status === 401) {
         //* Send Refresh
@@ -72,6 +72,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQueryWithRefreshToken,
-    tagTypes: ['Travelling', 'Utility', 'Employee', 'loan', 'Miscellaneous', 'Collection', 'Buyer Development', 'Factory', 'User', "Loan","fixedCost"],
+    tagTypes: ['Travelling', 'Utility', 'Employee', 'loan', 'Miscellaneous', 'Collection', 'Buyer Development', 'Factory', 'User', "Loan", "fixedCost"],
     endpoints: () => ({}),
 });

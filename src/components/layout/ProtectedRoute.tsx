@@ -31,7 +31,6 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
   if (!token) {
     return <Navigate to="/login" replace={true} />;
   }
-
   return children;
 };
 
