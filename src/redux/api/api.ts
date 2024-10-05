@@ -1,6 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-
 import {
     BaseQueryApi,
     BaseQueryFn,
@@ -20,11 +18,8 @@ const baseQuery = fetchBaseQuery({
             headers.set("Content-Type", "application/json");
         }
         if (token) {
-            // headers.set('authorization', `Bearer ${token}`);
             headers.set('authorization', `Bearer ${token}`)
-
         }
-
         return headers;
     },
 });
@@ -41,7 +36,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     }
     if (result?.error?.status === 403) {
         toast.error(result.error?.data?.message)
-
     }
     if (result?.error?.status === 401) {
         //* Send Refresh
@@ -53,12 +47,13 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         });
 
         const data = await res.json();
-        if (data?.data?.accessToken) {
+
+        if (data) {
             const user = (api.getState() as RootState).auth.user;
             api.dispatch(
                 setUser({
                     user,
-                    token: data?.data?.accessToken,
+                    token: data,
                 })
             );
             result = await baseQuery(args, api, extraOptions);
