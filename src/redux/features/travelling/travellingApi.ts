@@ -8,6 +8,11 @@ const travelApi = baseApi.injectEndpoints({
                 { url: `/travelling-allowance`, method: 'GET' }
             ), providesTags: ['Travelling'],
         }),
+        getTodayTravellings: builder.query({
+            query: () => (
+                { url: `/travelling-allowance/today`, method: 'GET' }
+            ), providesTags: ['Travelling'],
+        }),
         createTravel: builder.mutation({
             query: (travellingData) => ({
                 url: '/travelling-allowance',
@@ -42,4 +47,4 @@ const travelApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateTravelMutation, useGetAllTravellingsQuery, useUpdateTravellingMutation, useDeletedTravelMutation, useSingleTravellingQuery } = travelApi;
+export const { useCreateTravelMutation, useGetAllTravellingsQuery, useUpdateTravellingMutation, useDeletedTravelMutation, useSingleTravellingQuery, useGetTodayTravellingsQuery } = travelApi;

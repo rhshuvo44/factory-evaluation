@@ -5,6 +5,11 @@ const miscellaneousApi = baseApi.injectEndpoints({
         getAllMiscellaneous: builder.query({
             query: () => ({ url: '/miscellaneous', method: 'GET' }), providesTags: ['Miscellaneous'],
         }),
+        getTodayMiscellaneous: builder.query({
+            query: () => (
+                { url: `/miscellaneous/today`, method: 'GET' }
+            ), providesTags: ['Miscellaneous'],
+        }),
         getSingleMiscellaneous: builder.query({
             query: (id) => ({ url: `/miscellaneous/${id}`, method: 'GET' }),
         }),
@@ -35,4 +40,4 @@ const miscellaneousApi = baseApi.injectEndpoints({
 });
 
 
-export const { useGetAllMiscellaneousQuery, useCreateMiscellaneousMutation, useDeleteMiscellaneousMutation, useGetSingleMiscellaneousQuery, useUpdateMiscellaneousMutation } = miscellaneousApi;
+export const { useGetAllMiscellaneousQuery, useCreateMiscellaneousMutation, useDeleteMiscellaneousMutation, useGetSingleMiscellaneousQuery, useUpdateMiscellaneousMutation, useGetTodayMiscellaneousQuery } = miscellaneousApi;

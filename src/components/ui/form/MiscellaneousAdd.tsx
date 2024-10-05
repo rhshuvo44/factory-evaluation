@@ -71,6 +71,11 @@ const MiscellaneousAdd = () => {
         name="orderNo"
         message="Please input! Order No"
       />
+      <CustomInputNumber
+        label="Memo No"
+        name="memoNo"
+        message="Please input! Memo No"
+      />
       <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
 
       <Form.Item

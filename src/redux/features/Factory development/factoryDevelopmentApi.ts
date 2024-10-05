@@ -5,6 +5,11 @@ const factoryDevelopmentApi = baseApi.injectEndpoints({
         getAllFactoryDevelops: builder.query({
             query: () => ({ url: `/factory-development`, method: 'GET' }), providesTags: ['Factory'],
         }),
+        getTodayFactory: builder.query({
+            query: () => (
+                { url: `/factory-development/today`, method: 'GET' }
+            ), providesTags: ['Factory'],
+        }),
         createFactoryDevelop: builder.mutation({
             query: (data) => ({
                 url: '/factory-development',
@@ -37,4 +42,4 @@ const factoryDevelopmentApi = baseApi.injectEndpoints({
     }),
 })
 
-export const { useCreateFactoryDevelopMutation, useGetAllFactoryDevelopsQuery, useDeletedFactoryMutation, useSingleFactoryDevelopsQuery, useUpdateFactoryDevelopsMutation } = factoryDevelopmentApi 
+export const { useCreateFactoryDevelopMutation, useGetAllFactoryDevelopsQuery, useDeletedFactoryMutation, useSingleFactoryDevelopsQuery, useUpdateFactoryDevelopsMutation, useGetTodayFactoryQuery } = factoryDevelopmentApi 

@@ -6,6 +6,11 @@ const loanApi = baseApi.injectEndpoints({
             query: () => ({ url: '/loan-return', method: 'GET' }),
             providesTags: ['Loan'],
         }),
+        getTodayLoan: builder.query({
+            query: () => (
+                { url: `/loan-return/today`, method: 'GET' }
+            ), providesTags: ['Loan'],
+        }),
         createLoan: builder.mutation({
             query: (data) => ({
                 url: '/loan-return',
@@ -37,4 +42,4 @@ const loanApi = baseApi.injectEndpoints({
         }),
     }),
 });
-export const { useGetAllLoansQuery, useCreateLoanMutation, useDeleteLoanMutation, useSingleLoanQuery, useUpdateLoanMutation } = loanApi
+export const { useGetAllLoansQuery, useCreateLoanMutation, useDeleteLoanMutation, useSingleLoanQuery, useUpdateLoanMutation, useGetTodayLoanQuery } = loanApi

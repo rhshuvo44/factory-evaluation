@@ -69,6 +69,11 @@ const TravellingTable = () => {
       key: "orderNo",
     },
     {
+      title: "Memo No",
+      dataIndex: "memoNo",
+      key: "memoNo",
+    },
+    {
       title: "Pay To",
       dataIndex: "payTo",
       key: "payTo",

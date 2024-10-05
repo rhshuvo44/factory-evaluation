@@ -1,15 +1,98 @@
 import { Table } from "antd";
 import { useState } from "react";
+import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
+import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
+import { TBuyer, TMiscellaneous, TTravel } from "../../types";
+import Loading from "../ui/Loading";
+import SectionTitle from "../ui/SectionTitle";
+import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
+import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
+import { useGetTodayLoanQuery } from "../../redux/features/loan/loanApi";
 
 const RunningCostTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(10);
+
+  const {
+    data: miscData,
+    isError: isMiscError,
+    isLoading: isMiscLoading,
+  } = useGetTodayMiscellaneousQuery(undefined);
+  const {
+    data: travelData,
+    isError: isTravelError,
+    isLoading: isTravelLoading,
+  } = useGetTodayTravellingsQuery(undefined);
+  const {
+    data: buyerData,
+    isError: isBuyerError,
+    isLoading: isBuyerLoading,
+  } = useGetTodayBuyerDevelopmentQuery(undefined);
+  const {
+    data: factoryData,
+    isError: isFactoryError,
+    isLoading: isFactoryLoading,
+  } = useGetTodayFactoryQuery(undefined);
+  const {
+    data: loanData,
+    isError: isLoanError,
+    isLoading: isLoanLoading,
+  } = useGetTodayLoanQuery(undefined);
+  if (
+    isMiscLoading ||
+    isTravelLoading ||
+    isBuyerLoading ||
+    isFactoryLoading ||
+    isLoanLoading
+  )
+    return <Loading />;
+  if (
+    isMiscError ||
+    isTravelError ||
+    isBuyerError ||
+    isFactoryError ||
+    isLoanError
+  )
+    return <div>Error loading data</div>;
+
+  // Combine the data into a single array
+  const combinedData = [
+    ...(miscData?.data || []).map((item: TMiscellaneous) => ({
+      ...item,
+      source: "Miscellaneous",
+    })),
+    ...(travelData?.data || []).map((item: TTravel) => ({
+      ...item,
+      source: "Travel",
+    })),
+    ...(buyerData?.data || []).map((item: TBuyer) => ({
+      ...item,
+      source: "Buyer Development",
+    })),
+    ...(factoryData?.data || []).map((item: TBuyer) => ({
+      ...item,
+      source: "Factory Development",
+    })),
+    ...(loanData?.data || []).map((item: TBuyer) => ({
+      ...item,
+      source: "Loan Returns",
+    })),
+  ];
+  const totalCost = combinedData.reduce(
+    (sum, price) => sum + price.unitPrice,
+    0
+  );
 
   const colums = [
     {
-      title: "SL No",
-      dataIndex: "SL No",
-      key: "SL No",
+      title: "SL",
+      dataIndex: "slNo",
+      key: "slNo",
+    },
+    {
+      title: "Source",
+      dataIndex: "source",
+      key: "source",
     },
 
     {
@@ -34,23 +117,23 @@ const RunningCostTable = () => {
     },
     {
       title: "Buyer ID",
-      dataIndex: "buyer ID",
-      key: "buyer ID",
+      dataIndex: "buyerId",
+      key: "buyerId",
     },
     {
       title: "Order No",
-      dataIndex: "order No",
-      key: "order No",
+      dataIndex: "orderNo",
+      key: "orderNo",
     },
     {
       title: "Pay To",
-      dataIndex: "pay",
-      key: "pay",
+      dataIndex: "payTo",
+      key: "payTo",
     },
     {
       title: "Payment Type",
-      dataIndex: "payment",
-      key: "payment",
+      dataIndex: "paymentType",
+      key: "paymentType",
     },
     {
       title: "Unit",
@@ -59,39 +142,62 @@ const RunningCostTable = () => {
     },
     {
       title: "Unit Price",
-      dataIndex: "unit price",
-      key: "unit price",
+      dataIndex: "unitPrice",
+      key: "unitPrice",
     },
     {
       title: "Total Price",
-      dataIndex: "total price",
-      key: "total price",
+      dataIndex: "totalPrice",
+      key: "totalPrice",
     },
   ];
-  // const { data, isError, isLoading } = useGetTravellingsQuery({
-  //   limit: pageSize,
-  //   skip: (currentPage - 1) * pageSize,
-  // });
 
-  // if (isLoading) return <Loading />;
-  // if (isError) return <div>Error: {isError}</div>;
   return (
-    <Table
-      className="table-auto"
-      bordered
-      columns={colums}
-      // dataSource={data?.travelling}
-      rowKey="id"
-      pagination={{
-        current: currentPage,
-        pageSize: pageSize,
-        // total: data?.total,
-        onChange: (page, pageSize) => {
-          setCurrentPage(page);
-          setPageSize(pageSize);
-        },
-      }}
-    />
+    <div>
+      <div className="flex  items-center justify-between mb-2">
+        <SectionTitle title="Factory Running Cost" />
+        <div className="text-sm md:text-lg lg:text-3xl font-bold">
+          Total cost :<span className="text-red-500"> {totalCost}</span>
+        </div>
+      </div>
+      <div className="responsive-table-container">
+        <Table
+          size="small"
+          className="table-auto"
+          bordered
+          columns={colums}
+          dataSource={combinedData}
+          rowKey="_id"
+          pagination={{
+            current: currentPage,
+            pageSize: pageSize,
+            // total: data?.data.meta.total,
+            onChange: (page, pageSize) => {
+              setCurrentPage(page);
+              setPageSize(pageSize);
+            },
+          }}
+        />
+      </div>
+    </div>
+    //   <div>
+    //   <SectionTitle title="Combined Data" />
+    //   <Table
+    //     bordered
+    //     size="small"
+    //     columns={columns}
+    //     dataSource={combinedData}
+    //     rowKey="_id"
+    //     pagination={{
+    //       current: currentPage,
+    //       pageSize: pageSize,
+    //       onChange: (page, pageSize) => {
+    //         setCurrentPage(page);
+    //         setPageSize(pageSize);
+    //       },
+    //     }}
+    //   />
+    // </div>
   );
 };
 
