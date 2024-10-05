@@ -79,6 +79,7 @@ export type TSalary = {
 
 export type TUtility = {
     _id?: string;
+    date?: string;
     internet: TSubUtility[];
     water: TSubUtility[];
     electricity: TSubUtility[];

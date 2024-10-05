@@ -1,10 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
     BaseQueryApi,
-    BaseQueryFn,
-    DefinitionType,
-    FetchArgs
-} from '@reduxjs/toolkit/query/react';
+    BaseQueryFn, createApi, DefinitionType,
+    FetchArgs, fetchBaseQuery
+} from "@reduxjs/toolkit/query/react";
 import { toast } from "sonner";
 import { logout, setUser } from '../features/auth/authSlice';
 import { RootState } from '../store';
@@ -30,7 +28,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
     let result: any = await baseQuery(args, api, extraOptions);
-    console.log("result", result);
+
     if (result?.error?.status === 404) {
         toast.error(result.error?.data?.message);
     }
@@ -45,7 +43,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
             method: 'POST',
             credentials: 'include',
         });
-        console.log("res", res);
+
 
         const data = await res.json();
 

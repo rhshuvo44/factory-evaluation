@@ -30,7 +30,7 @@ const UtilityTable = () => {
     }
   };
   const { data, isError, isLoading } = useGetAllUtilityQuery(undefined);
-
+console.log(data);
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (

@@ -1,13 +1,22 @@
 import { Table } from "antd";
 import { useState } from "react";
-import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
-import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
-import { TBuyer, TMiscellaneous, TTravel } from "../../types";
-import Loading from "../ui/Loading";
-import SectionTitle from "../ui/SectionTitle";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
 import { useGetTodayLoanQuery } from "../../redux/features/loan/loanApi";
+import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
+import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
+import { useGetAllUtilityQuery } from "../../redux/features/utility/utilityApi";
+import {
+  TBuyer,
+  TFactory,
+  TLoan,
+  TMiscellaneous,
+  TTravel,
+  TUtility,
+} from "../../types";
+import Loading from "../ui/Loading";
+import SectionTitle from "../ui/SectionTitle";
+import EvaluationTable from "./EvaluationTable";
 
 const RunningCostTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,12 +47,18 @@ const RunningCostTable = () => {
     isError: isLoanError,
     isLoading: isLoanLoading,
   } = useGetTodayLoanQuery(undefined);
+  const {
+    data: utilityData,
+    isError: isUtilityError,
+    isLoading: isUtilityLoading,
+  } = useGetAllUtilityQuery(undefined);
   if (
     isMiscLoading ||
     isTravelLoading ||
     isBuyerLoading ||
     isFactoryLoading ||
-    isLoanLoading
+    isLoanLoading ||
+    isUtilityLoading
   )
     return <Loading />;
   if (
@@ -51,9 +66,69 @@ const RunningCostTable = () => {
     isTravelError ||
     isBuyerError ||
     isFactoryError ||
-    isLoanError
+    isLoanError ||
+    isUtilityError
   )
     return <div>Error loading data</div>;
+  const utility = (utilityData?.data?.result || []).map((item: TUtility) => ({
+    ...item,
+  }));
+  // const utilityComData = utility.map((item: any) => ({
+  //   _id: item._id,
+  //   date: item.date,
+  //   ...{
+  //     remark: "internet",
+  //     unitPrice: item.internet.map((i) => i.unitPrice),
+  //     totalPrice: item.internet.map((i) => i.totalPrice),
+  //   },
+  //   ...{
+  //     remark: "water",
+  //     unitPrice: item.water.map((i) => i.unitPrice),
+  //     totalPrice: item.water.map((i) => i.totalPrice),
+  //   },
+  //   ...{
+  //     electricity: item.electricity.map(
+  //       (e) => `Unit Price: ${e.unitPrice}, Total Price: ${e.totalPrice}`
+  //     ),
+  //   },
+  //   ...{
+  //     others: item.others.map(
+  //       (o) => `Unit Price: ${o.unitPrice}, Total Price: ${o.totalPrice}`
+  //     ),
+  //   },
+  // }));
+  const utilityComData = utility.flatMap((item: TUtility) => [
+    ...item.internet.map((i) => ({
+      _id: item._id,
+      date: item.date,
+      remark: "internet",
+      unitPrice: i.unitPrice, // Directly take the unitPrice
+      totalPrice: i.totalPrice, // Directly take the totalPrice
+    })),
+    ...item.water.map((i) => ({
+      _id: item._id,
+      date: item.date,
+      remark: "water",
+      unitPrice: i.unitPrice, // Directly take the unitPrice
+      totalPrice: i.totalPrice, // Directly take the totalPrice
+    })),
+    ...item.electricity.map((e) => ({
+      _id: item._id,
+      date: item.date,
+      remark: "electricity",
+      unitPrice: e.unitPrice, // Directly take the unitPrice
+      totalPrice: e.totalPrice, // Directly take the totalPrice
+    })),
+    ...(item?.others || []).map((o) => ({
+      _id: item._id,
+      date: item.date,
+      remark: "others",
+      unitPrice: o.unitPrice, // Directly take the unitPrice
+      totalPrice: o.totalPrice, // Directly take the totalPrice
+    })),
+  ]);
+
+  console.log(utilityComData);
 
   // Combine the data into a single array
   const combinedData = [
@@ -69,16 +144,20 @@ const RunningCostTable = () => {
       ...item,
       source: "Buyer Development",
     })),
-    ...(factoryData?.data || []).map((item: TBuyer) => ({
+    ...(factoryData?.data || []).map((item: TFactory) => ({
       ...item,
       source: "Factory Development",
     })),
-    ...(loanData?.data || []).map((item: TBuyer) => ({
+    ...(loanData?.data || []).map((item: TLoan) => ({
       ...item,
       source: "Loan Returns",
     })),
+    ...(utilityComData || []).map((item: TUtility) => ({
+      ...item,
+      source: "Utility Bills",
+    })),
   ];
-  const totalCost = combinedData.reduce(
+  const totalCost: number = combinedData.reduce(
     (sum, price) => sum + price.unitPrice,
     0
   );
@@ -179,25 +258,8 @@ const RunningCostTable = () => {
           }}
         />
       </div>
+      <EvaluationTable totalCost={totalCost} />
     </div>
-    //   <div>
-    //   <SectionTitle title="Combined Data" />
-    //   <Table
-    //     bordered
-    //     size="small"
-    //     columns={columns}
-    //     dataSource={combinedData}
-    //     rowKey="_id"
-    //     pagination={{
-    //       current: currentPage,
-    //       pageSize: pageSize,
-    //       onChange: (page, pageSize) => {
-    //         setCurrentPage(page);
-    //         setPageSize(pageSize);
-    //       },
-    //     }}
-    //   />
-    // </div>
   );
 };
 
