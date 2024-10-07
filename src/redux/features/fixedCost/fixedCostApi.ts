@@ -16,6 +16,11 @@ const fixedCostApi = baseApi.injectEndpoints({
                 { url: `/fixed-cost`, method: 'GET' }
             ), providesTags: ['fixedCost'],
         }),
+        getTodayFixedCost: builder.query({
+            query: () => (
+                { url: `/fixed-cost/today`, method: 'GET' }
+            ), providesTags: ['fixedCost'],
+        }),
         updateFixedCost: builder.mutation({
             query: (data) => ({
                 url: `/fixed-cost/${data.id}`,
@@ -42,4 +47,4 @@ const fixedCostApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateFixedCostMutation, useGetAllFixedCostQuery, useSingleFixedCostQuery, useUpdateFixedCostMutation, useDeletedFixedCostMutation } = fixedCostApi;
+export const { useCreateFixedCostMutation, useGetAllFixedCostQuery, useSingleFixedCostQuery, useUpdateFixedCostMutation, useDeletedFixedCostMutation, useGetTodayFixedCostQuery } = fixedCostApi;

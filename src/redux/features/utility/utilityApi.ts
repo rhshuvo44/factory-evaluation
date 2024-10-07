@@ -16,6 +16,11 @@ const utilityApi = baseApi.injectEndpoints({
                 { url: `/utility`, method: 'GET' }
             ), providesTags: ['Utility'],
         }),
+        getTodayUtility: builder.query({
+            query: () => (
+                { url: `/utility/today`, method: 'GET' }
+            ), providesTags: ['Utility'],
+        }),
         updateUtility: builder.mutation({
             query: (data) => ({
                 url: `/utility/${data.id}`,
@@ -42,4 +47,4 @@ const utilityApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateUtilityMutation, useGetAllUtilityQuery, useSingleUtilityQuery, useUpdateUtilityMutation, useDeletedUtilityMutation } = utilityApi;
+export const { useCreateUtilityMutation, useGetAllUtilityQuery, useSingleUtilityQuery, useUpdateUtilityMutation, useDeletedUtilityMutation, useGetTodayUtilityQuery } = utilityApi;

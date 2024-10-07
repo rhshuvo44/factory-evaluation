@@ -2,11 +2,11 @@ import { Table } from "antd";
 import { useState } from "react";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
-import { useGetAllFixedCostQuery } from "../../redux/features/fixedCost/fixedCostApi";
+import { useGetTodayFixedCostQuery } from "../../redux/features/fixedCost/fixedCostApi";
 import { useGetTodayLoanQuery } from "../../redux/features/loan/loanApi";
 import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
 import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
-import { useGetAllUtilityQuery } from "../../redux/features/utility/utilityApi";
+import { useGetTodayUtilityQuery } from "../../redux/features/utility/utilityApi";
 import {
   TBuyer,
   TFactory,
@@ -53,12 +53,12 @@ const RunningCostTable = () => {
     data: utilityData,
     isError: isUtilityError,
     isLoading: isUtilityLoading,
-  } = useGetAllUtilityQuery(undefined);
+  } = useGetTodayUtilityQuery(undefined);
   const {
     data: fixedCostData,
     isError: isFixedCostError,
     isLoading: isFixedCostLoading,
-  } = useGetAllFixedCostQuery(undefined);
+  } = useGetTodayFixedCostQuery(undefined);
   if (
     isMiscLoading ||
     isTravelLoading ||
@@ -79,27 +79,24 @@ const RunningCostTable = () => {
     isFixedCostError
   )
     return <div>Error loading data</div>;
-  const fixedCost = (fixedCostData?.data?.result || []).map((item: TFixed) => ({
+  const fixedCost = (fixedCostData?.data || []).map((item: TFixed) => ({
     ...item,
   }));
 
   const fixedCostComData = fixedCost.flatMap((item: TFixed) => [
     ...item.factoryRent.map((i) => ({
-      _id: item._id,
       date: item.date,
       remark: "factoryRent",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.factoryRevenue.map((i) => ({
-      _id: item._id,
       date: item.date,
       remark: "factoryRevenue",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.honorary.map((e) => ({
-      _id: item._id,
       date: item.date,
       remark: "honorary",
       unitPrice: e.unitPrice, // Directly take the unitPrice
@@ -107,34 +104,30 @@ const RunningCostTable = () => {
     })),
   ]);
 
-  const utility = (utilityData?.data?.result || []).map((item: TUtility) => ({
+  const utility = (utilityData?.data || []).map((item: TUtility) => ({
     ...item,
   }));
 
   const utilityComData = utility.flatMap((item: TUtility) => [
     ...item.internet.map((i) => ({
-      _id: item._id,
       date: item.date,
       remark: "internet",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.water.map((i) => ({
-      _id: item._id,
       date: item.date,
       remark: "water",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.electricity.map((e) => ({
-      _id: item._id,
       date: item.date,
       remark: "electricity",
       unitPrice: e.unitPrice, // Directly take the unitPrice
       totalPrice: e.totalPrice, // Directly take the totalPrice
     })),
     ...(item?.others || []).map((o) => ({
-      _id: item._id,
       date: item.date,
       remark: "others",
       unitPrice: o.unitPrice, // Directly take the unitPrice
@@ -144,6 +137,10 @@ const RunningCostTable = () => {
 
   // Combine the data into a single array
   const combinedData = [
+    ...(fixedCostComData || []).map((item: TFixed) => ({
+      ...item,
+      source: "Fixed cost",
+    })),
     ...(miscData?.data || []).map((item: TMiscellaneous) => ({
       ...item,
       source: "Miscellaneous",
@@ -168,11 +165,8 @@ const RunningCostTable = () => {
       ...item,
       source: "Utility Bills",
     })),
-    ...(fixedCostComData || []).map((item: TFixed) => ({
-      ...item,
-      source: "Fixed cost",
-    })),
   ];
+
   const totalCost: number = combinedData.reduce(
     (sum, price) => sum + price.unitPrice,
     0
