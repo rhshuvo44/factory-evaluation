@@ -16,7 +16,7 @@ import { TMiscellaneous } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-
+import dayjs, { Dayjs } from "dayjs";
 const MiscellaneousAdd = () => {
   const [form] = Form.useForm();
   const [unit, setUnit] = useState<number>(0);
@@ -32,6 +32,13 @@ const MiscellaneousAdd = () => {
   };
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
+  };
+  const disableDates = (current: Dayjs) => {
+    // Disable dates that are more than 45 days ago or in the future
+
+    return (
+      current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
+    );
   };
   useEffect(() => {
     form.setFieldsValue({
@@ -50,40 +57,55 @@ const MiscellaneousAdd = () => {
         label="Particulars"
         name="particulars"
         message="Please input! Particulars"
+        placeholder="please input particulars text..."
       />
       <CustomTextArea
         label="Description"
         name="description"
         message="Please input! Description"
+        placeholder="please input Description"
       />
       <CustomInput
         label="Remark"
         name="remark"
         message="Please input! Remark"
+        placeholder="please input remark"
       />
       <CustomInputNumber
         label="Buyer ID"
         name="buyerId"
         message="Please input! Buyer ID"
+        placeholder="please input Buyer ID number"
       />
       <CustomInputNumber
         label="Order No"
         name="orderNo"
         message="Please input! Order No"
+        placeholder="please input Order Number"
       />
       <CustomInputNumber
         label="Memo No"
         name="memoNo"
         message="Please input! Memo No"
+        placeholder="please input Memo Number"
       />
-      <CustomInput label="Pay to" name="payTo" message="Please input! Pay to" />
+      <CustomInput
+        label="Pay to"
+        name="payTo"
+        message="Please input! Pay to"
+        placeholder="please input pay to name"
+      />
 
       <Form.Item
         label="Date"
         name="date"
         rules={[{ required: true, message: "Please input! Date" }]}
       >
-        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
+        <DatePicker
+          onChange={onChangeDate}
+          style={{ width: "100%" }}
+          disabledDate={disableDates}
+        />
       </Form.Item>
 
       <Form.Item
@@ -106,6 +128,7 @@ const MiscellaneousAdd = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangeUnit}
+          placeholder="please input unit number"
         />
       </Form.Item>
 
@@ -118,6 +141,7 @@ const MiscellaneousAdd = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangeUnitPrice}
+          placeholder="please input unit price"
         />
       </Form.Item>
 

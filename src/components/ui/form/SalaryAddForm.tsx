@@ -53,8 +53,6 @@ const SalaryAddForm = () => {
   };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    console.log(fileList);
-    console.log(newFileList);
     setFileList(newFileList);
   };
 
@@ -76,7 +74,12 @@ const SalaryAddForm = () => {
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInput label="Name" name="name" message="Please input! Name" />
+      <CustomInput
+        label="Name"
+        name="name"
+        message="Please input! Name"
+        placeholder="please input Employee Name"
+      />
 
       <Form.Item
         label="Designation"
@@ -105,6 +108,7 @@ const SalaryAddForm = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangePerDaySalary}
+          placeholder="please input Employee per Day Salary"
         />
       </Form.Item>
 
@@ -113,7 +117,11 @@ const SalaryAddForm = () => {
         name="overTime"
         rules={[{ required: true, message: "Please Input Over Time" }]}
       >
-        <InputNumber style={{ width: "100%" }} onChange={onChangeOverTime} />
+        <InputNumber
+          style={{ width: "100%" }}
+          onChange={onChangeOverTime}
+          placeholder="please input over time hours"
+        />
       </Form.Item>
       <Form.Item label="Over Time Rate" name="overTimeRate">
         <InputNumber style={{ width: "100%" }} disabled />

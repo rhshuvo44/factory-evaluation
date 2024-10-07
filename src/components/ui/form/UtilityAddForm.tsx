@@ -45,16 +45,19 @@ const UtilityAddForm = () => {
         label="Internet"
         name="internet"
         message="Please input Internet Bill"
+        placeholder="please input Internet Bill"
       />
       <CustomInputNumber
         label="Water"
         name="water"
         message="Please input Water bill"
+        placeholder="please input Water bills"
       />
       <CustomInputNumber
         label="Electricity"
         name="electricity"
         message="Please input Electricity bill"
+        placeholder="please input Electricity bills"
       />
 
       <Form.Item
@@ -62,7 +65,10 @@ const UtilityAddForm = () => {
         name="others"
         rules={[{ required: false, message: "Please input Others Bill" }]}
       >
-        <InputNumber style={{ width: "100%" }} />
+        <InputNumber
+          style={{ width: "100%" }}
+          placeholder="please input  Others Bill (optional)"
+        />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
         <Button type="primary" htmlType="submit">

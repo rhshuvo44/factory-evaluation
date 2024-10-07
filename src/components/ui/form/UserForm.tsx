@@ -18,23 +18,42 @@ const UserForm = () => {
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInput label="Name" name="name" message="Please input Name" />
+      <CustomInput
+        label="Name"
+        name="name"
+        message="Please input Name"
+        placeholder="please input Name"
+      />
       <CustomInput
         label="Username"
         name="username"
         message="Please input Username"
+        placeholder="please input username"
       />
-      <CustomInput label="Email" name="email" message="Please input Email" />
+      <CustomInput
+        label="Email"
+        name="email"
+        message="Please input Email"
+        placeholder="please input email"
+      />
 
       <Form.Item
         label="Password"
         name="password"
         rules={[{ required: true, message: "Please input Password" }]}
       >
-        <Input.Password style={{ width: "100%" }} />
+        <Input.Password
+          style={{ width: "100%" }}
+          placeholder="please input password"
+        />
       </Form.Item>
 
-      <CustomInput label="Phone" name="phone" message="Please input Phone" />
+      <CustomInput
+        label="Phone"
+        name="phone"
+        message="Please input Phone"
+        placeholder="please input phone number"
+      />
       <Form.Item
         label="User Role"
         name="role"
@@ -50,6 +69,7 @@ const UserForm = () => {
         label="Address"
         name="address"
         message="Please input Address"
+        placeholder="please input Address"
       />
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>

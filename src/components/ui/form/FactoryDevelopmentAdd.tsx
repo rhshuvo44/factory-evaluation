@@ -7,6 +7,7 @@ import {
   InputNumberProps,
   Select,
 } from "antd";
+import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
@@ -15,7 +16,6 @@ import { TFactory } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-
 const FactoryDevelopmentAdd = () => {
   const [form] = Form.useForm();
   const [unit, setUnit] = useState<number>(0);
@@ -30,6 +30,13 @@ const FactoryDevelopmentAdd = () => {
   };
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
+  };
+  const disableDates = (current: Dayjs) => {
+    // Disable dates that are more than 45 days ago or in the future
+
+    return (
+      current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
+    );
   };
   useEffect(() => {
     form.setFieldsValue({
@@ -48,21 +55,25 @@ const FactoryDevelopmentAdd = () => {
         label="Particulars"
         name="particulars"
         message="Please input! Particulars"
+        placeholder="please input particulars text"
       />
       <CustomTextArea
         label="Description"
         name="description"
         message="Please input! Description"
+        placeholder="please input Description"
       />
       <CustomInputNumber
         label="Quantity"
         name="quantity"
         message="Please input! Quantity"
+        placeholder="please input Quantity Number"
       />
       <CustomInputNumber
         label="Memo No"
         name="memoNo"
         message="Please input! Memo No"
+        placeholder="please input Memo number"
       />
       <Form.Item
         label="Ordered By"
@@ -99,7 +110,11 @@ const FactoryDevelopmentAdd = () => {
         name="date"
         rules={[{ required: true, message: "Please input! Date" }]}
       >
-        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
+        <DatePicker
+          onChange={onChangeDate}
+          style={{ width: "100%" }}
+          disabledDate={disableDates}
+        />
       </Form.Item>
       <Form.Item
         label="Payment Type"
@@ -124,6 +139,7 @@ const FactoryDevelopmentAdd = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangeUnit}
+          placeholder="please input unit number"
         />
       </Form.Item>
 
@@ -136,6 +152,7 @@ const FactoryDevelopmentAdd = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangeUnitPrice}
+          placeholder="please input unit price"
         />
       </Form.Item>
 

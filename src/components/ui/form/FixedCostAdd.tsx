@@ -41,16 +41,19 @@ const FixedCostAdd = () => {
         label="Factory Rent"
         name="factoryRent"
         message="Please input Factory Rent Cost"
+        placeholder="please input Factory rent cost"
       />
       <CustomInputNumber
         label="Honorary"
         name="honorary"
         message="Please input Honorary Cost"
+        placeholder="please input Honorary Cost"
       />
       <CustomInputNumber
         label="Factory Revenue"
         name="factoryRevenue"
         message="Please input Factory Revenue Cost"
+        placeholder="please input Factory Revenue Cost"
       />
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>

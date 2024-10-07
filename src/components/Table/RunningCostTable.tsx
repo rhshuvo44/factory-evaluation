@@ -141,6 +141,10 @@ const RunningCostTable = () => {
       ...item,
       source: "Fixed cost",
     })),
+    ...(utilityComData || []).map((item: TUtility) => ({
+      ...item,
+      source: "Utility Bills",
+    })),
     ...(miscData?.data || []).map((item: TMiscellaneous) => ({
       ...item,
       source: "Miscellaneous",
@@ -161,10 +165,6 @@ const RunningCostTable = () => {
       ...item,
       source: "Loan Returns",
     })),
-    ...(utilityComData || []).map((item: TUtility) => ({
-      ...item,
-      source: "Utility Bills",
-    })),
   ];
 
   const totalCost: number = combinedData.reduce(
@@ -175,8 +175,10 @@ const RunningCostTable = () => {
   const colums = [
     {
       title: "SL",
-      dataIndex: "slNo",
+      // dataIndex: "slNo",
       key: "slNo",
+      render: (_: any, record: any, index: number) =>
+        (currentPage - 1) * pageSize + index + 1,
     },
     {
       title: "Source",

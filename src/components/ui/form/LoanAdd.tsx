@@ -7,6 +7,7 @@ import {
   InputNumberProps,
   Select,
 } from "antd";
+import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
@@ -31,6 +32,13 @@ const LoanAdd = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
+  const disableDates = (current: Dayjs) => {
+    // Disable dates that are more than 45 days ago or in the future
+
+    return (
+      current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
+    );
+  };
   useEffect(() => {
     form.setFieldsValue({
       totalPrice: unit * unitPrice,
@@ -54,21 +62,25 @@ const LoanAdd = () => {
         label="Particulars"
         name="particulars"
         message="Please input! Particulars"
+        placeholder="please input particular text"
       />
       <CustomTextArea
         label="Description"
         name="description"
         message="Please input! Description"
+        placeholder="please input Description"
       />
       <CustomInputNumber
         label="Quantity"
         name="quantity"
         message="Please input! Quantity"
+        placeholder="please input Quantity number"
       />
       <CustomInputNumber
         label="Memo No"
         name="memoNo"
         message="Please input! Memo No"
+        placeholder="please input memo number"
       />
       <Form.Item
         label="Ordered By"
@@ -105,7 +117,11 @@ const LoanAdd = () => {
         name="date"
         rules={[{ required: true, message: "Please input! Date" }]}
       >
-        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
+        <DatePicker
+          onChange={onChangeDate}
+          style={{ width: "100%" }}
+          disabledDate={disableDates}
+        />
       </Form.Item>
 
       <Form.Item
@@ -131,6 +147,7 @@ const LoanAdd = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangeUnit}
+          placeholder="please input unit number"
         />
       </Form.Item>
 
@@ -143,6 +160,7 @@ const LoanAdd = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangeUnitPrice}
+          placeholder="please input unit price"
         />
       </Form.Item>
 

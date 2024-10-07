@@ -7,7 +7,8 @@ import {
   InputNumberProps,
   Select,
 } from "antd";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -33,6 +34,13 @@ const CollectionAdd = () => {
   };
   const onChangeRatePer: InputNumberProps["onChange"] = (values) => {
     setRatePer(values as number);
+  };
+  const disableDates = (current: Dayjs) => {
+    // Disable dates that are more than 45 days ago or in the future
+
+    return (
+      current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
+    );
   };
   useEffect(() => {
     form.setFieldsValue({
@@ -75,17 +83,20 @@ const CollectionAdd = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangeTotal}
+          placeholder="please input Total number"
         />
       </Form.Item>
       <CustomInputNumber
         label="Work Order No"
         name="workOrderNo"
         message="Please input! Work Order No"
+        placeholder="please input Work Order number"
       />
       <CustomInputNumber
         label="Challan No"
         name="challanNo"
         message="Please input! Challan No"
+        placeholder="please input Chalan Number"
       />
       <Form.Item
         label="Line No"
@@ -107,7 +118,11 @@ const CollectionAdd = () => {
         name="date"
         rules={[{ required: true, message: "Please input! Date" }]}
       >
-        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
+        <DatePicker
+          onChange={onChangeDate}
+          style={{ width: "100%" }}
+          disabledDate={disableDates}
+        />
       </Form.Item>
 
       <Form.Item
@@ -119,6 +134,7 @@ const CollectionAdd = () => {
           style={{ width: "100%" }}
           min={0}
           onChange={onChangeRatePer}
+          placeholder="please input unit per rate"
         />
       </Form.Item>
       <Form.Item label="Amount" name="amount">

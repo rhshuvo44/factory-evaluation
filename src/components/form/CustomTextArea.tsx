@@ -1,14 +1,14 @@
 import { Form, Input } from "antd";
 import { TInput } from "../../types/customInputTypes";
 
-const CustomTextArea = ({ name, label, message }: TInput) => {
+const CustomTextArea = ({ name, label, message, placeholder }: TInput) => {
   return (
     <Form.Item
       label={label}
       name={name}
       rules={[{ required: true, message: message }]}
     >
-      <Input.TextArea />
+      <Input.TextArea placeholder={placeholder} />
     </Form.Item>
   );
 };
