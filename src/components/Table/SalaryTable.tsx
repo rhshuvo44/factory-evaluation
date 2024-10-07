@@ -42,7 +42,7 @@ const SalaryTable = () => {
       title: "Photo",
       dataIndex: "photo",
       key: "photo",
-      render: (_:any, record: { key: string; photo: string }) => (
+      render: (_: any, record: { key: string; photo: string }) => (
         <img
           src={record.photo}
           alt="Uploaded"
@@ -64,6 +64,11 @@ const SalaryTable = () => {
       title: "Working Days",
       dataIndex: "workingDays",
       key: "workingDays",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
     },
     {
       title: "Salary",

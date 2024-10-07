@@ -57,10 +57,10 @@ export const adminPaths = [
     ],
   },
   {
-    name: "Miscellaneous cost",
+    name: "Miscellaneous",
     children: [
       {
-        name: "Add Miscellaneous cost",
+        name: "Add Miscellaneous ",
         path: "add_misc_cost",
         element: <MiscellaneousForm />,
       },
@@ -69,17 +69,17 @@ export const adminPaths = [
         element: <MiscellaneousUpdate />,
       },
       {
-        name: "All Miscellaneous cost",
+        name: "All Miscellaneous",
         path: "all_misc_cost",
         element: <Miscellaneous />,
       },
     ],
   },
   {
-    name: "Buyer Development cost",
+    name: "Buyer Development",
     children: [
       {
-        name: "Add Buyer Development cost",
+        name: "Add Buyer Development",
         path: "add_buyer_development",
         element: <BuyerDevelopmentForm />,
       },
@@ -88,32 +88,32 @@ export const adminPaths = [
         element: <BuyerDevelopmentUpdate />,
       },
       {
-        name: "All Buyer Development cost",
+        name: "All Buyer Development",
         path: "all_buyer_development",
         element: <BuyerDevelopment />,
       },
     ],
   },
   {
-    name: "Employee salary cost",
+    name: "Employees",
     children: [
       {
-        name: "Add Employee salary cost",
+        name: "Add Employee",
         path: "add_salary_cost",
         element: <SalaryForm />,
       },
       {
-        name: "All Employee salary cost",
+        name: "All Employee",
         path: "all_salary_cost",
         element: <Salary />,
       },
     ],
   },
   {
-    name: "Factory Development cost",
+    name: "Factory Development",
     children: [
       {
-        name: "Add Factory Development cost",
+        name: "Add Factory Development",
         path: "add_factory_development",
         element: <FactoryDevelopmentForm />,
       },
@@ -122,7 +122,7 @@ export const adminPaths = [
         element: <FactoryDevelopmentUpdate />,
       },
       {
-        name: "All Factory Development cost",
+        name: "All Factory Development",
         path: "all_factory_development",
         element: <FactoryDevelopment />,
       },

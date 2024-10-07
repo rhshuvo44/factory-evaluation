@@ -22,7 +22,7 @@ const getBase64 = (file: FileType): Promise<string> =>
 const SalaryAddForm = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  // const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [form] = Form.useForm();
   const [perDaySalary, setPerDaySalary] = useState<number>(0);
@@ -40,7 +40,7 @@ const SalaryAddForm = () => {
     form.setFieldsValue({
       salary: perDaySalary * 26,
       overTimeRate: perDaySalary / 10,
-      grossPerDaySalary: perDaySalary + perDaySalary * overTime,
+      grossPerDaySalary: perDaySalary + (perDaySalary / 10) * overTime,
     });
   }, [perDaySalary, overTime, form]);
 
@@ -56,58 +56,49 @@ const SalaryAddForm = () => {
     setFileList(newFileList);
   };
 
-  // const customRequest = async ({ file, onSuccess, onError }: any) => {
-  //   const url = `https://api.cloudinary.com/v1_1/dyir8kd22/image/upload`;
-  //   const formData = new FormData();
-  //   const uploadPreset = "yke0e4pl"; // Replace with your actual upload preset
+  const customRequest = async ({ file, onSuccess, onError }: any) => {
+    const url = `https://api.cloudinary.com/v1_1/dyir8kd22/image/upload`;
+    const formData = new FormData();
+    const uploadPreset = "yke0e4pl"; // Replace with your actual upload preset
 
-  //   formData.append("upload_preset", uploadPreset);
-  //   formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("file", file);
 
-  //   // console.log("Uploading file:", file);
-  //   // console.log("Form Data:", formData); // Check the form data being sent
+    // console.log("Uploading file:", file);
+    // console.log("Form Data:", formData); // Check the form data being sent
 
-  //   try {
-  //     const response = await fetch(url, {
-  //       method: "POST",
-  //       body: formData,
-  //     });
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
 
-  //     if (!response.ok) {
-  //       const errorResponse = await response.json();
-  //       console.error("Upload failed:", errorResponse);
-  //       throw new Error(`Upload failed: ${errorResponse.message}`);
-  //     }
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        console.error("Upload failed:", errorResponse);
+        throw new Error(`Upload failed: ${errorResponse.message}`);
+      }
 
-  //     const result = await response.json();
-  //     setPhoto(result.url);
-  //     onSuccess(result, file);
-  //   } catch (error) {
-  //     console.error("Error uploading to Cloudinary:", error);
-  //     onError(new Error("Upload failed."));
-  //   }
-  // };
+      const result = await response.json();
+      setPhoto(result.url);
+      onSuccess(result, file);
+    } catch (error) {
+      console.error("Error uploading to Cloudinary:", error);
+      onError(new Error("Upload failed."));
+    }
+  };
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
       <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
-  const photo = fileList[0];
-  const onFinish = async (values: TSalary) => {
-    const formData = new FormData();
 
-    formData.append("data", JSON.stringify(values));
-    if (photo.originFileObj) {
-      formData.append("file", photo.originFileObj, photo.name);
-    }
-    // console.log(formData);
-    console.log(Object.fromEntries(formData));
-    const res = await createEmployee(formData).unwrap();
-    // const res = await createEmployee({
-    //   ...values,
-    //   photo: photo,
-    // }).unwrap();
+  const onFinish = async (values: TSalary) => {
+    const res = await createEmployee({
+      ...values,
+      photo: photo,
+    }).unwrap();
 
     if (!res.success) return toast.error(res.message);
     toast.success("Create successfully");
@@ -136,7 +127,20 @@ const SalaryAddForm = () => {
       <Form.Item label="Working Days" name="workingDays" initialValue={26}>
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
-
+      <Form.Item
+        label="Status"
+        name="status"
+        rules={[{ required: true, message: "Please select Status! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          defaultValue="Please select"
+          options={[
+            { value: "P", label: "P" },
+            { value: "A", label: "A" },
+          ]}
+        />
+      </Form.Item>
       <Form.Item label="Salary" name="salary">
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
@@ -179,7 +183,7 @@ const SalaryAddForm = () => {
           fileList={fileList}
           onPreview={handlePreview}
           onChange={handleChange}
-          // customRequest={customRequest}
+          customRequest={customRequest}
         >
           {fileList.length >= 1 ? null : uploadButton}
         </Upload>

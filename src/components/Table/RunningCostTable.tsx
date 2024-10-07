@@ -60,6 +60,11 @@ const RunningCostTable = () => {
     isError: isFixedCostError,
     isLoading: isFixedCostLoading,
   } = useGetTodayFixedCostQuery(undefined);
+  // const {
+  //   data: employeeCostData,
+  //   isError: isEmployeeCostError,
+  //   isLoading: isEmployeeCostLoading,
+  // } = useGetTodayEmployeesQuery(undefined);
   if (
     isMiscLoading ||
     isTravelLoading ||
@@ -68,6 +73,7 @@ const RunningCostTable = () => {
     isLoanLoading ||
     isUtilityLoading ||
     isFixedCostLoading
+    // isEmployeeCostLoading
   )
     return <Loading />;
   if (
@@ -78,6 +84,7 @@ const RunningCostTable = () => {
     isLoanError ||
     isUtilityError ||
     isFixedCostError
+    // isEmployeeCostError
   )
     return <div>Error loading data</div>;
   const fixedCost = (fixedCostData?.data || []).map((item: TFixed) => ({
@@ -166,12 +173,17 @@ const RunningCostTable = () => {
       ...item,
       source: "Loan Returns",
     })),
+    // ...(employeeCostData?.data || []).map((item) => ({
+    //   ...item,
+    //   source: "Employee",
+    // })),
   ];
-
+  // console.log(employeeCostData.data);
   const totalCost: number = combinedData.reduce(
     (sum, price) => sum + price.unitPrice,
     0
   );
+
   const roundCost = parseFloat(totalCost.toFixed(2));
   const colums: ColumnType<{ date: string }>[] = [
     {
