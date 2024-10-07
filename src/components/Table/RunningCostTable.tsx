@@ -1,4 +1,5 @@
 import { Table } from "antd";
+import { ColumnType } from "antd/es/table";
 import { useState } from "react";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
@@ -172,13 +173,15 @@ const RunningCostTable = () => {
     0
   );
   const roundCost = parseFloat(totalCost.toFixed(2));
-  const colums = [
+  const colums: ColumnType<{ date: string }>[] = [
     {
       title: "SL",
       // dataIndex: "slNo",
       key: "slNo",
-      // render: (_, record: { date: string }, index: number) =>
-      //   (currentPage - 1) * pageSize + index + 1,
+      render: (_, record: { date: string }, index: number) => {
+        console.log(record.date); // Example usage
+        return (currentPage - 1) * pageSize + index + 1;
+      },
     },
     {
       title: "Source",
