@@ -1,18 +1,24 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
+import BuyerDevelopmentUpdate from "../pages/buyer development/BuyerDevelopmentUpdate";
 import Collection from "../pages/Collection/Collection";
 import CollectionForm from "../pages/Collection/CollectionForm";
+import CollectionUpdate from "../pages/Collection/CollectionUpdate";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
+import FactoryDevelopmentUpdate from "../pages/Factory development/FactoryDevelopmentUpdate";
 import Loan from "../pages/loan/Loan";
 import LoanForm from "../pages/loan/LoanForm";
+import LoanUpdate from "../pages/loan/LoanUpdate";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
+import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
+import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAllowanceUpdate";
 
 export const executivePaths = [
   {
@@ -27,6 +33,10 @@ export const executivePaths = [
         name: "Add Travel Allowance",
         path: "add_travel_allowance",
         element: <TravellingAllowanceForm />,
+      },
+      {
+        path: "travel_allowance/:id",
+        element: <TravellingAllowanceUpdate />,
       },
       {
         name: "All Travel Allowance",
@@ -44,6 +54,10 @@ export const executivePaths = [
         element: <MiscellaneousForm />,
       },
       {
+        path: "misc_cost/:id",
+        element: <MiscellaneousUpdate />,
+      },
+      {
         name: "All Miscellaneous cost",
         path: "all_misc_cost",
         element: <Miscellaneous />,
@@ -57,6 +71,10 @@ export const executivePaths = [
         name: "Add Buyer Development cost",
         path: "add_buyer_development",
         element: <BuyerDevelopmentForm />,
+      },
+      {
+        path: "buyer_development/:id",
+        element: <BuyerDevelopmentUpdate />,
       },
       {
         name: "All Buyer Development cost",
@@ -89,6 +107,10 @@ export const executivePaths = [
         element: <FactoryDevelopmentForm />,
       },
       {
+        path: "factory_development/:id",
+        element: <FactoryDevelopmentUpdate />,
+      },
+      {
         name: "All Factory Development cost",
         path: "all_factory_development",
         element: <FactoryDevelopment />,
@@ -104,12 +126,17 @@ export const executivePaths = [
         element: <LoanForm />,
       },
       {
+        path: "loan/:id",
+        element: <LoanUpdate />,
+      },
+      {
         name: "All Loan Return",
         path: "all_loan",
         element: <Loan />,
       },
     ],
   },
+
   {
     name: "Collection",
     children: [
@@ -117,6 +144,10 @@ export const executivePaths = [
         name: "Add Collection",
         path: "add_collection",
         element: <CollectionForm />,
+      },
+      {
+        path: "collection/:id",
+        element: <CollectionUpdate />,
       },
       {
         name: "All Collection",
