@@ -141,9 +141,10 @@ export type TCollection = {
 }
 export type TFixed = {
     _id?: string;
-    factoryRent: TSubUtility;
-    honorary: TSubUtility;
-    factoryRevenue: TSubUtility;
+    date?: Date
+    factoryRent: TSubUtility[];
+    honorary: TSubUtility[];
+    factoryRevenue: TSubUtility[];
 }
 
 export type TRunning = {

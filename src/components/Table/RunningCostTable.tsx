@@ -2,6 +2,7 @@ import { Table } from "antd";
 import { useState } from "react";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
+import { useGetAllFixedCostQuery } from "../../redux/features/fixedCost/fixedCostApi";
 import { useGetTodayLoanQuery } from "../../redux/features/loan/loanApi";
 import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
 import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
@@ -9,6 +10,7 @@ import { useGetAllUtilityQuery } from "../../redux/features/utility/utilityApi";
 import {
   TBuyer,
   TFactory,
+  TFixed,
   TLoan,
   TMiscellaneous,
   TTravel,
@@ -52,13 +54,19 @@ const RunningCostTable = () => {
     isError: isUtilityError,
     isLoading: isUtilityLoading,
   } = useGetAllUtilityQuery(undefined);
+  const {
+    data: fixedCostData,
+    isError: isFixedCostError,
+    isLoading: isFixedCostLoading,
+  } = useGetAllFixedCostQuery(undefined);
   if (
     isMiscLoading ||
     isTravelLoading ||
     isBuyerLoading ||
     isFactoryLoading ||
     isLoanLoading ||
-    isUtilityLoading
+    isUtilityLoading ||
+    isFixedCostLoading
   )
     return <Loading />;
   if (
@@ -67,36 +75,42 @@ const RunningCostTable = () => {
     isBuyerError ||
     isFactoryError ||
     isLoanError ||
-    isUtilityError
+    isUtilityError ||
+    isFixedCostError
   )
     return <div>Error loading data</div>;
+  const fixedCost = (fixedCostData?.data?.result || []).map((item: TFixed) => ({
+    ...item,
+  }));
+
+  const fixedCostComData = fixedCost.flatMap((item: TFixed) => [
+    ...item.factoryRent.map((i) => ({
+      _id: item._id,
+      date: item.date,
+      remark: "factoryRent",
+      unitPrice: i.unitPrice, // Directly take the unitPrice
+      totalPrice: i.totalPrice, // Directly take the totalPrice
+    })),
+    ...item.factoryRevenue.map((i) => ({
+      _id: item._id,
+      date: item.date,
+      remark: "factoryRevenue",
+      unitPrice: i.unitPrice, // Directly take the unitPrice
+      totalPrice: i.totalPrice, // Directly take the totalPrice
+    })),
+    ...item.honorary.map((e) => ({
+      _id: item._id,
+      date: item.date,
+      remark: "honorary",
+      unitPrice: e.unitPrice, // Directly take the unitPrice
+      totalPrice: e.totalPrice, // Directly take the totalPrice
+    })),
+  ]);
+
   const utility = (utilityData?.data?.result || []).map((item: TUtility) => ({
     ...item,
   }));
-  // const utilityComData = utility.map((item: any) => ({
-  //   _id: item._id,
-  //   date: item.date,
-  //   ...{
-  //     remark: "internet",
-  //     unitPrice: item.internet.map((i) => i.unitPrice),
-  //     totalPrice: item.internet.map((i) => i.totalPrice),
-  //   },
-  //   ...{
-  //     remark: "water",
-  //     unitPrice: item.water.map((i) => i.unitPrice),
-  //     totalPrice: item.water.map((i) => i.totalPrice),
-  //   },
-  //   ...{
-  //     electricity: item.electricity.map(
-  //       (e) => `Unit Price: ${e.unitPrice}, Total Price: ${e.totalPrice}`
-  //     ),
-  //   },
-  //   ...{
-  //     others: item.others.map(
-  //       (o) => `Unit Price: ${o.unitPrice}, Total Price: ${o.totalPrice}`
-  //     ),
-  //   },
-  // }));
+
   const utilityComData = utility.flatMap((item: TUtility) => [
     ...item.internet.map((i) => ({
       _id: item._id,
@@ -128,8 +142,6 @@ const RunningCostTable = () => {
     })),
   ]);
 
-  console.log(utilityComData);
-
   // Combine the data into a single array
   const combinedData = [
     ...(miscData?.data || []).map((item: TMiscellaneous) => ({
@@ -156,12 +168,16 @@ const RunningCostTable = () => {
       ...item,
       source: "Utility Bills",
     })),
+    ...(fixedCostComData || []).map((item: TFixed) => ({
+      ...item,
+      source: "Fixed cost",
+    })),
   ];
   const totalCost: number = combinedData.reduce(
     (sum, price) => sum + price.unitPrice,
     0
   );
-
+  const roundCost = parseFloat(totalCost.toFixed(2));
   const colums = [
     {
       title: "SL",
@@ -236,7 +252,7 @@ const RunningCostTable = () => {
       <div className="flex  items-center justify-between mb-2">
         <SectionTitle title="Factory Running Cost" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
-          Total cost :<span className="text-red-500"> {totalCost}</span>
+          Total cost :<span className="text-red-500"> {roundCost}</span>
         </div>
       </div>
       <div className="responsive-table-container">
@@ -258,7 +274,7 @@ const RunningCostTable = () => {
           }}
         />
       </div>
-      <EvaluationTable totalCost={totalCost} />
+      <EvaluationTable totalCost={roundCost} />
     </div>
   );
 };
