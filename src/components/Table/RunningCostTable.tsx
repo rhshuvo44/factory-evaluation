@@ -176,7 +176,6 @@ const RunningCostTable = () => {
   const colums: ColumnType<{ date: string }>[] = [
     {
       title: "SL",
-      // dataIndex: "slNo",
       key: "slNo",
       render: (_, record: { date: string }, index: number) => {
         console.log(record.date); // Example usage

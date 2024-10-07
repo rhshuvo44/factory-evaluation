@@ -1,25 +1,48 @@
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { TSalary } from "../../types/tableType";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { userRole } from "../../constants/userRole";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
+import {
+  useDeleteEmployeeMutation,
+  useGetAllEmployeesQuery,
+} from "../../redux/features/employee/employeeApi";
+import { useAppSelector } from "../../redux/hook";
+import { TSalary } from "../../types";
+import { verifyToken } from "../../utilis/verifyToken";
+import Loading from "../ui/Loading";
+import SectionTitle from "../ui/SectionTitle";
 
 const SalaryTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const navigate = useNavigate();
+  const token = useAppSelector(useCurrentToken);
 
+  let user;
+
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
+  const [deleteEmployee] = useDeleteEmployeeMutation();
+  const handleDeleted = async (id: string) => {
+    const res = await deleteEmployee(id);
+    if (res.data.success) {
+      toast.success("Employee deleted successfully.");
+    }
+  };
   const colums = [
     {
-      title: "Employee ID",
-      dataIndex: "employeeId",
-      key: "employeeId",
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
     },
 
-    {
-      title: "Photo",
-      dataIndex: "photo",
-      key: "photo",
-    },
+    // {
+    //   title: "Photo",
+    //   dataIndex: "photo",
+    //   key: "photo",
+    // },
     {
       title: "Name",
       dataIndex: "name",
@@ -31,14 +54,9 @@ const SalaryTable = () => {
       key: "designation",
     },
     {
-      title: "WorkingDays",
+      title: "Working Days",
       dataIndex: "workingDays",
       key: "workingDays",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
     },
     {
       title: "Salary",
@@ -51,14 +69,14 @@ const SalaryTable = () => {
       key: "perDaySalary",
     },
     {
-      title: "Over Time",
-      dataIndex: "overTime",
-      key: "overTime",
-    },
-    {
       title: "Over Time Rate",
       dataIndex: "overTimeRate",
       key: "overTimeRate",
+    },
+    {
+      title: "overTime",
+      dataIndex: "overTime",
+      key: "overTime",
     },
     {
       title: "Gross Per Day Salary",
@@ -66,43 +84,67 @@ const SalaryTable = () => {
       key: "grossPerDaySalary",
     },
 
-    {
-      title: "Action",
-      key: "action",
-      render: (_: number, record: TSalary) => (
-        <Button
-          type="link"
-          onClick={() => navigate(`/product/${record.employeeId}`)}
-        >
-          View Details
-        </Button>
-      ),
-    },
+    ...(user?.role === userRole.ADMIN ||
+    user?.role === userRole.ExecutiveDirector
+      ? [
+          {
+            title: "Action",
+            key: "action",
+            render: (item: TSalary) => {
+              return (
+                <Space>
+                  <Link to={`/${user!.role}/employee/${item._id}`}>Edit</Link>
+                  {user!.role === "admin" && (
+                    <Button
+                      danger
+                      onClick={() => handleDeleted(item._id as string)}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                </Space>
+              );
+            },
+          },
+        ]
+      : []),
   ];
-  // const { data, isError, isLoading } = useGetTravellingsQuery({
-  //   limit: pageSize,
-  //   skip: (currentPage - 1) * pageSize,
-  // });
+  const { data, isError, isLoading } = useGetAllEmployeesQuery({
+    limit: pageSize,
+    skip: (currentPage - 1) * pageSize,
+  });
 
-  // if (isLoading) return <Loading />;
-  // if (isError) return <div>Error: {isError}</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error: {isError}</div>;
   return (
-    <Table
-      className="table-auto"
-      bordered
-      columns={colums}
-      //   dataSource={data}
-      rowKey="id"
-      pagination={{
-        current: currentPage,
-        pageSize: pageSize,
-        // total: data?.total,
-        onChange: (page, pageSize) => {
-          setCurrentPage(page);
-          setPageSize(pageSize);
-        },
-      }}
-    />
+    <div>
+      <div className="flex  items-center justify-between mb-2">
+        <SectionTitle title=" Employee Sheet" />
+        <div className="text-sm md:text-lg lg:text-3xl font-bold">
+          Total cost :
+          <span className="text-red-500"> {data?.data?.totalPrice}</span>
+        </div>
+      </div>
+      <div className="responsive-table-container">
+        <Table
+          size="small"
+          className="table-auto"
+          bordered
+          columns={colums}
+          dataSource={data?.data?.result}
+          rowKey="_id"
+          pagination={{
+            current: currentPage,
+            pageSize: pageSize,
+            // total: data?.data.meta.total,
+            onChange: (page, pageSize) => {
+              setCurrentPage(page);
+              setPageSize(pageSize);
+            },
+          }}
+        />
+      </div>
+    </div>
   );
 };
 

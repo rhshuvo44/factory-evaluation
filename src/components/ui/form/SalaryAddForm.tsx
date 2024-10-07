@@ -22,6 +22,7 @@ const getBase64 = (file: FileType): Promise<string> =>
 const SalaryAddForm = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
+  const [photo, setPhoto] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [form] = Form.useForm();
   const [perDaySalary, setPerDaySalary] = useState<number>(0);
@@ -47,7 +48,6 @@ const SalaryAddForm = () => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj as FileType);
     }
-
     setPreviewImage(file.url || (file.preview as string));
     setPreviewOpen(true);
   };
@@ -56,6 +56,37 @@ const SalaryAddForm = () => {
     setFileList(newFileList);
   };
 
+  const customRequest = async ({ file, onSuccess, onError }: any) => {
+    const url = `https://api.cloudinary.com/v1_1/dyir8kd22/image/upload`;
+    const formData = new FormData();
+    const uploadPreset = "yke0e4pl"; // Replace with your actual upload preset
+
+    formData.append("upload_preset", uploadPreset);
+    formData.append("file", file);
+
+    // console.log("Uploading file:", file);
+    // console.log("Form Data:", formData); // Check the form data being sent
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        console.error("Upload failed:", errorResponse);
+        throw new Error(`Upload failed: ${errorResponse.message}`);
+      }
+
+      const result = await response.json();
+      setPhoto(result.url);
+      onSuccess(result, file);
+    } catch (error) {
+      console.error("Error uploading to Cloudinary:", error);
+      onError(new Error("Upload failed."));
+    }
+  };
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
       <PlusOutlined />
@@ -66,8 +97,9 @@ const SalaryAddForm = () => {
   const onFinish = async (values: TSalary) => {
     const res = await createEmployee({
       ...values,
-      employeeImg: previewImage,
+      photo: photo,
     }).unwrap();
+
     if (!res.success) return toast.error(res.message);
     toast.success("Create successfully");
     form.resetFields();
@@ -134,11 +166,11 @@ const SalaryAddForm = () => {
         rules={[{ required: false, message: "Please upload Employee image " }]}
       >
         <Upload
-          // action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
           listType="picture-card"
           fileList={fileList}
           onPreview={handlePreview}
           onChange={handleChange}
+          customRequest={customRequest}
         >
           {fileList.length >= 1 ? null : uploadButton}
         </Upload>

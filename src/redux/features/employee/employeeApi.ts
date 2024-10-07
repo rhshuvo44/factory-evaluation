@@ -11,6 +11,7 @@ const employeeApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: data,
             }),
+            invalidatesTags: ['Employee'],
         }),
         updateEmployee: builder.mutation({
             query: (data) => ({
@@ -18,12 +19,14 @@ const employeeApi = baseApi.injectEndpoints({
                 method: 'PUT',
                 body: data,
             }),
+            invalidatesTags: ['Employee'],
         }),
         deleteEmployee: builder.mutation({
             query: (id) => ({
                 url: `/employee/${id}`,
                 method: 'DELETE',
             }),
+            invalidatesTags: ['Employee'],
         }),
     }),
 })
