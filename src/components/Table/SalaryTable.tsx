@@ -38,11 +38,18 @@ const SalaryTable = () => {
       key: "id",
     },
 
-    // {
-    //   title: "Photo",
-    //   dataIndex: "photo",
-    //   key: "photo",
-    // },
+    {
+      title: "Photo",
+      dataIndex: "photo",
+      key: "photo",
+      render: (_:any, record: { key: string; photo: string }) => (
+        <img
+          src={record.photo}
+          alt="Uploaded"
+          style={{ width: "50px", height: "50px", objectFit: "cover" }}
+        />
+      ),
+    },
     {
       title: "Name",
       dataIndex: "name",
@@ -136,7 +143,6 @@ const SalaryTable = () => {
           pagination={{
             current: currentPage,
             pageSize: pageSize,
-            // total: data?.data.meta.total,
             onChange: (page, pageSize) => {
               setCurrentPage(page);
               setPageSize(pageSize);
