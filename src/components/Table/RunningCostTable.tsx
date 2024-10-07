@@ -22,7 +22,7 @@ import EvaluationTable from "./EvaluationTable";
 
 const RunningCostTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(6);
 
   const {
     data: miscData,
@@ -177,7 +177,7 @@ const RunningCostTable = () => {
       title: "SL",
       // dataIndex: "slNo",
       key: "slNo",
-      render: (_: any, record: any, index: number) =>
+      render: (_, record: { date: string }, index: number) =>
         (currentPage - 1) * pageSize + index + 1,
     },
     {
