@@ -102,6 +102,7 @@ const SalaryAddForm = () => {
 
     if (!res.success) return toast.error(res.message);
     toast.success("Create successfully");
+    setPreviewImage("");
     form.resetFields();
   };
   return (
