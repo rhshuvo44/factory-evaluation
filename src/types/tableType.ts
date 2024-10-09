@@ -66,6 +66,7 @@ export type TBuyer = {
 
 export type TSalary = {
     _id?: string;
+    salary: number;
     employeeId: number;
     photo: string;
     name: string;

@@ -21,6 +21,7 @@ import Production from "../pages/Production/Production";
 import ProductionAdd from "../pages/Production/ProductionAdd";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
+import SalaryUpdate from "../pages/salary/SalaryUpdate";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAllowanceUpdate";
@@ -101,6 +102,10 @@ export const adminPaths = [
         name: "Add Employee",
         path: "add_salary_cost",
         element: <SalaryForm />,
+      },
+      {
+        path: "employee/:id",
+        element: <SalaryUpdate />,
       },
       {
         name: "All Employee",

@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { useCreateFixedCostMutation } from "../../../redux/features/fixedCost/fixedCostApi";
 import { TFixed, TSubUtility } from "../../../types/tableType";
+import { getDaysInMonth } from "../../../utilis/getDaysInMonth ";
 import CustomInputNumber from "../../form/CustomInputNumber";
 
 const FixedCostAdd = () => {
@@ -12,15 +13,24 @@ const FixedCostAdd = () => {
   const onFinish = async (values: TFixed) => {
     const { factoryRent, factoryRevenue, honorary } = values;
     const factoryRentBill: TSubUtility = {
-      unitPrice: typeof factoryRent === "number" ? factoryRent / 30 : 0,
+      unitPrice:
+        typeof factoryRent === "number"
+          ? parseFloat((factoryRent / getDaysInMonth(new Date())).toFixed(2))
+          : 0,
       totalPrice: typeof factoryRent === "number" ? factoryRent : 0,
     };
     const factoryRevenueBill: TSubUtility = {
-      unitPrice: typeof factoryRevenue === "number" ? factoryRevenue / 30 : 0,
+      unitPrice:
+        typeof factoryRevenue === "number"
+          ? parseFloat((factoryRevenue / getDaysInMonth(new Date())).toFixed(2))
+          : 0,
       totalPrice: typeof factoryRevenue === "number" ? factoryRevenue : 0,
     };
     const honoraryBill: TSubUtility = {
-      unitPrice: typeof honorary === "number" ? honorary / 30 : 0,
+      unitPrice:
+        typeof honorary === "number"
+          ? parseFloat((honorary / getDaysInMonth(new Date())).toFixed(2))
+          : 0,
       totalPrice: typeof honorary === "number" ? honorary : 0,
     };
 

@@ -2,28 +2,21 @@ import { Table } from "antd";
 import { ColumnType } from "antd/es/table";
 import { useState } from "react";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
+import { useGetTodayEmployeesQuery } from "../../redux/features/employee/employeeApi";
 import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
 import { useGetTodayFixedCostQuery } from "../../redux/features/fixedCost/fixedCostApi";
 import { useGetTodayLoanQuery } from "../../redux/features/loan/loanApi";
 import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
 import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 import { useGetTodayUtilityQuery } from "../../redux/features/utility/utilityApi";
-import {
-  TBuyer,
-  TFactory,
-  TFixed,
-  TLoan,
-  TMiscellaneous,
-  TTravel,
-  TUtility,
-} from "../../types";
+import { TFixed, TUtility } from "../../types";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 import EvaluationTable from "./EvaluationTable";
 
 const RunningCostTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
+  const [pageSize, setPageSize] = useState(10);
 
   const {
     data: miscData,
@@ -60,11 +53,11 @@ const RunningCostTable = () => {
     isError: isFixedCostError,
     isLoading: isFixedCostLoading,
   } = useGetTodayFixedCostQuery(undefined);
-  // const {
-  //   data: employeeCostData,
-  //   isError: isEmployeeCostError,
-  //   isLoading: isEmployeeCostLoading,
-  // } = useGetTodayEmployeesQuery(undefined);
+  const {
+    data: employeeCostData,
+    isError: isEmployeeCostError,
+    isLoading: isEmployeeCostLoading,
+  } = useGetTodayEmployeesQuery(undefined);
   if (
     isMiscLoading ||
     isTravelLoading ||
@@ -72,8 +65,8 @@ const RunningCostTable = () => {
     isFactoryLoading ||
     isLoanLoading ||
     isUtilityLoading ||
-    isFixedCostLoading
-    // isEmployeeCostLoading
+    isFixedCostLoading ||
+    isEmployeeCostLoading
   )
     return <Loading />;
   if (
@@ -83,8 +76,8 @@ const RunningCostTable = () => {
     isFactoryError ||
     isLoanError ||
     isUtilityError ||
-    isFixedCostError
-    // isEmployeeCostError
+    isFixedCostError ||
+    isEmployeeCostError
   )
     return <div>Error loading data</div>;
   const fixedCost = (fixedCostData?.data || []).map((item: TFixed) => ({
@@ -94,19 +87,25 @@ const RunningCostTable = () => {
   const fixedCostComData = fixedCost.flatMap((item: TFixed) => [
     ...item.factoryRent.map((i) => ({
       date: item.date,
-      remark: "factoryRent",
+      unit:"Day",
+      particulars: "Factory Rent",
+      paymentType: "Daily",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.factoryRevenue.map((i) => ({
       date: item.date,
-      remark: "factoryRevenue",
+      particulars: "Factory Revenue",
+      unit:"Day",
+      paymentType: "Daily",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.honorary.map((e) => ({
       date: item.date,
-      remark: "honorary",
+      unit: "Day",
+      paymentType: "Monthly",
+      particulars: "Honorary",
       unitPrice: e.unitPrice, // Directly take the unitPrice
       totalPrice: e.totalPrice, // Directly take the totalPrice
     })),
@@ -116,28 +115,36 @@ const RunningCostTable = () => {
     ...item,
   }));
 
-  const utilityComData = utility.flatMap((item: TUtility) => [
+  const utilityComData = utility?.flatMap((item: TUtility) => [
     ...item.internet.map((i) => ({
       date: item.date,
       remark: "internet",
+      unit:"Day",
+      paymentType: "Monthly",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.water.map((i) => ({
       date: item.date,
       remark: "water",
+      paymentType: "Monthly",
+      unit:"Day",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.electricity.map((e) => ({
       date: item.date,
       remark: "electricity",
+      unit:"Day",
+      paymentType: "Monthly",
       unitPrice: e.unitPrice, // Directly take the unitPrice
       totalPrice: e.totalPrice, // Directly take the totalPrice
     })),
     ...(item?.others || []).map((o) => ({
       date: item.date,
       remark: "others",
+      unit:"Day",
+      paymentType: "Monthly",
       unitPrice: o.unitPrice, // Directly take the unitPrice
       totalPrice: o.totalPrice, // Directly take the totalPrice
     })),
@@ -147,38 +154,24 @@ const RunningCostTable = () => {
   const combinedData = [
     ...(fixedCostComData || []).map((item: TFixed) => ({
       ...item,
-      source: "Fixed cost",
     })),
     ...(utilityComData || []).map((item: TUtility) => ({
       ...item,
-      source: "Utility Bills",
+      particulars: "Utility Bills",
     })),
-    ...(miscData?.data || []).map((item: TMiscellaneous) => ({
-      ...item,
-      source: "Miscellaneous",
-    })),
-    ...(travelData?.data || []).map((item: TTravel) => ({
-      ...item,
-      source: "Travel",
-    })),
-    ...(buyerData?.data || []).map((item: TBuyer) => ({
-      ...item,
-      source: "Buyer Development",
-    })),
-    ...(factoryData?.data || []).map((item: TFactory) => ({
-      ...item,
-      source: "Factory Development",
-    })),
-    ...(loanData?.data || []).map((item: TLoan) => ({
-      ...item,
-      source: "Loan Returns",
-    })),
-    // ...(employeeCostData?.data || []).map((item) => ({
+
+    { ...miscData?.data, particulars: "Miscellaneous" },
+    // ...(travelData?.data || []).map((item: TTravel) => ({
     //   ...item,
-    //   source: "Employee",
+    //   particulars: "Travel",
     // })),
+
+    { ...travelData?.data, particulars: "Travel" },
+    { ...buyerData?.data, particulars: "Buyer Development" },
+    { ...factoryData?.data, particulars: "Factory Development" },
+    { ...loanData?.data, particulars: "Loan Returns" },
+    { ...employeeCostData?.data, particulars: "Employee" },
   ];
-  // console.log(employeeCostData.data);
   const totalCost: number = combinedData.reduce(
     (sum, price) => sum + price.unitPrice,
     0
@@ -195,25 +188,14 @@ const RunningCostTable = () => {
       },
     },
     {
-      title: "Source",
-      dataIndex: "source",
-      key: "source",
-    },
-
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
       title: "Particulars",
       dataIndex: "particulars",
       key: "particulars",
     },
     {
       title: "Description",
-      dataIndex: "description",
-      key: "description",
+      dataIndex: "date",
+      key: "date",
     },
     {
       title: "Remark",
@@ -273,6 +255,7 @@ const RunningCostTable = () => {
           columns={colums}
           dataSource={combinedData}
           rowKey="_id"
+          // pagination={false}
           pagination={{
             current: currentPage,
             pageSize: pageSize,

@@ -4,6 +4,7 @@ import { formItemLayout } from "../../../constants/formItemLayout";
 import { useCreateUtilityMutation } from "../../../redux/features/utility/utilityApi";
 import { TSubUtility, TUtility } from "../../../types/tableType";
 import CustomInputNumber from "../../form/CustomInputNumber";
+import { getDaysInMonth } from "../../../utilis/getDaysInMonth ";
 
 const UtilityAddForm = () => {
   const [form] = Form.useForm();
@@ -13,19 +14,31 @@ const UtilityAddForm = () => {
   const onFinish = async (values: TUtility) => {
     const { electricity, internet, water, others } = values;
     const internetBill: TSubUtility = {
-      unitPrice: typeof internet === "number" ? internet / 30 : 0,
+      unitPrice:
+        typeof internet === "number"
+          ? parseFloat((internet / getDaysInMonth(new Date())).toFixed(2))
+          : 0,
       totalPrice: typeof internet === "number" ? internet : 0,
     };
     const waterBill: TSubUtility = {
-      unitPrice: typeof water === "number" ? water / 30 : 0,
+      unitPrice:
+        typeof water === "number"
+          ? parseFloat((water / getDaysInMonth(new Date())).toFixed(2))
+          : 0,
       totalPrice: typeof water === "number" ? water : 0,
     };
     const electricityBill: TSubUtility = {
-      unitPrice: typeof electricity === "number" ? electricity / 30 : 0,
+      unitPrice:
+        typeof electricity === "number"
+          ? parseFloat((electricity / getDaysInMonth(new Date())).toFixed(2))
+          : 0,
       totalPrice: typeof electricity === "number" ? electricity : 0,
     };
     const othersBill: TSubUtility = {
-      unitPrice: typeof others === "number" ? others / 30 : 0,
+      unitPrice:
+        typeof others === "number"
+          ? parseFloat((others / getDaysInMonth(new Date())).toFixed(2))
+          : 0,
       totalPrice: typeof others === "number" ? others : 0,
     };
     const utility = {
