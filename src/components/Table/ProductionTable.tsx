@@ -30,7 +30,7 @@ const ProductionTable = () => {
       toast.success("Collection deleted successfully.");
     }
   };
- 
+
   const colums = [
     {
       title: "SL",

@@ -5,7 +5,7 @@ const Production = () => {
   return (
     <>
       <SectionTitle title="Production Report Table" />
-      <ProductionTable />;
+      <ProductionTable />
     </>
   );
 };

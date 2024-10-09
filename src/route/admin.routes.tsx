@@ -19,6 +19,7 @@ import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
 import Production from "../pages/Production/Production";
 import ProductionAdd from "../pages/Production/ProductionAdd";
+import ProductionUpdate from "../pages/Production/ProductionUpdate";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import SalaryUpdate from "../pages/salary/SalaryUpdate";
@@ -219,7 +220,7 @@ export const adminPaths = [
       },
       {
         path: "production/:id",
-        element: <ProductionAdd />,
+        element: <ProductionUpdate />,
       },
       {
         name: "All Production Report",
