@@ -4,7 +4,7 @@ import SectionTitle from "../../components/ui/SectionTitle";
 const FixedCostForm = () => {
   return (
     <>
-      <SectionTitle title=" Factory Fixed Cost Add" />
+      <SectionTitle title="Factory Fixed Cost Add" />
       <FixedCostAdd />
     </>
   );

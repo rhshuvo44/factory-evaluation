@@ -6,6 +6,7 @@ const CustomInput = ({ name, label, message, placeholder }: TInput) => {
     <Form.Item
       label={label}
       name={name}
+      validateTrigger="onBlur"
       rules={[{ required: true, message: message }]}
     >
       <Input style={{ width: "100%" }} placeholder={placeholder} />

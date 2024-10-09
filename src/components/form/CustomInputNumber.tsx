@@ -5,6 +5,7 @@ const CustomInputNumber = ({ name, label, message, placeholder }: TInput) => {
   return (
     <Form.Item
       label={label}
+       validateTrigger="onBlur"
       name={name}
       rules={[{ required: true, message: message }]}
     >

@@ -163,3 +163,68 @@ export type TRunning = {
     unitPrice: number;
     totalPrice: number;
 }
+export type TSection = {
+    target: number
+    wip: number
+    output: number
+}
+export type TProductionReport = {
+    date: Date
+    lineNo: 'line 1 / 3rd floor' | 'line 2 / 4rd floor' | 'line 3 / 4rd floor'
+    buyer: string
+    orderNo: number
+    styleNo:
+    | 'hoody/jacket'
+    | 'Leggins'
+    | 'Polo Shirt'
+    | 'T-Shirt'
+    | 'Tank Top'
+    | 'Sweat Shirt'
+    | 'Trouser'
+    | 'Shorts'
+    | 'Romper/Keeper'
+    | 'Long Sleeve T-shirt'
+    color: string
+    orderQuantity: number
+    readyQuantity: number
+    cuttingSection: TSection[]
+    sellingSection: TSection[]
+    finishing: TSection[]
+    remark?: string
+}
+export type TProductionInput = {
+    date: Date
+    lineNo: 'line 1 / 3rd floor' | 'line 2 / 4rd floor' | 'line 3 / 4rd floor'
+    buyer: string
+    orderNo: number
+    styleNo:
+    | 'hoody/jacket'
+    | 'Leggins'
+    | 'Polo Shirt'
+    | 'T-Shirt'
+    | 'Tank Top'
+    | 'Sweat Shirt'
+    | 'Trouser'
+    | 'Shorts'
+    | 'Romper/Keeper'
+    | 'Long Sleeve T-shirt'
+    color: string
+    orderQuantity: number
+    readyQuantity: number
+    cuttingSection: {
+        cuttingTarget: number
+        cuttingWIP: number
+        cuttingOutput: number
+    }
+    sellingSection: {
+        sellingTarget: number
+        sellingWIP: number
+        sellingOutput: number
+    }
+    finishing: {
+        finishingTarget: number
+        finishingWIP: number
+        finishingOutput: number
+    }
+    remark?: string
+}

@@ -1,5 +1,4 @@
 import { Table } from "antd";
-import { ColumnType } from "antd/es/table";
 import { useState } from "react";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { useGetTodayEmployeesQuery } from "../../redux/features/employee/employeeApi";
@@ -9,7 +8,7 @@ import { useGetTodayLoanQuery } from "../../redux/features/loan/loanApi";
 import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
 import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 import { useGetTodayUtilityQuery } from "../../redux/features/utility/utilityApi";
-import { TFixed, TUtility } from "../../types";
+import { runningColums, TFixed, TUtility } from "../../types";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 import EvaluationTable from "./EvaluationTable";
@@ -58,6 +57,7 @@ const RunningCostTable = () => {
     isError: isEmployeeCostError,
     isLoading: isEmployeeCostLoading,
   } = useGetTodayEmployeesQuery(undefined);
+
   if (
     isMiscLoading ||
     isTravelLoading ||
@@ -110,7 +110,6 @@ const RunningCostTable = () => {
       totalPrice: e.totalPrice, // Directly take the totalPrice
     })),
   ]);
-  console.log(utilityData.data);
   const utility = (utilityData?.data || []).map((item: TUtility) => ({
     ...item,
   }));
@@ -149,7 +148,6 @@ const RunningCostTable = () => {
       totalPrice: o.totalPrice, // Directly take the totalPrice
     })),
   ]);
-  
 
   // Combine the data into a single array
   const combinedData = [
@@ -174,66 +172,6 @@ const RunningCostTable = () => {
   );
 
   const roundCost = parseFloat(totalCost.toFixed(2));
-  const colums: ColumnType<{ date: string }>[] = [
-    {
-      title: "SL",
-      key: "slNo",
-      render: (_, record: { date: string }, index: number) => {
-        console.log(record.date); // Example usage
-        return (currentPage - 1) * pageSize + index + 1;
-      },
-    },
-    {
-      title: "Particulars",
-      dataIndex: "particulars",
-      key: "particulars",
-    },
-    {
-      title: "Description",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Remark",
-      dataIndex: "remark",
-      key: "remark",
-    },
-    {
-      title: "Buyer ID",
-      dataIndex: "buyerId",
-      key: "buyerId",
-    },
-    {
-      title: "Order No",
-      dataIndex: "orderNo",
-      key: "orderNo",
-    },
-    {
-      title: "Pay To",
-      dataIndex: "payTo",
-      key: "payTo",
-    },
-    {
-      title: "Payment Type",
-      dataIndex: "paymentType",
-      key: "paymentType",
-    },
-    {
-      title: "Unit",
-      dataIndex: "unit",
-      key: "unit",
-    },
-    {
-      title: "Unit Price",
-      dataIndex: "unitPrice",
-      key: "unitPrice",
-    },
-    {
-      title: "Total Price",
-      dataIndex: "totalPrice",
-      key: "totalPrice",
-    },
-  ];
 
   return (
     <div>
@@ -248,7 +186,17 @@ const RunningCostTable = () => {
           size="small"
           className="table-auto"
           bordered
-          columns={colums}
+          columns={[
+            {
+              title: "SL",
+              key: "slNo",
+              render: (_, record: { date: string }, index: number) => {
+                console.log(record.date); // Example usage
+                return (currentPage - 1) * pageSize + index + 1;
+              },
+            },
+            ...runningColums,
+          ]}
           dataSource={combinedData}
           rowKey="_id"
           // pagination={false}
