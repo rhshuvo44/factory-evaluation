@@ -169,6 +169,7 @@ export type TSection = {
     output: number
 }
 export type TProductionReport = {
+    _id?: string;
     date: Date
     lineNo: 'line 1 / 3rd floor' | 'line 2 / 4rd floor' | 'line 3 / 4rd floor'
     buyer: string

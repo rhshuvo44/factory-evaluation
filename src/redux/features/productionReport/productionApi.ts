@@ -47,4 +47,4 @@ const productionApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateProductionMutation } = productionApi;
+export const { useCreateProductionMutation, useGetAllProductionQuery } = productionApi;
