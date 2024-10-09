@@ -87,7 +87,7 @@ const RunningCostTable = () => {
   const fixedCostComData = fixedCost.flatMap((item: TFixed) => [
     ...item.factoryRent.map((i) => ({
       date: item.date,
-      unit:"Day",
+      unit: "Day",
       particulars: "Factory Rent",
       paymentType: "Daily",
       unitPrice: i.unitPrice, // Directly take the unitPrice
@@ -96,7 +96,7 @@ const RunningCostTable = () => {
     ...item.factoryRevenue.map((i) => ({
       date: item.date,
       particulars: "Factory Revenue",
-      unit:"Day",
+      unit: "Day",
       paymentType: "Daily",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
@@ -110,7 +110,7 @@ const RunningCostTable = () => {
       totalPrice: e.totalPrice, // Directly take the totalPrice
     })),
   ]);
-
+  console.log(utilityData.data);
   const utility = (utilityData?.data || []).map((item: TUtility) => ({
     ...item,
   }));
@@ -119,7 +119,7 @@ const RunningCostTable = () => {
     ...item.internet.map((i) => ({
       date: item.date,
       remark: "internet",
-      unit:"Day",
+      unit: "Day",
       paymentType: "Monthly",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
@@ -128,14 +128,14 @@ const RunningCostTable = () => {
       date: item.date,
       remark: "water",
       paymentType: "Monthly",
-      unit:"Day",
+      unit: "Day",
       unitPrice: i.unitPrice, // Directly take the unitPrice
       totalPrice: i.totalPrice, // Directly take the totalPrice
     })),
     ...item.electricity.map((e) => ({
       date: item.date,
       remark: "electricity",
-      unit:"Day",
+      unit: "Day",
       paymentType: "Monthly",
       unitPrice: e.unitPrice, // Directly take the unitPrice
       totalPrice: e.totalPrice, // Directly take the totalPrice
@@ -143,12 +143,13 @@ const RunningCostTable = () => {
     ...(item?.others || []).map((o) => ({
       date: item.date,
       remark: "others",
-      unit:"Day",
+      unit: "Day",
       paymentType: "Monthly",
       unitPrice: o.unitPrice, // Directly take the unitPrice
       totalPrice: o.totalPrice, // Directly take the totalPrice
     })),
   ]);
+  
 
   // Combine the data into a single array
   const combinedData = [
@@ -161,11 +162,6 @@ const RunningCostTable = () => {
     })),
 
     { ...miscData?.data, particulars: "Miscellaneous" },
-    // ...(travelData?.data || []).map((item: TTravel) => ({
-    //   ...item,
-    //   particulars: "Travel",
-    // })),
-
     { ...travelData?.data, particulars: "Travel" },
     { ...buyerData?.data, particulars: "Buyer Development" },
     { ...factoryData?.data, particulars: "Factory Development" },
