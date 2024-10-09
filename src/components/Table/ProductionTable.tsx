@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
-import { useDeletedCollectionMutation } from "../../redux/features/collection/collectionApi";
-import { useGetAllProductionQuery } from "../../redux/features/productionReport/productionApi";
+import {
+  useDeletedProductionMutation,
+  useGetAllProductionQuery,
+} from "../../redux/features/productionReport/productionApi";
 import { useAppSelector } from "../../redux/hook";
 import { TProductionReport } from "../../types/tableType";
 import { verifyToken } from "../../utilis/verifyToken";
@@ -21,28 +23,14 @@ const ProductionTable = () => {
   if (token) {
     user = verifyToken(token) as TUser;
   }
-  const [deleteCollection] = useDeletedCollectionMutation();
+  const [deleteProduction] = useDeletedProductionMutation();
   const handleDeleted = async (id: string) => {
-    const res = await deleteCollection(id);
+    const res = await deleteProduction(id);
     if (res.data.success) {
       toast.success("Collection deleted successfully.");
     }
   };
-  //   buyer
-  //
-  //   cuttingSection
-  //   finishing
-  //   :
-  //   [{…}]
-  //   lineNo
-  //   orderNo
-  //   orderQuantity
-  //   readyQuantity
-  //   remark
-  //   sellingSection
-  //   :
-  //   [{…}]
-  //   styleNo
+ 
   const colums = [
     {
       title: "SL",
@@ -166,7 +154,7 @@ const ProductionTable = () => {
             render: (item: TProductionReport) => {
               return (
                 <Space>
-                  <Link to={`/${user!.role}/collection/${item._id}`}>Edit</Link>
+                  <Link to={`/${user!.role}/production/${item._id}`}>Edit</Link>
                   {user!.role === "admin" && (
                     <Button
                       danger

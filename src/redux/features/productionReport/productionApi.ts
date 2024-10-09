@@ -8,11 +8,6 @@ const productionApi = baseApi.injectEndpoints({
                 { url: `/production-report`, method: 'GET' }
             ), providesTags: ['production'],
         }),
-        // getTodayProduction: builder.query({
-        //     query: () => (
-        //         { url: `/production-report/today`, method: 'GET' }
-        //     ), providesTags: ['production'],
-        // }),
         createProduction: builder.mutation({
             query: (data) => ({
                 url: '/production-report',
@@ -47,4 +42,4 @@ const productionApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateProductionMutation, useGetAllProductionQuery } = productionApi;
+export const { useCreateProductionMutation, useGetAllProductionQuery, useDeletedProductionMutation, useSingleProductionQuery, useUpdateProductionMutation } = productionApi;
