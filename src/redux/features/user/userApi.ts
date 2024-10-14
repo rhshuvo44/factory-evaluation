@@ -27,7 +27,23 @@ const userApi = baseApi.injectEndpoints({
             invalidatesTags: ['User'],
 
         }),
+        getSingleUser: builder.query({
+            query: (id) => ({
+                url: `/user/${id}`,
+                method: 'GET',
+
+            }),
+        }),
+        updateUser: builder.mutation({
+            query: (data) => ({
+                url: `/user/${data.id}`,
+                method: 'PATCH',
+                body: data.data,
+            }),
+            invalidatesTags: ['User'],
+
+        }),
     }),
 });
 
-export const { useCreateUserMutation, useGetUserQuery, useDeleteUserMutation, useGetMeQuery } = userApi
+export const { useCreateUserMutation, useGetUserQuery, useDeleteUserMutation, useGetMeQuery, useUpdateUserMutation, useGetSingleUserQuery } = userApi

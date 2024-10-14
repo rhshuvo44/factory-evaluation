@@ -6,6 +6,9 @@ import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment"
 import FixedCost from "../pages/Fixed cost/FixedCost";
 import Loan from "../pages/loan/Loan";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
+import Production from "../pages/Production/Production";
+import ProductionAdd from "../pages/Production/ProductionAdd";
+import ProductionUpdate from "../pages/Production/ProductionUpdate";
 import Salary from "../pages/salary/Salary";
 import Utility from "../pages/utility/Utility";
 
@@ -67,12 +70,16 @@ export const coordinatorPaths = [
       {
         name: "Add Production Report",
         path: "add_production_report",
-        element: "addProductionReport",
+        element: <ProductionAdd />,
+      },
+      {
+        path: "production/:id",
+        element: <ProductionUpdate />,
       },
       {
         name: "All Production Report",
         path: "all_production_reports",
-        element: "all Production Report",
+        element: <Production />,
       },
     ],
   },

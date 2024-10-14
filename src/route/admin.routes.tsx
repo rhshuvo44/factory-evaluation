@@ -29,6 +29,7 @@ import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAl
 
 import AddUser from "../pages/user management/AddUser";
 import AllUsers from "../pages/user management/AllUsers";
+import UserUpdate from "../pages/user management/UserUpdate";
 import Utility from "../pages/utility/Utility";
 import UtilityForm from "../pages/utility/UtilityForm";
 import UtilityUpdate from "../pages/utility/UtilityUpdate";
@@ -236,6 +237,10 @@ export const adminPaths = [
         name: "Add User",
         path: "add_user",
         element: <AddUser />,
+      },
+      {
+        path: "user/:id",
+        element: <UserUpdate />,
       },
       {
         name: "All Users",

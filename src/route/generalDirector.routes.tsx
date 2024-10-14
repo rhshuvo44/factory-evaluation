@@ -6,6 +6,7 @@ import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment"
 import FixedCost from "../pages/Fixed cost/FixedCost";
 import Loan from "../pages/loan/Loan";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
+import Production from "../pages/Production/Production";
 import Salary from "../pages/salary/Salary";
 import Utility from "../pages/utility/Utility";
 
@@ -63,6 +64,6 @@ export const generalPaths = [
   {
     name: "Production Report",
     path: "all_production_reports",
-    element: "all Production Report",
+    element: <Production />,
   },
 ];
