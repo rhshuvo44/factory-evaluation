@@ -9,7 +9,7 @@ import {
   useGetAllLoansQuery,
 } from "../../redux/features/loan/loanApi";
 import { useAppSelector } from "../../redux/hook";
-import { TLoan } from "../../types";
+import { loanColums, TLoan } from "../../types";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
@@ -32,93 +32,7 @@ const LoanTable = () => {
       toast.success("Loan Return deleted successfully.");
     }
   };
-  const colums = [
-    {
-      title: "SL",
-      dataIndex: "slNo",
-      key: "slNo",
-    },
 
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Particulars",
-      dataIndex: "particulars",
-      key: "particulars",
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-    },
-    {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
-    },
-    {
-      title: "Memo NO",
-      dataIndex: "memoNo",
-      key: "memoNo",
-    },
-    {
-      title: "Ordered By",
-      dataIndex: "orderedBy",
-      key: "orderedBy",
-    },
-    {
-      title: "Pay To",
-      dataIndex: "payTo",
-      key: "payTo",
-    },
-    {
-      title: "Payment Type",
-      dataIndex: "paymentType",
-      key: "paymentType",
-    },
-    {
-      title: "Unit",
-      dataIndex: "unit",
-      key: "unit",
-    },
-    {
-      title: "Unit Price",
-      dataIndex: "unitPrice",
-      key: "unitPrice",
-    },
-    {
-      title: "Total Price",
-      dataIndex: "totalPrice",
-      key: "totalPrice",
-    },
-    ...(user?.role === userRole.ADMIN ||
-    user?.role === userRole.ExecutiveDirector
-      ? [
-          {
-            title: "Action",
-            key: "action",
-            render: (item: TLoan) => {
-              return (
-                <Space>
-                  <Link to={`/${user!.role}/loan/${item._id}`}>Edit</Link>
-                  {user!.role === "admin" && (
-                    <Button
-                      danger
-                      onClick={() => handleDeleted(item._id as string)}
-                    >
-                      Delete
-                    </Button>
-                  )}
-                </Space>
-              );
-            },
-          },
-        ]
-      : []),
-  ];
   const { data, isError, isLoading } = useGetAllLoansQuery(undefined);
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
@@ -136,7 +50,35 @@ const LoanTable = () => {
           className="table-auto"
           bordered
           size="small"
-          columns={colums}
+          columns={[
+            ...loanColums,
+            ...(user?.role === userRole.ADMIN ||
+            user?.role === userRole.ExecutiveDirector
+              ? [
+                  {
+                    title: "Action",
+                    key: "action",
+                    render: (item: TLoan) => {
+                      return (
+                        <Space>
+                          <Link to={`/${user!.role}/loan/${item._id}`}>
+                            Edit
+                          </Link>
+                          {user!.role === "admin" && (
+                            <Button
+                              danger
+                              onClick={() => handleDeleted(item._id as string)}
+                            >
+                              Delete
+                            </Button>
+                          )}
+                        </Space>
+                      );
+                    },
+                  },
+                ]
+              : []),
+          ]}
           dataSource={data?.data?.result}
           rowKey="slNo"
           pagination={{

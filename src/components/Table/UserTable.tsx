@@ -8,7 +8,7 @@ import {
   useGetUserQuery,
 } from "../../redux/features/user/userApi";
 import { useAppSelector } from "../../redux/hook";
-import { TUSer } from "../../types";
+import { TUSer, UserColums } from "../../types";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 
@@ -29,71 +29,40 @@ const UserTable = () => {
     }
   };
 
-  const colums = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "username",
-      dataIndex: "username",
-      key: "username",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Phone",
-      dataIndex: "phone",
-      key: "phone",
-    },
-    {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
-    ...(user?.role === "admin"
-      ? [
-          {
-            title: "Action",
-            key: "action",
-            render: (item: TUSer) => {
-              return (
-                <Space>
-                  <Link to={`/${user!.role}/user/${item._id}`}>Edit</Link>
-
-                  <Button
-                    danger
-                    onClick={() => handleDeleted(item._id as string)}
-                  >
-                    Delete
-                  </Button>
-                </Space>
-              );
-            },
-          },
-        ]
-      : []),
-  ];
   const { data, isError, isLoading } = useGetUserQuery(undefined);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
-  // console.log();
   return (
     <Table
       className="table-auto"
       bordered
       size="small"
-      columns={colums}
+      columns={[
+        ...UserColums,
+        ...(user?.role === "admin"
+          ? [
+              {
+                title: "Action",
+                key: "action",
+                render: (item: TUSer) => {
+                  return (
+                    <Space>
+                      <Link to={`/${user!.role}/user/${item._id}`}>Edit</Link>
+
+                      <Button
+                        danger
+                        onClick={() => handleDeleted(item._id as string)}
+                      >
+                        Delete
+                      </Button>
+                    </Space>
+                  );
+                },
+              },
+            ]
+          : []),
+      ]}
       dataSource={data?.data?.result}
       rowKey="id"
       pagination={{

@@ -9,6 +9,7 @@ import {
   useGetAllFactoryDevelopsQuery,
 } from "../../redux/features/Factory development/factoryDevelopmentApi";
 import { useAppSelector } from "../../redux/hook";
+import { factoryColums } from "../../types";
 import { TFactory } from "../../types/tableType";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
@@ -31,96 +32,7 @@ const FactoryDevelopmentTable = () => {
       toast("Factory Development deleted successfully.");
     }
   };
-  const colums = [
-    {
-      title: "SL",
-      dataIndex: "slNo",
-      key: "slNo",
-    },
 
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Particulars",
-      dataIndex: "particulars",
-      key: "particulars",
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-    },
-    {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
-    },
-    {
-      title: "Memo NO",
-      dataIndex: "memoNo",
-      key: "memoNo",
-    },
-    {
-      title: "Ordered By",
-      dataIndex: "orderedBy",
-      key: "orderedBy",
-    },
-    {
-      title: "Pay To",
-      dataIndex: "payTo",
-      key: "payTo",
-    },
-    {
-      title: "Payment Type",
-      dataIndex: "paymentType",
-      key: "paymentType",
-    },
-    {
-      title: "Unit",
-      dataIndex: "unit",
-      key: "unit",
-    },
-    {
-      title: "Unit Price",
-      dataIndex: "unitPrice",
-      key: "unitPrice",
-    },
-    {
-      title: "Total Price",
-      dataIndex: "totalPrice",
-      key: "totalPrice",
-    },
-
-    ...(user?.role === userRole.ADMIN ||
-    user?.role === userRole.ExecutiveDirector
-      ? [
-          {
-            title: "Action",
-            key: "action",
-            render: (item: TFactory) => {
-              return (
-                <Space>
-                  <Link to={`/${user!.role}/factory_development/${item._id}`}>
-                    Edit
-                  </Link>
-                  {user!.role === "admin" && (
-                    <Button
-                      danger
-                      onClick={() => handleDeleted(item._id as string)}
-                    >
-                      Delete
-                    </Button>
-                  )}
-                </Space>
-              );
-            },
-          },
-        ]
-      : []),
-  ];
   const { data, isError, isLoading } = useGetAllFactoryDevelopsQuery(undefined);
 
   if (isLoading) return <Loading />;
@@ -139,7 +51,39 @@ const FactoryDevelopmentTable = () => {
           size="small"
           className="table-auto"
           bordered
-          columns={colums}
+          columns={[
+            ...factoryColums,
+            ...(user?.role === userRole.ADMIN ||
+            user?.role === userRole.ExecutiveDirector
+              ? [
+                  {
+                    title: "Action",
+                    key: "action",
+                    render: (item: TFactory) => {
+                      return (
+                        <Space>
+                          <Link
+                            to={`/${user!.role}/factory_development/${
+                              item._id
+                            }`}
+                          >
+                            Edit
+                          </Link>
+                          {user!.role === "admin" && (
+                            <Button
+                              danger
+                              onClick={() => handleDeleted(item._id as string)}
+                            >
+                              Delete
+                            </Button>
+                          )}
+                        </Space>
+                      );
+                    },
+                  },
+                ]
+              : []),
+          ]}
           dataSource={data?.data?.result}
           rowKey="_id"
           pagination={{

@@ -9,6 +9,7 @@ import {
   useGetAllMiscellaneousQuery,
 } from "../../redux/features/Miscellaneous/MiscellaneousApi";
 import { useAppSelector } from "../../redux/hook";
+import { misColumns } from "../../types";
 import { TMiscellaneous } from "../../types/tableType";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
@@ -33,98 +34,6 @@ const MiscellaneousTableComponent = () => {
     }
   };
 
-  const columns = [
-    {
-      title: "SL",
-      dataIndex: "slNo",
-      key: "slNo",
-    },
-
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-    },
-    {
-      title: "Particulars",
-      dataIndex: "particulars",
-      key: "particulars",
-    },
-    {
-      title: "Remark",
-      dataIndex: "remark",
-      key: "remark",
-    },
-    {
-      title: "Buyer Id",
-      dataIndex: "buyerId",
-      key: "buyerId",
-    },
-    {
-      title: "Order No",
-      dataIndex: "orderNo",
-      key: "orderNo",
-    },
-    {
-      title: "Memo No",
-      dataIndex: "memoNo",
-      key: "memoNo",
-    },
-    {
-      title: "Pay To",
-      dataIndex: "payTo",
-      key: "payTo",
-    },
-    {
-      title: "Payment Type",
-      dataIndex: "paymentType",
-      key: "paymentType",
-    },
-    {
-      title: "Total Price",
-      dataIndex: "totalPrice",
-      key: "totalPrice",
-    },
-    {
-      title: "Unit",
-      dataIndex: "unit",
-      key: "unit",
-    },
-    {
-      title: "Unit Price",
-      dataIndex: "unitPrice",
-      key: "unitPrice",
-    },
-    ...(user?.role === userRole.ADMIN ||
-    user?.role === userRole.ExecutiveDirector
-      ? [
-          {
-            title: "Action",
-            key: "action",
-            render: (item: TMiscellaneous) => {
-              return (
-                <Space>
-                  <Link to={`/${user!.role}/misc_cost/${item._id}`}>Edit</Link>
-                  {user!.role === "admin" && (
-                    <Button
-                      danger
-                      onClick={() => handleDeleted(item._id as string)}
-                    >
-                      Delete
-                    </Button>
-                  )}
-                </Space>
-              );
-            },
-          },
-        ]
-      : []),
-  ];
   const { data, isError, isLoading } = useGetAllMiscellaneousQuery(undefined);
   // console.log(data?.data?.result);
   if (isLoading) return <Loading />;
@@ -143,7 +52,35 @@ const MiscellaneousTableComponent = () => {
           className="table-auto"
           bordered
           size="small"
-          columns={columns}
+          columns={[
+            ...misColumns,
+            ...(user?.role === userRole.ADMIN ||
+            user?.role === userRole.ExecutiveDirector
+              ? [
+                  {
+                    title: "Action",
+                    key: "action",
+                    render: (item: TMiscellaneous) => {
+                      return (
+                        <Space>
+                          <Link to={`/${user!.role}/misc_cost/${item._id}`}>
+                            Edit
+                          </Link>
+                          {user!.role === "admin" && (
+                            <Button
+                              danger
+                              onClick={() => handleDeleted(item._id as string)}
+                            >
+                              Delete
+                            </Button>
+                          )}
+                        </Space>
+                      );
+                    },
+                  },
+                ]
+              : []),
+          ]}
           dataSource={data?.data?.result}
           rowKey="_id"
           pagination={{

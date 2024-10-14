@@ -9,6 +9,7 @@ import {
   useGetAllTravellingsQuery,
 } from "../../redux/features/travelling/travellingApi";
 import { useAppSelector } from "../../redux/hook";
+import { travellingColums } from "../../types";
 import { TTravel } from "../../types/tableType";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
@@ -31,101 +32,7 @@ const TravellingTable = () => {
       toast.success("Travelling Allowance deleted successfully.");
     }
   };
-  const colums = [
-    {
-      title: "SL",
-      dataIndex: "slNo",
-      key: "slNo",
-    },
 
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Particulars",
-      dataIndex: "particulars",
-      key: "particulars",
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-    },
-    {
-      title: "Remark",
-      dataIndex: "remark",
-      key: "remark",
-    },
-    {
-      title: "Buyer ID",
-      dataIndex: "buyerId",
-      key: "buyerId",
-    },
-    {
-      title: "Order No",
-      dataIndex: "orderNo",
-      key: "orderNo",
-    },
-    {
-      title: "Memo No",
-      dataIndex: "memoNo",
-      key: "memoNo",
-    },
-    {
-      title: "Pay To",
-      dataIndex: "payTo",
-      key: "payTo",
-    },
-    {
-      title: "Payment Type",
-      dataIndex: "paymentType",
-      key: "paymentType",
-    },
-    {
-      title: "Unit",
-      dataIndex: "unit",
-      key: "unit",
-    },
-    {
-      title: "Unit Price",
-      dataIndex: "unitPrice",
-      key: "unitPrice",
-    },
-    {
-      title: "Total Price",
-      dataIndex: "totalPrice",
-      key: "totalPrice",
-    },
-
-    ...(user?.role === userRole.ADMIN ||
-    user?.role === userRole.ExecutiveDirector
-      ? [
-          {
-            title: "Action",
-            key: "action",
-            render: (item: TTravel) => {
-              return (
-                <Space>
-                  <Link to={`/${user!.role}/travel_allowance/${item._id}`}>
-                    Edit
-                  </Link>
-                  {user!.role === "admin" && (
-                    <Button
-                      danger
-                      onClick={() => handleDeleted(item._id as string)}
-                    >
-                      Delete
-                    </Button>
-                  )}
-                </Space>
-              );
-            },
-          },
-        ]
-      : []),
-  ];
   const { data, isError, isLoading } = useGetAllTravellingsQuery(undefined);
 
   if (isLoading) return <Loading />;
@@ -145,7 +52,37 @@ const TravellingTable = () => {
           className="table-auto"
           bordered
           size="small"
-          columns={colums}
+          columns={[
+            ...travellingColums,
+            ...(user?.role === userRole.ADMIN ||
+            user?.role === userRole.ExecutiveDirector
+              ? [
+                  {
+                    title: "Action",
+                    key: "action",
+                    render: (item: TTravel) => {
+                      return (
+                        <Space>
+                          <Link
+                            to={`/${user!.role}/travel_allowance/${item._id}`}
+                          >
+                            Edit
+                          </Link>
+                          {user!.role === "admin" && (
+                            <Button
+                              danger
+                              onClick={() => handleDeleted(item._id as string)}
+                            >
+                              Delete
+                            </Button>
+                          )}
+                        </Space>
+                      );
+                    },
+                  },
+                ]
+              : []),
+          ]}
           dataSource={data?.data?.result}
           rowKey="slNo"
           pagination={{
