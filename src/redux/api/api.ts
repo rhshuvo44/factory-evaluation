@@ -30,12 +30,12 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     let result: any = await baseQuery(args, api, extraOptions);
 
     if (result?.error?.status === 404) {
-        toast.error(result.error?.data?.message);
+        toast.error(result?.error?.data?.message);
     }
     if (result?.error?.status === 403) {
-        toast.error(result.error?.data?.message)
+        toast.error(result?.error?.data?.message)
     }
-    if (result?.error?.status === 401) {
+    if (result?.error?.status === 401 || (result?.error?.status === 500 && result?.error?.data?.err?.name === 'TokenExpiredError')) {
         //* Send Refresh
         console.log('Sending refresh token');
 
@@ -43,10 +43,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
             method: 'POST',
             credentials: 'include',
         });
-
-
         const data = await res.json();
-
+      
         if (data?.data) {
             const user = (api.getState() as RootState).auth.user;
             api.dispatch(

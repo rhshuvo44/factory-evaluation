@@ -5,6 +5,9 @@ const collectionApi = baseApi.injectEndpoints({
         getAllCollections: builder.query({
             query: () => ({ url: '/collection', method: 'GET' }), providesTags: ['Collection'],
         }),
+        getTodayCollections: builder.query({
+            query: () => ({ url: '/collection/today', method: 'GET' }), providesTags: ['Collection'],
+        }),
         updateCollection: builder.mutation({
             query: (data) => ({
                 url: `/collection/${data.id}`,
@@ -36,4 +39,4 @@ const collectionApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useCreateCollectionMutation, useGetAllCollectionsQuery, useDeletedCollectionMutation, useSingleCollectionQuery, useUpdateCollectionMutation } = collectionApi;
+export const { useCreateCollectionMutation, useGetAllCollectionsQuery, useDeletedCollectionMutation, useSingleCollectionQuery, useUpdateCollectionMutation, useGetTodayCollectionsQuery } = collectionApi;

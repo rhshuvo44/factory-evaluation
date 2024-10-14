@@ -12,6 +12,7 @@ import { useAppSelector } from "../../redux/hook";
 import { TFactory } from "../../types/tableType";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
+import SectionTitle from "../ui/SectionTitle";
 
 const FactoryDevelopmentTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -125,23 +126,51 @@ const FactoryDevelopmentTable = () => {
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
-    <Table
-      className="table-auto"
-      bordered
-      columns={colums}
-      dataSource={data?.data?.result}
-      rowKey="id"
-      size="small"
-      pagination={{
-        current: currentPage,
-        pageSize: pageSize,
-        //   total: data?.total,
-        onChange: (page, pageSize) => {
-          setCurrentPage(page);
-          setPageSize(pageSize);
-        },
-      }}
-    />
+    <div>
+      <div className="flex  items-center justify-between mb-2">
+        <SectionTitle title="Factory Development cost" />
+        <div className="text-sm md:text-lg lg:text-3xl font-bold">
+          Total cost :
+          <span className="text-red-500"> {data?.data?.totalPrice}</span>
+        </div>
+      </div>
+      <div className="responsive-table-container">
+        <Table
+          size="small"
+          className="table-auto"
+          bordered
+          columns={colums}
+          dataSource={data?.data?.result}
+          rowKey="_id"
+          pagination={{
+            current: currentPage,
+            pageSize: pageSize,
+            // total: data?.data.meta.total,
+            onChange: (page, pageSize) => {
+              setCurrentPage(page);
+              setPageSize(pageSize);
+            },
+          }}
+        />
+      </div>
+    </div>
+    // <Table
+    //   className="table-auto"
+    //   bordered
+    //   columns={colums}
+    //   dataSource={data?.data?.result}
+    //   rowKey="id"
+    //   size="small"
+    //   pagination={{
+    //     current: currentPage,
+    //     pageSize: pageSize,
+    //     //   total: data?.total,
+    //     onChange: (page, pageSize) => {
+    //       setCurrentPage(page);
+    //       setPageSize(pageSize);
+    //     },
+    //   }}
+    // />
   );
 };
 

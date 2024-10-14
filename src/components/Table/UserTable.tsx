@@ -17,7 +17,6 @@ const UserTable = () => {
   const [pageSize, setPageSize] = useState(7);
   const [deleteUser] = useDeleteUserMutation();
   const token = useAppSelector(useCurrentToken);
-
   let user;
 
   if (token) {
