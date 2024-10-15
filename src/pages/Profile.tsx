@@ -1,5 +1,11 @@
+import ChangePassword from "../components/ui/form/ChangePassword";
+
 const Profile = () => {
-  return <div>Profile</div>;
+  return (
+    <div>
+      <ChangePassword />
+    </div>
+  );
 };
 
 export default Profile;
