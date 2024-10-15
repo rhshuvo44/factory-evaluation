@@ -17,7 +17,7 @@ const HeaderMenu = () => {
   // }
 
   const { data } = useGetMeQuery(undefined);
-  // console.log(data?.data?.name);
+  console.log(data?.data?.name);
   const dispatch = useAppDispatch();
   const items: MenuProps["items"] = [
     {
