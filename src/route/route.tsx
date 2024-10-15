@@ -1,16 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
+import { userRole } from "../constants/userRole";
 import Dashboard from "../pages/Dashboard";
+import Forget from "../pages/Forget";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
+import ResetPassword from "../pages/ResetPassword";
 import { routeGenerator } from "../utilis/routesGenerator";
 import { adminPaths } from "./admin.routes";
 import { coordinatorPaths } from "./Coordinator.routes";
 import { executivePaths } from "./ExecutiveDirector.routes";
 import { generalPaths } from "./generalDirector.routes";
 import { managingPaths } from "./ManagingDirector.routes";
-import ProtectedRoute from "../components/layout/ProtectedRoute";
-import { userRole } from "../constants/userRole";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +73,14 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/forget-password",
+    element: <Forget />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
   },
   {
     path: "/",

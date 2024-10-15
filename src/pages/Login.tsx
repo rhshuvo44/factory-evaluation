@@ -48,7 +48,7 @@ const Login = () => {
         </Form.Item>
         <Form.Item>
           <Flex justify="space-between" align="center">
-            <Link to="/">Forgot password</Link>
+            <Link to="/forget-password">Forgot password</Link>
           </Flex>
         </Form.Item>
         <Form.Item>

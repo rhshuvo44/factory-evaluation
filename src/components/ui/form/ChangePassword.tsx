@@ -10,7 +10,6 @@ const ChangePassword = () => {
   const onFinish = async (values: TChangePassword) => {
     try {
       const res = await changePassword(values).unwrap();
-
       toast.success(res?.message);
     } catch (error) {
       console.log(error);
@@ -38,12 +37,11 @@ const ChangePassword = () => {
         <Form.Item
           name="newPassword"
           rules={[
-            { required: true, message: "Please input your newPassword!" },
+            { required: true, message: "Please input your new Password!" },
           ]}
         >
-          <Input.Password prefix={<LockOutlined />} placeholder="newPassword" />
+          <Input.Password prefix={<LockOutlined />} placeholder="new Password" />
         </Form.Item>
-
         <Form.Item>
           <Button block type="primary" htmlType="submit">
             Change Password
