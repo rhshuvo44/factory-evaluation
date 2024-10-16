@@ -1,23 +1,14 @@
+import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, Layout, MenuProps } from "antd";
 import { NavLink } from "react-router-dom";
-// import userImg from "../../assets/image/logo.png";
-import { UserOutlined } from "@ant-design/icons";
+import userImg from "../../../public/favicon.ico";
 import { logout } from "../../redux/features/auth/authSlice";
 import { useGetMeQuery } from "../../redux/features/user/userApi";
 import { useAppDispatch } from "../../redux/hook";
 const { Header } = Layout;
 
 const HeaderMenu = () => {
-  // const token = useAppSelector(useCurrentToken);
-
-  // let user;
-
-  // if (token) {
-  //   user = verifyToken(token) as TUser;
-  // }
-
   const { data } = useGetMeQuery(undefined);
-  console.log(data?.data?.name);
   const dispatch = useAppDispatch();
   const items: MenuProps["items"] = [
     {
@@ -50,7 +41,7 @@ const HeaderMenu = () => {
       <Dropdown menu={{ items }} trigger={["click"]}>
         <a onClick={(e) => e.preventDefault()}>
           <Avatar
-            // src={userImg}
+            src={userImg}
             alt="avatar"
             icon={<UserOutlined />}
             size={{ xs: 24, sm: 32, md: 40, lg: 50, xl: 56, xxl: 60 }}

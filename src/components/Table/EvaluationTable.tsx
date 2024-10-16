@@ -64,6 +64,7 @@ const EvaluationTable = ({ totalCost }: { totalCost: number }) => {
           columns={columns}
           dataSource={dataSource}
           rowKey="_id"
+          pagination={false}
         />
       </div>
     </div>
