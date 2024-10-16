@@ -43,7 +43,13 @@ const UtilityTable = () => {
         </div>
       </div>
       <div className="responsive-table-container">
-        <Table<TUtility> size="small" dataSource={data?.data?.result}>
+        <Table<TUtility>
+          size="small"
+          dataSource={data?.data?.result.map((item: TUtility) => ({
+            ...item,
+            key: item._id,
+          }))}
+        >
           <Column
             title="SL"
             key="slNo"

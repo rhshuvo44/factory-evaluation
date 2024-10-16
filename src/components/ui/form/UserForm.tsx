@@ -61,7 +61,7 @@ const UserForm = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Select User Role"
+          placeholder="Please select user role"
           options={userRoleOptions}
         />
       </Form.Item>

@@ -116,7 +116,7 @@ const TravellingForm = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select Payment Type"
+          placeholder="Please select Payment Type"
           options={paymentOptions}
         />
       </Form.Item>

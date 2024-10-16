@@ -122,7 +122,7 @@ const SalaryAddForm = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select"
+          placeholder="Please select Designation"
           options={designationOption}
         />
       </Form.Item>
@@ -136,7 +136,7 @@ const SalaryAddForm = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select"
+          placeholder="Please select Status"
           options={[
             { value: "P", label: "P" },
             { value: "A", label: "A" },
@@ -178,6 +178,7 @@ const SalaryAddForm = () => {
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
       <Form.Item
+        label="Employee Image"
         rules={[{ required: false, message: "Please upload Employee image " }]}
       >
         <Upload

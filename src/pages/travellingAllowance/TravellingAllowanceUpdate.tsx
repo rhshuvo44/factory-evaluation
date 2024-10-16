@@ -113,7 +113,7 @@ const TravellingAllowanceUpdate = () => {
         >
           <Select
             style={{ width: "100%" }}
-            defaultValue={result.paymentType}
+            // defaultValue={result.paymentType}
             options={paymentOptions}
           />
         </Form.Item>

@@ -82,7 +82,7 @@ const FactoryDevelopmentAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select Ordered By"
+          placeholder="Please select Ordered By"
           options={[
             { value: "M.D", label: "M.D" },
             { value: "Chairman", label: "Chairman" },
@@ -96,7 +96,7 @@ const FactoryDevelopmentAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select Pay to"
+          placeholder="Please select Pay to"
           options={[
             { value: "Sarkar Alliance OPC", label: "Sarkar Alliance OPC" },
             { value: "M.D", label: "M.D" },
@@ -123,7 +123,7 @@ const FactoryDevelopmentAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select payment type"
+          placeholder="Please select Payment Type"
           options={[
             { value: "Bank", label: "Bank" },
             { value: "Cash", label: "Cash" },

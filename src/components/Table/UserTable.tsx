@@ -64,7 +64,7 @@ const UserTable = () => {
           : []),
       ]}
       dataSource={data?.data?.result}
-      rowKey="id"
+      rowKey="_id"
       pagination={{
         current: currentPage,
         pageSize: pageSize,

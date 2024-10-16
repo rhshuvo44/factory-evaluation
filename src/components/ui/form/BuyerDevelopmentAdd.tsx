@@ -68,7 +68,7 @@ const BuyerDevelopmentAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select Particular"
+          placeholder="Please select Particular"
           options={buyerParticularsOptions}
         />
       </Form.Item>
@@ -128,7 +128,7 @@ const BuyerDevelopmentAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select Payment"
+          placeholder="Please select Payment Type"
           options={paymentOptions}
         />
       </Form.Item>

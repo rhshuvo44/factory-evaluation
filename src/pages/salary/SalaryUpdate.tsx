@@ -35,7 +35,6 @@ const SalaryUpdate = () => {
     setOverTime(values as number);
   };
   useEffect(() => {
-   
     const perDaySalaryValue = parseFloat(
       perDaySalary || data?.data?.perDaySalary
     );
@@ -92,9 +91,9 @@ const SalaryUpdate = () => {
     <>
       <SectionTitle title="Employee update" />
       <Form
+        form={form}
         {...formItemLayout}
         onFinish={onFinish}
-        form={form}
         initialValues={initialValues}
       >
         <CustomInput
@@ -109,13 +108,9 @@ const SalaryUpdate = () => {
           name="designation"
           rules={[{ required: true, message: "Please select Designation! " }]}
         >
-          <Select
-            style={{ width: "100%" }}
-            defaultValue="Please select"
-            options={designationOption}
-          />
+          <Select style={{ width: "100%" }} options={designationOption} />
         </Form.Item>
-        <Form.Item label="Working Days" name="workingDays" initialValue={26}>
+        <Form.Item label="Working Days" name="workingDays">
           <InputNumber style={{ width: "100%" }} disabled />
         </Form.Item>
         <Form.Item
@@ -125,7 +120,6 @@ const SalaryUpdate = () => {
         >
           <Select
             style={{ width: "100%" }}
-            defaultValue="Please select"
             options={[
               { value: "P", label: "P" },
               { value: "A", label: "A" },

@@ -76,7 +76,7 @@ const ProductionAddForm = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select"
+          placeholder="Please select Style"
           options={styleOption}
         />
       </Form.Item>
@@ -101,7 +101,7 @@ const ProductionAddForm = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select"
+          placeholder="Please select line number"
           options={[
             { value: "line 1 / 3rd floor", label: "line 1 / 3rd floor" },
             { value: "line 2 / 4th floor", label: "line 2 / 4th floor" },

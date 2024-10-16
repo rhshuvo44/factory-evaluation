@@ -7,6 +7,7 @@ import {
   InputNumberProps,
   Select,
 } from "antd";
+import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
@@ -16,7 +17,6 @@ import { TMiscellaneous } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
-import dayjs, { Dayjs } from "dayjs";
 const MiscellaneousAdd = () => {
   const [form] = Form.useForm();
   const [unit, setUnit] = useState<number>(0);
@@ -115,7 +115,7 @@ const MiscellaneousAdd = () => {
       >
         <Select
           style={{ width: "100%" }}
-          defaultValue="Please select Payment Type"
+          placeholder="Please select Payment Type"
           options={paymentOptions}
         />
       </Form.Item>

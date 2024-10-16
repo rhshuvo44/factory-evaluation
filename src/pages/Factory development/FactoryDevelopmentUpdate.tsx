@@ -80,9 +80,9 @@ const FactoryDevelopmentUpdate = () => {
     <>
       <SectionTitle title="Factory Development update" />
       <Form
+        form={form}
         {...formItemLayout}
         onFinish={onFinish}
-        form={form}
         initialValues={initialValues}
       >
         <CustomInput
@@ -112,7 +112,6 @@ const FactoryDevelopmentUpdate = () => {
         >
           <Select
             style={{ width: "100%" }}
-            defaultValue="Please select Ordered By"
             options={[
               { value: "M.D", label: "M.D" },
               { value: "Chairman", label: "Chairman" },
@@ -126,7 +125,6 @@ const FactoryDevelopmentUpdate = () => {
         >
           <Select
             style={{ width: "100%" }}
-            defaultValue="Please select Pay to"
             options={[
               { value: "Sarkar Alliance OPC", label: "Sarkar Alliance OPC" },
               { value: "M.D", label: "M.D" },
@@ -149,7 +147,6 @@ const FactoryDevelopmentUpdate = () => {
         >
           <Select
             style={{ width: "100%" }}
-            defaultValue="Please select payment type"
             options={[
               { value: "Bank", label: "Bank" },
               { value: "Cash", label: "Cash" },

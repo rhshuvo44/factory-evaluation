@@ -42,7 +42,13 @@ const FixedCostTable = () => {
         </div>
       </div>
       <div className="responsive-table-container">
-        <Table<TFixed> size="small" dataSource={data?.data?.result}>
+        <Table<TFixed>
+          size="small"
+          dataSource={data?.data?.result.map((item: TFixed) => ({
+            ...item,
+            key: item._id,
+          }))}
+        >
           <Column
             title="SL"
             key="slNo"
