@@ -30,7 +30,11 @@ const HeaderMenu = () => {
   ];
   const date = new Date();
   return (
-    <Header className="flex items-center gap-1 md:gap-5 justify-between">
+    <Header
+      style={{ position: "sticky", top: 0, zIndex: 1, width: "100%" }}
+      className="flex items-center gap-1 md:gap-5 justify-between"
+    >
+      
       <div className="flex items-center md:px-8 text-white justify-center">
         <h3 className="text-sm md:font-bold md:text-2xl lg:text-3xl capitalize text-primary md:mr-3">
           Hello {data?.data?.name},

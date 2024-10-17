@@ -133,13 +133,7 @@ const FactoryDevelopmentUpdate = () => {
           />
         </Form.Item>
 
-        {/* <Form.Item
-        label="Date"
-        name="date"
-        rules={[{ required: true, message: "Please input! Date" }]}
-      >
-        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
-      </Form.Item> */}
+     
         <Form.Item
           label="Payment Type"
           name="paymentType"

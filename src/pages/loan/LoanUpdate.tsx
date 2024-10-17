@@ -6,13 +6,13 @@ import CustomInput from "../../components/form/CustomInput";
 import CustomInputNumber from "../../components/form/CustomInputNumber";
 import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
+import SectionTitle from "../../components/ui/SectionTitle";
 import { formItemLayout } from "../../constants/formItemLayout";
 import {
   useSingleLoanQuery,
   useUpdateLoanMutation,
 } from "../../redux/features/loan/loanApi";
 import { TLoan } from "../../types";
-import SectionTitle from "../../components/ui/SectionTitle";
 
 const LoanUpdate = () => {
   const [form] = Form.useForm();
@@ -35,7 +35,6 @@ const LoanUpdate = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
-  
 
   useEffect(() => {
     const unitValue = unit || result?.unit;

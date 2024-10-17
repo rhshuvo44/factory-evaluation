@@ -45,7 +45,7 @@ const SalaryTable = () => {
       render: (_: any, record: { key: string; photo: string }) => (
         <img
           src={record.photo}
-          alt="Uploaded"
+          alt="Employee Photo"
           style={{ width: "50px", height: "50px", objectFit: "cover" }}
         />
       ),

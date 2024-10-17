@@ -67,7 +67,12 @@ const SideBar = () => {
   return (
     <Sider
       style={{
-        width: "100%",
+        // width: "100%",
+        height: "100%",
+        minHeight: "100vh",
+        position: "sticky",
+        top: "0",
+        left: "0",
       }}
       // width={250}
       breakpoint="lg"
@@ -79,7 +84,7 @@ const SideBar = () => {
         console.log(collapsed, type);
       }}
     >
-      <div className="m-5">
+      <div className="m-5" >
         <img src={logo} alt="logo" />
       </div>
       <Menu
