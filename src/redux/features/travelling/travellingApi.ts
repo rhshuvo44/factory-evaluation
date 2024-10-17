@@ -5,8 +5,15 @@ const travelApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllTravellings: builder.query({
             query: () => (
-                { url: `/travelling-allowance`, method: 'GET' }
-            ), providesTags: ['Travelling'],
+                { url: `/travelling-allowance`, method: 'GET' }),
+            // transformResponse: (responsive: TResponseRedux<TTravel>) => {
+            //     return {
+            //         data: responsive.data,
+            //         meta: responsive.meta,
+            //         totalPrice: responsive.totalPrice
+            //     };
+            // }, 
+            providesTags: ['Travelling'],
         }),
         getTodayTravellings: builder.query({
             query: () => (

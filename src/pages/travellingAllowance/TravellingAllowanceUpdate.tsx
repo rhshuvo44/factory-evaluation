@@ -69,9 +69,10 @@ const TravellingAllowanceUpdate = () => {
   };
   return (
     <>
-      <SectionTitle title="Travelling Allowance" />
+      <SectionTitle title="Travelling Allowance Update" />
       <Form
         form={form}
+        name="Travelling Allowance update form"
         {...formItemLayout}
         onFinish={onFinish}
         initialValues={initialValues}

@@ -99,6 +99,7 @@ export const travellingColums = [
         title: "Particulars",
         dataIndex: "particulars",
         key: "particulars",
+        
     },
     {
         title: "Description",

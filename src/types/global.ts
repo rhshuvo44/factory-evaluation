@@ -20,6 +20,7 @@ export type TResponse<T> = {
     data?: T;
     error?: TError;
     meta?: TMeta;
+    totalPrice?: number
     success: boolean;
     message: string;
 };

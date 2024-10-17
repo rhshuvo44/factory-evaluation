@@ -133,8 +133,7 @@ const SalaryTable = () => {
       <div className="flex  items-center justify-between mb-2">
         <SectionTitle title=" Employee Sheet" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
-          Total cost :
-          <span className="text-red-500"> {data?.data?.totalPrice}</span>
+          Total cost :<span className="text-red-500"> {data?.totalPrice}</span>
         </div>
       </div>
       <div className="responsive-table-container">
@@ -143,10 +142,11 @@ const SalaryTable = () => {
           className="table-auto"
           bordered
           columns={colums}
-          dataSource={data?.data?.result}
+          dataSource={data?.data}
           rowKey="_id"
           pagination={{
             current: currentPage,
+            total: data?.meta?.total,
             pageSize: pageSize,
             onChange: (page, pageSize) => {
               setCurrentPage(page);

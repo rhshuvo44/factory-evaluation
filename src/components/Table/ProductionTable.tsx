@@ -36,7 +36,7 @@ const ProductionTable = () => {
     limit: pageSize,
     skip: (currentPage - 1) * pageSize,
   });
-  // console.log(data);
+
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
@@ -80,12 +80,12 @@ const ProductionTable = () => {
               ]
             : []),
         ]}
-        dataSource={data?.data?.result}
+        dataSource={data?.data}
         rowKey="_id"
         pagination={{
           current: currentPage,
           pageSize: pageSize,
-          // total: data?.data.meta.total,
+          total: data?.meta.total,
           onChange: (page, pageSize) => {
             setCurrentPage(page);
             setPageSize(pageSize);

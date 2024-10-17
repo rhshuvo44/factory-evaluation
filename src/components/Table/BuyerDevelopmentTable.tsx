@@ -44,7 +44,7 @@ const BuyerDevelopmentTable = () => {
         <SectionTitle title="Buyer Development cost" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :
-          <span className="text-red-500"> {data?.data?.totalPrice}</span>
+          <span className="text-red-500"> {data?.totalPrice}</span>
         </div>
       </div>
       <div className="responsive-table-container">
@@ -83,12 +83,12 @@ const BuyerDevelopmentTable = () => {
                 ]
               : []),
           ]}
-          dataSource={data?.data?.result}
+          dataSource={data?.data}
           rowKey="_id"
           pagination={{
             current: currentPage,
             pageSize: pageSize,
-            // total: data?.data.meta.total,
+            total: data?.meta.total,
             onChange: (page, pageSize) => {
               setCurrentPage(page);
               setPageSize(pageSize);
