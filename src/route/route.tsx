@@ -7,6 +7,7 @@ import Forget from "../pages/Forget";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import ResetPassword from "../pages/ResetPassword";
+import Setting from "../pages/Setting";
 import { routeGenerator } from "../utilis/routesGenerator";
 import { adminPaths } from "./admin.routes";
 import { coordinatorPaths } from "./Coordinator.routes";
@@ -16,12 +17,44 @@ import { managingPaths } from "./ManagingDirector.routes";
 
 export const router = createBrowserRouter([
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/forget-password",
+    element: <Forget />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
+  },
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+    ],
+  },
+  {
     path: "/me",
     element: <App />,
     children: [
       {
         index: true,
         element: <Profile />,
+      },
+    ],
+  },
+  {
+    path: "/settings",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Setting />,
       },
     ],
   },
@@ -69,27 +102,5 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: routeGenerator(coordinatorPaths),
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/forget-password",
-    element: <Forget />,
-  },
-  {
-    path: "/reset-password",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      },
-    ],
   },
 ]);
