@@ -48,14 +48,19 @@ const UserTable = () => {
                 render: (item: TUSer) => {
                   return (
                     <Space>
-                      <Link to={`/${user!.role}/user/${item._id}`}>Edit</Link>
-
-                      <Button
-                        danger
-                        onClick={() => handleDeleted(item._id as string)}
-                      >
-                        Delete
-                      </Button>
+                      {user!.userId !== item._id && (
+                        <>
+                          <Link to={`/${user!.role}/user/${item._id}`}>
+                            Edit
+                          </Link>
+                          <Button
+                            danger
+                            onClick={() => handleDeleted(item._id as string)}
+                          >
+                            Delete
+                          </Button>
+                        </>
+                      )}
                     </Space>
                   );
                 },
