@@ -4,12 +4,8 @@ import SectionTitle from "../../components/ui/SectionTitle";
 const AddUser = () => {
   return (
     <>
-     
       <SectionTitle title="Add User form" />
-
-      <div>
-        <UserForm />
-      </div>
+      <UserForm />
     </>
   );
 };

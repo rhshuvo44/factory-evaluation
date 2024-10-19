@@ -5,9 +5,7 @@ const LoanForm = () => {
   return (
     <>
       <SectionTitle title=" Loan Return" />
-      <div className="responsive-table-container">
-        <LoanAdd />
-      </div>
+      <LoanAdd />
     </>
   );
 };

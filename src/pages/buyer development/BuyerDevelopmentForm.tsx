@@ -5,10 +5,7 @@ const BuyerDevelopmentForm = () => {
   return (
     <>
       <SectionTitle title=" Buyer Development Cost Add form" />
-
-      <div>
-        <BuyerDevelopmentAdd />
-      </div>
+      <BuyerDevelopmentAdd />
     </>
   );
 };

@@ -5,10 +5,7 @@ const MiscellaneousForm = () => {
   return (
     <>
       <SectionTitle title=" Miscellaneous Form" />
-
-      <div>
-        <MiscellaneousAdd />
-      </div>
+      <MiscellaneousAdd />
     </>
   );
 };

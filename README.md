@@ -21,7 +21,7 @@ The **Factory Evaluation - SMD** project aims to develop a monolithic REST syste
 - **username**: admin
 - **password**: admin12345
 
-## Live
+## Live Link
 
 - **Backend Live Link**: [Click Me](https://factory-backend.vercel.app/)
 - **Client Live Link**: [Click Me](https://factory-evaluation.vercel.app/)

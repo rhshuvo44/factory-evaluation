@@ -5,9 +5,7 @@ const CollectionForm = () => {
   return (
     <>
       <SectionTitle title=" Collection Add Form" />
-      <div>
-        <CollectionAdd />
-      </div>
+      <CollectionAdd />
     </>
   );
 };

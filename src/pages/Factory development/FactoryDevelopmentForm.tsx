@@ -5,9 +5,7 @@ const FactoryDevelopmentForm = () => {
   return (
     <>
       <SectionTitle title=" Factory Development cost" />
-      <div className="responsive-table-container">
-        <FactoryDevelopmentAdd />
-      </div>
+      <FactoryDevelopmentAdd />
     </>
   );
 };

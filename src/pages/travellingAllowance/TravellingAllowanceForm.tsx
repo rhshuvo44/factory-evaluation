@@ -5,10 +5,7 @@ const TravellingAllowanceForm = () => {
   return (
     <>
       <SectionTitle title=" Travelling Allowance Form" />
-
-      <div>
-        <TravellingForm />
-      </div>
+      <TravellingForm />
     </>
   );
 };

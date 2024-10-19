@@ -5,9 +5,7 @@ const SalaryForm = () => {
   return (
     <>
       <SectionTitle title="Salary Add Form" />
-      <div>
-        <SalaryAddForm />
-      </div>
+      <SalaryAddForm />
     </>
   );
 };
