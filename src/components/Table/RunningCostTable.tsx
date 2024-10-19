@@ -156,7 +156,7 @@ const RunningCostTable = () => {
     })),
 
     { ...miscData?.data, particulars: "Miscellaneous" },
-    { ...travelData?.data, particulars: "Travel" },
+    { ...travelData?.data, particulars: "Travelling Allowance" },
     { ...buyerData?.data, particulars: "Buyer Development" },
     { ...factoryData?.data, particulars: "Factory Development" },
     { ...loanData?.data, particulars: "Loan Returns" },
