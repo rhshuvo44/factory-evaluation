@@ -30,7 +30,7 @@ const UserTable = () => {
   };
 
   const { data, isError, isLoading } = useGetUserQuery(undefined);
-
+  console.log(data);
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
@@ -68,12 +68,12 @@ const UserTable = () => {
             ]
           : []),
       ]}
-      dataSource={data?.data?.result}
+      dataSource={data?.data}
       rowKey="_id"
       pagination={{
         current: currentPage,
         pageSize: pageSize,
-        // total: data?.total,
+        total: data?.meta?.total,
         onChange: (page, pageSize) => {
           setCurrentPage(page);
           setPageSize(pageSize);
