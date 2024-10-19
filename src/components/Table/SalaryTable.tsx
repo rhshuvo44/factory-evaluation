@@ -125,7 +125,6 @@ const SalaryTable = () => {
     limit: pageSize,
     skip: (currentPage - 1) * pageSize,
   });
-
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (

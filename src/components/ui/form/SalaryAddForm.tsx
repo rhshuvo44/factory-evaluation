@@ -22,8 +22,8 @@ const getBase64 = (file: FileType): Promise<string> =>
 const SalaryAddForm = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [photo, setPhoto] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [photo, setPhoto] = useState<File | undefined>(undefined);
   const [form] = Form.useForm();
   const [perDaySalary, setPerDaySalary] = useState<number>(0);
   const [overTime, setOverTime] = useState<number>(0);
@@ -53,7 +53,17 @@ const SalaryAddForm = () => {
   };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    // console.log(newFileList?.originFileObj);
     setFileList(newFileList);
+
+    // if (newFileList.length > 0) {
+    //   //+
+    //   const file = newFileList[newFileList.length - 1]; //+
+    //   if (file.originFileObj) {
+    //     //+
+    //     setPhoto(file.originFileObj); //+
+    //   } //+
+    // } //+
   };
 
   const customRequest = async ({ file, onSuccess, onError }: any) => {
@@ -93,12 +103,25 @@ const SalaryAddForm = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
-
+  // console.log(photo);
   const onFinish = async (values: TSalary) => {
+    // const formData = new FormData();
+    // if (photo) {
+    //   formData.append("file", photo);
+    // }
+    // // if (fileList) {
+    // //   formData.append("file", fileList.originFileObj);
+    // // }
+    // // fileList.forEach((file) => {
+    // //   formData.append(`file`, file.originFileObj ?? new File([], "")); // append file to FormData
+    // // });
+    // formData.append("data", JSON.stringify(values));
+    // console.log(Object.fromEntries(formData));
     const res = await createEmployee({
       ...values,
       photo: photo,
     }).unwrap();
+    // const res = await createEmployee(formData).unwrap();
 
     if (!res.success) return toast.error(res.message);
     toast.success("Create successfully");
@@ -146,6 +169,13 @@ const SalaryAddForm = () => {
       <Form.Item label="Salary" name="salary">
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
+      {/* <Form.Item label="Salary" name="photo">
+        <Input
+          type="file"
+          style={{ width: "100%" }}
+          onChange={(e) => setPhoto(e.target.files?.[0])}
+        />
+      </Form.Item> */}
       <Form.Item
         label="Per Day Salary"
         name="perDaySalary"

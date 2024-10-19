@@ -12,9 +12,6 @@ const baseQuery = fetchBaseQuery({
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
-        if (!headers.has("Content-Type")) {
-            headers.set("Content-Type", "application/json");
-        }
         if (token) {
             headers.set('authorization', `Bearer ${token}`)
         }
@@ -44,7 +41,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
             credentials: 'include',
         });
         const data = await res.json();
-      
+
         if (data?.data) {
             const user = (api.getState() as RootState).auth.user;
             api.dispatch(
