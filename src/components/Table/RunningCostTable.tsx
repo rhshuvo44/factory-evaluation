@@ -1,5 +1,4 @@
 import { Table } from "antd";
-import { useState } from "react";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { useGetTodayEmployeesQuery } from "../../redux/features/employee/employeeApi";
 import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
@@ -14,9 +13,6 @@ import SectionTitle from "../ui/SectionTitle";
 import EvaluationTable from "./EvaluationTable";
 
 const RunningCostTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-
   const {
     data: miscData,
     isError: isMiscError,
@@ -189,26 +185,19 @@ const RunningCostTable = () => {
           columns={[
             {
               title: "SL",
+              width: 40,
               key: "slNo",
               render: (_, record: { date: string }, index: number) => {
                 console.log(record.date); // Example usage
-                return (currentPage - 1) * pageSize + index + 1;
+                return index + 1;
               },
             },
             ...runningColums,
           ]}
           dataSource={combinedData}
+          scroll={{ y: 55 * 7 }}
           rowKey="_id"
-          // pagination={false}
-          pagination={{
-            current: currentPage,
-            pageSize: pageSize,
-            // total: data?.data.meta.total,
-            onChange: (page, pageSize) => {
-              setCurrentPage(page);
-              setPageSize(pageSize);
-            },
-          }}
+          pagination={false}
         />
       </div>
       <EvaluationTable totalCost={roundCost} />

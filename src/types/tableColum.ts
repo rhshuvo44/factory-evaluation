@@ -3,6 +3,7 @@ export const runningColums = [
         title: "Particulars",
         dataIndex: "particulars",
         key: "particulars",
+        
     },
     {
         title: "Description",

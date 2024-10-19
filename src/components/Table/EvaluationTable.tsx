@@ -42,7 +42,7 @@ const EvaluationTable = ({ totalCost }: { totalCost: number }) => {
   ];
   return (
     <div>
-      <div className="flex  items-center justify-between mb-2">
+      <div className="flex  items-center justify-between my-2">
         <SectionTitle title="Factory Evaluation Cost" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           {totalCost >= amount ? (
