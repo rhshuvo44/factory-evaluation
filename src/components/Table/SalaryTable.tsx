@@ -37,7 +37,6 @@ const SalaryTable = () => {
       dataIndex: "id",
       key: "id",
     },
-
     {
       title: "Photo",
       dataIndex: "photo",

@@ -53,49 +53,23 @@ const SalaryAddForm = () => {
   };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    // console.log(newFileList?.originFileObj);
+    
     setFileList(newFileList);
 
-    // if (newFileList.length > 0) {
-    //   //+
-    //   const file = newFileList[newFileList.length - 1]; //+
-    //   if (file.originFileObj) {
-    //     //+
-    //     setPhoto(file.originFileObj); //+
-    //   } //+
-    // } //+
+    if (newFileList.length > 0) {
+      
+      const file = newFileList[newFileList.length - 1]; 
+      if (file.originFileObj) {
+        
+        setPhoto(file.originFileObj); 
+      } 
+    } 
   };
 
-  const customRequest = async ({ file, onSuccess, onError }: any) => {
-    const url = `https://api.cloudinary.com/v1_1/dyir8kd22/image/upload`;
-    const formData = new FormData();
-    const uploadPreset = "yke0e4pl"; // Replace with your actual upload preset
-
-    formData.append("upload_preset", uploadPreset);
-    formData.append("file", file);
-
-    // console.log("Uploading file:", file);
-    // console.log("Form Data:", formData); // Check the form data being sent
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        console.error("Upload failed:", errorResponse);
-        throw new Error(`Upload failed: ${errorResponse.message}`);
-      }
-
-      const result = await response.json();
-      setPhoto(result.url);
-      onSuccess(result, file);
-    } catch (error) {
-      console.error("Error uploading to Cloudinary:", error);
-      onError(new Error("Upload failed."));
-    }
+  const customRequest = async ({ file, onSuccess }: any) => {
+  
+    onSuccess(file);
+    
   };
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
@@ -105,23 +79,13 @@ const SalaryAddForm = () => {
   );
   // console.log(photo);
   const onFinish = async (values: TSalary) => {
-    // const formData = new FormData();
-    // if (photo) {
-    //   formData.append("file", photo);
-    // }
-    // // if (fileList) {
-    // //   formData.append("file", fileList.originFileObj);
-    // // }
-    // // fileList.forEach((file) => {
-    // //   formData.append(`file`, file.originFileObj ?? new File([], "")); // append file to FormData
-    // // });
-    // formData.append("data", JSON.stringify(values));
-    // console.log(Object.fromEntries(formData));
-    const res = await createEmployee({
-      ...values,
-      photo: photo,
-    }).unwrap();
-    // const res = await createEmployee(formData).unwrap();
+    const formData = new FormData();
+    if (photo) {
+      formData.append("file", photo);
+    }
+    formData.append("data", JSON.stringify(values));
+    
+    const res = await createEmployee(formData).unwrap();
 
     if (!res.success) return toast.error(res.message);
     toast.success("Create successfully");
@@ -169,13 +133,7 @@ const SalaryAddForm = () => {
       <Form.Item label="Salary" name="salary">
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
-      {/* <Form.Item label="Salary" name="photo">
-        <Input
-          type="file"
-          style={{ width: "100%" }}
-          onChange={(e) => setPhoto(e.target.files?.[0])}
-        />
-      </Form.Item> */}
+    
       <Form.Item
         label="Per Day Salary"
         name="perDaySalary"
