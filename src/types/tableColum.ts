@@ -206,69 +206,8 @@ export const productionColums = [
         dataIndex: "remark",
         key: "remark",
     },
-    // Grouping Cutting Section
-    {
-        title: "Cutting Section",
-        children: [
-            {
-                title: "Target",
-                dataIndex: ["cuttingSection", 0, "target"],
-                key: "cuttingTarget",
-            },
-            {
-                title: "WIP",
-                dataIndex: ["cuttingSection", 0, "wip"],
-                key: "cuttingWIP",
-            },
-            {
-                title: "Output",
-                dataIndex: ["cuttingSection", 0, "output"],
-                key: "cuttingOutput",
-            },
-        ],
-    },
-    // Grouping sewing Section
-    {
-        title: "sewing Section",
-        children: [
-            {
-                title: "Target",
-                dataIndex: ["sewingSection", 0, "target"],
-                key: "sewingTarget",
-            },
-            {
-                title: "WIP",
-                dataIndex: ["sewingSection", 0, "wip"],
-                key: "sewingWIP",
-            },
-            {
-                title: "Output",
-                dataIndex: ["sewingSection", 0, "output"],
-                key: "sewingOutput",
-            },
-        ],
-    },
-    // Grouping Finishing Section
-    {
-        title: "Finishing Section",
-        children: [
-            {
-                title: "Target",
-                dataIndex: ["finishing", 0, "target"],
-                key: "finishingTarget",
-            },
-            {
-                title: "WIP",
-                dataIndex: ["finishing", 0, "wip"],
-                key: "finishingWIP",
-            },
-            {
-                title: "Output",
-                dataIndex: ["finishing", 0, "output"],
-                key: "finishingOutput",
-            },
-        ],
-    },
+
+
 ];
 
 export const misColumns = [
@@ -592,5 +531,113 @@ export const buyerColums = [
         title: "Total Price",
         dataIndex: "totalPrice",
         key: "totalPrice",
+    },
+];
+
+export const targetOutputColums = [
+    {
+        title: "SL",
+        dataIndex: "slNo",
+        key: "slNo",
+    },
+
+    {
+        title: "Date",
+        dataIndex: "date",
+        key: "date",
+    },
+    {
+        title: "Color",
+        dataIndex: "color",
+        key: "color",
+    },
+    {
+        title: "Style No",
+        dataIndex: "styleNo",
+        key: "styleNo",
+    },
+    {
+        title: "Buyer",
+        dataIndex: "buyer",
+        key: "buyer",
+    },
+    {
+        title: "Order No ",
+        dataIndex: "orderNo",
+        key: "orderNo",
+    },
+    {
+        title: "Order Quantity",
+        dataIndex: "orderQuantity",
+        key: "orderQuantity",
+    },
+
+    {
+        title: "Remark",
+        dataIndex: "remark",
+        key: "remark",
+    },
+    // Grouping Cutting Section
+    {
+        title: "Cutting Section",
+        children: [
+            {
+                title: "Target",
+                dataIndex: ["cuttingSection", 0, "target"],
+                key: "cuttingTarget",
+            },
+            {
+                title: "WIP",
+                dataIndex: ["cuttingSection", 0, "wip"],
+                key: "cuttingWIP",
+            },
+            {
+                title: "Output",
+                dataIndex: ["cuttingSection", 0, "output"],
+                key: "cuttingOutput",
+            },
+        ],
+    },
+    // Grouping sewing Section
+    {
+        title: "Sewing Section",
+        children: [
+            {
+                title: "Target",
+                dataIndex: ["sewingSection", 0, "target"],
+                key: "sewingTarget",
+            },
+            {
+                title: "WIP",
+                dataIndex: ["sewingSection", 0, "wip"],
+                key: "sewingWIP",
+            },
+            {
+                title: "Output",
+                dataIndex: ["sewingSection", 0, "output"],
+                key: "sewingOutput",
+            },
+        ],
+    },
+    // Grouping Finishing Section
+    {
+        title: "Finishing Section",
+        children: [
+            {
+                title: "Target",
+                dataIndex: ["finishing", 0, "target"],
+                key: "finishingTarget",
+            },
+            {
+                title: "WIP",
+                dataIndex: ["finishing", 0, "wip"],
+                key: "finishingWIP",
+            },
+            {
+                title: "Output",
+                dataIndex: ["finishing", 0, "output"],
+                key: "finishingOutput",
+            },
+        ],
     },
 ];

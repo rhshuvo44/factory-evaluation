@@ -23,6 +23,9 @@ import ProductionUpdate from "../pages/Production/ProductionUpdate";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import SalaryUpdate from "../pages/salary/SalaryUpdate";
+import TargetOutput from "../pages/targetOutput/TargetOutput";
+import TargetOutputAdd from "../pages/targetOutput/TargetOutputAdd";
+import TargetOutputUpdate from "../pages/targetOutput/TargetOutputUpdate";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAllowanceUpdate";
@@ -227,6 +230,20 @@ export const adminPaths = [
         name: "All Production Report",
         path: "all_production_reports",
         element: <Production />,
+      },
+      {
+        name: "Add Target",
+        path: "add_target",
+        element: <TargetOutputAdd />,
+      },
+      {
+        path: "target/:id",
+        element: <TargetOutputUpdate />,
+      },
+      {
+        name: "All Target",
+        path: "all_target",
+        element: <TargetOutput />,
       },
     ],
   },

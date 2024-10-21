@@ -10,6 +10,9 @@ import Production from "../pages/Production/Production";
 import ProductionAdd from "../pages/Production/ProductionAdd";
 import ProductionUpdate from "../pages/Production/ProductionUpdate";
 import Salary from "../pages/salary/Salary";
+import TargetOutput from "../pages/targetOutput/TargetOutput";
+import TargetOutputAdd from "../pages/targetOutput/TargetOutputAdd";
+import TargetOutputUpdate from "../pages/targetOutput/TargetOutputUpdate";
 import Utility from "../pages/utility/Utility";
 
 export const coordinatorPaths = [
@@ -80,6 +83,20 @@ export const coordinatorPaths = [
         name: "All Production Report",
         path: "all_production_reports",
         element: <Production />,
+      },
+      {
+        name: "Add Target",
+        path: "add_target",
+        element: <TargetOutputAdd />,
+      },
+      {
+        path: "target/:id",
+        element: <TargetOutputUpdate />,
+      },
+      {
+        name: "All Target",
+        path: "all_target",
+        element: <TargetOutput />,
       },
     ],
   },

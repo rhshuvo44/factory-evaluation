@@ -5,16 +5,15 @@ import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
-  useDeletedProductionMutation,
-  useGetAllProductionQuery,
-} from "../../redux/features/productionReport/productionApi";
+  useDeletedTargetOutputMutation,
+  useGetAllTargetOutputQuery,
+} from "../../redux/features/targetOutput/targetOutputApi";
 import { useAppSelector } from "../../redux/hook";
-import { productionColums } from "../../types";
-import { TProductionReport } from "../../types/tableType";
+import { targetOutputColums, TTargetReport } from "../../types";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 
-const ProductionTable = () => {
+const TargetOutputTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const token = useAppSelector(useCurrentToken);
@@ -24,15 +23,15 @@ const ProductionTable = () => {
   if (token) {
     user = verifyToken(token) as TUser;
   }
-  const [deleteProduction] = useDeletedProductionMutation();
+  const [deleteTargetOutput] = useDeletedTargetOutputMutation();
   const handleDeleted = async (id: string) => {
-    const res = await deleteProduction(id);
+    const res = await deleteTargetOutput(id);
     if (res.data.success) {
-      toast.success("Production report deleted successfully.");
+      toast.success("Target report deleted successfully.");
     }
   };
 
-  const { data, isError, isLoading } = useGetAllProductionQuery({
+  const { data, isError, isLoading } = useGetAllTargetOutputQuery({
     limit: pageSize,
     skip: (currentPage - 1) * pageSize,
   });
@@ -42,21 +41,22 @@ const ProductionTable = () => {
   return (
     <div className="responsive-table-container">
       <Table
+        scroll={{ x: 1500 }}
         size="small"
         className="table-auto"
         bordered
         columns={[
-          ...productionColums,
+          ...targetOutputColums,
           ...(user?.role === userRole.ADMIN ||
           user?.role === userRole.Coordinator
             ? [
                 {
                   title: "Action",
                   key: "action",
-                  render: (item: TProductionReport) => {
+                  render: (item: TTargetReport) => {
                     return (
                       <Space>
-                        <Link to={`/${user!.role}/production/${item._id}`}>
+                        <Link to={`/${user!.role}/target/${item._id}`}>
                           Edit
                         </Link>
                         <Button
@@ -94,4 +94,4 @@ const ProductionTable = () => {
   );
 };
 
-export default ProductionTable;
+export default TargetOutputTable;

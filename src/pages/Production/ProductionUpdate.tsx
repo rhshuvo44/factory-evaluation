@@ -1,4 +1,4 @@
-import { Button, Form, InputNumber, Select } from "antd";
+import { Button, Form, Select } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import CustomInput from "../../components/form/CustomInput";
@@ -11,7 +11,7 @@ import {
   useSingleProductionQuery,
   useUpdateProductionMutation,
 } from "../../redux/features/productionReport/productionApi";
-import { TProductionInput, TSection } from "../../types";
+import { TProductionReport } from "../../types";
 
 const ProductionUpdate = () => {
   const [form] = Form.useForm();
@@ -31,40 +31,10 @@ const ProductionUpdate = () => {
     color: data?.data?.color,
     orderQuantity: data?.data?.orderQuantity,
     readyQuantity: data?.data?.readyQuantity,
-    sewingSection: {
-      sewingTarget: data?.data.sewingSection[0].target,
-      sewingWIP: data?.data.sewingSection[0].wip,
-      sewingOutput: data?.data.sewingSection[0].output,
-    },
-    finishing: {
-      finishingTarget: data?.data.finishing[0].target,
-      finishingWIP: data?.data.finishing[0].wip,
-      finishingOutput: data?.data.finishing[0].output,
-    },
     remark: data?.data?.remark,
-    cuttingSection: {
-      cuttingTarget: data?.data.cuttingSection[0].target,
-      cuttingWIP: data?.data.cuttingSection[0].wip,
-      cuttingOutput: data?.data.cuttingSection[0].output,
-    },
   };
   if (isLoading) return <Loading />;
-  const onFinish = async (values: TProductionInput) => {
-    const cutting: TSection = {
-      target: values.cuttingSection.cuttingTarget, // Access from cuttingSection
-      wip: values.cuttingSection.cuttingWIP,
-      output: values.cuttingSection.cuttingOutput,
-    };
-    const sewing: TSection = {
-      target: values.sewingSection.sewingTarget, // Access from sewingSection
-      wip: values.sewingSection.sewingWIP,
-      output: values.sewingSection.sewingOutput,
-    };
-    const finishing: TSection = {
-      target: values.finishing.finishingTarget, // Access from finishing
-      wip: values.finishing.finishingWIP,
-      output: values.finishing.finishingOutput,
-    };
+  const onFinish = async (values: TProductionReport) => {
     const productionData = {
       lineNo: values.lineNo,
       buyer: values.buyer,
@@ -73,10 +43,8 @@ const ProductionUpdate = () => {
       color: values.color,
       orderQuantity: values.orderQuantity,
       readyQuantity: values.readyQuantity,
-      sewingSection: [sewing],
-      finishing: [finishing],
+
       remark: values.remark,
-      cuttingSection: [cutting],
     };
     const updateData = {
       id,
@@ -89,7 +57,7 @@ const ProductionUpdate = () => {
   };
   return (
     <>
-      <SectionTitle title="Utility update" />
+      <SectionTitle title="Production Report update" />
       <Form
         initialValues={initialValues}
         {...formItemLayout}
@@ -162,122 +130,6 @@ const ProductionUpdate = () => {
           message="Please input! Remark"
           placeholder="please input Remark"
         />
-        {/* Cutting Section */}
-        <Form.Item
-          label="Cutting Section"
-          style={{ marginBottom: 0, display: "block" }}
-        >
-          <Form.Item
-            label="Target"
-            name={["cuttingSection", "cuttingTarget"]}
-            rules={[{ required: true }]}
-            style={{ display: "inline-block", width: "calc(32% - 8px)" }}
-          >
-            <InputNumber placeholder="Target" />
-          </Form.Item>
-          <Form.Item
-            label="WIP"
-            name={["cuttingSection", "cuttingWIP"]}
-            rules={[{ required: true }]}
-            style={{
-              display: "inline-block",
-              width: "calc(32% - 8px)",
-              margin: "0 8px",
-            }}
-          >
-            <InputNumber placeholder="WIP" />
-          </Form.Item>
-          <Form.Item
-            label="Output"
-            name={["cuttingSection", "cuttingOutput"]}
-            rules={[{ required: true }]}
-            style={{
-              display: "inline-block",
-              width: "calc(32% - 8px)",
-              margin: "0 8px",
-            }}
-          >
-            <InputNumber placeholder="Output" />
-          </Form.Item>
-        </Form.Item>
-
-        {/* Selling Section */}
-        <Form.Item
-          label="sewing Section"
-          style={{ marginBottom: 0, display: "block" }}
-        >
-          <Form.Item
-            label="Target"
-            name={["sewingSection", "sewingTarget"]}
-            rules={[{ required: true }]}
-            style={{ display: "inline-block", width: "calc(32% - 8px)" }}
-          >
-            <InputNumber placeholder="Target" />
-          </Form.Item>
-          <Form.Item
-            label="WIP"
-            name={["sewingSection", "sewingWIP"]}
-            rules={[{ required: true }]}
-            style={{
-              display: "inline-block",
-              width: "calc(32% - 8px)",
-              margin: "0 8px",
-            }}
-          >
-            <InputNumber placeholder="WIP" />
-          </Form.Item>
-          <Form.Item
-            label="Output"
-            name={["sewingSection", "sewingOutput"]}
-            rules={[{ required: true }]}
-            style={{
-              display: "inline-block",
-              width: "calc(32% - 8px)",
-              margin: "0 8px",
-            }}
-          >
-            <InputNumber placeholder="Output" />
-          </Form.Item>
-        </Form.Item>
-
-        {/* Finishing Section */}
-        <Form.Item
-          label="Finishing Section"
-          style={{ marginBottom: 0, display: "block" }}
-        >
-          <Form.Item
-            label="Target"
-            name={["finishing", "finishingTarget"]}
-            rules={[{ required: true }]}
-            style={{ display: "inline-block", width: "calc(32% - 8px)" }}
-          >
-            <InputNumber placeholder="Target" />
-          </Form.Item>
-          <Form.Item
-            label="WIP"
-            name={["finishing", "finishingWIP"]}
-            rules={[{ required: true }]}
-            style={{
-              display: "inline-block",
-              width: "calc(32% - 8px)",
-              margin: "0 8px",
-            }}
-          >
-            <InputNumber placeholder="WIP" />
-          </Form.Item>
-          <Form.Item
-            label="Output"
-            name={["finishing", "finishingOutput"]}
-            rules={[{ required: true }]}
-            style={{
-              display: "inline-block",
-              width: "calc(32% - 8px)",
-              margin: "0 8px",
-            }}
-          >
-            <InputNumber placeholder="Output" />
-          </Form.Item>
-        </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
           <Button type="primary" htmlType="submit">
