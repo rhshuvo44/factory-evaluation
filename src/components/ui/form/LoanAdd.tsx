@@ -3,6 +3,7 @@ import {
   DatePicker,
   DatePickerProps,
   Form,
+  Input,
   InputNumber,
   InputNumberProps,
   Select,
@@ -13,9 +14,7 @@ import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { useCreateLoanMutation } from "../../../redux/features/loan/loanApi";
 import { TLoan } from "../../../types/tableType";
-import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
-import CustomTextArea from "../../form/CustomTextArea";
 
 const LoanAdd = () => {
   const [form] = Form.useForm();
@@ -45,8 +44,6 @@ const LoanAdd = () => {
     });
   }, [unit, unitPrice, form]);
   const onFinish = async (values: TLoan) => {
-    console.log("Received values of form: ", { ...values, date });
-
     const res = await createLoanMutation({
       ...values,
       date,
@@ -57,19 +54,35 @@ const LoanAdd = () => {
   };
 
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
-      <CustomInput
+    <Form
+      {...formItemLayout}
+      onFinish={onFinish}
+      form={form}
+      initialValues={{ particulars: "Loan Return" }}
+    >
+      <Form.Item
         label="Particulars"
         name="particulars"
-        message="Please input! Particulars"
-        placeholder="please input particular text"
-      />
-      <CustomTextArea
+        rules={[{ required: true, message: "Please Input Particulars! " }]}
+      >
+        <Input
+          disabled
+        />
+      </Form.Item>
+      <Form.Item
         label="Description"
         name="description"
-        message="Please input! Description"
-        placeholder="please input Description"
-      />
+        rules={[{ required: true, message: "Please select Description! " }]}
+      >
+        <Select
+          style={{ width: "100%" }}
+          placeholder="Please select Description"
+          options={[
+            { value: "Emergency Loan Return", label: "Emergency Loan Return" },
+            { value: "EMI Return", label: "EMI Return" },
+          ]}
+        />
+      </Form.Item>
       <CustomInputNumber
         label="Quantity"
         name="quantity"

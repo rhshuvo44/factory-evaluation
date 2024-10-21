@@ -1,10 +1,8 @@
-import { Button, Form, InputNumber, InputNumberProps, Select } from "antd";
+import { Button, Form, Input, InputNumber, InputNumberProps, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import CustomInput from "../../components/form/CustomInput";
 import CustomInputNumber from "../../components/form/CustomInputNumber";
-import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
 import SectionTitle from "../../components/ui/SectionTitle";
 import { formItemLayout } from "../../constants/formItemLayout";
@@ -84,16 +82,30 @@ const LoanUpdate = () => {
         onFinish={onFinish}
         initialValues={initialValues}
       >
-        <CustomInput
+        <Form.Item
           label="Particulars"
           name="particulars"
-          message="Please input! Particulars"
-        />
-        <CustomTextArea
+          rules={[{ required: true, message: "Please Input Particulars! " }]}
+        >
+          <Input disabled />
+        </Form.Item>
+        <Form.Item
           label="Description"
           name="description"
-          message="Please input! Description"
-        />
+          rules={[{ required: true, message: "Please select Description! " }]}
+        >
+          <Select
+            style={{ width: "100%" }}
+            placeholder="Please select Description"
+            options={[
+              {
+                value: "Emergency Loan Return",
+                label: "Emergency Loan Return",
+              },
+              { value: "EMI Return", label: "EMI Return" },
+            ]}
+          />
+        </Form.Item>
         <CustomInputNumber
           label="Quantity"
           name="quantity"

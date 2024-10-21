@@ -37,10 +37,10 @@ const ProductionAddForm = () => {
       wip: values.cuttingSection.cuttingWIP,
       output: values.cuttingSection.cuttingOutput,
     };
-    const selling: TSection = {
-      target: values.sellingSection.sellingTarget, // Access from sellingSection
-      wip: values.sellingSection.sellingWIP,
-      output: values.sellingSection.sellingOutput,
+    const sewing: TSection = {
+      target: values.sewingSection.sewingTarget, // Access from sewingSection
+      wip: values.sewingSection.sewingWIP,
+      output: values.sewingSection.sewingOutput,
     };
     const finishing: TSection = {
       target: values.finishing.finishingTarget, // Access from finishing
@@ -56,7 +56,7 @@ const ProductionAddForm = () => {
       color: values.color,
       orderQuantity: values.orderQuantity,
       readyQuantity: values.readyQuantity,
-      sellingSection: [selling],
+      sewingSection: [sewing],
       finishing: [finishing],
       remark: values.remark,
       cuttingSection: [cutting],
@@ -187,14 +187,14 @@ const ProductionAddForm = () => {
         </Form.Item>
       </Form.Item>
 
-      {/* Selling Section */}
+      {/* sewing Section */}
       <Form.Item
-        label="Selling Section"
+        label="sewing Section"
         style={{ marginBottom: 0, display: "block" }}
       >
         <Form.Item
           label="Target"
-          name={["sellingSection", "sellingTarget"]}
+          name={["sewingSection", "sewingTarget"]}
           rules={[{ required: true }]}
           style={{ display: "inline-block", width: "calc(32% - 8px)" }}
         >
@@ -202,7 +202,7 @@ const ProductionAddForm = () => {
         </Form.Item>
         <Form.Item
           label="WIP"
-          name={["sellingSection", "sellingWIP"]}
+          name={["sewingSection", "sewingWIP"]}
           rules={[{ required: true }]}
           style={{
             display: "inline-block",
@@ -214,7 +214,7 @@ const ProductionAddForm = () => {
         </Form.Item>
         <Form.Item
           label="Output"
-          name={["sellingSection", "sellingOutput"]}
+          name={["sewingSection", "sewingOutput"]}
           rules={[{ required: true }]}
           style={{
             display: "inline-block",

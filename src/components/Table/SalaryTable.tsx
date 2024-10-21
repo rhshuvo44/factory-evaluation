@@ -45,7 +45,13 @@ const SalaryTable = () => {
         <img
           src={record.photo}
           alt="Employee Photo"
-          style={{ width: "50px", height: "50px", objectFit: "cover" }}
+          style={{
+            width: "50px",
+            height: "50px",
+            objectFit: "cover", 
+            borderRadius: "5px", 
+            border: "1px solid #ddd",
+          }}
         />
       ),
     },

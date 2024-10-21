@@ -53,23 +53,18 @@ const SalaryAddForm = () => {
   };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    
     setFileList(newFileList);
 
     if (newFileList.length > 0) {
-      
-      const file = newFileList[newFileList.length - 1]; 
+      const file = newFileList[newFileList.length - 1];
       if (file.originFileObj) {
-        
-        setPhoto(file.originFileObj); 
-      } 
-    } 
+        setPhoto(file.originFileObj);
+      }
+    }
   };
 
   const customRequest = async ({ file, onSuccess }: any) => {
-  
     onSuccess(file);
-    
   };
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
@@ -84,7 +79,7 @@ const SalaryAddForm = () => {
       formData.append("file", photo);
     }
     formData.append("data", JSON.stringify(values));
-    
+
     const res = await createEmployee(formData).unwrap();
 
     if (!res.success) return toast.error(res.message);
@@ -133,7 +128,7 @@ const SalaryAddForm = () => {
       <Form.Item label="Salary" name="salary">
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>
-    
+
       <Form.Item
         label="Per Day Salary"
         name="perDaySalary"
@@ -189,6 +184,7 @@ const SalaryAddForm = () => {
             src={previewImage}
           />
         )}
+        <small>Max size 5MB , 200x200px</small>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>

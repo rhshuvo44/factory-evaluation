@@ -51,6 +51,7 @@ const UtilityAddForm = () => {
     if (!res.success) return toast.error(res.message);
     toast.success("Create Utility successfully");
     form.resetFields();
+    
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish}>

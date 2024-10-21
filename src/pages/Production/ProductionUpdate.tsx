@@ -31,10 +31,10 @@ const ProductionUpdate = () => {
     color: data?.data?.color,
     orderQuantity: data?.data?.orderQuantity,
     readyQuantity: data?.data?.readyQuantity,
-    sellingSection: {
-      sellingTarget: data?.data.sellingSection[0].target,
-      sellingWIP: data?.data.sellingSection[0].wip,
-      sellingOutput: data?.data.sellingSection[0].output,
+    sewingSection: {
+      sewingTarget: data?.data.sewingSection[0].target,
+      sewingWIP: data?.data.sewingSection[0].wip,
+      sewingOutput: data?.data.sewingSection[0].output,
     },
     finishing: {
       finishingTarget: data?.data.finishing[0].target,
@@ -55,10 +55,10 @@ const ProductionUpdate = () => {
       wip: values.cuttingSection.cuttingWIP,
       output: values.cuttingSection.cuttingOutput,
     };
-    const selling: TSection = {
-      target: values.sellingSection.sellingTarget, // Access from sellingSection
-      wip: values.sellingSection.sellingWIP,
-      output: values.sellingSection.sellingOutput,
+    const sewing: TSection = {
+      target: values.sewingSection.sewingTarget, // Access from sewingSection
+      wip: values.sewingSection.sewingWIP,
+      output: values.sewingSection.sewingOutput,
     };
     const finishing: TSection = {
       target: values.finishing.finishingTarget, // Access from finishing
@@ -73,7 +73,7 @@ const ProductionUpdate = () => {
       color: values.color,
       orderQuantity: values.orderQuantity,
       readyQuantity: values.readyQuantity,
-      sellingSection: [selling],
+      sewingSection: [sewing],
       finishing: [finishing],
       remark: values.remark,
       cuttingSection: [cutting],
@@ -203,12 +203,12 @@ const ProductionUpdate = () => {
 
         {/* Selling Section */}
         <Form.Item
-          label="Selling Section"
+          label="sewing Section"
           style={{ marginBottom: 0, display: "block" }}
         >
           <Form.Item
             label="Target"
-            name={["sellingSection", "sellingTarget"]}
+            name={["sewingSection", "sewingTarget"]}
             rules={[{ required: true }]}
             style={{ display: "inline-block", width: "calc(32% - 8px)" }}
           >
@@ -216,7 +216,7 @@ const ProductionUpdate = () => {
           </Form.Item>
           <Form.Item
             label="WIP"
-            name={["sellingSection", "sellingWIP"]}
+            name={["sewingSection", "sewingWIP"]}
             rules={[{ required: true }]}
             style={{
               display: "inline-block",
@@ -228,7 +228,7 @@ const ProductionUpdate = () => {
           </Form.Item>
           <Form.Item
             label="Output"
-            name={["sellingSection", "sellingOutput"]}
+            name={["sewingSection", "sewingOutput"]}
             rules={[{ required: true }]}
             style={{
               display: "inline-block",

@@ -3,8 +3,8 @@ export const runningColums = [
         title: "Particulars",
         dataIndex: "particulars",
         key: "particulars",
-        width:110
-        
+        width: 110
+
     },
     {
         title: "Description",
@@ -101,7 +101,7 @@ export const travellingColums = [
         title: "Particulars",
         dataIndex: "particulars",
         key: "particulars",
-        
+
     },
     {
         title: "Description",
@@ -227,24 +227,24 @@ export const productionColums = [
             },
         ],
     },
-    // Grouping Selling Section
+    // Grouping sewing Section
     {
-        title: "Selling Section",
+        title: "sewing Section",
         children: [
             {
                 title: "Target",
-                dataIndex: ["sellingSection", 0, "target"],
-                key: "sellingTarget",
+                dataIndex: ["sewingSection", 0, "target"],
+                key: "sewingTarget",
             },
             {
                 title: "WIP",
-                dataIndex: ["sellingSection", 0, "wip"],
-                key: "sellingWIP",
+                dataIndex: ["sewingSection", 0, "wip"],
+                key: "sewingWIP",
             },
             {
                 title: "Output",
-                dataIndex: ["sellingSection", 0, "output"],
-                key: "sellingOutput",
+                dataIndex: ["sewingSection", 0, "output"],
+                key: "sewingOutput",
             },
         ],
     },
@@ -526,71 +526,71 @@ export const collectionColums = [
     },
 ];
 
-export   const buyerColums = [
+export const buyerColums = [
     {
-      title: "SL",
-      dataIndex: "slNo",
-      key: "slNo",
+        title: "SL",
+        dataIndex: "slNo",
+        key: "slNo",
     },
 
     {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
+        title: "Date",
+        dataIndex: "date",
+        key: "date",
     },
     {
-      title: "Particulars",
-      dataIndex: "particulars",
-      key: "particulars",
+        title: "Particulars",
+        dataIndex: "particulars",
+        key: "particulars",
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+        title: "Description",
+        dataIndex: "description",
+        key: "description",
     },
     {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
+        title: "Quantity",
+        dataIndex: "quantity",
+        key: "quantity",
     },
     {
-      title: "Buyer ID",
-      dataIndex: "buyerId",
-      key: "buyerId",
+        title: "Buyer ID",
+        dataIndex: "buyerId",
+        key: "buyerId",
     },
     {
-      title: "Order No",
-      dataIndex: "orderNo",
-      key: "orderNo",
+        title: "Order No",
+        dataIndex: "orderNo",
+        key: "orderNo",
     },
     {
-      title: "Memo No",
-      dataIndex: "memoNo",
-      key: "memoNo",
+        title: "Memo No",
+        dataIndex: "memoNo",
+        key: "memoNo",
     },
     {
-      title: "Pay To",
-      dataIndex: "payTo",
-      key: "payTo",
+        title: "Pay To",
+        dataIndex: "payTo",
+        key: "payTo",
     },
     {
-      title: "Payment Type",
-      dataIndex: "paymentType",
-      key: "paymentType",
+        title: "Payment Type",
+        dataIndex: "paymentType",
+        key: "paymentType",
     },
     {
-      title: "Unit",
-      dataIndex: "unit",
-      key: "unit",
+        title: "Unit",
+        dataIndex: "unit",
+        key: "unit",
     },
     {
-      title: "Unit Price",
-      dataIndex: "unitPrice",
-      key: "unitPrice",
+        title: "Unit Price",
+        dataIndex: "unitPrice",
+        key: "unitPrice",
     },
     {
-      title: "Total Price",
-      dataIndex: "totalPrice",
-      key: "totalPrice",
+        title: "Total Price",
+        dataIndex: "totalPrice",
+        key: "totalPrice",
     },
-  ];
+];

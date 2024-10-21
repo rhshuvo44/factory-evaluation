@@ -57,21 +57,20 @@ const ProductionTable = () => {
                   render: (item: TProductionReport) => {
                     return (
                       <Space>
+                        <Link to={`/${user!.role}/production/${item._id}`}>
+                          Edit
+                        </Link>
+                        <Button
+                          danger
+                          onClick={() => handleDeleted(item._id as string)}
+                        >
+                          Delete
+                        </Button>
                         {/* Conditionally render "Edit" if quantities match */}
                         {item.readyQuantity === item.orderQuantity ? (
                           <Button type="primary">Finished</Button>
                         ) : (
-                          <>
-                            <Link to={`/${user!.role}/production/${item._id}`}>
-                              Edit
-                            </Link>
-                            <Button
-                              danger
-                              onClick={() => handleDeleted(item._id as string)}
-                            >
-                              Delete
-                            </Button>
-                          </>
+                          <Button>Running</Button>
                         )}
                       </Space>
                     );

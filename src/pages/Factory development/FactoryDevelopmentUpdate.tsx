@@ -8,6 +8,7 @@ import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
 import SectionTitle from "../../components/ui/SectionTitle";
 import { formItemLayout } from "../../constants/formItemLayout";
+import { paymentOptions } from "../../constants/Options";
 import {
   useSingleFactoryDevelopsQuery,
   useUpdateFactoryDevelopsMutation,
@@ -35,7 +36,6 @@ const FactoryDevelopmentUpdate = () => {
   const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
     setUnitPrice(values as number);
   };
- 
 
   useEffect(() => {
     const unitValue = unit || result?.unit;
@@ -118,22 +118,13 @@ const FactoryDevelopmentUpdate = () => {
             ]}
           />
         </Form.Item>
-        <Form.Item
+        <CustomInput
           label="Pay to"
           name="payTo"
-          rules={[{ required: true, message: "Please select Pay to! " }]}
-        >
-          <Select
-            style={{ width: "100%" }}
-            options={[
-              { value: "Sarkar Alliance OPC", label: "Sarkar Alliance OPC" },
-              { value: "M.D", label: "M.D" },
-              { value: "Chairman", label: "Chairman" },
-            ]}
-          />
-        </Form.Item>
+          message="Please input! Pay to"
+          placeholder="please input pay to name"
+        />
 
-     
         <Form.Item
           label="Payment Type"
           name="paymentType"
@@ -141,10 +132,8 @@ const FactoryDevelopmentUpdate = () => {
         >
           <Select
             style={{ width: "100%" }}
-            options={[
-              { value: "Bank", label: "Bank" },
-              { value: "Cash", label: "Cash" },
-            ]}
+            placeholder="Please select Payment Type"
+            options={paymentOptions}
           />
         </Form.Item>
         <Form.Item

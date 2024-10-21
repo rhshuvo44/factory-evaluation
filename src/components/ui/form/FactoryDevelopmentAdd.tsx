@@ -16,6 +16,7 @@ import { TFactory } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
 import CustomTextArea from "../../form/CustomTextArea";
+import { paymentOptions } from "../../../constants/Options";
 const FactoryDevelopmentAdd = () => {
   const [form] = Form.useForm();
   const [unit, setUnit] = useState<number>(0);
@@ -89,21 +90,12 @@ const FactoryDevelopmentAdd = () => {
           ]}
         />
       </Form.Item>
-      <Form.Item
+      <CustomInput
         label="Pay to"
         name="payTo"
-        rules={[{ required: true, message: "Please select Pay to! " }]}
-      >
-        <Select
-          style={{ width: "100%" }}
-          placeholder="Please select Pay to"
-          options={[
-            { value: "Sarkar Alliance OPC", label: "Sarkar Alliance OPC" },
-            { value: "M.D", label: "M.D" },
-            { value: "Chairman", label: "Chairman" },
-          ]}
-        />
-      </Form.Item>
+        message="Please input! Pay to"
+        placeholder="please input pay to name"
+      />
 
       <Form.Item
         label="Date"
@@ -124,10 +116,7 @@ const FactoryDevelopmentAdd = () => {
         <Select
           style={{ width: "100%" }}
           placeholder="Please select Payment Type"
-          options={[
-            { value: "Bank", label: "Bank" },
-            { value: "Cash", label: "Cash" },
-          ]}
+          options={paymentOptions}
         />
       </Form.Item>
       <Form.Item

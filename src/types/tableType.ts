@@ -1,6 +1,6 @@
 
 export type PaymentType = 'Monthly' | 'Daily' | 'Once';
-export type userRole = "admin" | "executive-director" | "managing-irector" | "general-manager" | "coordinator"
+export type userRole = "admin" | "executive-director" | "managing-director" | "general-manager" | "coordinator"
 export type TLine = "Line 1 / 3rd floor" | "Line 2 / 4th floor" | "Line 3 / 4th floor"
 export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Tank Top" | "Sweat Shirt" | "Trouser" | "Shorts" | "Romper/Keeper" | "Long Sleeve T-shirt"
 export type TDesignation = 'Supervisor' | 'G.M' | 'P.M' | 'Ex. Accountant' | 'Security' | 'Cutting Master' | 'Fin. Incharge' | 'Mechanic' | 'Operator' | 'Folding' | 'Check' | 'Poly' | 'Helper' | 'Maid' | 'Cleaner' | 'Cut. Helper' | 'Cutting Man';
@@ -108,8 +108,8 @@ export type TFactory = {
     quantity: number;
     memoNo: number;
     orderedBy: 'M.D' | 'Chairman';
-    payTo: 'M.D' | 'Chairman' | 'Sarkar Alliance OPC';
-    paymentType: 'Bank' | 'Cash';
+    payTo: string;
+    paymentType: PaymentType;
     unit: number;
     unitPrice: number;
     totalPrice: number;
@@ -117,8 +117,8 @@ export type TFactory = {
 export type TLoan = {
     _id?: string;
     date: Date;
-    particulars: string;
-    description: string;
+    particulars: "Loan Return"
+    description: "Emergency Loan Return" | "EMI Return"
     quantity: number;
     memoNo: string;
     orderedBy: "M.D" | "Chairman";
@@ -189,7 +189,7 @@ export type TProductionReport = {
     orderQuantity: number
     readyQuantity: number
     cuttingSection: TSection[]
-    sellingSection: TSection[]
+    sewingSection: TSection[]
     finishing: TSection[]
     remark?: string
 }
@@ -217,10 +217,10 @@ export type TProductionInput = {
         cuttingWIP: number
         cuttingOutput: number
     }
-    sellingSection: {
-        sellingTarget: number
-        sellingWIP: number
-        sellingOutput: number
+    sewingSection: {
+        sewingTarget: number
+        sewingWIP: number
+        sewingOutput: number
     }
     finishing: {
         finishingTarget: number
