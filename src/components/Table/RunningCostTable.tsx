@@ -11,6 +11,7 @@ import { runningColums, TFixed, TUtility } from "../../types";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 import EvaluationTable from "./EvaluationTable";
+import ReportForm from "../ui/form/ReportForm";
 
 const RunningCostTable = () => {
   const {
@@ -170,7 +171,7 @@ const RunningCostTable = () => {
   const roundCost = parseFloat(totalCost.toFixed(2));
 
   return (
-    <div>
+    <>
       <div className="flex  items-center justify-between mb-2">
         <SectionTitle title="Factory Running Cost" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
@@ -201,7 +202,8 @@ const RunningCostTable = () => {
         />
       </div>
       <EvaluationTable totalCost={roundCost} />
-    </div>
+      <ReportForm runningCost={roundCost}  />
+    </>
   );
 };
 

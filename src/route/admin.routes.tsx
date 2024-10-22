@@ -20,6 +20,7 @@ import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
 import Production from "../pages/Production/Production";
 import ProductionAdd from "../pages/Production/ProductionAdd";
 import ProductionUpdate from "../pages/Production/ProductionUpdate";
+import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import SalaryUpdate from "../pages/salary/SalaryUpdate";
@@ -246,6 +247,11 @@ export const adminPaths = [
         element: <TargetOutput />,
       },
     ],
+  },
+  {
+    name: "View Report",
+    path: "all_reports",
+    element: <Report />,
   },
   {
     name: "User Management",

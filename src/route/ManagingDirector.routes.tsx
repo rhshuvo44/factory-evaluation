@@ -7,6 +7,7 @@ import FixedCost from "../pages/Fixed cost/FixedCost";
 import Loan from "../pages/loan/Loan";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import Production from "../pages/Production/Production";
+import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import Utility from "../pages/utility/Utility";
 
@@ -65,5 +66,9 @@ export const managingPaths = [
     name: "Production Report",
     path: "all_production_reports",
     element: <Production />,
+  },{
+    name: "View Report",
+    path: "all_reports",
+    element: <Report />,
   },
 ];

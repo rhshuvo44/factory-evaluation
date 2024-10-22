@@ -14,6 +14,7 @@ import LoanUpdate from "../pages/loan/LoanUpdate";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
+import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
@@ -155,5 +156,9 @@ export const executivePaths = [
         element: <Collection />,
       },
     ],
+  },{
+    name: "View Report",
+    path: "all_reports",
+    element: <Report />,
   },
 ];

@@ -250,3 +250,11 @@ export type TTargetInputFiled = {
     }
     remark?: string
 }
+export type TReport = {
+    _id?: string;
+    slNo: number
+    date: Date
+    factoryRunningCost: number
+    factoryCollection: number
+    balance: number
+}

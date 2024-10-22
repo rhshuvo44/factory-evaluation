@@ -35,11 +35,14 @@ const TravellingForm = () => {
   };
   const disableDates = (current: Dayjs) => {
     // Disable dates that are more than 45 days ago or in the future
-
+  
     return (
       current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
     );
   };
+  const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1); 
+    console.log(startOfMonth);
   useEffect(() => {
     form.setFieldsValue({
       totalPrice: unit * unitPrice,
