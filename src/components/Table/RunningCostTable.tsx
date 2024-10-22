@@ -40,7 +40,7 @@ const RunningCostTable = () => {
     isError: isMiscError,
     isLoading: isMiscLoading,
     isFetching: isMiscFetching,
-  } = useGetTodayMiscellaneousQuery(undefined);
+  } = useGetTodayMiscellaneousQuery(queryParams);
   const {
     data: travelData,
     isError: isTravelError,
@@ -52,37 +52,37 @@ const RunningCostTable = () => {
     isError: isBuyerError,
     isLoading: isBuyerLoading,
     isFetching: isBuyerFetching,
-  } = useGetTodayBuyerDevelopmentQuery(undefined);
+  } = useGetTodayBuyerDevelopmentQuery(queryParams);
   const {
     data: factoryData,
     isError: isFactoryError,
     isLoading: isFactoryLoading,
     isFetching: isFactoryFetching,
-  } = useGetTodayFactoryQuery(undefined);
+  } = useGetTodayFactoryQuery(queryParams);
   const {
     data: loanData,
     isError: isLoanError,
     isLoading: isLoanLoading,
     isFetching: isLoanFetching,
-  } = useGetTodayLoanQuery(undefined);
+  } = useGetTodayLoanQuery(queryParams);
   const {
     data: utilityData,
     isError: isUtilityError,
     isLoading: isUtilityLoading,
     isFetching: isUtilityFetching,
-  } = useGetTodayUtilityQuery(undefined);
+  } = useGetTodayUtilityQuery(queryParams);
   const {
     data: fixedCostData,
     isError: isFixedCostError,
     isLoading: isFixedCostLoading,
     isFetching: isFixedCostFetching,
-  } = useGetTodayFixedCostQuery(undefined);
+  } = useGetTodayFixedCostQuery(queryParams);
   const {
     data: employeeCostData,
     isError: isEmployeeCostError,
     isLoading: isEmployeeCostLoading,
     isFetching: isEmployeeCostFetching,
-  } = useGetTodayEmployeesQuery(undefined);
+  } = useGetTodayEmployeesQuery(queryParams);
 
   if (
     isMiscLoading ||

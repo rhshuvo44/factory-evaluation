@@ -16,9 +16,13 @@ const travelApi = baseApi.injectEndpoints({
             providesTags: ['Travelling'],
         }),
         getTodayTravellings: builder.query({
-            query: (queryParams) => (
-                { url: `/travelling-allowance/today?${queryParams.date}`, method: 'GET' }
-            ), providesTags: ['Travelling'],
+            query: (queryParams) => {
+                // const params = new URLSearchParams();
+                // if (queryParams) {
+                //     queryParams.forEach((item: TQueryParam) => {
+
+                return { url: `/travelling-allowance/today?date=${queryParams.date}`, method: 'GET' }
+            }, providesTags: ['Travelling'],
         }),
         createTravel: builder.mutation({
             query: (travellingData) => ({

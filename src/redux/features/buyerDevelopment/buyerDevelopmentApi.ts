@@ -12,8 +12,8 @@ const buyerDevelopmentApi = baseApi.injectEndpoints({
             providesTags: ['Buyer Development'],
         }),
         getTodayBuyerDevelopment: builder.query({
-            query: () => (
-                { url: `/buyer-development/today`, method: 'GET' }
+            query: (queryParams) => (
+                { url: `/buyer-development/today?date=${queryParams.date}`, method: 'GET' }
             ), providesTags: ['Buyer Development'],
         }),
         createBuyerDevelopment: builder.mutation({
