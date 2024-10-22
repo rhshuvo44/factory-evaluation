@@ -24,10 +24,12 @@ const ReportForm = ({ runningCost }: { runningCost: number }) => {
   if (isLoading) return <Loading />;
   if (isError) return <div>Error loading data</div>;
   const onFinish = async (values: TReport) => {
+    const totalBalance = values.factoryCollection - values.factoryRunningCost;
     const reportData = {
-      ...values,
+      factoryRunningCost: values.factoryRunningCost.toFixed(2),
+      factoryCollection: values.factoryCollection.toFixed(2),
       date,
-      balance: values.factoryCollection - values.factoryRunningCost,
+      balance: totalBalance.toFixed(2),
     };
     const res = await createReportMutation(reportData).unwrap();
     if (!res.success) return toast.error(res.message);

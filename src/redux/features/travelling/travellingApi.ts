@@ -16,8 +16,8 @@ const travelApi = baseApi.injectEndpoints({
             providesTags: ['Travelling'],
         }),
         getTodayTravellings: builder.query({
-            query: () => (
-                { url: `/travelling-allowance/today`, method: 'GET' }
+            query: (queryParams) => (
+                { url: `/travelling-allowance/today?${queryParams.date}`, method: 'GET' }
             ), providesTags: ['Travelling'],
         }),
         createTravel: builder.mutation({

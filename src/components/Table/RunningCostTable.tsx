@@ -1,4 +1,7 @@
-import { Table } from "antd";
+import { DatePicker, DatePickerProps, Table } from "antd";
+import dayjs, { Dayjs } from "dayjs";
+import moment from "moment";
+import { useState } from "react";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { useGetTodayEmployeesQuery } from "../../redux/features/employee/employeeApi";
 import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
@@ -8,51 +11,77 @@ import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneou
 import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 import { useGetTodayUtilityQuery } from "../../redux/features/utility/utilityApi";
 import { runningColums, TFixed, TUtility } from "../../types";
+import ReportForm from "../ui/form/ReportForm";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 import EvaluationTable from "./EvaluationTable";
-import ReportForm from "../ui/form/ReportForm";
 
 const RunningCostTable = () => {
+  // State to hold selected date
+  const [selectedDate, setSelectedDate] = useState<string | string[]>("");
+
+  // Function to handle date change
+
+  const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
+    setSelectedDate(dateString);
+  };
+  const disableDates = (current: Dayjs) => {
+    // Disable dates that are more than 45 days ago or in the future
+    return (
+      current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
+    );
+  };
+  // Query params (send the date if selected, otherwise use today's date)
+  const queryParams = selectedDate
+    ? { date: selectedDate }
+    : { date: moment().format("DD-MMM-YYYY") }; // Default to today if no date selected
   const {
     data: miscData,
     isError: isMiscError,
     isLoading: isMiscLoading,
+    isFetching: isMiscFetching,
   } = useGetTodayMiscellaneousQuery(undefined);
   const {
     data: travelData,
     isError: isTravelError,
     isLoading: isTravelLoading,
-  } = useGetTodayTravellingsQuery(undefined);
+    isFetching: isTravelFetching,
+  } = useGetTodayTravellingsQuery(queryParams);
   const {
     data: buyerData,
     isError: isBuyerError,
     isLoading: isBuyerLoading,
+    isFetching: isBuyerFetching,
   } = useGetTodayBuyerDevelopmentQuery(undefined);
   const {
     data: factoryData,
     isError: isFactoryError,
     isLoading: isFactoryLoading,
+    isFetching: isFactoryFetching,
   } = useGetTodayFactoryQuery(undefined);
   const {
     data: loanData,
     isError: isLoanError,
     isLoading: isLoanLoading,
+    isFetching: isLoanFetching,
   } = useGetTodayLoanQuery(undefined);
   const {
     data: utilityData,
     isError: isUtilityError,
     isLoading: isUtilityLoading,
+    isFetching: isUtilityFetching,
   } = useGetTodayUtilityQuery(undefined);
   const {
     data: fixedCostData,
     isError: isFixedCostError,
     isLoading: isFixedCostLoading,
+    isFetching: isFixedCostFetching,
   } = useGetTodayFixedCostQuery(undefined);
   const {
     data: employeeCostData,
     isError: isEmployeeCostError,
     isLoading: isEmployeeCostLoading,
+    isFetching: isEmployeeCostFetching,
   } = useGetTodayEmployeesQuery(undefined);
 
   if (
@@ -169,17 +198,30 @@ const RunningCostTable = () => {
   );
 
   const roundCost = parseFloat(totalCost.toFixed(2));
+  console.log(queryParams);
+  console.log(travelData);
 
   return (
     <>
       <div className="flex  items-center justify-between mb-2">
         <SectionTitle title="Factory Running Cost" />
+        <DatePicker onChange={onChangeDate} disabledDate={disableDates} />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :<span className="text-red-500"> {roundCost}</span>
         </div>
       </div>
       <div className="responsive-table-container">
         <Table
+          loading={
+            isMiscFetching ||
+            isTravelFetching ||
+            isBuyerFetching ||
+            isFactoryFetching ||
+            isLoanFetching ||
+            isUtilityFetching ||
+            isFixedCostFetching ||
+            isEmployeeCostFetching
+          }
           size="small"
           className="table-auto"
           bordered
@@ -202,7 +244,7 @@ const RunningCostTable = () => {
         />
       </div>
       <EvaluationTable totalCost={roundCost} />
-      <ReportForm runningCost={roundCost}  />
+      <ReportForm runningCost={roundCost} />
     </>
   );
 };
