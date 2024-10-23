@@ -8,12 +8,20 @@ import { useCreateReportMutation } from "../../../redux/features/report/reportAp
 import { TReport } from "../../../types";
 import Loading from "../Loading";
 import SectionTitle from "../SectionTitle";
+import { useEffect } from "react";
 
-const ReportForm = ({ runningCost }: { runningCost: number }) => {
+const ReportForm = ({
+  runningCost,
+  date,
+}: {
+  runningCost: number;
+  date: string;
+}) => {
   dayjs.extend(customParseFormat);
   const [form] = Form.useForm();
-  const { data, isLoading, isError } = useGetTodayCollectionsQuery(undefined);
-  const date = new Date().toLocaleDateString();
+  const { data, isLoading, isError, refetch } =
+    useGetTodayCollectionsQuery(date);
+  // const date = new Date().toLocaleDateString();
   const amount = data?.data?.amount;
   const [createReportMutation] = useCreateReportMutation();
 
@@ -21,15 +29,29 @@ const ReportForm = ({ runningCost }: { runningCost: number }) => {
     factoryRunningCost: runningCost,
     factoryCollection: amount,
   };
+  // Refetch collections data when date changes
+  useEffect(() => {
+    refetch();
+  }, [date, refetch]);
+
+  // Update form initial values when data is loaded
+  useEffect(() => {
+    if (data) {
+      form.setFieldsValue({
+        factoryRunningCost: runningCost,
+        factoryCollection: data?.data?.amount,
+      });
+    }
+  }, [data, runningCost, form]);
   if (isLoading) return <Loading />;
   if (isError) return <div>Error loading data</div>;
   const onFinish = async (values: TReport) => {
     const totalBalance = values.factoryCollection - values.factoryRunningCost;
     const reportData = {
-      factoryRunningCost: values.factoryRunningCost.toFixed(2),
-      factoryCollection: values.factoryCollection.toFixed(2),
+      factoryRunningCost: parseFloat(values.factoryRunningCost.toString()),
+      factoryCollection: parseFloat(values.factoryCollection.toString()),
       date,
-      balance: totalBalance.toFixed(2),
+      balance: parseFloat(totalBalance.toString()),
     };
     const res = await createReportMutation(reportData).unwrap();
     if (!res.success) return toast.error(res.message);

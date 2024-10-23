@@ -198,8 +198,6 @@ const RunningCostTable = () => {
   );
 
   const roundCost = parseFloat(totalCost.toFixed(2));
-  console.log(queryParams);
-  console.log(travelData);
 
   return (
     <>
@@ -243,8 +241,11 @@ const RunningCostTable = () => {
           pagination={false}
         />
       </div>
-      <EvaluationTable totalCost={roundCost} />
-      <ReportForm runningCost={roundCost} />
+      <EvaluationTable
+        totalCost={roundCost}
+        date={queryParams.date?.toString()}
+      />
+      <ReportForm runningCost={roundCost} date={queryParams.date?.toString()} />
     </>
   );
 };

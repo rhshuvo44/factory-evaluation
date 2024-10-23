@@ -6,8 +6,8 @@ const factoryDevelopmentApi = baseApi.injectEndpoints({
             query: () => ({ url: `/factory-development`, method: 'GET' }), providesTags: ['Factory'],
         }),
         getTodayFactory: builder.query({
-            query: () => (
-                { url: `/factory-development/today`, method: 'GET' }
+            query: (queryParams) => (
+                { url: `/factory-development/today?date=${queryParams.date}`, method: 'GET' }
             ), providesTags: ['Factory'],
         }),
         createFactoryDevelop: builder.mutation({

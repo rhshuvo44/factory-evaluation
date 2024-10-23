@@ -17,8 +17,8 @@ const utilityApi = baseApi.injectEndpoints({
             ), providesTags: ['Utility'],
         }),
         getTodayUtility: builder.query({
-            query: () => (
-                { url: `/utility/today`, method: 'GET' }
+            query: (queryParams) => (
+                { url: `/utility/today?date=${queryParams.date}`, method: 'GET' }
             ), providesTags: ['Utility'],
         }),
         updateUtility: builder.mutation({

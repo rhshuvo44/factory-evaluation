@@ -6,8 +6,8 @@ const miscellaneousApi = baseApi.injectEndpoints({
             query: () => ({ url: '/miscellaneous', method: 'GET' }), providesTags: ['Miscellaneous'],
         }),
         getTodayMiscellaneous: builder.query({
-            query: () => (
-                { url: `/miscellaneous/today`, method: 'GET' }
+            query: (queryParams) => (
+                { url: `/miscellaneous/today?date=${queryParams.date}`, method: 'GET' }
             ), providesTags: ['Miscellaneous'],
         }),
         getSingleMiscellaneous: builder.query({

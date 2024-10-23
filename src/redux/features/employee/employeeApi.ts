@@ -6,7 +6,7 @@ const employeeApi = baseApi.injectEndpoints({
             query: () => ({ url: '/employee', method: 'GET' }), providesTags: ['Employee'],
         }),
         getTodayEmployees: builder.query({
-            query: () => ({ url: '/employee/today', method: 'GET' }), providesTags: ['Employee'],
+            query: (queryParams) => ({ url: `/employee/today?date=${queryParams.date}`, method: 'GET' }), providesTags: ['Employee'],
         }),
         createEmployee: builder.mutation({
             query: (data) => ({

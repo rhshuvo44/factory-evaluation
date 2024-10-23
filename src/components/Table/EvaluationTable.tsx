@@ -3,8 +3,14 @@ import { useGetTodayCollectionsQuery } from "../../redux/features/collection/col
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
-const EvaluationTable = ({ totalCost }: { totalCost: number }) => {
-  const { data, isLoading, isError } = useGetTodayCollectionsQuery(undefined);
+const EvaluationTable = ({
+  totalCost,
+  date,
+}: {
+  totalCost: number;
+  date: string;
+}) => {
+  const { data, isLoading, isError } = useGetTodayCollectionsQuery(date);
   if (isLoading) return <Loading />;
   if (isError) return <div>Error loading data</div>;
   const amount = data?.data?.amount;

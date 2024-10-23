@@ -17,8 +17,8 @@ const fixedCostApi = baseApi.injectEndpoints({
             ), providesTags: ['fixedCost'],
         }),
         getTodayFixedCost: builder.query({
-            query: () => (
-                { url: `/fixed-cost/today`, method: 'GET' }
+            query: (queryParams) => (
+                { url: `/fixed-cost/today?date=${queryParams.date}`, method: 'GET' }
             ), providesTags: ['fixedCost'],
         }),
         updateFixedCost: builder.mutation({

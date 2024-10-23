@@ -6,7 +6,7 @@ const collectionApi = baseApi.injectEndpoints({
             query: () => ({ url: '/collection', method: 'GET' }), providesTags: ['Collection'],
         }),
         getTodayCollections: builder.query({
-            query: () => ({ url: '/collection/today', method: 'GET' }), providesTags: ['Collection'],
+            query: (queryParams) => ({ url: `/collection/today?date=${queryParams}`, method: 'GET' }), providesTags: ['Collection'],
         }),
         updateCollection: builder.mutation({
             query: (data) => ({

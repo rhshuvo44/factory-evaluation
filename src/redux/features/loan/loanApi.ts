@@ -7,8 +7,8 @@ const loanApi = baseApi.injectEndpoints({
             providesTags: ['Loan'],
         }),
         getTodayLoan: builder.query({
-            query: () => (
-                { url: `/loan-return/today`, method: 'GET' }
+            query: (queryParams) => (
+                { url: `/loan-return/today?date=${queryParams.date}`, method: 'GET' }
             ), providesTags: ['Loan'],
         }),
         createLoan: builder.mutation({
