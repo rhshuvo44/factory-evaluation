@@ -96,13 +96,25 @@ const ReportTable = () => {
         ]
       : []),
   ];
+  const balance = data?.totalPrice.toFixed(2);
   return (
     <div>
       <div className="flex  items-center justify-between my-2">
         <SectionTitle title="Reports" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total Balance :
-          <span className="text-red-500"> {data?.totalPrice}</span>
+          <span
+            style={{
+              color:
+                balance < 0
+                  ? "rgb(240, 0, 0)"
+                  : balance > 0
+                  ? "rgb(0, 240, 0)"
+                  : "inherit",
+            }}
+          >
+            {balance}
+          </span>
         </div>
       </div>
       <div className="responsive-table-container">
