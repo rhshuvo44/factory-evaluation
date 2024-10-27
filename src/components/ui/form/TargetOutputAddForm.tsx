@@ -29,9 +29,9 @@ const TargetOutputAddForm = () => {
   const disableDates = (current: Dayjs) => {
     // Disable dates that are more than 45 days ago or in the future
 
-    return (
-      current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
-    );
+    const startOfMonth = dayjs().startOf("month");
+    // current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
+    return current.isBefore(startOfMonth) || current.isAfter(dayjs());
   };
   const initialValues = {
     sewingSection: {
