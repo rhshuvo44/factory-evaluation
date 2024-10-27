@@ -1,5 +1,4 @@
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
@@ -16,9 +15,6 @@ import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
 const MiscellaneousTableComponent = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -82,15 +78,8 @@ const MiscellaneousTableComponent = () => {
           ]}
           dataSource={data?.data}
           rowKey="_id"
-          pagination={{
-            current: currentPage,
-            pageSize: pageSize,
-            total: data?.meta?.total,
-            onChange: (page, pageSize) => {
-              setCurrentPage(page);
-              setPageSize(pageSize);
-            },
-          }}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

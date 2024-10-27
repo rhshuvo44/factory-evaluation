@@ -134,7 +134,7 @@ const SalaryTable = () => {
           Total cost :<span className="text-red-500"> {data?.totalPrice}</span>
         </div>
       </div>
-      <div className="responsive-table-container">
+      <div className="responsive-table-container" >
         <Table
           size="small"
           className="table-auto"

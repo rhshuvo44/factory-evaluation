@@ -39,7 +39,7 @@ const HeaderMenu = () => {
         <h3 className="text-sm md:font-bold md:text-2xl lg:text-3xl capitalize text-primary ">
           Hello {data?.data?.name},
         </h3>
-        <small className=" hidden md:block md:mr-3 md:font-bold md:text-lg">
+        <small className=" hidden md:block mt-3 md:mr-3 md:font-bold md:text-lg text-[#00A9EA]">
           {data?.data?.role}
         </small>
         <p className="hidden md:block lg:mt-3"> {date.toDateString()}</p>
