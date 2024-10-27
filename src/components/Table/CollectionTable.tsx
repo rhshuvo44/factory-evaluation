@@ -1,5 +1,4 @@
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
@@ -9,15 +8,13 @@ import {
   useGetAllCollectionsQuery,
 } from "../../redux/features/collection/collectionApi";
 import { useAppSelector } from "../../redux/hook";
+import { collectionColums } from "../../types";
 import { TCollection } from "../../types/tableType";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
-import { collectionColums } from "../../types";
 
 const CollectionTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -33,10 +30,7 @@ const CollectionTable = () => {
     }
   };
 
-  const { data, isError, isLoading } = useGetAllCollectionsQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
+  const { data, isError, isLoading } = useGetAllCollectionsQuery(undefined);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
@@ -45,8 +39,7 @@ const CollectionTable = () => {
       <div className="flex  items-center justify-between mb-2">
         <SectionTitle title=" Collection Table" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
-          Total cost :
-          <span className="text-red-500"> {data?.totalPrice}</span>
+          Total cost :<span className="text-red-500"> {data?.totalPrice}</span>
         </div>
       </div>
       <div className="responsive-table-container">
@@ -85,15 +78,8 @@ const CollectionTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="_id"
-          pagination={{
-            current: currentPage,
-            pageSize: pageSize,
-            total: data?.meta.total,
-            onChange: (page, pageSize) => {
-              setCurrentPage(page);
-              setPageSize(pageSize);
-            },
-          }}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

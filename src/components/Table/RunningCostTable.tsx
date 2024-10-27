@@ -15,11 +15,21 @@ import ReportForm from "../ui/form/ReportForm";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 import EvaluationTable from "./EvaluationTable";
+import { useAppSelector } from "../../redux/hook";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
+import { verifyToken } from "../../utilis/verifyToken";
+import { userRole } from "../../constants/userRole";
 
 const RunningCostTable = () => {
   // State to hold selected date
   const [selectedDate, setSelectedDate] = useState<string | string[]>("");
+  const token = useAppSelector(useCurrentToken);
 
+  let user;
+
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
   // Function to handle date change
 
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
@@ -237,15 +247,21 @@ const RunningCostTable = () => {
           ]}
           dataSource={combinedData}
           scroll={{ y: 55 * 7 }}
-          rowKey="_id"
           pagination={false}
+          rowKey="_id"
         />
       </div>
       <EvaluationTable
         totalCost={roundCost}
         date={queryParams.date?.toString()}
       />
-      <ReportForm runningCost={roundCost} date={queryParams.date?.toString()} />
+      {user?.role === userRole.ADMIN ||
+      user?.role === userRole.ExecutiveDirector ? (
+        <ReportForm
+          runningCost={roundCost}
+          date={queryParams.date?.toString()}
+        />
+      ) : null}
     </>
   );
 };

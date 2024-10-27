@@ -1,5 +1,4 @@
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
@@ -15,8 +14,6 @@ import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
 const SalaryTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -48,8 +45,8 @@ const SalaryTable = () => {
           style={{
             width: "50px",
             height: "50px",
-            objectFit: "cover", 
-            borderRadius: "5px", 
+            objectFit: "cover",
+            borderRadius: "5px",
             border: "1px solid #ddd",
           }}
         />
@@ -126,10 +123,7 @@ const SalaryTable = () => {
         ]
       : []),
   ];
-  const { data, isError, isLoading } = useGetAllEmployeesQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
+  const { data, isError, isLoading } = useGetAllEmployeesQuery(undefined);
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
@@ -148,15 +142,8 @@ const SalaryTable = () => {
           columns={colums}
           dataSource={data?.data}
           rowKey="_id"
-          pagination={{
-            current: currentPage,
-            total: data?.meta?.total,
-            pageSize: pageSize,
-            onChange: (page, pageSize) => {
-              setCurrentPage(page);
-              setPageSize(pageSize);
-            },
-          }}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

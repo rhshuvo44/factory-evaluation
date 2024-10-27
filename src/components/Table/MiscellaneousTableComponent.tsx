@@ -30,7 +30,7 @@ const MiscellaneousTableComponent = () => {
   const handleDeleted = async (id: string) => {
     const res = await deletedTravel(id);
     if (res.data.success) {
-      toast.success("Travelling Allowance deleted successfully.");
+      toast.success("Miscellaneous deleted successfully.");
     }
   };
 
@@ -43,8 +43,7 @@ const MiscellaneousTableComponent = () => {
       <div className="flex  items-center justify-between mb-2">
         <SectionTitle title="Miscellaneous" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
-          Total cost :
-          <span className="text-red-500"> {data?.totalPrice}</span>
+          Total cost :<span className="text-red-500"> {data?.totalPrice}</span>
         </div>
       </div>
       <div className="responsive-table-container">

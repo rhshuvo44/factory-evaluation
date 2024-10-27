@@ -1,5 +1,4 @@
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
@@ -14,8 +13,6 @@ import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 
 const TargetOutputTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -31,17 +28,14 @@ const TargetOutputTable = () => {
     }
   };
 
-  const { data, isError, isLoading } = useGetAllTargetOutputQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
+  const { data, isError, isLoading } = useGetAllTargetOutputQuery(undefined);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
     <div className="responsive-table-container">
       <Table
-        scroll={{ x: 1500 }}
+        scroll={{ x: 1500, y: 55 * 7 }}
         size="small"
         className="table-auto"
         bordered
@@ -80,15 +74,7 @@ const TargetOutputTable = () => {
         ]}
         dataSource={data?.data}
         rowKey="_id"
-        pagination={{
-          current: currentPage,
-          pageSize: pageSize,
-          total: data?.meta.total,
-          onChange: (page, pageSize) => {
-            setCurrentPage(page);
-            setPageSize(pageSize);
-          },
-        }}
+        pagination={false}
       />
     </div>
   );

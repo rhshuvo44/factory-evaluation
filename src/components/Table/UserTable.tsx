@@ -1,5 +1,4 @@
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
@@ -13,8 +12,6 @@ import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 
 const UserTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(7);
   const [deleteUser] = useDeleteUserMutation();
   const token = useAppSelector(useCurrentToken);
   let user;
@@ -30,7 +27,7 @@ const UserTable = () => {
   };
 
   const { data, isError, isLoading } = useGetUserQuery(undefined);
-  console.log(data);
+
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
@@ -70,15 +67,8 @@ const UserTable = () => {
       ]}
       dataSource={data?.data}
       rowKey="_id"
-      pagination={{
-        current: currentPage,
-        pageSize: pageSize,
-        total: data?.meta?.total,
-        onChange: (page, pageSize) => {
-          setCurrentPage(page);
-          setPageSize(pageSize);
-        },
-      }}
+      scroll={{ y: 55 * 7 }}
+      pagination={false}
     />
   );
 };

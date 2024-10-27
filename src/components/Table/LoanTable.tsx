@@ -1,5 +1,4 @@
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
@@ -15,9 +14,6 @@ import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
 const LoanTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
-
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -41,8 +37,7 @@ const LoanTable = () => {
       <div className="flex  items-center justify-between mb-2">
         <SectionTitle title="Loan Return" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
-          Total cost :
-          <span className="text-red-500"> {data?.totalPrice}</span>
+          Total cost :<span className="text-red-500"> {data?.totalPrice}</span>
         </div>
       </div>
       <div className="responsive-table-container">
@@ -81,15 +76,8 @@ const LoanTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="slNo"
-          pagination={{
-            current: currentPage,
-            pageSize: pageSize,
-            total: data?.meta.total,
-            onChange: (page, pageSize) => {
-              setCurrentPage(page);
-              setPageSize(pageSize);
-            },
-          }}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

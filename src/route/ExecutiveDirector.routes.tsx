@@ -8,18 +8,21 @@ import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FactoryDevelopmentForm from "../pages/Factory development/FactoryDevelopmentForm";
 import FactoryDevelopmentUpdate from "../pages/Factory development/FactoryDevelopmentUpdate";
+import FixedCost from "../pages/Fixed cost/FixedCost";
 import Loan from "../pages/loan/Loan";
 import LoanForm from "../pages/loan/LoanForm";
 import LoanUpdate from "../pages/loan/LoanUpdate";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
+import Production from "../pages/Production/Production";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAllowanceUpdate";
+import Utility from "../pages/utility/Utility";
 
 export const executivePaths = [
   {
@@ -156,7 +159,23 @@ export const executivePaths = [
         element: <Collection />,
       },
     ],
-  },{
+  },
+  {
+    name: "Utility Bill",
+    path: "all_bill",
+    element: <Utility />,
+  },
+  {
+    name: "Fixed cost",
+    path: "all_fixed_cost",
+    element: <FixedCost />,
+  },
+  {
+    name: "Production Report",
+    path: "all_production_reports",
+    element: <Production />,
+  },
+  {
     name: "View Report",
     path: "all_reports",
     element: <Report />,

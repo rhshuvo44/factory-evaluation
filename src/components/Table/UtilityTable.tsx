@@ -49,6 +49,7 @@ const UtilityTable = () => {
             ...item,
             key: item._id,
           }))}
+          pagination={false}
         >
           <Column
             title="SL"

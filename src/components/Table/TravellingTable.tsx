@@ -1,5 +1,4 @@
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
@@ -16,8 +15,6 @@ import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
 const TravellingTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -84,15 +81,8 @@ const TravellingTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="slNo"
-          pagination={{
-            current: currentPage,
-            pageSize: pageSize,
-            total: data?.meta?.total,
-            onChange: (page, pageSize) => {
-              setCurrentPage(page);
-              setPageSize(pageSize);
-            },
-          }}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

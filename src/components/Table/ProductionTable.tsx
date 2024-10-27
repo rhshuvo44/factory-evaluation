@@ -1,5 +1,4 @@
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
@@ -15,8 +14,6 @@ import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 
 const ProductionTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -32,10 +29,7 @@ const ProductionTable = () => {
     }
   };
 
-  const { data, isError, isLoading } = useGetAllProductionQuery({
-    limit: pageSize,
-    skip: (currentPage - 1) * pageSize,
-  });
+  const { data, isError, isLoading } = useGetAllProductionQuery(undefined);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
@@ -80,15 +74,8 @@ const ProductionTable = () => {
         ]}
         dataSource={data?.data}
         rowKey="_id"
-        pagination={{
-          current: currentPage,
-          pageSize: pageSize,
-          total: data?.meta.total,
-          onChange: (page, pageSize) => {
-            setCurrentPage(page);
-            setPageSize(pageSize);
-          },
-        }}
+        scroll={{ y: 55 * 7 }}
+        pagination={false}
       />
     </div>
   );
