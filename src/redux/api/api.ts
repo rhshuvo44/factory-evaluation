@@ -29,6 +29,16 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     if (result?.error?.status === 404) {
         toast.error(result?.error?.data?.message);
     }
+    if (result?.error?.status === 400) {
+        result?.error?.data?.errorMessages.forEach((error: { message: string }) => {
+            toast.error(error.message);
+        });
+
+    }
+    // if (result?.error?.status === 400) {
+    //     toast.error(result?.error?.data?.message);
+    // }
+
     if (result?.error?.status === 403) {
         toast.error(result?.error?.data?.message)
     }

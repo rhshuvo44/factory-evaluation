@@ -12,7 +12,7 @@ const UserForm = () => {
   const [createUser] = useCreateUserMutation();
   const onFinish = async (values: TUSer) => {
     const res = await createUser(values).unwrap();
-    console.log(res);
+
     if (!res.success) return toast.error(res.message);
     toast.success("Create User successfully");
     form.resetFields();
@@ -41,7 +41,12 @@ const UserForm = () => {
       <Form.Item
         label="Password"
         name="password"
-        rules={[{ required: true, message: "Please input Password" }]}
+        rules={[
+          {
+            required: true,
+            message: "Password must be at least 8 characters long",
+          },
+        ]}
       >
         <Input.Password
           style={{ width: "100%" }}
