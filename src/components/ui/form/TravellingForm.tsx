@@ -12,7 +12,9 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { paymentOptions } from "../../../constants/Options";
+import { useCreateNotificationMutation } from "../../../redux/features/notification/notificationApi";
 import { useCreateTravelMutation } from "../../../redux/features/travelling/travellingApi";
+import { useGetMeQuery } from "../../../redux/features/user/userApi";
 import { TTravel } from "../../../types/tableType";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
@@ -23,7 +25,10 @@ const TravellingForm = () => {
   const [unitPrice, setUnitPrice] = useState<number>(0);
   const [date, setDate] = useState<string | string[]>("");
 
+  const { data: user } = useGetMeQuery(undefined);
+
   const [createTravel] = useCreateTravelMutation();
+  const [createNotificationMutation] = useCreateNotificationMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -40,9 +45,7 @@ const TravellingForm = () => {
     // current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
     return current.isBefore(startOfMonth) || current.isAfter(dayjs());
   };
-  const now = new Date();
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  console.log(startOfMonth);
+
   useEffect(() => {
     form.setFieldsValue({
       totalPrice: unit * unitPrice,
@@ -54,6 +57,16 @@ const TravellingForm = () => {
     if (!res.success) return toast.error(res.message);
     toast.success("Create Travelling Allowance successfully");
     form.resetFields();
+    const notify = {
+      message: `New Travelling Allowance created by ${user?.data?.name}`,
+      date: date,
+    };
+    await createNotificationMutation(notify);
+    // if (socket) {
+    //   socket.emit("sendNotification", {
+    //     message: `New Travelling Allowance created by ${user?.data?.name}`,
+    //   });
+    // }
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>

@@ -14,6 +14,7 @@ import { coordinatorPaths } from "./Coordinator.routes";
 import { executivePaths } from "./ExecutiveDirector.routes";
 import { generalPaths } from "./generalDirector.routes";
 import { managingPaths } from "./ManagingDirector.routes";
+import Notification from "../pages/Notification";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,16 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Setting />,
+      },
+    ],
+  },
+  {
+    path: "/notification",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Notification />,
       },
     ],
   },

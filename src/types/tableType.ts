@@ -258,3 +258,8 @@ export type TReport = {
     factoryCollection: number
     balance: number
 }
+export type TNotification = {
+    slNo: number
+    date: Date
+    message: string
+  }

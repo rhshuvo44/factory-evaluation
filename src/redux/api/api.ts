@@ -29,12 +29,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     if (result?.error?.status === 404) {
         toast.error(result?.error?.data?.message);
     }
-    if (result?.error?.status === 400) {
-        result?.error?.data?.errorMessages.forEach((error: { message: string }) => {
-            toast.error(error.message);
-        });
 
-    }
     // if (result?.error?.status === 400) {
     //     toast.error(result?.error?.data?.message);
     // }
@@ -65,13 +60,18 @@ const baseQueryWithRefreshToken: BaseQueryFn<
             api.dispatch(logout());
         }
     }
+    if (result?.error?.status === 400) {
+        result?.error?.data?.errorMessages.forEach((error: { message: string }) => {
+            toast.error(error.message);
+        });
 
+    }
     return result;
 };
 
 export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQueryWithRefreshToken,
-    tagTypes: ['Travelling', 'Utility', 'Employee', 'loan', 'Miscellaneous', 'Collection', 'Buyer Development', 'Factory', 'User', "Loan", "fixedCost", "production", "targetOutput", "report"],
+    tagTypes: ['Travelling', 'Utility', 'Employee', 'loan', 'Miscellaneous', 'Collection', 'Buyer Development', 'Factory', 'User', "Loan", "fixedCost", "production", "targetOutput", "report", "notification"],
     endpoints: () => ({}),
 });
