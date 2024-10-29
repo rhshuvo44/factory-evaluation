@@ -25,6 +25,7 @@ const HeaderMenu = () => {
   const { data } = useGetMeQuery(undefined);
   const { data: notifications, refetch } = useGetNotificationQuery({});
   const dispatch = useAppDispatch();
+  const lastFiveNotifications = notifications?.data?.slice(-5) || [];
   const items: MenuProps["items"] = [
     {
       label: <NavLink to={`/me`}>Profile</NavLink>,
@@ -52,12 +53,13 @@ const HeaderMenu = () => {
 
     return () => clearInterval(intervalId);
   }, [refetch]);
+
   const notificationMenu = (
     <Menu>
       {notifications?.data?.length === 0 ? (
         <Menu.Item disabled>No notifications</Menu.Item>
       ) : (
-        notifications?.data.map((notify: TNotification, index: number) => (
+        lastFiveNotifications?.map((notify: TNotification, index: number) => (
           <>
             <Menu.Item key={index}>
               <Typography.Text>{notify?.message}</Typography.Text>
@@ -94,7 +96,7 @@ const HeaderMenu = () => {
 
       <div className="flex gap-4 justify-center items-center">
         <Dropdown overlay={notificationMenu} trigger={["click"]}>
-          <Badge count={notifications?.data?.length}>
+          <Badge count={lastFiveNotifications?.length}>
             <Avatar
               alt="avatar"
               icon={<BellOutlined />}
