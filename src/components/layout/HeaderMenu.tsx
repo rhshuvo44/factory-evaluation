@@ -59,7 +59,12 @@ const HeaderMenu = () => {
   const handleBadgeClick = () => {
     setBadgeCount(0); // Clear badge count on click
   };
- 
+  useEffect(() => {
+    const storedPrevCount = localStorage.getItem("prevNotificationCount");
+    if (storedPrevCount) {
+      setPrevNotificationCount(parseInt(storedPrevCount, 10));
+    }
+  }, []);
   // Refetch notifications every 10 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -70,7 +75,6 @@ const HeaderMenu = () => {
         setPrevNotificationCount(notifications?.data?.length); // Update previous count
       }
     }, 10000); // 10 seconds
-
     return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, [
     refetch,
