@@ -23,14 +23,14 @@ const { Header } = Layout;
 
 const HeaderMenu = () => {
   const { data } = useGetMeQuery(undefined);
-  const { data: notifications, refetch } = useGetNotificationQuery({});
+  const { data: notifications, refetch } = useGetNotificationQuery(undefined);
   const dispatch = useAppDispatch();
   const lastFiveNotifications = Array.isArray(notifications?.data)
     ? notifications.data.slice(0, 5)
     : [];
   const [badgeCount, setBadgeCount] = useState(0); // Badge count for new notifications
   const [prevNotificationCount, setPrevNotificationCount] = useState(
-    lastFiveNotifications.length
+    0
   );
 
   const items: MenuProps["items"] = [
@@ -69,10 +69,17 @@ const HeaderMenu = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       refetch(); // Fetch new notifications
-      // Check if there are new notifications by comparing lengths
-      if (notifications?.data?.length > prevNotificationCount) {
-        setBadgeCount(badgeCount + 1); // Increment badge for each new notification
-        setPrevNotificationCount(notifications?.data?.length); // Update previous count
+      const currentNotificationCount = notifications?.data?.length || 0;
+
+      // Only increment badge if there are new notifications
+      if (currentNotificationCount > prevNotificationCount) {
+        const newNotificationsCount =
+          currentNotificationCount - prevNotificationCount;
+        setBadgeCount((prev) => prev + newNotificationsCount);
+        setPrevNotificationCount(currentNotificationCount);
+
+        // Store the updated count in localStorage
+        localStorage.setItem("prevNotificationCount", currentNotificationCount);
       }
     }, 10000); // 10 seconds
     return () => clearInterval(intervalId); // Cleanup interval on unmount
