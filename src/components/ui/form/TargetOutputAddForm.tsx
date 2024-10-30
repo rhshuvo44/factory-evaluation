@@ -7,7 +7,8 @@ import {
   Select,
 } from "antd";
 import dayjs, { Dayjs } from "dayjs";
-import { useState } from "react";
+import moment from "moment";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { styleOption } from "../../../constants/Options";
@@ -23,14 +24,17 @@ import Loading from "../Loading";
 
 const TargetOutputAddForm = () => {
   const [form] = Form.useForm();
-  const [date, setDate] = useState<string | string[]>("");
+  const [selectedDate, setSelectedDate] = useState<string | string[]>("");
   const [createTargetOutput] = useCreateTargetOutputMutation();
-  const { data, isLoading } = useGetTodayProductionQuery(undefined);
+  const queryParams = selectedDate
+    ? { date: selectedDate }
+    : { date: moment().format("DD-MMM-YYYY") };
+  const { data, isLoading } = useGetTodayProductionQuery(queryParams);
   const { data: user } = useGetMeQuery(undefined);
 
   const [createNotificationMutation] = useCreateNotificationMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-    setDate(dateString);
+    setSelectedDate(dateString);
   };
   const disableDates = (current: Dayjs) => {
     // Disable dates that are more than 45 days ago or in the future
@@ -39,11 +43,14 @@ const TargetOutputAddForm = () => {
     // current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
     return current.isBefore(startOfMonth) || current.isAfter(dayjs());
   };
-  const initialValues = {
-    sewingSection: {
-      sewingOutput: data?.data?.readyQuantity,
-    },
-  };
+  useEffect(() => {
+    form.setFieldsValue({
+      sewingSection: {
+        sewingOutput: data?.data?.readyQuantity,
+      },
+    });
+  }, [form, data]);
+
   if (isLoading) return <Loading />;
   const onFinish = async (values: TTargetInputFiled) => {
     const cutting: TSection = {
@@ -62,7 +69,7 @@ const TargetOutputAddForm = () => {
       output: values.finishing.finishingOutput,
     };
     const targetData = {
-      date: date,
+      date: selectedDate,
       buyer: values.buyer,
       orderNo: values.orderNo,
       styleNo: values.styleNo,
@@ -82,19 +89,14 @@ const TargetOutputAddForm = () => {
     if (user?.data?.role === userRole.Coordinator) {
       const notify = {
         message: `New target output created by ${user?.data?.name}`,
-        date: date,
+        date: selectedDate,
       };
       await createNotificationMutation(notify);
     }
   };
 
   return (
-    <Form
-      form={form}
-      {...formItemLayout}
-      onFinish={onFinish}
-      initialValues={initialValues}
-    >
+    <Form form={form} {...formItemLayout} onFinish={onFinish}>
       <Form.Item
         label="Style No"
         name="styleNo"

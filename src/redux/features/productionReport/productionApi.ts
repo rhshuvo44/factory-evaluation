@@ -17,8 +17,8 @@ const productionApi = baseApi.injectEndpoints({
             invalidatesTags: ['production'],
         }),
         getTodayProduction: builder.query({
-            query: () => (
-                { url: `/production-report/today`, method: 'GET' }
+            query: (queryParams) => (
+                { url: `/production-report/today?date=${queryParams.date}`, method: 'GET' }
             ), providesTags: ['production'],
         }),
         updateProduction: builder.mutation({

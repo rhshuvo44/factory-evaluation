@@ -211,7 +211,7 @@ const RunningCostTable = () => {
 
   return (
     <>
-      <div className="flex  items-center justify-between mb-2">
+      <div className="flex flex-col lg:flex-row gap-1 items-center justify-between mb-2">
         <SectionTitle title="Factory Running Cost" />
         <DatePicker onChange={onChangeDate} disabledDate={disableDates} />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
@@ -246,8 +246,8 @@ const RunningCostTable = () => {
             ...runningColums,
           ]}
           dataSource={combinedData}
-          scroll={{ y: 55 * 7 }}
-          tableLayout="auto"
+          // scroll={{ y: 55 * 7 }}
+          // tableLayout="auto"
           pagination={false}
           rowKey="_id"
         />

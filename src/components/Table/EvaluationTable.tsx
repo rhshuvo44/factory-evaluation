@@ -47,8 +47,8 @@ const EvaluationTable = ({
     },
   ];
   return (
-    <div>
-      <div className="flex  items-center justify-between my-2">
+    <>
+      <div className="flex flex-col lg:flex-row items-center justify-between my-2">
         <SectionTitle title="Factory Evaluation Cost" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           {totalCost >= amount ? (
@@ -71,10 +71,9 @@ const EvaluationTable = ({
           dataSource={dataSource}
           rowKey="_id"
           pagination={false}
-           tableLayout="auto"
         />
       </div>
-    </div>
+    </>
   );
 };
 
