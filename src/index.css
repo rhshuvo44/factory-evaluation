@@ -19,9 +19,9 @@
     overflow-x: scroll;
   }
 }
-.responsive-table-container .ant-table-wrapper {
+/* .responsive-table-container .ant-table-wrapper {
   min-width: 100%;
-}
+} */
 
 :where(
     .css-dev-only-do-not-override-qnu6hi

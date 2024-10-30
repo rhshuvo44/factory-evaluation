@@ -71,6 +71,7 @@ const EvaluationTable = ({
           dataSource={dataSource}
           rowKey="_id"
           pagination={false}
+           tableLayout="auto"
         />
       </div>
     </div>

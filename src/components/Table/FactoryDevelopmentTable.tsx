@@ -84,6 +84,7 @@ const FactoryDevelopmentTable = () => {
           rowKey="_id"
           scroll={{ y: 55 * 7 }}
           pagination={false}
+           tableLayout="auto"
         />
       </div>
     </div>

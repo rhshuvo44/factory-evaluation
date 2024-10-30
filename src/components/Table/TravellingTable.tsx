@@ -81,7 +81,8 @@ const TravellingTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="slNo"
-          // scroll={{ y: 500 }}
+          scroll={{ y: 500 }}
+          tableLayout="auto"
           pagination={false}
         />
       </div>

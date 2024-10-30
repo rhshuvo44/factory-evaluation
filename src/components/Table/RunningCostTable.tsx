@@ -2,6 +2,8 @@ import { DatePicker, DatePickerProps, Table } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import moment from "moment";
 import { useState } from "react";
+import { userRole } from "../../constants/userRole";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import { useGetTodayBuyerDevelopmentQuery } from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
 import { useGetTodayEmployeesQuery } from "../../redux/features/employee/employeeApi";
 import { useGetTodayFactoryQuery } from "../../redux/features/Factory development/factoryDevelopmentApi";
@@ -10,15 +12,13 @@ import { useGetTodayLoanQuery } from "../../redux/features/loan/loanApi";
 import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
 import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 import { useGetTodayUtilityQuery } from "../../redux/features/utility/utilityApi";
+import { useAppSelector } from "../../redux/hook";
 import { runningColums, TFixed, TUtility } from "../../types";
+import { verifyToken } from "../../utilis/verifyToken";
 import ReportForm from "../ui/form/ReportForm";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 import EvaluationTable from "./EvaluationTable";
-import { useAppSelector } from "../../redux/hook";
-import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
-import { verifyToken } from "../../utilis/verifyToken";
-import { userRole } from "../../constants/userRole";
 
 const RunningCostTable = () => {
   // State to hold selected date
@@ -246,7 +246,8 @@ const RunningCostTable = () => {
             ...runningColums,
           ]}
           dataSource={combinedData}
-          // scroll={{ y: 55 * 7 }}
+          scroll={{ y: 55 * 7 }}
+          tableLayout="auto"
           pagination={false}
           rowKey="_id"
         />

@@ -122,6 +122,7 @@ const ReportTable = () => {
           columns={columns}
           dataSource={data?.data}
           rowKey="_id"
+           tableLayout="auto"
           scroll={{ y: 55 * 7 }}
           pagination={false}
         />

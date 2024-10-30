@@ -44,6 +44,7 @@ const FixedCostTable = () => {
       <div className="responsive-table-container">
         <Table<TFixed>
           size="small"
+           tableLayout="auto"
           pagination={false}
           dataSource={data?.data?.result.map((item: TFixed) => ({
             ...item,
