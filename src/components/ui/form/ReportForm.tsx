@@ -1,14 +1,17 @@
 import { Button, Form, InputNumber } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { useEffect } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
+import { userRole } from "../../../constants/userRole";
 import { useGetTodayCollectionsQuery } from "../../../redux/features/collection/collectionApi";
+import { useCreateNotificationMutation } from "../../../redux/features/notification/notificationApi";
 import { useCreateReportMutation } from "../../../redux/features/report/reportApi";
+import { useGetMeQuery } from "../../../redux/features/user/userApi";
 import { TReport } from "../../../types";
 import Loading from "../Loading";
 import SectionTitle from "../SectionTitle";
-import { useEffect } from "react";
 
 const ReportForm = ({
   runningCost,
@@ -24,7 +27,9 @@ const ReportForm = ({
   // const date = new Date().toLocaleDateString();
   const amount = data?.data?.amount;
   const [createReportMutation] = useCreateReportMutation();
+  const { data: user } = useGetMeQuery(undefined);
 
+  const [createNotificationMutation] = useCreateNotificationMutation();
   const initialValues = {
     factoryRunningCost: runningCost,
     factoryCollection: amount,
@@ -57,6 +62,14 @@ const ReportForm = ({
     if (!res.success) return toast.error(res.message);
     toast.success("Create successfully");
     form.resetFields();
+    // Check if user role is admin before creating a notification
+    if (user?.data?.role === userRole.ExecutiveDirector) {
+      const notify = {
+        message: `New Report Generate created by ${user?.data?.name}`,
+        date: date,
+      };
+      await createNotificationMutation(notify);
+    }
   };
   return (
     <>

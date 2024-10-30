@@ -11,6 +11,7 @@ import {
   MenuProps,
   Typography,
 } from "antd";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import userImg from "../../../public/favicon.ico";
 import { logout } from "../../redux/features/auth/authSlice";
@@ -18,14 +19,20 @@ import { useGetNotificationQuery } from "../../redux/features/notification/notif
 import { useGetMeQuery } from "../../redux/features/user/userApi";
 import { useAppDispatch } from "../../redux/hook";
 import { TNotification } from "../../types";
-import { useEffect } from "react";
 const { Header } = Layout;
 
 const HeaderMenu = () => {
   const { data } = useGetMeQuery(undefined);
   const { data: notifications, refetch } = useGetNotificationQuery({});
   const dispatch = useAppDispatch();
-  const lastFiveNotifications = notifications?.data?.slice(-5) || [];
+  const lastFiveNotifications = Array.isArray(notifications?.data)
+    ? notifications.data.slice(0, 5)
+    : [];
+  const [badgeCount, setBadgeCount] = useState(0); // Badge count for new notifications
+  const [prevNotificationCount, setPrevNotificationCount] = useState(
+    lastFiveNotifications.length
+  );
+
   const items: MenuProps["items"] = [
     {
       label: <NavLink to={`/me`}>Profile</NavLink>,
@@ -45,14 +52,33 @@ const HeaderMenu = () => {
     },
   ];
   const date = new Date();
+
+  // Function to handle dropdown click
+
+  // Handle badge click to reset count
+  const handleBadgeClick = () => {
+    setBadgeCount(0); // Clear badge count on click
+  };
+ 
   // Refetch notifications every 10 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
-      refetch();
+      refetch(); // Fetch new notifications
+      // Check if there are new notifications by comparing lengths
+      if (notifications?.data?.length > prevNotificationCount) {
+        setBadgeCount(badgeCount + 1); // Increment badge for each new notification
+        setPrevNotificationCount(notifications?.data?.length); // Update previous count
+      }
     }, 10000); // 10 seconds
 
-    return () => clearInterval(intervalId);
-  }, [refetch]);
+    return () => clearInterval(intervalId); // Cleanup interval on unmount
+  }, [
+    refetch,
+    lastFiveNotifications.length,
+    prevNotificationCount,
+    badgeCount,
+    notifications?.data?.length,
+  ]);
 
   const notificationMenu = (
     <Menu>
@@ -78,6 +104,7 @@ const HeaderMenu = () => {
       </Flex>
     </Menu>
   );
+  // console.log(badge);
 
   return (
     <Header
@@ -96,8 +123,9 @@ const HeaderMenu = () => {
 
       <div className="flex gap-4 justify-center items-center">
         <Dropdown overlay={notificationMenu} trigger={["click"]}>
-          <Badge count={lastFiveNotifications?.length}>
+          <Badge count={badgeCount}>
             <Avatar
+              onClick={handleBadgeClick}
               alt="avatar"
               icon={<BellOutlined />}
               style={{ fontSize: "24px", cursor: "pointer" }}

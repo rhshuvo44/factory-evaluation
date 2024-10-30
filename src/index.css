@@ -10,6 +10,7 @@
 .responsive-table-container {
   overflow-x: auto;
   background-color: white;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -17,6 +18,9 @@
     width: 100%;
     overflow-x: scroll;
   }
+}
+.responsive-table-container .ant-table-wrapper {
+  min-width: 100%;
 }
 
 :where(
@@ -84,4 +88,3 @@
     transform: rotate(360deg);
   }
 }
-

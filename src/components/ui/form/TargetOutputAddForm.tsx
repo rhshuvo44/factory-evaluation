@@ -11,8 +11,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { styleOption } from "../../../constants/Options";
+import { userRole } from "../../../constants/userRole";
+import { useCreateNotificationMutation } from "../../../redux/features/notification/notificationApi";
 import { useGetTodayProductionQuery } from "../../../redux/features/productionReport/productionApi";
 import { useCreateTargetOutputMutation } from "../../../redux/features/targetOutput/targetOutputApi";
+import { useGetMeQuery } from "../../../redux/features/user/userApi";
 import { TSection, TTargetInputFiled } from "../../../types";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
@@ -23,6 +26,9 @@ const TargetOutputAddForm = () => {
   const [date, setDate] = useState<string | string[]>("");
   const [createTargetOutput] = useCreateTargetOutputMutation();
   const { data, isLoading } = useGetTodayProductionQuery(undefined);
+  const { data: user } = useGetMeQuery(undefined);
+
+  const [createNotificationMutation] = useCreateNotificationMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -72,6 +78,14 @@ const TargetOutputAddForm = () => {
     if (!res.success) return toast.error(res.message);
     toast.success("Create Target report successfully");
     form.resetFields();
+    // Check if user role is admin before creating a notification
+    if (user?.data?.role === userRole.Coordinator) {
+      const notify = {
+        message: `New target output created by ${user?.data?.name}`,
+        date: date,
+      };
+      await createNotificationMutation(notify);
+    }
   };
 
   return (

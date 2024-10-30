@@ -4,7 +4,10 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { styleOption } from "../../../constants/Options";
+import { userRole } from "../../../constants/userRole";
+import { useCreateNotificationMutation } from "../../../redux/features/notification/notificationApi";
 import { useCreateProductionMutation } from "../../../redux/features/productionReport/productionApi";
+import { useGetMeQuery } from "../../../redux/features/user/userApi";
 import { TProductionReport } from "../../../types";
 import CustomInput from "../../form/CustomInput";
 import CustomInputNumber from "../../form/CustomInputNumber";
@@ -12,6 +15,9 @@ const ProductionAddForm = () => {
   const [form] = Form.useForm();
   const [date, setDate] = useState<string | string[]>("");
   const [createProduction] = useCreateProductionMutation();
+  const { data: user } = useGetMeQuery(undefined);
+
+  const [createNotificationMutation] = useCreateNotificationMutation();
   const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
     setDate(dateString);
   };
@@ -23,12 +29,20 @@ const ProductionAddForm = () => {
     // current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
     return current.isBefore(startOfMonth) || current.isAfter(dayjs());
   };
-
+  
   const onFinish = async (values: TProductionReport) => {
     const res = await createProduction({ ...values, date }).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Create Production successfully");
     form.resetFields();
+    // Check if user role is admin before creating a notification
+    if (user?.data?.role === userRole.Coordinator) {
+      const notify = {
+        message: `New production Report Generate created by ${user?.data?.name}`,
+        date: date,
+      };
+      await createNotificationMutation(notify);
+    }
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish} form={form}>
