@@ -139,7 +139,7 @@ const SalaryTable = () => {
           size="small"
           className="table-auto"
           // style={{ tableLayout: "auto" }}
-          tableLayout="auto"
+          
           bordered
           columns={colums}
           dataSource={data?.data}

@@ -77,7 +77,6 @@ const LoanTable = () => {
           dataSource={data?.data}
           rowKey="slNo"
           scroll={{ y: 55 * 7 }}
-           tableLayout="auto"
           pagination={false}
         />
       </div>

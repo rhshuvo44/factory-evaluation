@@ -39,7 +39,6 @@ const TargetOutputTable = () => {
         size="small"
         className="table-auto"
         bordered
-         tableLayout="auto"
         columns={[
           ...targetOutputColums,
           ...(user?.role === userRole.ADMIN ||
