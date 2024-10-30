@@ -33,8 +33,8 @@ const FixedCostTable = () => {
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
-    <div>
-      <div className="flex  items-center justify-between mb-2">
+    <>
+      <div className="flex flex-col lg:flex-row gap-1 items-center justify-between mb-2">
         <SectionTitle title="Fixed Cost Table" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :
@@ -116,7 +116,7 @@ const FixedCostTable = () => {
           )}
         </Table>
       </div>
-    </div>
+    </>
   );
 };
 

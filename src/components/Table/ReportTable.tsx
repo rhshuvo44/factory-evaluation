@@ -42,12 +42,12 @@ const ReportTable = () => {
       key: "date",
     },
     {
-      title: "Factory Running Cost",
+      title: "Running Cost",
       dataIndex: "factoryRunningCost",
       key: "factoryRunningCost",
     },
     {
-      title: "Factory Collection",
+      title: "Collection",
       dataIndex: "factoryCollection",
       key: "factoryCollection",
     },
@@ -96,7 +96,7 @@ const ReportTable = () => {
   const balance = data?.totalPrice.toFixed(2);
   return (
     <div>
-      <div className="flex  items-center justify-between my-2">
+      <div className="flex items-center justify-between my-2">
         <SectionTitle title="Reports" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total Balance :

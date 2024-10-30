@@ -34,7 +34,7 @@ const LoanTable = () => {
   if (isError) return <div>Error: {isError}</div>;
   return (
     <div>
-      <div className="flex  items-center justify-between mb-2">
+      <div className="flex flex-col lg:flex-row gap-1 items-center justify-between mb-2">
         <SectionTitle title="Loan Return" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :<span className="text-red-500"> {data?.totalPrice}</span>

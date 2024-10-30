@@ -36,7 +36,7 @@ const CollectionTable = () => {
   if (isError) return <div>Error: {isError}</div>;
   return (
     <div>
-      <div className="flex  items-center justify-between mb-2">
+      <div className="flex flex-col lg:flex-row gap-1 items-center justify-between mb-2">
         <SectionTitle title=" Collection Table" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :<span className="text-red-500"> {data?.totalPrice}</span>
@@ -78,8 +78,7 @@ const CollectionTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="_id"
-          scroll={{ y: 55 * 7 }}
-           
+          scroll={{ x:"",y: 55 * 7 }}
           pagination={false}
         />
       </div>
