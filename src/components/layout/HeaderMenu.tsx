@@ -29,9 +29,7 @@ const HeaderMenu = () => {
     ? notifications.data.slice(0, 5)
     : [];
   const [badgeCount, setBadgeCount] = useState(0); // Badge count for new notifications
-  const [prevNotificationCount, setPrevNotificationCount] = useState(
-    0
-  );
+  const [prevNotificationCount, setPrevNotificationCount] = useState(0);
 
   const items: MenuProps["items"] = [
     {
@@ -55,42 +53,53 @@ const HeaderMenu = () => {
 
   // Function to handle dropdown click
 
-  // Handle badge click to reset count
   const handleBadgeClick = () => {
     setBadgeCount(0); // Clear badge count on click
+    localStorage.setItem(
+      `prevNotificationCount_${data?.data._id}`,
+      notifications?.data?.length || 0
+    ); // Reset count for the current user
   };
+
+  // Load previous notification count for the current user on initial render
   useEffect(() => {
-    const storedPrevCount = localStorage.getItem("prevNotificationCount");
+    const storedPrevCount = localStorage.getItem(
+      `prevNotificationCount_${data?.data._id}`
+    );
     if (storedPrevCount) {
       setPrevNotificationCount(parseInt(storedPrevCount, 10));
     }
-  }, []);
-  // Refetch notifications every 10 seconds
+  }, [data?.data._id]);
+
+  // Refetch notifications every 10 seconds and update badge count if there are new notifications
   useEffect(() => {
     const intervalId = setInterval(() => {
       refetch(); // Fetch new notifications
+
       const currentNotificationCount = notifications?.data?.length || 0;
 
-      // Only increment badge if there are new notifications
+      // Only increment badge if there are new notifications for this user
       if (currentNotificationCount > prevNotificationCount) {
         const newNotificationsCount =
           currentNotificationCount - prevNotificationCount;
         setBadgeCount((prev) => prev + newNotificationsCount);
         setPrevNotificationCount(currentNotificationCount);
 
-        // Store the updated count in localStorage
-        localStorage.setItem("prevNotificationCount", currentNotificationCount);
+        // Store the updated count for the current user
+        localStorage.setItem(
+          `prevNotificationCount_${data?.data._id}`,
+          currentNotificationCount
+        );
       }
     }, 10000); // 10 seconds
+
     return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, [
     refetch,
-    lastFiveNotifications.length,
-    prevNotificationCount,
-    badgeCount,
     notifications?.data?.length,
+    prevNotificationCount,
+    data?.data._id,
   ]);
-
   const notificationMenu = (
     <Menu>
       {notifications?.data?.length === 0 ? (
