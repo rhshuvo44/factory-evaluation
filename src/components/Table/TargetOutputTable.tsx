@@ -35,7 +35,7 @@ const TargetOutputTable = () => {
   return (
     <div className="responsive-table-container">
       <Table
-        scroll={{ x: 1500, y: 55 * 7 }}
+        scroll={{ x: 1500 }}
         size="small"
         className="table-auto"
         bordered
