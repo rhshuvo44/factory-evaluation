@@ -38,9 +38,11 @@ const SalaryAddForm = () => {
 
   useEffect(() => {
     form.setFieldsValue({
-      salary: perDaySalary * 26,
-      overTimeRate: perDaySalary / 10,
-      grossPerDaySalary: perDaySalary + (perDaySalary / 10) * overTime,
+      salary: parseFloat((perDaySalary * 26).toFixed(2)),
+      overTimeRate: parseFloat((perDaySalary / 10).toFixed(2)),
+      grossPerDaySalary: parseFloat(
+        (perDaySalary + (perDaySalary / 10) * overTime).toFixed(2)
+      ),
     });
   }, [perDaySalary, overTime, form]);
 

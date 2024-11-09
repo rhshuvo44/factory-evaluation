@@ -19,6 +19,8 @@ import Production from "../pages/Production/Production";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
+import SalaryUpdate from "../pages/salary/SalaryUpdate";
+import TargetOutput from "../pages/targetOutput/TargetOutput";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAllowanceUpdate";
@@ -91,12 +93,16 @@ export const executivePaths = [
     name: "Employee salary cost",
     children: [
       {
-        name: "Add Employee salary cost",
+        name: "Add Employee",
         path: "add_salary_cost",
         element: <SalaryForm />,
       },
       {
-        name: "All Employee salary cost",
+        path: "employee/:id",
+        element: <SalaryUpdate />,
+      },
+      {
+        name: "All Employee",
         path: "all_salary_cost",
         element: <Salary />,
       },
@@ -174,6 +180,11 @@ export const executivePaths = [
     name: "Production Report",
     path: "all_production_reports",
     element: <Production />,
+  },
+  {
+    name: "All Target",
+    path: "all_target",
+    element: <TargetOutput />,
   },
   {
     name: "View Report",

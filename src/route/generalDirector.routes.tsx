@@ -9,6 +9,7 @@ import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import Production from "../pages/Production/Production";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
+import TargetOutput from "../pages/targetOutput/TargetOutput";
 import Utility from "../pages/utility/Utility";
 
 export const generalPaths = [
@@ -66,6 +67,11 @@ export const generalPaths = [
     name: "Production Report",
     path: "all_production_reports",
     element: <Production />,
+  },
+  {
+    name: "All Target",
+    path: "all_target",
+    element: <TargetOutput />,
   },
   {
     name: "View Report",
