@@ -265,7 +265,7 @@ const SalaryTable = () => {
         <SectionTitle title=" Employee Sheet" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :
-          <span className="text-red-500"> {data?.totalPrice.toFixed(2)}</span>
+          <span className="text-red-500"> {data?.totalPrice?.toFixed(2)}</span>
         </div>
       </div>
       <div className="responsive-table-container">
