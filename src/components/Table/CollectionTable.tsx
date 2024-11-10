@@ -49,7 +49,7 @@ const CollectionTable = () => {
           bordered
           columns={[
             ...collectionColums,
-            ...(user?.role === userRole.ADMIN ||
+            ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
             user?.role === userRole.ExecutiveDirector
               ? [
                   {
@@ -78,8 +78,8 @@ const CollectionTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="_id"
-          // scroll={{ x:"",y: 55 * 7 }}
-          // pagination={false}
+          scroll={{ x:"",y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

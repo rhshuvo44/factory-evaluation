@@ -10,6 +10,7 @@ import { coordinatorPaths } from "../../route/Coordinator.routes";
 import { executivePaths } from "../../route/ExecutiveDirector.routes";
 import { generalPaths } from "../../route/generalDirector.routes";
 import { managingPaths } from "../../route/ManagingDirector.routes";
+import { superAdminPaths } from "../../route/superAdmin.routes";
 import { sidebarItemsGenerator } from "../../utilis/sidebarItemsGenerator";
 import { verifyToken } from "../../utilis/verifyToken";
 
@@ -24,6 +25,12 @@ const SideBar = () => {
   let sidebarItems;
 
   switch (user!.role) {
+    case userRole.superAdmin:
+      sidebarItems = sidebarItemsGenerator(
+        superAdminPaths,
+        userRole.superAdmin
+      );
+      break;
     case userRole.ADMIN:
       sidebarItems = sidebarItemsGenerator(adminPaths, userRole.ADMIN);
       break;
@@ -84,7 +91,7 @@ const SideBar = () => {
         console.log(collapsed, type);
       }}
     >
-      <div className="m-5" >
+      <div className="m-5">
         <img src={logo} alt="logo" />
       </div>
       <Menu

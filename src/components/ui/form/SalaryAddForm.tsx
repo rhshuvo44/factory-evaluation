@@ -74,13 +74,19 @@ const SalaryAddForm = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
+
   // console.log(photo);
   const onFinish = async (values: TSalary) => {
+    const perDaySalary = parseFloat(values.perDaySalary.toFixed(2));
+    const employData = {
+      ...values,
+      perDaySalary,
+    };
     const formData = new FormData();
     if (photo) {
       formData.append("file", photo);
     }
-    formData.append("data", JSON.stringify(values));
+    formData.append("data", JSON.stringify(employData));
 
     const res = await createEmployee(formData).unwrap();
 
@@ -98,8 +104,19 @@ const SalaryAddForm = () => {
         message="Please input! Name"
         placeholder="please input Employee Name"
       />
-
       <Form.Item
+        label="Designation"
+        name="designation"
+        rules={[{ required: true, message: "Please select Designation! " }]}
+      >
+        <Select
+          showSearch
+          placeholder="Please select Designation! "
+          optionFilterProp="label"
+          options={designationOption}
+        />
+      </Form.Item>
+      {/* <Form.Item
         label="Designation"
         name="designation"
         rules={[{ required: true, message: "Please select Designation! " }]}
@@ -109,7 +126,7 @@ const SalaryAddForm = () => {
           placeholder="Please select Designation"
           options={designationOption}
         />
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item label="Working Days" name="workingDays" initialValue={26}>
         <InputNumber style={{ width: "100%" }} disabled />
       </Form.Item>

@@ -47,7 +47,7 @@ const LoanTable = () => {
           size="small"
           columns={[
             ...loanColums,
-            ...(user?.role === userRole.ADMIN ||
+            ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
             user?.role === userRole.ExecutiveDirector
               ? [
                   {
@@ -76,8 +76,8 @@ const LoanTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="slNo"
-          // scroll={{ y: 55 * 7 }}
-          // pagination={false}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

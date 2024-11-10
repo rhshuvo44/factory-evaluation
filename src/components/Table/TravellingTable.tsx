@@ -50,7 +50,7 @@ const TravellingTable = () => {
           size="small"
           columns={[
             ...travellingColums,
-            ...(user?.role === userRole.ADMIN ||
+            ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
             user?.role === userRole.ExecutiveDirector
               ? [
                   {
@@ -81,7 +81,7 @@ const TravellingTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="slNo"
-          // scroll={{ y: 55 * 7 }}
+          scroll={{ y: 55 * 7 }}
           // scroll={{ y: 500 }}
           // tableLayout="auto"
           pagination={false}

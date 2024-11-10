@@ -22,7 +22,7 @@ import { TNotification } from "../../types";
 const { Header } = Layout;
 
 const HeaderMenu = () => {
-  const { data } = useGetMeQuery(undefined);
+  const { data, refetch: userRefetch } = useGetMeQuery(undefined);
   const { data: notifications, refetch } = useGetNotificationQuery(undefined);
   const dispatch = useAppDispatch();
   const lastFiveNotifications = Array.isArray(notifications?.data)
@@ -60,7 +60,9 @@ const HeaderMenu = () => {
       notifications?.data?.length || 0
     ); // Reset count for the current user
   };
-
+  useEffect(() => {
+    userRefetch(); // Trigger data refetch on component mount
+  }, [data, userRefetch]);
   // Load previous notification count for the current user on initial render
   useEffect(() => {
     const storedPrevCount = localStorage.getItem(

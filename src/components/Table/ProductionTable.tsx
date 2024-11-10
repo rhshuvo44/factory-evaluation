@@ -41,7 +41,7 @@ const ProductionTable = () => {
         bordered
         columns={[
           ...productionColums,
-          ...(user?.role === userRole.ADMIN ||
+          ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
           user?.role === userRole.Coordinator
             ? [
                 {
@@ -74,7 +74,8 @@ const ProductionTable = () => {
         ]}
         dataSource={data?.data}
         rowKey="_id"
-        // scroll={{ y: 55 * 7 }}
+        scroll={{ y: 55 * 7 }}
+        pagination={false}
       />
     </div>
   );

@@ -49,7 +49,7 @@ const MiscellaneousTableComponent = () => {
           size="small"
           columns={[
             ...misColumns,
-            ...(user?.role === userRole.ADMIN ||
+            ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
             user?.role === userRole.ExecutiveDirector
               ? [
                   {
@@ -78,8 +78,8 @@ const MiscellaneousTableComponent = () => {
           ]}
           dataSource={data?.data}
           rowKey="_id"
-          // scroll={{ y: 55 * 7 }}
-          // pagination={false}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

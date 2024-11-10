@@ -15,6 +15,7 @@ import { executivePaths } from "./ExecutiveDirector.routes";
 import { generalPaths } from "./generalDirector.routes";
 import { managingPaths } from "./ManagingDirector.routes";
 import Notification from "../pages/Notification";
+import { superAdminPaths } from "./superAdmin.routes";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,15 @@ export const router = createBrowserRouter([
         element: <Notification />,
       },
     ],
+  },
+  {
+    path: "/superAdmin",
+    element: (
+      <ProtectedRoute role={userRole.superAdmin}>
+        <App />
+      </ProtectedRoute>
+    ),
+    children: routeGenerator(superAdminPaths),
   },
   {
     path: "/admin",

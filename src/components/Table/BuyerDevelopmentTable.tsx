@@ -50,7 +50,8 @@ const BuyerDevelopmentTable = () => {
           bordered
           columns={[
             ...buyerColums,
-            ...(user?.role === userRole.ADMIN ||
+            ...(user?.role === userRole.superAdmin ||
+            user?.role === userRole.ADMIN ||
             user?.role === userRole.ExecutiveDirector
               ? [
                   {
@@ -81,8 +82,8 @@ const BuyerDevelopmentTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="_id"
-          // scroll={{ y: 55 * 7 }}      
-          // pagination={false}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

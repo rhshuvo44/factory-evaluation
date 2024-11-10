@@ -35,13 +35,13 @@ const TargetOutputTable = () => {
   return (
     <div className="responsive-table-container">
       <Table
-        scroll={{ x: 1500 }}
+        scroll={{ x: 1500, y: 500 }}
         size="small"
         className="table-auto"
         bordered
         columns={[
           ...targetOutputColums,
-          ...(user?.role === userRole.ADMIN ||
+          ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
           user?.role === userRole.Coordinator
             ? [
                 {

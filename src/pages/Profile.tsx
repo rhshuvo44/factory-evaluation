@@ -1,5 +1,5 @@
+import userImg from "../../public/favicon.ico";
 import { useGetMeQuery } from "../redux/features/user/userApi";
-
 const Profile = () => {
   const { data } = useGetMeQuery(undefined);
 
@@ -7,7 +7,7 @@ const Profile = () => {
     <section className="w-72 mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
       <div className="mt-6 w-fit mx-auto">
         <img
-          src="../../public/favicon.ico"
+          src={userImg}
           className="rounded-full w-28 "
           alt="profile picture"
         />

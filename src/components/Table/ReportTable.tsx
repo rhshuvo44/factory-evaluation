@@ -70,7 +70,7 @@ const ReportTable = () => {
         </span>
       ),
     },
-    ...(user?.role === userRole.ADMIN
+    ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN
       ? [
           {
             title: "Action",
@@ -78,14 +78,13 @@ const ReportTable = () => {
             render: (item: TReport) => {
               return (
                 <Space>
-                  {user!.role === "admin" && (
                     <Button
                       danger
                       onClick={() => handleDeleted(item._id as string)}
                     >
                       Delete
                     </Button>
-                  )}
+                  
                 </Space>
               );
             },
@@ -122,8 +121,8 @@ const ReportTable = () => {
           columns={columns}
           dataSource={data?.data}
           rowKey="_id"
-          // scroll={{ y: 55 * 7 }}
-          // pagination={false}
+          scroll={{ y: 55 * 7 }}
+          pagination={false}
         />
       </div>
     </div>

@@ -10,6 +10,7 @@ import { useAppSelector } from "../../redux/hook";
 import { TUSer, UserColums } from "../../types";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
+import { userRole } from "../../constants/userRole";
 
 const UserTable = () => {
   const [deleteUser] = useDeleteUserMutation();
@@ -37,7 +38,7 @@ const UserTable = () => {
       size="small"
       columns={[
         ...UserColums,
-        ...(user?.role === "admin"
+        ...(user?.role === userRole.superAdmin || user?.role === "admin"
           ? [
               {
                 title: "Action",

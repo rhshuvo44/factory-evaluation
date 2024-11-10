@@ -8,8 +8,8 @@ import { logout, setUser } from '../features/auth/authSlice';
 import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://factory-backend.vercel.app/api',
-    // baseUrl: 'https://factory-evaluation-backend.vercel.app/api',
+    // baseUrl: 'https://factory-backend.vercel.app/api',
+    baseUrl: 'https://factory-evaluation-backend.vercel.app/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
@@ -42,14 +42,14 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         //* Send Refresh
         console.log('Sending refresh token');
 
-        const res = await fetch('https://factory-backend.vercel.app/api/auth/refresh-token', {
-            method: 'POST',
-            credentials: 'include',
-        });
-        // const res = await fetch('https://factory-evaluation-backend.vercel.app/api/auth/refresh-token', {
+        // const res = await fetch('https://factory-backend.vercel.app/api/auth/refresh-token', {
         //     method: 'POST',
         //     credentials: 'include',
         // });
+        const res = await fetch('https://factory-evaluation-backend.vercel.app/api/auth/refresh-token', {
+            method: 'POST',
+            credentials: 'include',
+        });
         const data = await res.json();
 
         if (data?.data) {

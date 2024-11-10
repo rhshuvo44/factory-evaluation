@@ -13,6 +13,7 @@ import { TUtility } from "../../types/tableType";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
+import { userRole } from "../../constants/userRole";
 
 const UtilityTable = () => {
   const [deleteUtility] = useDeletedUtilityMutation();
@@ -108,7 +109,7 @@ const UtilityTable = () => {
             />
           </ColumnGroup>
 
-          {user?.role === "admin" && (
+          {user?.role === userRole.superAdmin || user?.role === "admin" ? (
             <Column
               title="Action"
               key="action"
@@ -124,6 +125,8 @@ const UtilityTable = () => {
                 </Space>
               )}
             />
+          ) : (
+            []
           )}
         </Table>
       </div>

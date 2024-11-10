@@ -17,11 +17,14 @@ const employeeApi = baseApi.injectEndpoints({
             invalidatesTags: ['Employee'],
         }),
         updateEmployee: builder.mutation({
-            query: (data) => ({
-                url: `/employee/${data.id}`,
-                method: 'PATCH',
-                body: data.data,
-            }),
+            query: ({ id, formData }) => {
+            
+                return {
+                    url: `/employee/${id}`,
+                    method: 'PATCH',
+                    body: formData,
+                }
+            },
             invalidatesTags: ['Employee'],
         }),
         singleEmployee: builder.query({

@@ -246,7 +246,7 @@ const RunningCostTable = () => {
             ...runningColums,
           ]}
           dataSource={combinedData}
-          // scroll={{ y: 55 * 7 }}
+          scroll={{ y: 55 * 7 }}
           // tableLayout="auto"
           pagination={false}
           rowKey="_id"
@@ -256,7 +256,8 @@ const RunningCostTable = () => {
         totalCost={roundCost}
         date={queryParams.date?.toString()}
       />
-      {user?.role === userRole.ADMIN ||
+      {user?.role === userRole.superAdmin ||
+      user?.role === userRole.ADMIN ||
       user?.role === userRole.ExecutiveDirector ? (
         <ReportForm
           runningCost={roundCost}

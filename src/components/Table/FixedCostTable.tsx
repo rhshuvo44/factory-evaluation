@@ -13,6 +13,7 @@ import { TFixed } from "../../types";
 import { verifyToken } from "../../utilis/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
+import { userRole } from "../../constants/userRole";
 
 const FixedCostTable = () => {
   const [deleteUtility] = useDeletedFixedCostMutation();
@@ -98,7 +99,7 @@ const FixedCostTable = () => {
               render={(_, record) => record.honorary[0]?.totalPrice || "N/A"}
             />
           </ColumnGroup>
-          {user?.role === "admin" && (
+          {user?.role === userRole.superAdmin || user?.role === "admin" ? (
             <Column
               title="Action"
               key="action"
@@ -114,6 +115,8 @@ const FixedCostTable = () => {
                 </Space>
               )}
             />
+          ) : (
+            []
           )}
         </Table>
       </div>

@@ -27,6 +27,8 @@ export const designationOption = [
     { value: "Cleaner", label: "Cleaner" },
     { value: "Cut. Helper", label: "Cut. Helper" },
     { value: "Cutting Man", label: "Cutting Man" },
+    { value: "Line Incharge", label: "Line Incharge" },
+    { value: "Store Keeper", label: "Store Keeper" },
 
 ]
 
