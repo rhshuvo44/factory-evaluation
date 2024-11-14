@@ -78,8 +78,8 @@ const CollectionTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="_id"
-          scroll={{ x:"",y: 55 * 7 }}
-          pagination={false}
+          // scroll={{ x:"",y: 55 * 7 }}
+          // pagination={false}
         />
       </div>
     </div>

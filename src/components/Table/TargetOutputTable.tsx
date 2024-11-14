@@ -35,7 +35,7 @@ const TargetOutputTable = () => {
   return (
     <div className="responsive-table-container">
       <Table
-        scroll={{ x: 1500, y: 500 }}
+        scroll={{ x: 1500}}
         size="small"
         className="table-auto"
         bordered
@@ -74,7 +74,7 @@ const TargetOutputTable = () => {
         ]}
         dataSource={data?.data}
         rowKey="_id"
-        pagination={false}
+        // pagination={false}
       />
     </div>
   );

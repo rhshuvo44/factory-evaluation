@@ -83,8 +83,8 @@ const FactoryDevelopmentTable = () => {
           ]}
           dataSource={data?.data}
           rowKey="_id"
-          scroll={{ y: 55 * 7 }}
-          pagination={false}
+          // scroll={{ y: 55 * 7 }}
+          // pagination={false}
         />
       </div>
     </div>

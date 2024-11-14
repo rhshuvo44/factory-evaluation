@@ -246,7 +246,7 @@ const RunningCostTable = () => {
             ...runningColums,
           ]}
           dataSource={combinedData}
-          scroll={{ y: 55 * 7 }}
+          // scroll={{ y: 55 * 7 }}
           // tableLayout="auto"
           pagination={false}
           rowKey="_id"
