@@ -14,7 +14,7 @@ import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/tra
 import { useGetTodayUtilityQuery } from "../../redux/features/utility/utilityApi";
 import { useAppSelector } from "../../redux/hook";
 import { runningColums, TFixed, TUtility } from "../../types";
-import { verifyToken } from "../../utilis/verifyToken";
+import { verifyToken } from "../../utils/verifyToken";
 import ReportForm from "../ui/form/ReportForm";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";

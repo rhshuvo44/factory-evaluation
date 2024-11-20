@@ -10,7 +10,7 @@ import {
   useUpdateUtilityMutation,
 } from "../../redux/features/utility/utilityApi";
 import { TSubUtility, TUtility } from "../../types";
-import { getDaysInMonth } from "../../utilis/getDaysInMonth ";
+import { getDaysInMonth } from "../../utils/getDaysInMonth ";
 
 const UtilityUpdate = () => {
   const [form] = Form.useForm();

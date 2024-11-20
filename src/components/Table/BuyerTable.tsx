@@ -4,9 +4,9 @@ import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
-  useDeleteBuyerDevelopmentMutation,
-  useGetAllBuyerDevelopmentQuery,
-} from "../../redux/features/buyerDevelopment/buyerDevelopmentApi";
+  useDeleteBuyerMutation,
+  useGetAllBuyerQuery,
+} from "../../redux/features/buyer/buyerApi";
 import { useAppSelector } from "../../redux/hook";
 import { buyerColums } from "../../types";
 import { TBuyer } from "../../types/tableType";
@@ -14,7 +14,7 @@ import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
-const BuyerDevelopmentTable = () => {
+const BuyerTable = () => {
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -22,15 +22,15 @@ const BuyerDevelopmentTable = () => {
   if (token) {
     user = verifyToken(token) as TUser;
   }
-  const [deleteBuyerDevelopment] = useDeleteBuyerDevelopmentMutation();
+  const [deleteBuyer] = useDeleteBuyerMutation();
   const handleDeleted = async (id: string) => {
-    const res = await deleteBuyerDevelopment(id);
+    const res = await deleteBuyer(id);
     if (res.data.success) {
-      toast.success("Buyer Development deleted successfully.");
+      toast.success("Buyer deleted successfully.");
     }
   };
 
-  const { data, isError, isLoading } = useGetAllBuyerDevelopmentQuery({
+  const { data, isError, isLoading } = useGetAllBuyerQuery({
     undefined,
   });
   if (isLoading) return <Loading />;
@@ -38,7 +38,7 @@ const BuyerDevelopmentTable = () => {
   return (
     <div>
       <div className="flex flex-col lg:flex-row gap-1 items-center justify-between mb-2">
-        <SectionTitle title="Buyer Development cost" />
+        <SectionTitle title="Buyer List" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
           Total cost :<span className="text-red-500"> {data?.totalPrice}</span>
         </div>
@@ -60,9 +60,7 @@ const BuyerDevelopmentTable = () => {
                     render: (item: TBuyer) => {
                       return (
                         <Space>
-                          <Link
-                            to={`/${user!.role}/buyer_development/${item._id}`}
-                          >
+                          <Link to={`/${user!.role}/buyer/${item._id}`}>
                             Edit
                           </Link>
                           {user!.role === "admin" && (
@@ -90,4 +88,4 @@ const BuyerDevelopmentTable = () => {
   );
 };
 
-export default BuyerDevelopmentTable;
+export default BuyerTable;

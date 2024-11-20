@@ -6,7 +6,7 @@ import {
   useCurrentToken,
 } from "../../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { verifyToken } from "../../utilis/verifyToken";
+import { verifyToken } from "../../utils/verifyToken";
 
 type TProtectedRoute = {
   children: ReactNode;

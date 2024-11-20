@@ -8,7 +8,7 @@ import {
 } from "../../redux/features/report/reportApi";
 import { useAppSelector } from "../../redux/hook";
 import { TReport } from "../../types";
-import { verifyToken } from "../../utilis/verifyToken";
+import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
@@ -70,7 +70,7 @@ const ReportTable = () => {
         </span>
       ),
     },
-    ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN
+    ...(user?.role === userRole.superAdmin || user?.role === userRole.ADMIN
       ? [
           {
             title: "Action",
@@ -78,13 +78,12 @@ const ReportTable = () => {
             render: (item: TReport) => {
               return (
                 <Space>
-                    <Button
-                      danger
-                      onClick={() => handleDeleted(item._id as string)}
-                    >
-                      Delete
-                    </Button>
-                  
+                  <Button
+                    danger
+                    onClick={() => handleDeleted(item._id as string)}
+                  >
+                    Delete
+                  </Button>
                 </Space>
               );
             },

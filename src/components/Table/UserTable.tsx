@@ -1,6 +1,7 @@
 import { Button, Space, Table } from "antd";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeleteUserMutation,
@@ -8,9 +9,8 @@ import {
 } from "../../redux/features/user/userApi";
 import { useAppSelector } from "../../redux/hook";
 import { TUSer, UserColums } from "../../types";
-import { verifyToken } from "../../utilis/verifyToken";
+import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
-import { userRole } from "../../constants/userRole";
 
 const UserTable = () => {
   const [deleteUser] = useDeleteUserMutation();

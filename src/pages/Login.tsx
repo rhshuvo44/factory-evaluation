@@ -6,7 +6,7 @@ import { useLoginMutation } from "../redux/features/auth/authApi";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/hook";
 import { TLogin } from "../types";
-import { verifyToken } from "../utilis/verifyToken";
+import { verifyToken } from "../utils/verifyToken";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

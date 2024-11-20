@@ -9,7 +9,7 @@ import {
 } from "../../redux/features/loan/loanApi";
 import { useAppSelector } from "../../redux/hook";
 import { loanColums, TLoan } from "../../types";
-import { verifyToken } from "../../utilis/verifyToken";
+import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
@@ -47,7 +47,8 @@ const LoanTable = () => {
           size="small"
           columns={[
             ...loanColums,
-            ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
+            ...(user?.role === userRole.superAdmin ||
+            user?.role === userRole.ADMIN ||
             user?.role === userRole.ExecutiveDirector
               ? [
                   {

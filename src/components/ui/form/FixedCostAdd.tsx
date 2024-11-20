@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { useCreateFixedCostMutation } from "../../../redux/features/fixedCost/fixedCostApi";
 import { TFixed, TSubUtility } from "../../../types/tableType";
-import { getDaysInMonth } from "../../../utilis/getDaysInMonth ";
+import { getDaysInMonth } from "../../../utils/getDaysInMonth ";
 import CustomInputNumber from "../../form/CustomInputNumber";
 
 const FixedCostAdd = () => {

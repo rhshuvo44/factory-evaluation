@@ -3,8 +3,8 @@ import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { useCreateUtilityMutation } from "../../../redux/features/utility/utilityApi";
 import { TSubUtility, TUtility } from "../../../types/tableType";
+import { getDaysInMonth } from "../../../utils/getDaysInMonth ";
 import CustomInputNumber from "../../form/CustomInputNumber";
-import { getDaysInMonth } from "../../../utilis/getDaysInMonth ";
 
 const UtilityAddForm = () => {
   const [form] = Form.useForm();
@@ -51,7 +51,6 @@ const UtilityAddForm = () => {
     if (!res.success) return toast.error(res.message);
     toast.success("Create Utility successfully");
     form.resetFields();
-    
   };
   return (
     <Form {...formItemLayout} onFinish={onFinish}>

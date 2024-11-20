@@ -1,4 +1,5 @@
 import { Button, Form } from "antd";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import CustomInputNumber from "../../components/form/CustomInputNumber";
@@ -10,8 +11,7 @@ import {
   useUpdateFixedCostMutation,
 } from "../../redux/features/fixedCost/fixedCostApi";
 import { TFixed, TSubUtility } from "../../types";
-import { useEffect } from "react";
-import { getDaysInMonth } from "../../utilis/getDaysInMonth ";
+import { getDaysInMonth } from "../../utils/getDaysInMonth ";
 
 const FixedCostUpdate = () => {
   const [form] = Form.useForm();

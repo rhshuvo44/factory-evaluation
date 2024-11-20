@@ -5,16 +5,16 @@ import { userRole } from "../constants/userRole";
 import Dashboard from "../pages/Dashboard";
 import Forget from "../pages/Forget";
 import Login from "../pages/Login";
+import Notification from "../pages/Notification";
 import Profile from "../pages/Profile";
 import ResetPassword from "../pages/ResetPassword";
 import Setting from "../pages/Setting";
-import { routeGenerator } from "../utilis/routesGenerator";
+import { routeGenerator } from "../utils/routesGenerator";
 import { adminPaths } from "./admin.routes";
 import { coordinatorPaths } from "./Coordinator.routes";
 import { executivePaths } from "./ExecutiveDirector.routes";
 import { generalPaths } from "./generalDirector.routes";
 import { managingPaths } from "./ManagingDirector.routes";
-import Notification from "../pages/Notification";
 import { superAdminPaths } from "./superAdmin.routes";
 
 export const router = createBrowserRouter([

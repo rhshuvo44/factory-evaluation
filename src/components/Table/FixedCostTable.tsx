@@ -3,6 +3,7 @@ import Column from "antd/es/table/Column";
 import ColumnGroup from "antd/es/table/ColumnGroup";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeletedFixedCostMutation,
@@ -10,10 +11,9 @@ import {
 } from "../../redux/features/fixedCost/fixedCostApi";
 import { useAppSelector } from "../../redux/hook";
 import { TFixed } from "../../types";
-import { verifyToken } from "../../utilis/verifyToken";
+import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
-import { userRole } from "../../constants/userRole";
 
 const FixedCostTable = () => {
   const [deleteUtility] = useDeletedFixedCostMutation();

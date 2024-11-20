@@ -9,7 +9,7 @@ import {
 } from "../../redux/features/targetOutput/targetOutputApi";
 import { useAppSelector } from "../../redux/hook";
 import { targetOutputColums, TTargetReport } from "../../types";
-import { verifyToken } from "../../utilis/verifyToken";
+import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 
 const TargetOutputTable = () => {
@@ -35,13 +35,14 @@ const TargetOutputTable = () => {
   return (
     <div className="responsive-table-container">
       <Table
-        scroll={{ x: 1500}}
+        scroll={{ x: 1500 }}
         size="small"
         className="table-auto"
         bordered
         columns={[
           ...targetOutputColums,
-          ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
+          ...(user?.role === userRole.superAdmin ||
+          user?.role === userRole.ADMIN ||
           user?.role === userRole.Coordinator
             ? [
                 {

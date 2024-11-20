@@ -10,7 +10,7 @@ import {
 import { useAppSelector } from "../../redux/hook";
 import { productionColums } from "../../types";
 import { TProductionReport } from "../../types/tableType";
-import { verifyToken } from "../../utilis/verifyToken";
+import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 
 const ProductionTable = () => {
@@ -41,7 +41,8 @@ const ProductionTable = () => {
         bordered
         columns={[
           ...productionColums,
-          ...(user?.role === userRole.superAdmin ||user?.role === userRole.ADMIN ||
+          ...(user?.role === userRole.superAdmin ||
+          user?.role === userRole.ADMIN ||
           user?.role === userRole.Coordinator
             ? [
                 {

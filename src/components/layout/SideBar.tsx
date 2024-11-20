@@ -11,8 +11,8 @@ import { executivePaths } from "../../route/ExecutiveDirector.routes";
 import { generalPaths } from "../../route/generalDirector.routes";
 import { managingPaths } from "../../route/ManagingDirector.routes";
 import { superAdminPaths } from "../../route/superAdmin.routes";
-import { sidebarItemsGenerator } from "../../utilis/sidebarItemsGenerator";
-import { verifyToken } from "../../utilis/verifyToken";
+import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
+import { verifyToken } from "../../utils/verifyToken";
 
 const SideBar = () => {
   const [openKeys, setOpenKeys] = useState([]);
