@@ -88,6 +88,7 @@ const BuyerAdd = () => {
       styleNo = style + item + values.styleNo;
     }
     const orderNo = "sta-" + values.orderNo;
+
     const res = await createBuyerMutation({
       ...values,
       orderNo,

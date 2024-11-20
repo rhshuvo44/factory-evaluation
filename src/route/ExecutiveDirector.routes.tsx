@@ -1,6 +1,7 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
 import BuyerDevelopmentUpdate from "../pages/buyer development/BuyerDevelopmentUpdate";
+import Buyer from "../pages/buyer/Buyer";
 import Collection from "../pages/Collection/Collection";
 import CollectionForm from "../pages/Collection/CollectionForm";
 import CollectionUpdate from "../pages/Collection/CollectionUpdate";
@@ -175,6 +176,11 @@ export const executivePaths = [
     name: "Fixed cost",
     path: "all_fixed_cost",
     element: <FixedCost />,
+  },
+  {
+    name: "All Buyers",
+    path: "all_buyers",
+    element: <Buyer />,
   },
   {
     name: "Production Report",

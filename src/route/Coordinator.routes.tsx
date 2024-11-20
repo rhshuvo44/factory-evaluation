@@ -1,5 +1,8 @@
 import TravellingTable from "../components/Table/TravellingTable";
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
+import Buyer from "../pages/buyer/Buyer";
+import BuyerForm from "../pages/buyer/BuyerForm";
+import BuyerUpdate from "../pages/buyer/BuyerUpdate";
 import Collection from "../pages/Collection/Collection";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
@@ -67,7 +70,25 @@ export const coordinatorPaths = [
     path: "all_fixed_cost",
     element: <FixedCost />,
   },
-
+  {
+    name: "Buyers",
+    children: [
+      {
+        name: "Add Buyer",
+        path: "add_buyer",
+        element: <BuyerForm />,
+      },
+      {
+        path: "buyer/:id",
+        element: <BuyerUpdate />,
+      },
+      {
+        name: "All Buyers",
+        path: "all_buyers",
+        element: <Buyer />,
+      },
+    ],
+  },
   {
     name: "Production Report",
     children: [

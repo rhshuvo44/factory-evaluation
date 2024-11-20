@@ -8,7 +8,7 @@ import {
   useGetAllBuyerQuery,
 } from "../../redux/features/buyer/buyerApi";
 import { useAppSelector } from "../../redux/hook";
-import { buyerColums } from "../../types";
+import { buyerAddColums } from "../../types";
 import { TBuyer } from "../../types/tableType";
 import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
@@ -33,23 +33,20 @@ const BuyerTable = () => {
   const { data, isError, isLoading } = useGetAllBuyerQuery({
     undefined,
   });
+
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
     <div>
-      <div className="flex flex-col lg:flex-row gap-1 items-center justify-between mb-2">
-        <SectionTitle title="Buyer List" />
-        <div className="text-sm md:text-lg lg:text-3xl font-bold">
-          Total cost :<span className="text-red-500"> {data?.totalPrice}</span>
-        </div>
-      </div>
-      <div className="responsive-table-container">
+      <SectionTitle title="Buyer List" />
+
+      <div className="responsive-table-container mt-2">
         <Table
           size="small"
           className="table-auto"
           bordered
           columns={[
-            ...buyerColums,
+            ...buyerAddColums,
             ...(user?.role === userRole.superAdmin ||
             user?.role === userRole.ADMIN ||
             user?.role === userRole.ExecutiveDirector

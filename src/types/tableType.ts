@@ -272,7 +272,7 @@ export type TBuyerAdd = {
     quantity: number
     date: Date
     shipmentDate: Date
-    leadTime: string
+    leadTime: number
     fabricConsumption: number
     totalFabric: number
 }

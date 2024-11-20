@@ -534,6 +534,65 @@ export const buyerColums = [
     },
 ];
 
+
+
+
+
+export const buyerAddColums = [
+    {
+        title: "Order No",
+        dataIndex: "orderNo",
+        key: "orderNo",
+    },
+
+    {
+        title: "Date",
+        dataIndex: "date",
+        key: "date",
+    },
+    {
+        title: "Buyer",
+        dataIndex: "buyer",
+        key: "buyer",
+    },
+    {
+        title: "Description",
+        dataIndex: "description",
+        key: "description",
+    },
+    {
+        title: "Quantity",
+        dataIndex: "quantity",
+        key: "quantity",
+    },
+    {
+        title: "Style No",
+        dataIndex: "styleNo",
+        key: "styleNo",
+    },
+    {
+        title: "Shipment Date",
+        dataIndex: "shipmentDate",
+        key: "shipmentDate",
+    },
+    {
+        title: "Lead Time",
+        dataIndex: "leadTime",
+        key: "leadTime",
+    },
+
+    {
+        title: "Fabric Consumption (KG)",
+        dataIndex: "fabricConsumption",
+        key: "fabricConsumption",
+    },
+    {
+        title: "Total Fabric",
+        dataIndex: "totalFabric",
+        key: "totalFabric",
+    },
+];
+
 export const targetOutputColums = [
     {
         title: "SL",

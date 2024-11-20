@@ -1,5 +1,6 @@
 import TravellingTable from "../components/Table/TravellingTable";
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
+import Buyer from "../pages/buyer/Buyer";
 import Collection from "../pages/Collection/Collection";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
@@ -62,6 +63,11 @@ export const generalPaths = [
     name: "Fixed cost",
     path: "all_fixed_cost",
     element: <FixedCost />,
+  },
+  {
+    name: "All Buyers",
+    path: "all_buyers",
+    element: <Buyer />,
   },
   {
     name: "Production Report",
