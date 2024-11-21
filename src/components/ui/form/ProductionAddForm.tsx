@@ -62,7 +62,7 @@ const ProductionAddForm = () => {
     console.log(values);
     // const res = await createProduction({ ...values, date }).unwrap();
     // if (!res.success) return toast.error(res.message);
-    toast.success("Create Production successfully");
+    toast.success("Create Production Report successfully");
     // form.resetFields();
     // Check if user role is admin before creating a notification
     if (user?.data?.role === userRole.Coordinator) {

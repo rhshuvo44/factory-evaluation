@@ -154,11 +154,13 @@ export const travellingColums = [
         key: "totalPrice",
     },
 ];
+
+
 export const productionColums = [
     {
-        title: "SL",
-        dataIndex: "slNo",
-        key: "slNo",
+        title: "Order No",
+        dataIndex: "orderNo",
+        key: "orderNo",
     },
 
     {
@@ -167,9 +169,19 @@ export const productionColums = [
         key: "date",
     },
     {
-        title: "Color",
-        dataIndex: "color",
-        key: "color",
+        title: "Buyer",
+        dataIndex: "buyer",
+        key: "buyer",
+    },
+    {
+        title: "Description",
+        dataIndex: "description",
+        key: "description",
+    },
+    {
+        title: "Quantity",
+        dataIndex: "quantity",
+        key: "quantity",
     },
     {
         title: "Style No",
@@ -177,29 +189,108 @@ export const productionColums = [
         key: "styleNo",
     },
     {
-        title: "Buyer",
-        dataIndex: "buyer",
-        key: "buyer",
+        title: "Shipment Date",
+        dataIndex: "shipmentDate",
+        key: "shipmentDate",
     },
     {
-        title: "Order No ",
-        dataIndex: "orderNo",
-        key: "orderNo",
+        title: "Lead Time",
+        dataIndex: "leadTime",
+        key: "leadTime",
+    },
+
+    {
+        title: "Fabric Consumption (KG)",
+        dataIndex: "fabricConsumption",
+        key: "fabricConsumption",
     },
     {
-        title: "Line No ",
-        dataIndex: "lineNo",
-        key: "lineNo",
+        title: "Total Fabric",
+        dataIndex: "totalFabric",
+        key: "totalFabric",
     },
     {
-        title: "Order Quantity",
-        dataIndex: "orderQuantity",
-        key: "orderQuantity",
+        title: "Fabric In House",
+        dataIndex: "fabricInHouse",
+        key: "fabricInHouse",
     },
     {
-        title: "Ready Quantity",
-        dataIndex: "readyQuantity",
-        key: "readyQuantity",
+        title: "Required Fabric",
+        dataIndex: "requiredFabric",
+        key: "requiredFabric",
+    },
+    {
+        title: "Cutting Completed",
+        dataIndex: "cuttingCompleted",
+        key: "cuttingCompleted",
+    },
+    {
+        title: "Cutting Required",
+        dataIndex: "cuttingRequired",
+        key: "cuttingRequired",
+    },
+    {
+        title: "deliveryToPrint",
+        dataIndex: "deliveryToPrint",
+        key: "deliveryToPrint",
+    },
+    {
+        title: "Delivery To Print Remaining",
+        dataIndex: "deliveryToPrintRemaining",
+        key: "deliveryToPrintRemaining",
+    },
+    {
+        title: "Print Completed",
+        dataIndex: "printCompleted",
+        key: "printCompleted",
+    },
+    {
+        title: "Print Receivable",
+        dataIndex: "printReceivable",
+        key: "printReceivable",
+    },
+    {
+        title: "Sewing Input",
+        dataIndex: "sewingInput",
+        key: "sewingInput",
+    },
+    {
+        title: "Sewing Input Remaining",
+        dataIndex: "sewingInputRemaining",
+        key: "sewingInputRemaining",
+    },
+    {
+        title: "Sewing Output",
+        dataIndex: "sewingOutput",
+        key: "sewingOutput",
+    },
+
+    {
+        title: "Sewing Output Remaining",
+        dataIndex: "sewingOutputRemaining",
+        key: "sewingOutputRemaining",
+    },
+    {
+        title: "Finishing Output",
+        dataIndex: "finishingOutput",
+        key: "finishingOutput",
+    },
+
+    {
+        title: "Finishing Output Remaining",
+        dataIndex: "finishingOutputRemaining",
+        key: "finishingOutputRemaining",
+    },
+    {
+        title: "Packing Completed",
+        dataIndex: "packingCompleted",
+        key: "packingCompleted",
+    },
+
+    {
+        title: "Packing Remaining",
+        dataIndex: "packingRemaining",
+        key: "packingRemaining",
     },
     {
         title: "Remark",

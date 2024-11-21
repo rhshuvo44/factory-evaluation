@@ -61,11 +61,11 @@ const ProductionTable = () => {
                           Delete
                         </Button>
                         {/* Conditionally render "Edit" if quantities match */}
-                        {item.readyQuantity === item.orderQuantity ? (
+                        {/* {item.readyQuantity === item.orderQuantity ? (
                           <Button type="primary">Finished</Button>
                         ) : (
                           <Button>Running</Button>
-                        )}
+                        )} */}
                       </Space>
                     );
                   },

@@ -169,6 +169,7 @@ export type TSection = {
     output: number
 }
 export type TProductionReport = {
+    _id?: string;
     orderNo: string
     buyer: string
     styleNo: string
