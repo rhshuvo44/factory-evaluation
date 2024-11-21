@@ -84,7 +84,7 @@ const BuyerDevelopmentUpdate = () => {
       <Form
         {...formItemLayout}
         onFinish={onFinish}
-        form={form}
+        form={form} layout="vertical"
         initialValues={initialValues}
       >
         <Form.Item

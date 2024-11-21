@@ -1,22 +1,27 @@
-import { Button, Form, InputNumber, InputNumberProps, Select } from "antd";
+import {
+  Button,
+  DatePicker,
+  DatePickerProps,
+  Form,
+  Input,
+  InputNumber,
+  InputNumberProps,
+} from "antd";
+import dayjs, { Dayjs } from "dayjs";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import CustomInput from "../../components/form/CustomInput";
-import CustomInputNumber from "../../components/form/CustomInputNumber";
 import CustomTextArea from "../../components/form/CustomTextArea";
 import Loading from "../../components/ui/Loading";
 import SectionTitle from "../../components/ui/SectionTitle";
 import { formItemLayout } from "../../constants/formItemLayout";
 import {
-  buyerParticularsOptions,
-  paymentOptions,
-} from "../../constants/Options";
-import {
   useSingleBuyerQuery,
   useUpdateBuyerMutation,
 } from "../../redux/features/buyer/buyerApi";
-import { TBuyer } from "../../types";
+import { TBuyerAdd } from "../../types";
 
 const BuyerUpdate = () => {
   const [form] = Form.useForm();
@@ -28,147 +33,195 @@ const BuyerUpdate = () => {
   const { data, isLoading } = useSingleBuyerQuery(id);
   const [updateBuyer] = useUpdateBuyerMutation();
   const result = data?.data;
-  const [unit, setUnit] = useState<number>(result?.unit);
-  const [unitPrice, setUnitPrice] = useState<number>(result?.unitPrice);
-  // const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-  //   setDate(dateString);
-  // };
-  const onChangeUnit: InputNumberProps["onChange"] = (values) => {
-    setUnit(values as number);
-  };
-  const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
-    setUnitPrice(values as number);
+  const [fabricConsumption, setFabricConsumption] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(0);
+  const [date, setDate] = useState<string | string[]>("");
+  const [shipmentDate, setShipmentDate] = useState<string | string[]>("");
+
+  const calculateLeadTime = (
+    orderDate: string | string[],
+    shipmentDate: string | string[]
+  ) => {
+    if (orderDate && shipmentDate) {
+      const leadDays = moment(shipmentDate).diff(moment(orderDate), "days");
+
+      form.setFieldsValue({ leadTime: `${leadDays} days` });
+    } else {
+      form.setFieldsValue({ leadTime: "" });
+    }
   };
 
-  useEffect(() => {
-    const unitValue = unit || result?.unit;
-    const unitPriceValue = unitPrice || result?.unitPrice;
-    const calculatedAmount =
-      unit || unitPrice ? unitValue * unitPriceValue : result?.totalPrice;
-    form.setFieldsValue({
-      totalPrice: calculatedAmount,
-    });
-  }, [unit, unitPrice, form, result]);
-  const initialValues = {
-    buyerId: result?.buyerId,
-    description: result?.description,
-    // date: result?.date,
-    orderNo: result?.orderNo,
-    particulars: result?.particulars,
-    paymentType: result?.paymentType,
-    quantity: result?.quantity,
-    memoNo: result?.memoNo,
-    payTo: result?.payTo,
-    unit: result?.unit,
-    unitPrice: result?.unitPrice,
-    totalPrice: result?.totalPrice,
+  const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
+    setDate(dateString);
+    calculateLeadTime(dateString, shipmentDate);
   };
-  // date
+  const onChangeShipmentDate: DatePickerProps["onChange"] = (_, dateString) => {
+    setShipmentDate(dateString);
+    calculateLeadTime(date, dateString);
+  };
+  const onChangeFabricConsumption: InputNumberProps["onChange"] = (values) => {
+    setFabricConsumption(values as number);
+  };
+  const onChangeQuantity: InputNumberProps["onChange"] = (values) => {
+    setQuantity(values as number);
+  };
+
+  const disableDates = (current: Dayjs) => {
+    // Disable dates that are more than 45 days ago or in the future
+    // Get the start of the current month
+    // const startOfMonth = dayjs().startOf("month");
+    return (
+      current.isBefore(dayjs().subtract(30, "day")) || current.isAfter(dayjs())
+    );
+
+    // return current.isBefore(startOfMonth) || current.isAfter(dayjs());
+  };
+
+  // If result?.date is a string, convert it to moment
+  const orderDate = result?.date ? moment(result?.date) : "";
+  const shipmentDateDataBase = result?.shipmentDate
+    ? moment(result?.shipmentDate)
+    : "";
+
+  useEffect(() => {
+    const fabricConsumptionValue =
+      fabricConsumption || result?.fabricConsumption;
+    const quantityValue = quantity || result?.quantity;
+    const calculatedFabric =
+      fabricConsumption || quantity
+        ? parseFloat(((fabricConsumptionValue / 12) * quantityValue).toFixed(2))
+        : result?.totalFabric;
+
+    form.setFieldsValue({
+      totalFabric: calculatedFabric,
+    });
+  }, [fabricConsumption, form, quantity, result]);
+  const initialValues = {
+    buyer: result?.buyer,
+    description: result?.description,
+    date: orderDate,
+    orderNo: result?.orderNo,
+    quantity: result?.quantity,
+    styleNo: result?.styleNo,
+    shipmentDate: shipmentDateDataBase,
+    leadTime: result?.leadTime,
+    fabricConsumption: result?.fabricConsumption,
+    totalFabric: result?.totalFabric,
+  };
 
   if (isLoading) return <Loading />;
 
-  const onFinish = async (values: TBuyer) => {
-    const totalPrice = isNaN(values.totalPrice) ? 0 : values.totalPrice;
+  const onFinish = async (values: TBuyerAdd) => {
     const updateData = {
-      id,
-      data: { ...values, totalPrice },
+      id: result?._id,
+      data: { ...values },
     };
     const res = await updateBuyer(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
-    toast.success("Update Buyer  successfully");
+    toast.success("Update Buyer successfully");
     navigate(-1);
   };
   return (
     <>
-      <SectionTitle title="Buyer  update" />
+      <SectionTitle title="Buyer update" />
+
       <Form
         {...formItemLayout}
         onFinish={onFinish}
         form={form}
         initialValues={initialValues}
+        className="mt-2"
+        layout="vertical"
       >
         <Form.Item
-          label="Particulars"
-          name="particulars"
-          rules={[{ required: true, message: "Please select Particulars! " }]}
+          label="Order No"
+          validateTrigger="onBlur"
+          name="orderNo"
+          rules={[{ required: true, message: "Please input order no" }]}
         >
-          <Select style={{ width: "100%" }} options={buyerParticularsOptions} />
+          <Input
+            disabled
+            placeholder="please input order number"
+            style={{ width: "100%" }}
+          />
         </Form.Item>
+        <CustomInput
+          label="Buyer"
+          name="buyer"
+          message="Please input! Buyer"
+          placeholder="please input Buyer"
+        />
+        <CustomInput
+          label="Style no"
+          name="styleNo"
+          message="please style No"
+          placeholder="please style No"
+        />
+
         <CustomTextArea
           label="Description"
           name="description"
           message="Please input! Description"
-        />
-        <CustomInputNumber
-          label="Quantity"
-          name="quantity"
-          message="Please input! Quantity"
-        />
-        <CustomInputNumber
-          label="Buyer ID"
-          name="buyerId"
-          message="Please input! Buyer ID"
-        />
-        <CustomInputNumber
-          label="Memo No"
-          name="memoNo"
-          message="Please input! Memo No"
-        />
-        <CustomInputNumber
-          label="Order No"
-          name="orderNo"
-          message="Please input! Order No"
-        />
-        <CustomInput
-          label="Pay to"
-          name="payTo"
-          message="Please input! Pay to"
+          placeholder="please input description"
         />
 
-        {/* <Form.Item
-        label="Date"
-        name="date"
-        rules={[{ required: true, message: "Please input! Date" }]}
-      >
-        <DatePicker onChange={onChangeDate} style={{ width: "100%" }} />
-      </Form.Item> */}
         <Form.Item
-          label="Payment Type"
-          name="paymentType"
-          rules={[{ required: true, message: "Please select Payment Type! " }]}
+          label="Order Quantity"
+          name="quantity"
+          rules={[{ required: true, message: "Please input! Order Quantity" }]}
         >
-          <Select style={{ width: "100%" }} options={paymentOptions} />
+          <InputNumber
+            style={{ width: "100%" }}
+            min={0}
+            onChange={onChangeQuantity}
+            placeholder="please input Order Quantity number"
+          />
         </Form.Item>
         <Form.Item
-          label="Unit"
-          name="unit"
+          label="Order place Date"
+          name="date"
+          rules={[{ required: true, message: "Please input! Date" }]}
+        >
+          <DatePicker
+            onChange={onChangeDate}
+            style={{ width: "100%" }}
+            disabledDate={disableDates}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Shipment Date"
+          name="shipmentDate"
+          rules={[{ required: true, message: "Please input! shipment Date" }]}
+        >
+          <DatePicker
+            onChange={onChangeShipmentDate}
+            style={{ width: "100%" }}
+          />
+        </Form.Item>
+        <Form.Item label="Lead Time" name="leadTime">
+          <Input style={{ width: "100%" }} disabled />
+        </Form.Item>
+
+        <Form.Item
+          label="Fabric Consumption (KG)"
+          name="fabricConsumption"
           rules={[{ required: true, message: "Please Input Unit! " }]}
         >
           <InputNumber
             style={{ width: "100%" }}
             min={0}
-            onChange={onChangeUnit}
+            onChange={onChangeFabricConsumption}
+            placeholder="please input unit number"
           />
         </Form.Item>
 
-        <Form.Item
-          label="Unit Price"
-          name="unitPrice"
-          rules={[{ required: true, message: "Please Input Unit Price! " }]}
-        >
-          <InputNumber
-            style={{ width: "100%" }}
-            min={0}
-            onChange={onChangeUnitPrice}
-          />
-        </Form.Item>
-        <Form.Item label="Total Price" name="totalPrice">
+        <Form.Item label="Total Fabric Required" name="totalFabric">
           <InputNumber style={{ width: "100%" }} disabled />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            Buyer Update
           </Button>
         </Form.Item>
       </Form>

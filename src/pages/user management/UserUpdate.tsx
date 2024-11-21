@@ -46,6 +46,7 @@ const UserUpdate = () => {
     <>
       <SectionTitle title="User Update" />
       <Form
+        layout="vertical"
         form={form}
         {...formItemLayout}
         onFinish={onFinish}

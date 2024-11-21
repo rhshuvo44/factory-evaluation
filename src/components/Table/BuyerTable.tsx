@@ -57,7 +57,7 @@ const BuyerTable = () => {
                     render: (item: TBuyer) => {
                       return (
                         <Space>
-                          <Link to={`/${user!.role}/buyer/${item._id}`}>
+                          <Link to={`/${user!.role}/buyer/${item.orderNo}`}>
                             Edit
                           </Link>
                           {user!.role === "admin" && (

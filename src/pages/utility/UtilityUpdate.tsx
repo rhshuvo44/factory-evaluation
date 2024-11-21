@@ -81,6 +81,7 @@ const UtilityUpdate = () => {
         initialValues={initialValues}
         {...formItemLayout}
         onFinish={onFinish}
+        layout="vertical"
       >
         <CustomInputNumber
           label="Internet"

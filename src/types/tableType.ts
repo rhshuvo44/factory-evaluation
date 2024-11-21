@@ -169,25 +169,32 @@ export type TSection = {
     output: number
 }
 export type TProductionReport = {
-    _id?: string;
-    date: Date
-    lineNo: 'line 1 / 3rd floor' | 'line 2 / 4rd floor' | 'line 3 / 4rd floor'
+    orderNo: string
     buyer: string
-    orderNo: number
-    styleNo:
-    | 'hoody/jacket'
-    | 'Leggins'
-    | 'Polo Shirt'
-    | 'T-Shirt'
-    | 'Tank Top'
-    | 'Sweat Shirt'
-    | 'Trouser'
-    | 'Shorts'
-    | 'Romper/Keeper'
-    | 'Long Sleeve T-shirt'
-    color: string
-    orderQuantity: number
-    readyQuantity: number
+    styleNo: string
+    description: string
+    quantity: number
+    date: Date
+    shipmentDate: Date
+    leadTime: string
+    fabricConsumption: number
+    totalFabric: number
+    fabricInHouse: number
+    requiredFabric: number
+    cuttingCompleted: number
+    cuttingRequired: number
+    deliveryToPrint: number
+    deliveryToPrintRemaining: number
+    printCompleted: number
+    printReceivable: number
+    sewingInput: number
+    sewingInputRemaining: number
+    sewingOutput: number
+    sewingOutputRemaining: number
+    finishingOutput: number
+    finishingOutputRemaining: number
+    packingCompleted: number
+    packingRemaining: number
     remark?: string
 }
 export type TTargetReport = {

@@ -63,7 +63,7 @@ const BuyerDevelopmentAdd = () => {
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form {...formItemLayout} onFinish={onFinish} form={form} layout="vertical">
       <Form.Item
         label="Particulars"
         name="particulars"

@@ -97,7 +97,7 @@ const SalaryAddForm = () => {
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form {...formItemLayout} onFinish={onFinish} layout="vertical" form={form}>
       <CustomInput
         label="Name"
         name="name"

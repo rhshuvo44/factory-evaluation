@@ -65,7 +65,9 @@ return (
   };
 
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form {...formItemLayout} 
+    layout="vertical"
+    onFinish={onFinish} form={form}>
       <Form.Item
         label="Style"
         name="style"

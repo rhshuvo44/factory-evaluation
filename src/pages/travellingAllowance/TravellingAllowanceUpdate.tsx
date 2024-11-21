@@ -71,6 +71,7 @@ const TravellingAllowanceUpdate = () => {
     <>
       <SectionTitle title="Travelling Allowance Update" />
       <Form
+        layout="vertical"
         form={form}
         name="Travelling Allowance update form"
         {...formItemLayout}

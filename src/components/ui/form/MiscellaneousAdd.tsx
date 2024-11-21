@@ -56,7 +56,7 @@ const MiscellaneousAdd = () => {
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form {...formItemLayout} onFinish={onFinish} form={form} layout="vertical">
       <CustomInput
         label="Particulars"
         name="particulars"

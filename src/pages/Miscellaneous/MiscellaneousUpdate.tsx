@@ -73,7 +73,7 @@ const MiscellaneousUpdate = () => {
       <Form
         {...formItemLayout}
         onFinish={onFinish}
-        form={form}
+        form={form} layout="vertical"
         initialValues={initialValues}
       >
         <CustomInput

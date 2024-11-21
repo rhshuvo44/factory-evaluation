@@ -172,6 +172,7 @@ const SalaryUpdate = () => {
         form={form}
         {...formItemLayout}
         onFinish={onFinish}
+        layout="vertical"
         initialValues={initialValues}
       >
         <CustomInput

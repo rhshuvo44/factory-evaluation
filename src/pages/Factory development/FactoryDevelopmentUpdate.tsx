@@ -81,7 +81,7 @@ const FactoryDevelopmentUpdate = () => {
       <SectionTitle title="Factory Development update" />
       <Form
         form={form}
-        {...formItemLayout}
+        {...formItemLayout} layout="vertical"
         onFinish={onFinish}
         initialValues={initialValues}
       >

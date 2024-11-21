@@ -61,6 +61,7 @@ const LoanAdd = () => {
       {...formItemLayout}
       onFinish={onFinish}
       form={form}
+      layout="vertical"
       initialValues={{ particulars: "Loan Return" }}
     >
       <Form.Item

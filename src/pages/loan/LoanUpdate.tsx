@@ -78,7 +78,7 @@ const LoanUpdate = () => {
       <SectionTitle title="Loan update" />
       <Form
         form={form}
-        {...formItemLayout}
+        {...formItemLayout} layout="vertical"
         onFinish={onFinish}
         initialValues={initialValues}
       >

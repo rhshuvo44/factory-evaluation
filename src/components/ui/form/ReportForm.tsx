@@ -77,7 +77,7 @@ const ReportForm = ({
       <Form
         {...formItemLayout}
         onFinish={onFinish}
-        form={form}
+        form={form}layout="vertical"
         initialValues={initialValues}
       >
         <Form.Item label="Running cost" name="factoryRunningCost">

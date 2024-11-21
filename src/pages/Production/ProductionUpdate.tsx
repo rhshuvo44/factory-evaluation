@@ -63,6 +63,7 @@ const ProductionUpdate = () => {
         {...formItemLayout}
         onFinish={onFinish}
         form={form}
+        layout="vertical"
       >
         <Form.Item
           label="Style No"

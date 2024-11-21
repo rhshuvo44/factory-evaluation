@@ -53,7 +53,7 @@ const UtilityAddForm = () => {
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish}>
+    <Form {...formItemLayout} layout="vertical" onFinish={onFinish}>
       <CustomInputNumber
         label="Internet"
         name="internet"

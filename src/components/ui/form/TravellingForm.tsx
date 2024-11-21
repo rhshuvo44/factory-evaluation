@@ -56,7 +56,7 @@ const TravellingForm = () => {
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form {...formItemLayout} layout="vertical" onFinish={onFinish} form={form}>
       <CustomInput
         label="Particulars"
         name="particulars"

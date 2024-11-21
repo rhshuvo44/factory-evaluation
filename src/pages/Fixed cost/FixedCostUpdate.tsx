@@ -78,6 +78,7 @@ const FixedCostUpdate = () => {
       <SectionTitle title="Fixed Cost update" />
       <Form
         {...formItemLayout}
+        layout="vertical"
         initialValues={initialValues}
         form={form}
         onFinish={onFinish}

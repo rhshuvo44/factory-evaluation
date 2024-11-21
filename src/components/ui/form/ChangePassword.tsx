@@ -26,21 +26,24 @@ const ChangePassword = () => {
         <Form.Item
           name="oldPassword"
           rules={[
-            { required: true, message: "Please input your old Password!" },
+            { required: true, message: "Please input your Old Password!" },
           ]}
         >
           <Input.Password
             prefix={<LockOutlined />}
-            placeholder="old Password"
+            placeholder="Old Password"
           />
         </Form.Item>
         <Form.Item
           name="newPassword"
           rules={[
-            { required: true, message: "Please input your new Password!" },
+            { required: true, message: "Please input your New Password!" },
           ]}
         >
-          <Input.Password prefix={<LockOutlined />} placeholder="new Password" />
+          <Input.Password
+            prefix={<LockOutlined />}
+            placeholder="New Password"
+          />
         </Form.Item>
         <Form.Item>
           <Button block type="primary" htmlType="submit">

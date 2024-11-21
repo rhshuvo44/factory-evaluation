@@ -45,6 +45,12 @@ const buyerApi = baseApi.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        GetAllBuyerOrderNo: builder.query({
+            query: () => ({
+                url: `/buyer/orderNumber`,
+                method: 'GET',
+            }),
+        }),
 
 
     })
@@ -53,4 +59,4 @@ const buyerApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateBuyerMutation, useGetAllBuyerQuery, useDeleteBuyerMutation, useUpdateBuyerMutation, useSingleBuyerQuery, useGetTodayBuyerQuery } = buyerApi;
+export const { useCreateBuyerMutation, useGetAllBuyerQuery, useDeleteBuyerMutation, useUpdateBuyerMutation, useSingleBuyerQuery, useGetTodayBuyerQuery, useGetAllBuyerOrderNoQuery } = buyerApi;

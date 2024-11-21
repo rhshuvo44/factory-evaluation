@@ -34,13 +34,13 @@ const FactoryDevelopmentAdd = () => {
   };
   const disableDates = (current: Dayjs) => {
     // Disable dates that are more than 45 days ago or in the future
-// Get the start of the current month
-return (
-  current.isBefore(dayjs().subtract(30, "day")) || current.isAfter(dayjs())
-);
-// const startOfMonth = dayjs().startOf("month");
-// // current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
-// return current.isBefore(startOfMonth) || current.isAfter(dayjs());
+    // Get the start of the current month
+    return (
+      current.isBefore(dayjs().subtract(30, "day")) || current.isAfter(dayjs())
+    );
+    // const startOfMonth = dayjs().startOf("month");
+    // // current.isBefore(dayjs().subtract(45, "day")) || current.isAfter(dayjs())
+    // return current.isBefore(startOfMonth) || current.isAfter(dayjs());
   };
   useEffect(() => {
     form.setFieldsValue({
@@ -54,7 +54,7 @@ return (
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form {...formItemLayout} layout="vertical" onFinish={onFinish} form={form}>
       <CustomInput
         label="Particulars"
         name="particulars"

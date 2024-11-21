@@ -68,6 +68,16 @@ const BuyerAdd = () => {
 
     // return current.isBefore(startOfMonth) || current.isAfter(dayjs());
   };
+  // const disableShipmentDates = (current: Dayjs) => {
+  //   // Disable dates that are more than 45 days ago or in the future
+  //   // Get the start of the current month
+  //   // const startOfMonth = dayjs().startOf("month");
+  //   return (
+  //     current.isBefore(dayjs().subtract(date, "day")) || current.isAfter(dayjs())
+  //   );
+
+  // return current.isBefore(startOfMonth) || current.isAfter(dayjs());
+  // };
 
   const handleStyleChange = (value: string) => {
     setStyle(value);
@@ -101,7 +111,7 @@ const BuyerAdd = () => {
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} onFinish={onFinish} form={form}>
+    <Form {...formItemLayout} layout="vertical" onFinish={onFinish} form={form}>
       <Form.Item
         label="Order No"
         validateTrigger="onBlur"
@@ -149,8 +159,8 @@ const BuyerAdd = () => {
             onChange={handleItemChange}
             style={{ width: "100%" }}
             options={[
-              { value: "1", label: "Man's" },
-              { value: "2", label: "Ladies" },
+              { value: "1", label: "Top" },
+              { value: "2", label: "Bottom" },
             ]}
           />
         </Form.Item>

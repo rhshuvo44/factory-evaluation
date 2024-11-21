@@ -46,7 +46,7 @@ const FixedCostAdd = () => {
   };
 
   return (
-    <Form {...formItemLayout} form={form} onFinish={onFinish}>
+    <Form {...formItemLayout} layout="vertical" form={form} onFinish={onFinish}>
       <CustomInputNumber
         label="Factory Rent"
         name="factoryRent"
