@@ -17,6 +17,8 @@ import {
   useSingleBuyerQuery,
 } from "../../../redux/features/buyer/buyerApi";
 
+import { useCreateNotificationMutation } from "../../../redux/features/notification/notificationApi";
+import { useCreateProductionMutation } from "../../../redux/features/productionReport/productionApi";
 import { useGetMeQuery } from "../../../redux/features/user/userApi";
 import { TProductionReport } from "../../../types";
 import CustomInput from "../../form/CustomInput";
@@ -24,19 +26,61 @@ import Loading from "../Loading";
 const ProductionAddForm = () => {
   const [form] = Form.useForm();
   const [orderNo, setOrderNo] = useState<string>();
+  const [inHouse, setInHouse] = useState<number>(0);
+  const [cuttingCompleted, setCuttingCompleted] = useState<number>(0);
+  const [printCompleted, setPrintCompleted] = useState<number>(0);
+  const [deliveryToPrint, setDeliveryToPrint] = useState<number>(0);
+  const [sewingInput, setSewingInput] = useState<number>(0);
+  const [sewingOutput, setSewingOutput] = useState<number>(0);
+  const [finishingOutput, setFinishingOutput] = useState<number>(0);
+  const [packingCompleted, setPackingCompleted] = useState<number>(0);
 
   const { data: user } = useGetMeQuery(undefined);
-
   const queryParams = orderNo ? orderNo : undefined;
 
   const { data: allOrderNo } = useGetAllBuyerOrderNoQuery("");
   const orders = allOrderNo?.data;
   const { data, isLoading } = useSingleBuyerQuery(queryParams);
   const result = data?.data;
-  // const [createNotificationMutation] = useCreateNotificationMutation();
+  const [createNotificationMutation] = useCreateNotificationMutation();
+  const [createProduction] = useCreateProductionMutation();
 
   const orderNoChangeHandler: InputNumberProps["onChange"] = (values) => {
     setOrderNo(values as string);
+  };
+  const inHouseChangeHandler: InputNumberProps["onChange"] = (values) => {
+    setInHouse(values as number);
+  };
+  const cuttingCompletedChangeHandler: InputNumberProps["onChange"] = (
+    values
+  ) => {
+    setCuttingCompleted(values as number);
+  };
+  const printCompletedChangeHandler: InputNumberProps["onChange"] = (
+    values
+  ) => {
+    setPrintCompleted(values as number);
+  };
+  const deliveryToPrintChangeHandler: InputNumberProps["onChange"] = (
+    values
+  ) => {
+    setDeliveryToPrint(values as number);
+  };
+  const sewingInputChangeHandler: InputNumberProps["onChange"] = (values) => {
+    setSewingInput(values as number);
+  };
+  const sewingOutputChangeHandler: InputNumberProps["onChange"] = (values) => {
+    setSewingOutput(values as number);
+  };
+  const finishingOutputChangeHandler: InputNumberProps["onChange"] = (
+    values
+  ) => {
+    setFinishingOutput(values as number);
+  };
+  const packingCompletedChangeHandler: InputNumberProps["onChange"] = (
+    values
+  ) => {
+    setPackingCompleted(values as number);
   };
 
   useEffect(() => {
@@ -56,21 +100,41 @@ const ProductionAddForm = () => {
         totalFabric: result?.totalFabric,
       });
     }
-  }, [form, result]);
+    form.setFieldsValue({
+      requiredFabric: result?.totalFabric - inHouse,
+      cuttingRequired: result?.quantity - cuttingCompleted,
+      deliveryToPrintRemaining: cuttingCompleted - deliveryToPrint,
+      printReceivable: deliveryToPrint - printCompleted,
+      sewingInputRemaining: printCompleted - sewingInput,
+      sewingOutputRemaining: sewingInput - sewingOutput,
+      finishingOutputRemaining: sewingOutput - finishingOutput,
+      packingRemaining: finishingOutput - packingCompleted,
+    });
+  }, [
+    form,
+    result,
+    inHouse,
+    cuttingCompleted,
+    deliveryToPrint,
+    printCompleted,
+    sewingInput,
+    sewingOutput,
+    finishingOutput,
+    packingCompleted,
+  ]);
 
   const onFinish = async (values: TProductionReport) => {
-    console.log(values);
-    // const res = await createProduction({ ...values, date }).unwrap();
-    // if (!res.success) return toast.error(res.message);
+    const res = await createProduction(values).unwrap();
+    if (!res.success) return toast.error(res.message);
     toast.success("Create Production Report successfully");
-    // form.resetFields();
+    form.resetFields();
     // Check if user role is admin before creating a notification
     if (user?.data?.role === userRole.Coordinator) {
-      // const notify = {
-      //   message: `New production Report Generate created by ${user?.data?.name}`,
-      //   date: date,
-      // };
-      // await createNotificationMutation(notify);
+      const notify = {
+        message: `New production Report Generate created by ${user?.data?.name}`,
+        date: moment(),
+      };
+      await createNotificationMutation(notify);
     }
   };
   return (
@@ -191,6 +255,8 @@ const ProductionAddForm = () => {
             ]}
           >
             <InputNumber
+              onChange={inHouseChangeHandler}
+              min={0}
               style={{ width: "100%" }}
               placeholder="please input Fabric In House (KG)"
             />
@@ -220,7 +286,10 @@ const ProductionAddForm = () => {
             ]}
           >
             <InputNumber
+              onChange={cuttingCompletedChangeHandler}
               style={{ width: "100%" }}
+              max={result?.quantity}
+              min={0}
               placeholder="Cutting Completed (Per price)"
             />
           </Form.Item>
@@ -252,6 +321,9 @@ const ProductionAddForm = () => {
           >
             <InputNumber
               style={{ width: "100%" }}
+              max={cuttingCompleted}
+              min={0}
+              onChange={deliveryToPrintChangeHandler}
               placeholder="Delivery To Print (Per Price)"
             />
           </Form.Item>
@@ -282,6 +354,9 @@ const ProductionAddForm = () => {
             ]}
           >
             <InputNumber
+              onChange={printCompletedChangeHandler}
+              min={0}
+              max={deliveryToPrint}
               style={{ width: "100%" }}
               placeholder="Print Completed"
             />
@@ -312,11 +387,17 @@ const ProductionAddForm = () => {
               },
             ]}
           >
-            <InputNumber style={{ width: "100%" }} placeholder="sewing Input" />
+            <InputNumber
+              min={0}
+              max={printCompleted}
+              onChange={sewingInputChangeHandler}
+              style={{ width: "100%" }}
+              placeholder="sewing Input"
+            />
           </Form.Item>
           <Form.Item
             label="sewing Input Remaining "
-            name="sewingInputRemaining "
+            name="sewingInputRemaining"
             rules={[
               {
                 required: true,
@@ -341,13 +422,16 @@ const ProductionAddForm = () => {
             ]}
           >
             <InputNumber
+              min={0}
+              max={sewingInput}
+              onChange={sewingOutputChangeHandler}
               style={{ width: "100%" }}
               placeholder="sewing Output"
             />
           </Form.Item>
           <Form.Item
-            label="sewing Output Remaining "
-            name="sewingOutputRemaining "
+            label="sewing Output Remaining"
+            name="sewingOutputRemaining"
             rules={[
               {
                 required: true,
@@ -374,12 +458,14 @@ const ProductionAddForm = () => {
             <InputNumber
               style={{ width: "100%" }}
               min={0}
+              max={sewingOutput}
+              onChange={finishingOutputChangeHandler}
               placeholder="Finishing Output"
             />
           </Form.Item>
           <Form.Item
             label="Finishing Output Remaining "
-            name="finishingOutputRemaining "
+            name="finishingOutputRemaining"
             rules={[
               {
                 required: true,
@@ -406,12 +492,14 @@ const ProductionAddForm = () => {
             <InputNumber
               style={{ width: "100%" }}
               min={0}
+              max={finishingOutput}
+              onChange={packingCompletedChangeHandler}
               placeholder="Packing Completed"
             />
           </Form.Item>
           <Form.Item
             label="Packing Remaining "
-            name="packingRemaining "
+            name="packingRemaining"
             rules={[
               {
                 required: true,

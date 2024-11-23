@@ -61,11 +61,11 @@ const ProductionTable = () => {
                           Delete
                         </Button>
                         {/* Conditionally render "Edit" if quantities match */}
-                        {/* {item.readyQuantity === item.orderQuantity ? (
+                        {item.quantity === item.packingRemaining ? (
                           <Button type="primary">Finished</Button>
                         ) : (
                           <Button>Running</Button>
-                        )} */}
+                        )}
                       </Space>
                     );
                   },
@@ -75,7 +75,8 @@ const ProductionTable = () => {
         ]}
         dataSource={data?.data}
         rowKey="_id"
-        // scroll={{ y: 55 * 7 }}
+        scroll={{ x: 100 }}
+        // tableLayout="auto"
         // pagination={false}
       />
     </div>
