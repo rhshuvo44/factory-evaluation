@@ -7,7 +7,7 @@ import {
   InputNumber,
   InputNumberProps,
 } from "antd";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -35,29 +35,20 @@ const BuyerUpdate = () => {
   const result = data?.data;
   const [fabricConsumption, setFabricConsumption] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(0);
-  const [date, setDate] = useState<string | string[]>("");
   const [shipmentDate, setShipmentDate] = useState<string | string[]>("");
 
-  const calculateLeadTime = (
-    orderDate: string | string[],
-    shipmentDate: string | string[]
-  ) => {
-    if (orderDate && shipmentDate) {
-      const leadDays = moment(shipmentDate).diff(moment(orderDate), "days");
-
+  const calculateLeadTime = (shipmentDate: string | string[]) => {
+    if (shipmentDate) {
+      const leadDays = moment(shipmentDate).diff(moment(), "days");
       form.setFieldsValue({ leadTime: `${leadDays} days` });
     } else {
       form.setFieldsValue({ leadTime: "" });
     }
   };
 
-  const onChangeDate: DatePickerProps["onChange"] = (_, dateString) => {
-    setDate(dateString);
-    calculateLeadTime(dateString, shipmentDate);
-  };
   const onChangeShipmentDate: DatePickerProps["onChange"] = (_, dateString) => {
     setShipmentDate(dateString);
-    calculateLeadTime(date, dateString);
+    calculateLeadTime(dateString);
   };
   const onChangeFabricConsumption: InputNumberProps["onChange"] = (values) => {
     setFabricConsumption(values as number);
@@ -65,23 +56,9 @@ const BuyerUpdate = () => {
   const onChangeQuantity: InputNumberProps["onChange"] = (values) => {
     setQuantity(values as number);
   };
+  const orderDate = dayjs(result?.date);
 
-  const disableDates = (current: Dayjs) => {
-    // Disable dates that are more than 45 days ago or in the future
-    // Get the start of the current month
-    // const startOfMonth = dayjs().startOf("month");
-    return (
-      current.isBefore(dayjs().subtract(30, "day")) || current.isAfter(dayjs())
-    );
-
-    // return current.isBefore(startOfMonth) || current.isAfter(dayjs());
-  };
-
-  // If result?.date is a string, convert it to moment
-  const orderDate = result?.date ? moment(result?.date) : "";
-  const shipmentDateDataBase = result?.shipmentDate
-    ? moment(result?.shipmentDate)
-    : "";
+  const shipmentDateDataBase = dayjs(result?.shipmentDate);
 
   useEffect(() => {
     const fabricConsumptionValue =
@@ -100,10 +77,10 @@ const BuyerUpdate = () => {
     buyer: result?.buyer,
     description: result?.description,
     date: orderDate,
+    shipmentDate: shipmentDateDataBase,
     orderNo: result?.orderNo,
     quantity: result?.quantity,
     styleNo: result?.styleNo,
-    shipmentDate: shipmentDateDataBase,
     leadTime: result?.leadTime,
     fabricConsumption: result?.fabricConsumption,
     totalFabric: result?.totalFabric,
@@ -114,7 +91,7 @@ const BuyerUpdate = () => {
   const onFinish = async (values: TBuyerAdd) => {
     const updateData = {
       id: result?._id,
-      data: { ...values },
+      data: { ...values, shipmentDate },
     };
     const res = await updateBuyer(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
@@ -183,9 +160,8 @@ const BuyerUpdate = () => {
           rules={[{ required: true, message: "Please input! Date" }]}
         >
           <DatePicker
-            onChange={onChangeDate}
+            disabled
             style={{ width: "100%" }}
-            disabledDate={disableDates}
           />
         </Form.Item>
         <Form.Item
