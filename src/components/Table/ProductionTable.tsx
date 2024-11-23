@@ -61,7 +61,7 @@ const ProductionTable = () => {
                           Delete
                         </Button>
                         {/* Conditionally render "Edit" if quantities match */}
-                        {item.quantity === item.packingRemaining ? (
+                        {item.quantity === item.packingCompleted ? (
                           <Button type="primary">Finished</Button>
                         ) : (
                           <Button>Running</Button>

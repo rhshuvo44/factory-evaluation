@@ -140,8 +140,10 @@ const BuyerAdd = () => {
             onChange={handleStyleChange}
             style={{ width: "100%" }}
             options={[
-              { value: "1", label: "Man's" },
+              { value: "1", label: "Men's" },
               { value: "2", label: "Ladies" },
+              { value: "3", label: "Boys" },
+              { value: "4", label: "Girls" },
             ]}
           />
         </Form.Item>
@@ -242,7 +244,7 @@ const BuyerAdd = () => {
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
         <Button type="primary" htmlType="submit">
-          Add Buyer
+          Add Order
         </Button>
       </Form.Item>
     </Form>

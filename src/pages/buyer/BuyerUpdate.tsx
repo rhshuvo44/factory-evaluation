@@ -100,7 +100,7 @@ const BuyerUpdate = () => {
   };
   return (
     <>
-      <SectionTitle title="Buyer update" />
+      <SectionTitle title="Order update" />
 
       <Form
         {...formItemLayout}

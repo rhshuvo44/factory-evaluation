@@ -1,10 +1,12 @@
 import {
   Button,
+  Col,
   DatePicker,
   DatePickerProps,
   Form,
   InputNumber,
   InputNumberProps,
+  Row,
   Select,
 } from "antd";
 import dayjs, { Dayjs } from "dayjs";
@@ -56,109 +58,144 @@ const TravellingForm = () => {
     form.resetFields();
   };
   return (
-    <Form {...formItemLayout} layout="vertical" onFinish={onFinish} form={form}>
-      <CustomInput
-        label="Particulars"
-        name="particulars"
-        message="Please input! Particulars"
-        placeholder="please input particular text"
-      />
-      <CustomTextArea
-        label="Description"
-        name="description"
-        message="Please input! Description"
-        placeholder="please input Description"
-      />
-      <CustomInput
-        label="Remark"
-        name="remark"
-        message="Please input! Remark"
-        placeholder="please input remark"
-      />
-      <CustomInputNumber
-        label="Buyer ID"
-        name="buyerId"
-        message="Please input! Buyer ID"
-        placeholder="please input buyer ID number"
-      />
-      <CustomInputNumber
-        label="Order No"
-        name="orderNo"
-        message="Please input! Order No"
-        placeholder="please input Order No"
-      />
-      <CustomInputNumber
-        label="Memo No"
-        name="memoNo"
-        message="Please input! Memo No"
-        placeholder="please input Memo No"
-      />
-      <CustomInput
-        label="Pay to"
-        name="payTo"
-        message="Please input! Pay to"
-        placeholder="please input pay to name"
-      />
+    <Row justify="center">
+      <Col span={24}>
+        <Form
+          {...formItemLayout}
+          layout="vertical"
+          onFinish={onFinish}
+          form={form}
+        >
+          <Row gutter={16}>
+            <Col span={24} md={{ span: 12 }}>
+              <CustomInput
+                label="Particulars"
+                name="particulars"
+                message="Please input! Particulars"
+                placeholder="please input particular text"
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <CustomTextArea
+                label="Description"
+                name="description"
+                message="Please input! Description"
+                placeholder="please input Description"
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <CustomInput
+                label="Remark"
+                name="remark"
+                message="Please input! Remark"
+                placeholder="please input remark"
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <CustomInputNumber
+                label="Buyer ID"
+                name="buyerId"
+                message="Please input! Buyer ID"
+                placeholder="please input buyer ID number"
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <CustomInputNumber
+                label="Order No"
+                name="orderNo"
+                message="Please input! Order No"
+                placeholder="please input Order No"
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <CustomInputNumber
+                label="Memo No"
+                name="memoNo"
+                message="Please input! Memo No"
+                placeholder="please input Memo No"
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <CustomInput
+                label="Pay to"
+                name="payTo"
+                message="Please input! Pay to"
+                placeholder="please input pay to name"
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Date"
+                name="date"
+                rules={[{ required: true, message: "Please input! Date" }]}
+              >
+                <DatePicker
+                  onChange={onChangeDate}
+                  style={{ width: "100%" }}
+                  disabledDate={disableDates}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Payment Type"
+                name="paymentType"
+                rules={[
+                  { required: true, message: "Please select Payment type! " },
+                ]}
+              >
+                <Select
+                  style={{ width: "100%" }}
+                  placeholder="Please select Payment Type"
+                  options={paymentOptions}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Unit"
+                name="unit"
+                rules={[{ required: true, message: "Please Input Unit! " }]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  min={0}
+                  onChange={onChangeUnit}
+                  placeholder="please input Unit Number"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Unit Price"
+                name="unitPrice"
+                rules={[
+                  { required: true, message: "Please Input Unit Price! " },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  min={0}
+                  onChange={onChangeUnitPrice}
+                  placeholder="please input Unit price"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item label="Total Price" name="totalPrice">
+                <InputNumber style={{ width: "100%" }} disabled />
+              </Form.Item>
+            </Col>
+          </Row>
 
-      <Form.Item
-        label="Date"
-        name="date"
-        rules={[{ required: true, message: "Please input! Date" }]}
-      >
-        <DatePicker
-          onChange={onChangeDate}
-          style={{ width: "100%" }}
-          disabledDate={disableDates}
-        />
-      </Form.Item>
-
-      <Form.Item
-        label="Payment Type"
-        name="paymentType"
-        rules={[{ required: true, message: "Please select Payment type! " }]}
-      >
-        <Select
-          style={{ width: "100%" }}
-          placeholder="Please select Payment Type"
-          options={paymentOptions}
-        />
-      </Form.Item>
-      <Form.Item
-        label="Unit"
-        name="unit"
-        rules={[{ required: true, message: "Please Input Unit! " }]}
-      >
-        <InputNumber
-          style={{ width: "100%" }}
-          min={0}
-          onChange={onChangeUnit}
-          placeholder="please input Unit Number"
-        />
-      </Form.Item>
-
-      <Form.Item
-        label="Unit Price"
-        name="unitPrice"
-        rules={[{ required: true, message: "Please Input Unit Price! " }]}
-      >
-        <InputNumber
-          style={{ width: "100%" }}
-          min={0}
-          onChange={onChangeUnitPrice}
-          placeholder="please input Unit price"
-        />
-      </Form.Item>
-
-      <Form.Item label="Total Price" name="totalPrice">
-        <InputNumber style={{ width: "100%" }} disabled />
-      </Form.Item>
-
-      <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+          <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 

@@ -216,20 +216,20 @@ export const adminPaths = [
     ],
   },
   {
-    name: "Buyers",
+    name: "Orders",
     children: [
       {
-        name: "Add Buyer",
-        path: "add_buyer",
+        name: "Add Order",
+        path: "add_order",
         element: <BuyerForm />,
       },
       {
-        path: "buyer/:id",
+        path: "order/:id",
         element: <BuyerUpdate />,
       },
       {
-        name: "All Buyers",
-        path: "all_buyers",
+        name: "All Orders",
+        path: "all_orders",
         element: <Buyer />,
       },
     ],

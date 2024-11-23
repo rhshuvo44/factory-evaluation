@@ -38,7 +38,7 @@ const BuyerTable = () => {
   if (isError) return <div>Error: {isError}</div>;
   return (
     <div>
-      <SectionTitle title="Buyer List" />
+      <SectionTitle title="Order List" />
 
       <div className="responsive-table-container mt-2">
         <Table
@@ -57,7 +57,7 @@ const BuyerTable = () => {
                     render: (item: TBuyer) => {
                       return (
                         <Space>
-                          <Link to={`/${user!.role}/buyer/${item.orderNo}`}>
+                          <Link to={`/${user!.role}/order/${item.orderNo}`}>
                             Edit
                           </Link>
                           {user!.role === "admin" && (

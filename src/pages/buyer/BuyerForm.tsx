@@ -4,7 +4,7 @@ import SectionTitle from "../../components/ui/SectionTitle";
 const BuyerForm = () => {
   return (
     <>
-      <SectionTitle title=" Buyer Add form" />
+      <SectionTitle title=" Order Add form" />
       <BuyerAdd />
     </>
   );
