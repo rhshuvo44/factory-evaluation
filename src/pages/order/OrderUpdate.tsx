@@ -21,7 +21,7 @@ import {
   useSingleBuyerQuery,
   useUpdateBuyerMutation,
 } from "../../redux/features/buyer/buyerApi";
-import { TBuyerAdd } from "../../types";
+import { TOrderAdd } from "../../types";
 
 const OrderUpdate = () => {
   const [form] = Form.useForm();
@@ -88,7 +88,7 @@ const OrderUpdate = () => {
 
   if (isLoading) return <Loading />;
 
-  const onFinish = async (values: TBuyerAdd) => {
+  const onFinish = async (values: TOrderAdd) => {
     const updateData = {
       id: result?._id,
       data: { ...values, shipmentDate },
