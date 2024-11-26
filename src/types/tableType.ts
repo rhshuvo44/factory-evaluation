@@ -19,7 +19,7 @@ export type TSubUtility = {
 }
 export type TTravel = {
     _id?: string;
-    date: Date;
+    date: string;
     particulars: string;
     description: string;
     remark: string;
@@ -35,7 +35,7 @@ export type TTravel = {
 
 export type TMiscellaneous = {
     _id?: string;
-    date: Date;
+    date: string;
     particulars: string;
     description: string;
     remark?: string;
@@ -102,7 +102,7 @@ export type TUSer = {
 export type TFactory = {
     _id?: string;
     slNo: number;
-    date: Date;
+    date: string;
     particulars: string;
     description: string;
     quantity: number;
@@ -116,7 +116,7 @@ export type TFactory = {
 }
 export type TLoan = {
     _id?: string;
-    date: Date;
+    date: string;
     particulars: "Loan Return"
     description: "Emergency Loan Return" | "EMI Return"
     quantity: number;
@@ -138,7 +138,7 @@ export type TCollection = {
     workOrderNo: number;
     lineNo: TLine;
     chalanNo: number;
-    ratePer: string;
+    ratePer: number;
     amount: number;
 }
 export type TFixed = {
