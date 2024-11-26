@@ -14,7 +14,7 @@ import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
-const BuyerTable = () => {
+const OrderTable = () => {
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -26,7 +26,7 @@ const BuyerTable = () => {
   const handleDeleted = async (id: string) => {
     const res = await deleteBuyer(id);
     if (res.data.success) {
-      toast.success("Buyer deleted successfully.");
+      toast.success("Order deleted successfully.");
     }
   };
 
@@ -85,4 +85,4 @@ const BuyerTable = () => {
   );
 };
 
-export default BuyerTable;
+export default OrderTable;

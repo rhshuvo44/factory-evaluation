@@ -1,13 +1,13 @@
-import BuyerAdd from "../../components/ui/form/BuyerAdd";
+import OrderAdd from "../../components/ui/form/OrderAdd";
 import SectionTitle from "../../components/ui/SectionTitle";
 
-const BuyerForm = () => {
+const OrderForm = () => {
   return (
     <>
       <SectionTitle title=" Order Add form" />
-      <BuyerAdd />
+      <OrderAdd />
     </>
   );
 };
 
-export default BuyerForm;
+export default OrderForm;

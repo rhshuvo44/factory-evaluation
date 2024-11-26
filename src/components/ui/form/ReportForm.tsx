@@ -1,4 +1,4 @@
-import { Button, Form, InputNumber } from "antd";
+import { Button, Col, Form, InputNumber, Row } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useEffect } from "react";
@@ -72,28 +72,37 @@ const ReportForm = ({
     }
   };
   return (
-    <>
+    <Row justify="center">
       <SectionTitle title="Report Generate" />
-      <Form
-        {...formItemLayout}
-        onFinish={onFinish}
-        form={form}layout="vertical"
-        initialValues={initialValues}
-      >
-        <Form.Item label="Running cost" name="factoryRunningCost">
-          <InputNumber style={{ width: "100%" }} disabled />
-        </Form.Item>
-        <Form.Item label="Collection" name="factoryCollection">
-          <InputNumber style={{ width: "100%" }} disabled />
-        </Form.Item>
+      <Col span={24}>
+        <Form
+          {...formItemLayout}
+          onFinish={onFinish}
+          form={form}
+          layout="vertical"
+          initialValues={initialValues}
+        >
+          <Row gutter={16}>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item label="Running cost" name="factoryRunningCost">
+                <InputNumber style={{ width: "100%" }} disabled />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item label="Collection" name="factoryCollection">
+                <InputNumber style={{ width: "100%" }} disabled />
+              </Form.Item>
+            </Col>
+          </Row>
 
-        <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-    </>
+          <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 

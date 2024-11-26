@@ -272,14 +272,14 @@ export type TNotification = {
     message: string
 }
 
-export type TBuyerAdd = {
+export type TOrderAdd = {
     orderNo: string
     buyer: string
     styleNo: string
     description: string
     quantity: number
-    date: Date
-    shipmentDate: Date
+    date: string
+    shipmentDate: string
     leadTime: number
     fabricConsumption: number
     totalFabric: number

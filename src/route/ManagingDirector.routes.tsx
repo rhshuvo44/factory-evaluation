@@ -1,12 +1,12 @@
 import TravellingTable from "../components/Table/TravellingTable";
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
-import Buyer from "../pages/buyer/Buyer";
 import Collection from "../pages/Collection/Collection";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FixedCost from "../pages/Fixed cost/FixedCost";
 import Loan from "../pages/loan/Loan";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
+import Order from "../pages/order/Order";
 import Production from "../pages/Production/Production";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
@@ -71,9 +71,9 @@ export const managingPaths = [
   },
 
   {
-    name: "All Buyers",
-    path: "all_buyers",
-    element: <Buyer />,
+    name: "All Orders",
+    path: "all_orders",
+    element: <Order />,
   },
 
   {

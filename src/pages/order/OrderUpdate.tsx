@@ -23,7 +23,7 @@ import {
 } from "../../redux/features/buyer/buyerApi";
 import { TBuyerAdd } from "../../types";
 
-const BuyerUpdate = () => {
+const OrderUpdate = () => {
   const [form] = Form.useForm();
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const BuyerUpdate = () => {
 
   const id: string = location.pathname.split("/")[3];
   const { data, isLoading } = useSingleBuyerQuery(id);
-  const [updateBuyer] = useUpdateBuyerMutation();
+  const [updateOrder] = useUpdateBuyerMutation();
   const result = data?.data;
   const [fabricConsumption, setFabricConsumption] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(0);
@@ -93,9 +93,9 @@ const BuyerUpdate = () => {
       id: result?._id,
       data: { ...values, shipmentDate },
     };
-    const res = await updateBuyer(updateData).unwrap();
+    const res = await updateOrder(updateData).unwrap();
     if (!res.success) return toast.error(res.message);
-    toast.success("Update Buyer successfully");
+    toast.success("Update Order successfully");
     navigate(-1);
   };
   return (
@@ -197,7 +197,7 @@ const BuyerUpdate = () => {
 
         <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
           <Button type="primary" htmlType="submit">
-            Buyer Update
+            Order Update
           </Button>
         </Form.Item>
       </Form>
@@ -205,4 +205,4 @@ const BuyerUpdate = () => {
   );
 };
 
-export default BuyerUpdate;
+export default OrderUpdate;

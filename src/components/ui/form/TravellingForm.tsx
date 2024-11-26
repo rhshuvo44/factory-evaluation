@@ -67,7 +67,7 @@ const TravellingForm = () => {
           form={form}
         >
           <Row gutter={16}>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <CustomInput
                 label="Particulars"
                 name="particulars"
@@ -75,7 +75,7 @@ const TravellingForm = () => {
                 placeholder="please input particular text"
               />
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <CustomTextArea
                 label="Description"
                 name="description"
@@ -83,7 +83,7 @@ const TravellingForm = () => {
                 placeholder="please input Description"
               />
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <CustomInput
                 label="Remark"
                 name="remark"
@@ -91,7 +91,7 @@ const TravellingForm = () => {
                 placeholder="please input remark"
               />
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <CustomInputNumber
                 label="Buyer ID"
                 name="buyerId"
@@ -99,7 +99,7 @@ const TravellingForm = () => {
                 placeholder="please input buyer ID number"
               />
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <CustomInputNumber
                 label="Order No"
                 name="orderNo"
@@ -107,7 +107,7 @@ const TravellingForm = () => {
                 placeholder="please input Order No"
               />
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <CustomInputNumber
                 label="Memo No"
                 name="memoNo"
@@ -115,7 +115,7 @@ const TravellingForm = () => {
                 placeholder="please input Memo No"
               />
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <CustomInput
                 label="Pay to"
                 name="payTo"
@@ -123,7 +123,7 @@ const TravellingForm = () => {
                 placeholder="please input pay to name"
               />
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <Form.Item
                 label="Date"
                 name="date"
@@ -136,7 +136,7 @@ const TravellingForm = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <Form.Item
                 label="Payment Type"
                 name="paymentType"
@@ -151,7 +151,7 @@ const TravellingForm = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <Form.Item
                 label="Unit"
                 name="unit"
@@ -165,7 +165,7 @@ const TravellingForm = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <Form.Item
                 label="Unit Price"
                 name="unitPrice"
@@ -181,7 +181,7 @@ const TravellingForm = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 12 }}>
+            <Col span={24} md={{ span: 8 }}>
               <Form.Item label="Total Price" name="totalPrice">
                 <InputNumber style={{ width: "100%" }} disabled />
               </Form.Item>

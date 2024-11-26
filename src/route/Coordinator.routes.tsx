@@ -1,14 +1,14 @@
 import TravellingTable from "../components/Table/TravellingTable";
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
-import Buyer from "../pages/buyer/Buyer";
-import BuyerForm from "../pages/buyer/BuyerForm";
-import BuyerUpdate from "../pages/buyer/BuyerUpdate";
 import Collection from "../pages/Collection/Collection";
 import Dashboard from "../pages/Dashboard";
 import FactoryDevelopment from "../pages/Factory development/FactoryDevelopment";
 import FixedCost from "../pages/Fixed cost/FixedCost";
 import Loan from "../pages/loan/Loan";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
+import Order from "../pages/order/Order";
+import OrderForm from "../pages/order/OrderForm";
+import OrderUpdate from "../pages/order/OrderUpdate";
 import Production from "../pages/Production/Production";
 import ProductionAdd from "../pages/Production/ProductionAdd";
 import ProductionUpdate from "../pages/Production/ProductionUpdate";
@@ -71,21 +71,21 @@ export const coordinatorPaths = [
     element: <FixedCost />,
   },
   {
-    name: "Buyers",
+    name: "Orders",
     children: [
       {
-        name: "Add Buyer",
-        path: "add_buyer",
-        element: <BuyerForm />,
+        name: "Add Order",
+        path: "add_order",
+        element: <OrderForm />,
       },
       {
-        path: "buyer/:id",
-        element: <BuyerUpdate />,
+        path: "order/:id",
+        element: <OrderUpdate />,
       },
       {
-        name: "All Buyers",
-        path: "all_buyers",
-        element: <Buyer />,
+        name: "All Orders",
+        path: "all_orders",
+        element: <Order />,
       },
     ],
   },

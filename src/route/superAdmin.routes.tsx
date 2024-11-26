@@ -1,9 +1,6 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
 import BuyerDevelopmentUpdate from "../pages/buyer development/BuyerDevelopmentUpdate";
-import Buyer from "../pages/buyer/Buyer";
-import BuyerForm from "../pages/buyer/BuyerForm";
-import BuyerUpdate from "../pages/buyer/BuyerUpdate";
 import Collection from "../pages/Collection/Collection";
 import CollectionForm from "../pages/Collection/CollectionForm";
 import CollectionUpdate from "../pages/Collection/CollectionUpdate";
@@ -20,6 +17,9 @@ import LoanUpdate from "../pages/loan/LoanUpdate";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
+import Buyer from "../pages/order/Order";
+import BuyerForm from "../pages/order/OrderForm";
+import BuyerUpdate from "../pages/order/OrderUpdate";
 import Production from "../pages/Production/Production";
 import ProductionAdd from "../pages/Production/ProductionAdd";
 import ProductionUpdate from "../pages/Production/ProductionUpdate";
@@ -219,7 +219,7 @@ export const superAdminPaths = [
     ],
   },
   {
-    name: "Buyers",
+    name: "Orders",
     children: [
       {
         name: "Add Buyer",

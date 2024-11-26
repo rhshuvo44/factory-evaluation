@@ -1,4 +1,12 @@
-import { Button, Form, InputNumber, InputNumberProps, Select } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  InputNumber,
+  InputNumberProps,
+  Row,
+  Select,
+} from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -68,92 +76,113 @@ const TravellingAllowanceUpdate = () => {
     navigate(-1);
   };
   return (
-    <>
-      <SectionTitle title="Travelling Allowance Update" />
-      <Form
-        layout="vertical"
-        form={form}
-        name="Travelling Allowance update form"
-        {...formItemLayout}
-        onFinish={onFinish}
-        initialValues={initialValues}
-      >
-        <CustomInput
-          label="Particulars"
-          name="particulars"
-          message="Please input! Particulars"
-        />
-        <CustomTextArea
-          label="Description"
-          name="description"
-          message="Please input! Description"
-        />
-        <CustomInput
-          label="Remark"
-          name="remark"
-          message="Please input! Remark"
-        />
-        <CustomInputNumber
-          label="Buyer ID"
-          name="buyerId"
-          message="Please input! Buyer ID"
-        />
-        <CustomInputNumber
-          label="Order No"
-          name="orderNo"
-          message="Please input! Order No"
-        />
-        <CustomInput
-          label="Pay to"
-          name="payTo"
-          message="Please input! Pay to"
-        />
-        <Form.Item
-          label="Payment Type"
-          name="paymentType"
-          rules={[{ required: true, message: "Please select Payment Type! " }]}
+    <Row justify="center">
+        <SectionTitle title="Travelling Allowance Update" />
+      <Col span={24}>
+        <Form
+          layout="vertical"
+          form={form}
+          name="Travelling Allowance update form"
+          {...formItemLayout}
+          onFinish={onFinish}
+          initialValues={initialValues}
         >
-          <Select
-            style={{ width: "100%" }}
-            // defaultValue={result.paymentType}
-            options={paymentOptions}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Unit"
-          name="unit"
-          rules={[{ required: true, message: "Please Input Unit! " }]}
-        >
-          <InputNumber
-            style={{ width: "100%" }}
-            min={0}
-            onChange={onChangeUnit}
-          />
-        </Form.Item>
-
-        <Form.Item
-          label="Unit Price"
-          name="unitPrice"
-          rules={[{ required: true, message: "Please Input Unit Price! " }]}
-        >
-          <InputNumber
-            style={{ width: "100%" }}
-            min={0}
-            onChange={onChangeUnitPrice}
-          />
-        </Form.Item>
-
-        <Form.Item label="Total Price" name="totalPrice">
-          <InputNumber style={{ width: "100%" }} disabled />
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-    </>
+          <Row gutter={16}>
+            <Col span={24} md={{ span: 8 }}>
+              <CustomInput
+                label="Particulars"
+                name="particulars"
+                message="Please input! Particulars"
+              />
+            </Col>
+            <Col span={24} md={{ span: 16 }}>
+              <CustomTextArea
+                label="Description"
+                name="description"
+                message="Please input! Description"
+              />
+            </Col>
+            <Col span={24} md={{ span: 8 }}>
+              <CustomInput
+                label="Remark"
+                name="remark"
+                message="Please input! Remark"
+              />
+            </Col>
+            <Col span={24} md={{ span: 8 }}>
+              <CustomInputNumber
+                label="Buyer ID"
+                name="buyerId"
+                message="Please input! Buyer ID"
+              />
+            </Col>
+            <Col span={24} md={{ span: 8 }}>
+              <CustomInputNumber
+                label="Order No"
+                name="orderNo"
+                message="Please input! Order No"
+              />
+            </Col>
+            <Col span={24} md={{ span: 8 }}>
+              <CustomInput
+                label="Pay to"
+                name="payTo"
+                message="Please input! Pay to"
+              />
+            </Col>
+            <Col span={24} md={{ span: 8 }}>
+              <Form.Item
+                label="Payment Type"
+                name="paymentType"
+                rules={[
+                  { required: true, message: "Please select Payment Type! " },
+                ]}
+              >
+                <Select style={{ width: "100%" }} options={paymentOptions} />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 8 }}>
+              <Form.Item
+                label="Unit"
+                name="unit"
+                rules={[{ required: true, message: "Please Input Unit! " }]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  min={0}
+                  onChange={onChangeUnit}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 8 }}>
+              <Form.Item
+                label="Unit Price"
+                name="unitPrice"
+                rules={[
+                  { required: true, message: "Please Input Unit Price! " },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  min={0}
+                  onChange={onChangeUnitPrice}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 8 }}>
+              <Form.Item label="Total Price" name="totalPrice">
+                <InputNumber style={{ width: "100%" }} disabled />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 

@@ -2,6 +2,7 @@ import {
   Button,
   Col,
   DatePicker,
+  Divider,
   Form,
   Input,
   InputNumber,
@@ -127,6 +128,7 @@ const ProductionAddForm = () => {
 
   const onFinish = async (values: TProductionReport) => {
     const res = await createProduction(values).unwrap();
+    console.log(res);
     if (!res.success) return toast.error(res.message);
     toast.success("Create Production Report successfully");
     form.resetFields();
@@ -172,6 +174,7 @@ const ProductionAddForm = () => {
               </Form.Item>
             </Col>
           </Row>
+          <Divider />
           {isLoading ? (
             <Loading />
           ) : result ? (
@@ -432,6 +435,7 @@ const ProductionAddForm = () => {
                   </Form.Item>
                 </Col>
               </Row>
+              <Divider />
               <Row gutter={16}>
                 <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
                   <Form.Item
@@ -617,13 +621,13 @@ const ProductionAddForm = () => {
                       max={finishingOutput}
                       onChange={packingCompletedChangeHandler}
                       placeholder="Packing Completed"
-                      onBlur={(e) => {
-                        const value = (e.target as HTMLInputElement)
-                          .valueAsNumber;
-                        if (value < 0 || value > finishingOutput) {
-                          console.error("Value out of range");
-                        }
-                      }}
+                      // onBlur={(e) => {
+                      //   const value = (e.target as HTMLInputElement)
+                      //     .valueAsNumber;
+                      //   if (value < 0 || value > finishingOutput) {
+                      //     console.error("Value out of range");
+                      //   }
+                      // }}
                     />
                   </Form.Item>
                 </Col>

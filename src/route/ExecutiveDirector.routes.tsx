@@ -1,7 +1,6 @@
 import BuyerDevelopment from "../pages/buyer development/BuyerDevelopment";
 import BuyerDevelopmentForm from "../pages/buyer development/BuyerDevelopmentForm";
 import BuyerDevelopmentUpdate from "../pages/buyer development/BuyerDevelopmentUpdate";
-import Buyer from "../pages/buyer/Buyer";
 import Collection from "../pages/Collection/Collection";
 import CollectionForm from "../pages/Collection/CollectionForm";
 import CollectionUpdate from "../pages/Collection/CollectionUpdate";
@@ -16,6 +15,7 @@ import LoanUpdate from "../pages/loan/LoanUpdate";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
+import Order from "../pages/order/Order";
 import Production from "../pages/Production/Production";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
@@ -178,9 +178,9 @@ export const executivePaths = [
     element: <FixedCost />,
   },
   {
-    name: "All Buyers",
-    path: "all_buyers",
-    element: <Buyer />,
+    name: "All Orders",
+    path: "all_orders",
+    element: <Order />,
   },
   {
     name: "Production Report",
