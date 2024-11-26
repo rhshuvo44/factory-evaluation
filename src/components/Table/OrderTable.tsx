@@ -3,16 +3,14 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
-import {
-  useDeleteBuyerMutation,
-  useGetAllBuyerQuery,
-} from "../../redux/features/buyer/buyerApi";
+
 import { useAppSelector } from "../../redux/hook";
 import { buyerAddColums } from "../../types";
 import { TBuyer } from "../../types/tableType";
 import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
+import { useDeleteOrderMutation, useGetAllOrderQuery } from "../../redux/features/order/orderApi";
 
 const OrderTable = () => {
   const token = useAppSelector(useCurrentToken);
@@ -22,15 +20,15 @@ const OrderTable = () => {
   if (token) {
     user = verifyToken(token) as TUser;
   }
-  const [deleteBuyer] = useDeleteBuyerMutation();
+  const [deleteOrder] = useDeleteOrderMutation();
   const handleDeleted = async (id: string) => {
-    const res = await deleteBuyer(id);
+    const res = await deleteOrder(id);
     if (res.data.success) {
       toast.success("Order deleted successfully.");
     }
   };
 
-  const { data, isError, isLoading } = useGetAllBuyerQuery({
+  const { data, isError, isLoading } = useGetAllOrderQuery({
     undefined,
   });
 

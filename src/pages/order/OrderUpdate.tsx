@@ -18,9 +18,9 @@ import Loading from "../../components/ui/Loading";
 import SectionTitle from "../../components/ui/SectionTitle";
 import { formItemLayout } from "../../constants/formItemLayout";
 import {
-  useSingleBuyerQuery,
-  useUpdateBuyerMutation,
-} from "../../redux/features/buyer/buyerApi";
+  useSingleOrderQuery,
+  useUpdateOrderMutation,
+} from "../../redux/features/order/orderApi";
 import { TOrderAdd } from "../../types";
 
 const OrderUpdate = () => {
@@ -30,8 +30,8 @@ const OrderUpdate = () => {
   // const [date, setDate] = useState<string | string[]>("");
 
   const id: string = location.pathname.split("/")[3];
-  const { data, isLoading } = useSingleBuyerQuery(id);
-  const [updateOrder] = useUpdateBuyerMutation();
+  const { data, isLoading } = useSingleOrderQuery(id);
+  const [updateOrder] = useUpdateOrderMutation();
   const result = data?.data;
   const [fabricConsumption, setFabricConsumption] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(0);
@@ -159,10 +159,7 @@ const OrderUpdate = () => {
           name="date"
           rules={[{ required: true, message: "Please input! Date" }]}
         >
-          <DatePicker
-            disabled
-            style={{ width: "100%" }}
-          />
+          <DatePicker disabled style={{ width: "100%" }} />
         </Form.Item>
         <Form.Item
           label="Shipment Date"

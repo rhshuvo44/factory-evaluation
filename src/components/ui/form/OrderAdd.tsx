@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import moment from "moment";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
-import { useCreateBuyerMutation } from "../../../redux/features/buyer/buyerApi";
+import { useCreateOrderMutation } from "../../../redux/features/order/orderApi";
 import { orderFields } from "../../../types";
 import { TOrderAdd } from "../../../types/tableType";
 import RenderFormItem from "../../form/RenderFormItem";
@@ -16,7 +16,7 @@ const OrderAdd = () => {
   const [style, setStyle] = useState<string>("");
   const [item, setItem] = useState<string>("");
 
-  const [createBuyerMutation] = useCreateBuyerMutation();
+  const [createOrderMutation] = useCreateOrderMutation();
 
   const calculateLeadTime = (
     orderDate: string | string[],
@@ -74,13 +74,13 @@ const OrderAdd = () => {
     if (values.shipmentDate) {
       values.shipmentDate = dayjs(values.shipmentDate).format("YYYY-MM-DD");
     }
-    const res = await createBuyerMutation({
+    const res = await createOrderMutation({
       ...values,
       orderNo,
       styleNo,
     }).unwrap();
     if (!res.success) return toast.error(res.message);
-    toast.success("Create Buyer successfully");
+    toast.success("Create Order successfully");
     form.resetFields();
   };
   return (

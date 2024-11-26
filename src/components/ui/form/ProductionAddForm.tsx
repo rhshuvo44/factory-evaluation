@@ -15,12 +15,12 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { userRole } from "../../../constants/userRole";
-import {
-  useGetAllBuyerOrderNoQuery,
-  useSingleBuyerQuery,
-} from "../../../redux/features/buyer/buyerApi";
 
 import { useCreateNotificationMutation } from "../../../redux/features/notification/notificationApi";
+import {
+  useGetAllOrderNoQuery,
+  useSingleOrderQuery,
+} from "../../../redux/features/order/orderApi";
 import { useCreateProductionMutation } from "../../../redux/features/productionReport/productionApi";
 import { useGetMeQuery } from "../../../redux/features/user/userApi";
 import { TProductionReport } from "../../../types";
@@ -41,9 +41,9 @@ const ProductionAddForm = () => {
   const { data: user } = useGetMeQuery(undefined);
   const queryParams = orderNo ? orderNo : undefined;
 
-  const { data: allOrderNo } = useGetAllBuyerOrderNoQuery("");
+  const { data: allOrderNo } = useGetAllOrderNoQuery("");
   const orders = allOrderNo?.data;
-  const { data, isLoading } = useSingleBuyerQuery(queryParams);
+  const { data, isLoading } = useSingleOrderQuery(queryParams);
   const result = data?.data;
   const [createNotificationMutation] = useCreateNotificationMutation();
   const [createProduction] = useCreateProductionMutation();
