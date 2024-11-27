@@ -302,8 +302,10 @@ const ProductionUpdate = () => {
                 <InputNumber style={{ width: "100%" }} disabled />
               </Form.Item>
             </Col>
-
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+          </Row>
+          <Divider />
+          <Row gutter={16}>
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 label="Required Fabric"
                 name="requiredFabric"
@@ -321,137 +323,7 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Form.Item
-                label="Cutting Required"
-                name="cuttingRequired"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please Input Cutting Required",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  disabled
-                  placeholder="Cutting Required"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Form.Item
-                label="Delivery To Print Remaining (Per Price)"
-                name="deliveryToPrintRemaining"
-                rules={[
-                  {
-                    required: true,
-                    message:
-                      "Please Input Delivery To Print Remaining (Per Price)",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  disabled
-                  placeholder="Delivery To Print Remaining (Per Price)"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Form.Item
-                label="Print Receivable"
-                name="printReceivable"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please Input Print Receivable",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  disabled
-                  placeholder="Print Receivable"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Form.Item
-                label="sewing Input Remaining "
-                name="sewingInputRemaining"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please sewing Input Remaining ",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  disabled
-                  placeholder="sewing Input Remaining"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Form.Item
-                label="sewing Output Remaining"
-                name="sewingOutputRemaining"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please sewing Output Remaining ",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  disabled
-                  placeholder="sewing Output Remaining"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Form.Item
-                label="Finishing Output Remaining "
-                name="finishingOutputRemaining"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please Finishing Output Remaining ",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  disabled
-                  placeholder="Finishing Output Remaining"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Form.Item
-                label="Packing Remaining "
-                name="packingRemaining"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please Packing Remaining ",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  disabled
-                  placeholder="Packing Remaining"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Divider />
-          <Row gutter={16}>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 label="Fabric In House (KG)"
                 name="fabricInHouse"
@@ -471,7 +343,25 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Cutting Required"
+                name="cuttingRequired"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Input Cutting Required",
+                  },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  disabled
+                  placeholder="Cutting Required"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 label="Cutting Completed (Per price)"
                 name="cuttingCompleted"
@@ -492,7 +382,26 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Delivery To Print Remaining (Per Price)"
+                name="deliveryToPrintRemaining"
+                rules={[
+                  {
+                    required: true,
+                    message:
+                      "Please Input Delivery To Print Remaining (Per Price)",
+                  },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  disabled
+                  placeholder="Delivery To Print Remaining (Per Price)"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 validateTrigger="onBlur"
                 label="Delivery To Print (Per Price)"
@@ -513,7 +422,25 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Print Receivable"
+                name="printReceivable"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Input Print Receivable",
+                  },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  disabled
+                  placeholder="Print Receivable"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 validateTrigger="onBlur"
                 label="Print Completed"
@@ -534,7 +461,25 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="sewing Input Remaining "
+                name="sewingInputRemaining"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please sewing Input Remaining ",
+                  },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  disabled
+                  placeholder="sewing Input Remaining"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 validateTrigger="onBlur"
                 label="sewing Input"
@@ -555,7 +500,25 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="sewing Output Remaining"
+                name="sewingOutputRemaining"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please sewing Output Remaining ",
+                  },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  disabled
+                  placeholder="sewing Output Remaining"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 validateTrigger="onBlur"
                 label="sewing Output "
@@ -576,7 +539,25 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Finishing Output Remaining "
+                name="finishingOutputRemaining"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Finishing Output Remaining ",
+                  },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  disabled
+                  placeholder="Finishing Output Remaining"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 validateTrigger="onBlur"
                 label="Finishing Output "
@@ -597,7 +578,26 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
+              <Form.Item
+                label="Packing Remaining "
+                name="packingRemaining"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Packing Remaining ",
+                  },
+                ]}
+              >
+                <InputNumber
+                  style={{ width: "100%" }}
+                  disabled
+                  placeholder="Packing Remaining"
+                />
+              </Form.Item>
+            </Col>
+
+            <Col span={24} md={{ span: 12 }}>
               <Form.Item
                 validateTrigger="onBlur"
                 label="Packing Completed "
@@ -643,7 +643,7 @@ const ProductionUpdate = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+            <Col span={24} md={{ span: 12 }}>
               <CustomInput
                 label="Remark"
                 name="remark"
