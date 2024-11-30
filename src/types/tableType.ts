@@ -175,8 +175,9 @@ export type TProductionReport = {
     styleNo: string
     description: string
     quantity: number
-    date: Date
-    shipmentDate: Date
+    date: string
+    orderDate: string
+    shipmentDate: string
     leadTime: string
     fabricConsumption: number
     totalFabric: number
@@ -278,7 +279,7 @@ export type TOrderAdd = {
     styleNo: string
     description: string
     quantity: number
-    date: string
+    orderDate: string
     shipmentDate: string
     leadTime: number
     fabricConsumption: number

@@ -4,13 +4,16 @@ import { toast } from "sonner";
 import { userRole } from "../../constants/userRole";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 
+import {
+  useDeleteOrderMutation,
+  useGetAllOrderQuery,
+} from "../../redux/features/order/orderApi";
 import { useAppSelector } from "../../redux/hook";
-import { buyerAddColums } from "../../types";
+import { orderColums } from "../../types";
 import { TBuyer } from "../../types/tableType";
 import { verifyToken } from "../../utils/verifyToken";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
-import { useDeleteOrderMutation, useGetAllOrderQuery } from "../../redux/features/order/orderApi";
 
 const OrderTable = () => {
   const token = useAppSelector(useCurrentToken);
@@ -44,7 +47,7 @@ const OrderTable = () => {
           className="table-auto"
           bordered
           columns={[
-            ...buyerAddColums,
+            ...orderColums,
             ...(user?.role === userRole.superAdmin ||
             user?.role === userRole.ADMIN ||
             user?.role === userRole.ExecutiveDirector

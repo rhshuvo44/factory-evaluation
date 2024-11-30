@@ -35,6 +35,12 @@ const productionApi = baseApi.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        orderNoProduction: builder.query({
+            query: (orderNo) => ({
+                url: `/production-report/orderNo/${orderNo}`,
+                method: 'GET',
+            }),
+        }),
         deletedProduction: builder.mutation({
             query: (id) => ({
                 url: `/production-report/${id}`, method: "DELETE"
@@ -47,4 +53,4 @@ const productionApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateProductionMutation, useGetAllProductionQuery, useDeletedProductionMutation, useSingleProductionQuery, useUpdateProductionMutation, useGetTodayProductionQuery } = productionApi;
+export const { useCreateProductionMutation, useGetAllProductionQuery, useDeletedProductionMutation, useSingleProductionQuery, useUpdateProductionMutation, useGetTodayProductionQuery, useOrderNoProductionQuery } = productionApi;

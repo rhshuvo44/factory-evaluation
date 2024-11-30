@@ -92,37 +92,46 @@ const ProductionUpdate = () => {
       });
     }
     const inHouseValue = inHouse || production?.fabricInHouse;
-    const requiredFabricCalculator =
-      production?.totalFabric - inHouseValue || production?.requiredFabric;
+    const requiredFabricCalculator = inHouse
+      ? production?.totalFabric - inHouseValue
+      : production?.requiredFabric;
     const cuttingCompletedValue =
       cuttingCompleted || production?.cuttingCompleted;
-    const cuttingRequiredCalculator =
-      production?.quantity - cuttingCompletedValue ||
-      production?.cuttingRequired;
+    const cuttingRequiredCalculator = cuttingCompletedValue
+      ? production?.quantity - cuttingCompletedValue
+      : production?.cuttingRequired;
     const deliveryToPrintValue = deliveryToPrint || production?.deliveryToPrint;
     const deliveryToPrintRemainingCalculator =
-      cuttingCompletedValue - deliveryToPrintValue ||
-      production?.deliveryToPrintRemaining;
+      cuttingCompletedValue || deliveryToPrintValue
+        ? cuttingCompletedValue - deliveryToPrintValue
+        : production?.deliveryToPrintRemaining;
     const printCompletedValue = printCompleted || production?.printCompleted;
     const printReceivableCalculator =
-      deliveryToPrintValue - printCompletedValue || production?.printReceivable;
+      deliveryToPrintValue || printCompletedValue
+        ? deliveryToPrintValue - printCompletedValue
+        : production?.printReceivable;
     const sewingInputValue = sewingInput || production?.sewingInput;
     const sewingInputRemainingCalculator =
-      printCompletedValue - sewingInputValue ||
-      production?.sewingInputRemaining;
+      printCompletedValue || sewingInputValue
+        ? printCompletedValue - sewingInputValue
+        : production?.sewingInputRemaining;
     const sewingOutputValue = sewingOutput || production?.sewingOutput;
     const sewingOutputRemainingCalculator =
-      sewingInputValue - sewingOutputValue || production?.sewingOutputRemaining;
+      sewingInputValue || sewingOutputValue
+        ? sewingInputValue - sewingOutputValue
+        : production?.sewingOutputRemaining;
 
     const finishingOutputValue = finishingOutput || production?.finishingOutput;
     const finishingOutputRemainingCalculator =
-      sewingOutputValue - finishingOutputValue ||
-      production?.finishingOutputRemaining;
+      sewingOutputValue || finishingOutputValue
+        ? sewingOutputValue - finishingOutputValue
+        : production?.finishingOutputRemaining;
     const packingCompletedValue =
       packingCompleted || production?.packingCompleted;
     const packingRemainingCalculator =
-      finishingOutputValue - packingCompletedValue ||
-      production?.packingRemaining;
+      finishingOutputValue || packingCompletedValue
+        ? finishingOutputValue - packingCompletedValue
+        : production?.packingRemaining;
 
     form.setFieldsValue({
       requiredFabric: requiredFabricCalculator,

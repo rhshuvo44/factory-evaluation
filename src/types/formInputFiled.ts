@@ -659,7 +659,7 @@ export const orderFields = [
 
   {
     label: "Order Date",
-    name: "date",
+    name: "orderDate",
     type: "DatePicker",
     props: {
       placeholder: "please input Order Date",
@@ -699,5 +699,239 @@ export const orderFields = [
       disabled: true,
     },
     type: "InputNumber",
+  },
+];
+export const productionReportDisableFields = [
+  {
+    label: "Buyer Name",
+    name: "buyer",
+    type: "Input",
+    props: {
+      placeholder: "please input Buyer Name",
+      disabled: true
+    },
+  },
+  {
+    label: "style No",
+    name: "styleNo",
+    type: "InputNumber",
+    props: {
+      placeholder: "please input styleNo",
+      disabled: true
+    },
+  },
+  {
+    label: "Description",
+    name: "description",
+    type: "TextArea",
+    props: {
+      placeholder: "please input Description",
+      disabled: true
+    },
+  },
+  {
+    label: "Order Quantity",
+    name: "quantity",
+    type: "InputNumber",
+    props: {
+      placeholder: "please input Order Quantity",
+      disabled: true
+    },
+  },
+  {
+    label: "Order Date",
+    name: "orderDate",
+    type: "DatePicker",
+    props: {
+      placeholder: "please input Order Date",
+      disabled: true
+    },
+  },
+  {
+    label: "Shipment Date",
+    name: "shipmentDate",
+    type: "DatePicker",
+    props: {
+      placeholder: "please input Shipment Date",
+      disabled: true
+    },
+  },
+  {
+    label: "Lead Time",
+    name: "leadTime",
+    type: "Input",
+    props: {
+      placeholder: "please input Lead Time",
+      disabled: true
+    },
+  },
+  {
+    label: "Fabric Consumption (KG)",
+    name: "fabricConsumption",
+    props: {
+      placeholder: "please input Fabric Consumption (KG)",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Total Fabric Required",
+    name: "totalFabric",
+    props: {
+      placeholder: "(fabricConsumption / 12) * quantity",
+      disabled: true,
+    },
+    type: "InputNumber",
+  },
+];
+export const productionReportFields = [
+  {
+    label: "Required Fabric",
+    name: "requiredFabric",
+    type: "InputNumber",
+    props: {
+      placeholder: "please input requiredFabric",
+      disabled: true
+    },
+  },
+  {
+    label: "fabric In House ",
+    name: "fabricInHouse",
+    type: "InputNumber",
+    props: {
+      placeholder: "please input fabricInHouse ",
+
+    },
+  },
+
+  {
+    label: "Cutting Required",
+    name: "cuttingRequired",
+    type: "InputNumber",
+    props: {
+      placeholder: "please input Cutting Required",
+      disabled: true
+    },
+  },
+  {
+    label: "Cutting Completed (Per price)",
+    name: "cuttingCompleted",
+    type: "InputNumber",
+    props: {
+      placeholder: "Cutting Completed (Per price)",
+
+    },
+  },
+  {
+    label: "Delivery To Print Remaining (Per Price)",
+    name: "deliveryToPrintRemaining",
+    type: "InputNumber",
+    props: {
+      placeholder: "Delivery To Print Remaining (Per Price)",
+      disabled: true
+    },
+  },
+  {
+    label: "Delivery To Print (Per Price)",
+    name: "deliveryToPrint",
+    type: "InputNumber",
+    props: {
+      placeholder: "Delivery To Print (Per Price)",
+
+    },
+  },
+  {
+    label: "Print Receivable",
+    name: "printReceivable",
+    type: "InputNumber",
+    props: {
+      placeholder: "print Receivable",
+      disabled: true
+    },
+  },
+  {
+    label: "Print Completed",
+    name: "printCompleted",
+    props: {
+      placeholder: "please input Print Completed",
+
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Sewing Input Remaining",
+    name: "sewingInputRemaining",
+    props: {
+      placeholder: "sewing Input Remaining",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Sewing Input",
+    name: "sewingInput",
+    props: {
+      placeholder: "please input sewing Input",
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Sewing Output Remaining",
+    name: "sewingOutputRemaining",
+    props: {
+      placeholder: "sewing Output Remaining",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Sewing Output",
+    name: "sewingOutput",
+    props: {
+      placeholder: "sewing Output",
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Finishing Output Remaining",
+    name: "finishingOutputRemaining",
+    props: {
+      placeholder: "finishing Output Remaining",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Finishing Output",
+    name: "finishingOutput",
+    props: {
+      placeholder: "Finishing Output",
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Packing Remaining",
+    name: "packingRemaining",
+    props: {
+      placeholder: "Packing Remaining",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Packing Completed",
+    name: "packingCompleted",
+    props: {
+      placeholder: "Packing Completed",
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Remark",
+    name: "remark",
+    props: {
+      placeholder: "Remark",
+    },
+    type: "Input",
   },
 ];

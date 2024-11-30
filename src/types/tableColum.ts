@@ -189,6 +189,11 @@ export const productionColums = [
         key: "styleNo",
     },
     {
+        title: "Order Date",
+        dataIndex: "orderDate",
+        key: "orderDate",
+    },
+    {
         title: "Shipment Date",
         dataIndex: "shipmentDate",
         key: "shipmentDate",
@@ -629,7 +634,7 @@ export const buyerColums = [
 
 
 
-export const buyerAddColums = [
+export const orderColums = [
     {
         title: "Order No",
         dataIndex: "orderNo",
@@ -637,9 +642,9 @@ export const buyerAddColums = [
     },
 
     {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
+        title: "Order Date",
+        dataIndex: "orderDate",
+        key: "orderDate",
     },
     {
         title: "Buyer",

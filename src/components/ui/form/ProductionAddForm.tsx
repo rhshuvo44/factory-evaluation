@@ -1,11 +1,8 @@
 import {
   Button,
   Col,
-  DatePicker,
   Divider,
   Form,
-  Input,
-  InputNumber,
   InputNumberProps,
   Row,
   Select,
@@ -16,82 +13,237 @@ import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
 import { userRole } from "../../../constants/userRole";
 
+import dayjs from "dayjs";
 import { useCreateNotificationMutation } from "../../../redux/features/notification/notificationApi";
 import {
   useGetAllOrderNoQuery,
   useSingleOrderQuery,
 } from "../../../redux/features/order/orderApi";
-import { useCreateProductionMutation } from "../../../redux/features/productionReport/productionApi";
+import {
+  useCreateProductionMutation,
+  useOrderNoProductionQuery,
+} from "../../../redux/features/productionReport/productionApi";
 import { useGetMeQuery } from "../../../redux/features/user/userApi";
-import { TProductionReport } from "../../../types";
-import CustomInput from "../../form/CustomInput";
+import {
+  productionReportDisableFields,
+  productionReportFields,
+  TProductionReport,
+} from "../../../types";
+import RenderFormItem from "../../form/RenderFormItem";
 import Loading from "../Loading";
 const ProductionAddForm = () => {
   const [form] = Form.useForm();
   const [orderNo, setOrderNo] = useState<string>();
-  const [inHouse, setInHouse] = useState<number>(0);
-  const [cuttingCompleted, setCuttingCompleted] = useState<number>(0);
-  const [printCompleted, setPrintCompleted] = useState<number>(0);
-  const [deliveryToPrint, setDeliveryToPrint] = useState<number>(0);
-  const [sewingInput, setSewingInput] = useState<number>(0);
-  const [sewingOutput, setSewingOutput] = useState<number>(0);
-  const [finishingOutput, setFinishingOutput] = useState<number>(0);
-  const [packingCompleted, setPackingCompleted] = useState<number>(0);
+  // const [inHouse, setInHouse] = useState<number>(0);
+  // const [cuttingCompleted, setCuttingCompleted] = useState<number>(0);
+  // const [printCompleted, setPrintCompleted] = useState<number>(0);
+  // const [deliveryToPrint, setDeliveryToPrint] = useState<number>(0);
+  // const [sewingInput, setSewingInput] = useState<number>(0);
+  // const [sewingOutput, setSewingOutput] = useState<number>(0);
+  // const [finishingOutput, setFinishingOutput] = useState<number>(0);
+  // const [packingCompleted, setPackingCompleted] = useState<number>(0);
 
   const { data: user } = useGetMeQuery(undefined);
   const queryParams = orderNo ? orderNo : undefined;
 
   const { data: allOrderNo } = useGetAllOrderNoQuery("");
   const orders = allOrderNo?.data;
-  const { data, isLoading } = useSingleOrderQuery(queryParams);
-  const result = data?.data;
+  const { data: productionReport, isLoading: productionLoading } =
+    useOrderNoProductionQuery(queryParams);
+  const { data, isLoading } = useSingleOrderQuery(queryParams, {
+    // enabled: productionReport?.data === undefined,
+  });
+
+  const result = productionReport?.data ?? data?.data;
+
   const [createNotificationMutation] = useCreateNotificationMutation();
   const [createProduction] = useCreateProductionMutation();
 
   const orderNoChangeHandler: InputNumberProps["onChange"] = (values) => {
     setOrderNo(values as string);
   };
-  const inHouseChangeHandler: InputNumberProps["onChange"] = (values) => {
-    setInHouse(values as number);
-  };
-  const cuttingCompletedChangeHandler: InputNumberProps["onChange"] = (
-    values
+  // const inHouseChangeHandler: InputNumberProps["onChange"] = (values) => {
+  //   setInHouse(values as number);
+  // };
+  // const cuttingCompletedChangeHandler: InputNumberProps["onChange"] = (
+  //   values
+  // ) => {
+  //   setCuttingCompleted(values as number);
+  // };
+  // const printCompletedChangeHandler: InputNumberProps["onChange"] = (
+  //   values
+  // ) => {
+  //   setPrintCompleted(values as number);
+  // };
+  // const deliveryToPrintChangeHandler: InputNumberProps["onChange"] = (
+  //   values
+  // ) => {
+  //   setDeliveryToPrint(values as number);
+  // };
+  // const sewingInputChangeHandler: InputNumberProps["onChange"] = (values) => {
+  //   setSewingInput(values as number);
+  // };
+  // const sewingOutputChangeHandler: InputNumberProps["onChange"] = (values) => {
+  //   setSewingOutput(values as number);
+  // };
+  // const finishingOutputChangeHandler: InputNumberProps["onChange"] = (
+  //   values
+  // ) => {
+  //   setFinishingOutput(values as number);
+  // };
+  // const packingCompletedChangeHandler: InputNumberProps["onChange"] = (
+  //   values
+  // ) => {
+  //   setPackingCompleted(values as number);
+  // };
+  const handleValuesChange = (
+    _: TProductionReport,
+    allValues: TProductionReport
   ) => {
-    setCuttingCompleted(values as number);
-  };
-  const printCompletedChangeHandler: InputNumberProps["onChange"] = (
-    values
-  ) => {
-    setPrintCompleted(values as number);
-  };
-  const deliveryToPrintChangeHandler: InputNumberProps["onChange"] = (
-    values
-  ) => {
-    setDeliveryToPrint(values as number);
-  };
-  const sewingInputChangeHandler: InputNumberProps["onChange"] = (values) => {
-    setSewingInput(values as number);
-  };
-  const sewingOutputChangeHandler: InputNumberProps["onChange"] = (values) => {
-    setSewingOutput(values as number);
-  };
-  const finishingOutputChangeHandler: InputNumberProps["onChange"] = (
-    values
-  ) => {
-    setFinishingOutput(values as number);
-  };
-  const packingCompletedChangeHandler: InputNumberProps["onChange"] = (
-    values
-  ) => {
-    setPackingCompleted(values as number);
-  };
+    const {
+      fabricInHouse,
+      cuttingCompleted,
+      deliveryToPrint,
+      printCompleted,
+      sewingInput,
+      sewingOutput,
+      finishingOutput,
+      packingCompleted,
+    } = allValues;
 
+    if (result?.totalFabric && fabricInHouse) {
+      const requiredFabric = result?.totalFabric - fabricInHouse;
+      form.setFieldsValue({
+        // Enforce min = 0 for requiredFabric
+        requiredFabric: Math.max(0, requiredFabric),
+        // Clamp fabricInHouse between 0 and totalFabric
+        fabricInHouse: Math.max(
+          0,
+          Math.min(fabricInHouse, result?.totalFabric)
+        ),
+      });
+    } else {
+      form.setFieldsValue({
+        requiredFabric: 0,
+      });
+    }
+    // cuttingRequired: result?.quantity - cuttingCompleted,
+
+    if (result?.quantity && cuttingCompleted) {
+      const cuttingRequired = result?.quantity - cuttingCompleted;
+      form.setFieldsValue({
+        // Enforce min = 0 for requiredFabric
+        cuttingRequired: Math.max(0, cuttingRequired),
+        // Clamp fabricInHouse between 0 and totalFabric
+        cuttingCompleted: Math.max(
+          0,
+          Math.min(cuttingCompleted, result?.quantity)
+        ),
+      });
+    } else {
+      form.setFieldsValue({
+        cuttingRequired: 0,
+      });
+    }
+    // deliveryToPrintRemaining: cuttingCompleted - deliveryToPrint,
+
+    if (deliveryToPrint && cuttingCompleted) {
+      const deliveryToPrintRemaining = cuttingCompleted - deliveryToPrint;
+      form.setFieldsValue({
+        // Enforce min = 0 for requiredFabric
+        deliveryToPrintRemaining: Math.max(0, deliveryToPrintRemaining),
+        // Clamp fabricInHouse between 0 and totalFabric
+        deliveryToPrint: Math.max(
+          0,
+          Math.min(deliveryToPrint, cuttingCompleted)
+        ),
+      });
+    } else {
+      form.setFieldsValue({
+        deliveryToPrintRemaining: 0,
+      });
+    }
+    // printReceivable: deliveryToPrint - printCompleted,
+
+    if (deliveryToPrint && printCompleted) {
+      const printReceivable = deliveryToPrint - printCompleted;
+      form.setFieldsValue({
+        // Enforce min = 0 for requiredFabric
+        printReceivable: Math.max(0, printReceivable),
+        // Clamp fabricInHouse between 0 and totalFabric
+        printCompleted: Math.max(0, Math.min(printCompleted, deliveryToPrint)),
+      });
+    } else {
+      form.setFieldsValue({
+        printReceivable: 0,
+      });
+    }
+    // sewingInputRemaining: printCompleted - sewingInput,
+    if (printCompleted && sewingInput) {
+      const sewingInputRemaining = printCompleted - sewingInput;
+      form.setFieldsValue({
+        // Enforce min = 0 for requiredFabric
+        sewingInputRemaining: Math.max(0, sewingInputRemaining),
+        // Clamp fabricInHouse between 0 and totalFabric
+        sewingInput: Math.max(0, Math.min(sewingInput, printCompleted)),
+      });
+    } else {
+      form.setFieldsValue({
+        sewingInputRemaining: 0,
+      });
+    }
+    // sewingOutputRemaining: sewingInput - sewingOutput,
+    if (sewingInput && sewingOutput) {
+      const sewingOutputRemaining = sewingInput - sewingOutput;
+      form.setFieldsValue({
+        // Enforce min = 0 for requiredFabric
+        sewingOutputRemaining: Math.max(0, sewingOutputRemaining),
+        // Clamp fabricInHouse between 0 and totalFabric
+        sewingOutput: Math.max(0, Math.min(sewingOutput, sewingInput)),
+      });
+    } else {
+      form.setFieldsValue({
+        sewingOutputRemaining: 0,
+      });
+    }
+    // finishingOutputRemaining: sewingOutput - finishingOutput,
+    if (sewingOutput && finishingOutput) {
+      const finishingOutputRemaining = sewingOutput - finishingOutput;
+      form.setFieldsValue({
+        // Enforce min = 0 for requiredFabric
+        finishingOutputRemaining: Math.max(0, finishingOutputRemaining),
+        // Clamp fabricInHouse between 0 and totalFabric
+        finishingOutput: Math.max(0, Math.min(finishingOutput, sewingOutput)),
+      });
+    } else {
+      form.setFieldsValue({
+        finishingOutputRemaining: 0,
+      });
+    }
+    // packingRemaining: finishingOutput - packingCompleted,
+    if (finishingOutput && packingCompleted) {
+      const packingRemaining = finishingOutput - packingCompleted;
+      form.setFieldsValue({
+        // Enforce min = 0 for requiredFabric
+        packingRemaining: Math.max(0, packingRemaining),
+        // Clamp fabricInHouse between 0 and totalFabric
+        packingCompleted: Math.max(
+          0,
+          Math.min(packingCompleted, finishingOutput)
+        ),
+      });
+    } else {
+      form.setFieldsValue({
+        packingRemaining: 0,
+      });
+    }
+  };
   useEffect(() => {
     if (result) {
       form.setFieldsValue({
         buyer: result?.buyer,
         description: result?.description,
-        date: result?.date ? moment(result?.date) : undefined,
+        orderDate: result?.orderDate ? moment(result?.orderDate) : undefined,
         orderNo: result?.orderNo,
         quantity: result?.quantity,
         styleNo: result?.styleNo,
@@ -100,35 +252,38 @@ const ProductionAddForm = () => {
           : undefined,
         leadTime: result?.leadTime,
         fabricConsumption: result?.fabricConsumption,
+        finishingOutput: result?.finishingOutput,
         totalFabric: result?.totalFabric,
+        fabricInHouse: result?.fabricInHouse,
+        cuttingCompleted: result?.cuttingCompleted,
+        cuttingRequired: result?.cuttingRequired,
+        printCompleted: result?.printCompleted,
+        deliveryToPrint: result?.deliveryToPrint,
+        deliveryToPrintRemaining: result?.deliveryToPrintRemaining,
+        sewingInput: result?.sewingInput,
+        finishingOutputRemaining: result?.finishingOutputRemaining,
+        packingCompleted: result?.packingCompleted,
+        packingRemaining: result?.packingRemaining,
+        printReceivable: result?.printReceivable,
+        requiredFabric: result?.requiredFabric,
+        sewingInputRemaining: result?.sewingInputRemaining,
+        sewingOutput: result?.sewingOutput,
+        sewingOutputRemaining: result?.sewingOutputRemaining,
+        remark: result?.remark,
       });
     }
-    form.setFieldsValue({
-      requiredFabric: result?.totalFabric - inHouse,
-      cuttingRequired: result?.quantity - cuttingCompleted,
-      deliveryToPrintRemaining: cuttingCompleted - deliveryToPrint,
-      printReceivable: deliveryToPrint - printCompleted,
-      sewingInputRemaining: printCompleted - sewingInput,
-      sewingOutputRemaining: sewingInput - sewingOutput,
-      finishingOutputRemaining: sewingOutput - finishingOutput,
-      packingRemaining: finishingOutput - packingCompleted,
-    });
-  }, [
-    form,
-    result,
-    inHouse,
-    cuttingCompleted,
-    deliveryToPrint,
-    printCompleted,
-    sewingInput,
-    sewingOutput,
-    finishingOutput,
-    packingCompleted,
-  ]);
+  }, [form, result]);
 
   const onFinish = async (values: TProductionReport) => {
-    const res = await createProduction(values).unwrap();
-    console.log(res);
+    const date = new Date().toLocaleDateString();
+    if (values.orderDate) {
+      values.orderDate = dayjs(values.orderDate).format("YYYY-MM-DD");
+    }
+    if (values.shipmentDate) {
+      values.shipmentDate = dayjs(values.shipmentDate).format("YYYY-MM-DD");
+    }
+    const res = await createProduction({ ...values, date }).unwrap();
+
     if (!res.success) return toast.error(res.message);
     toast.success("Create Production Report successfully");
     form.resetFields();
@@ -150,6 +305,7 @@ const ProductionAddForm = () => {
           form={form}
           layout="vertical"
           // initialValues={initialValues}
+          onValuesChange={handleValuesChange}
         >
           <Row gutter={[16, 16]}>
             <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
@@ -175,12 +331,12 @@ const ProductionAddForm = () => {
             </Col>
           </Row>
           <Divider />
-          {isLoading ? (
+          {isLoading || productionLoading ? (
             <Loading />
           ) : result ? (
             <>
               <Row gutter={16}>
-                <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
+                {/* <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
                   <Form.Item
                     label="Buyer Name"
                     name="buyer"
@@ -287,11 +443,21 @@ const ProductionAddForm = () => {
                   <Form.Item label="Total Fabric Required" name="totalFabric">
                     <InputNumber style={{ width: "100%" }} disabled />
                   </Form.Item>
-                </Col>
+                </Col> */}
+                {productionReportDisableFields?.map((field, index) => (
+                  <Col span={24} md={{ span: 8 }} lg={{ span: 6 }} key={index}>
+                    {RenderFormItem(field)}
+                  </Col>
+                ))}
               </Row>
               <Divider />
               <Row gutter={16}>
-                <Col span={24} md={{ span: 12 }}>
+                {productionReportFields?.map((field, index) => (
+                  <Col span={24} md={{ span: 12 }} key={index}>
+                    {RenderFormItem(field)}
+                  </Col>
+                ))}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="Required Fabric"
                     name="requiredFabric"
@@ -324,12 +490,13 @@ const ProductionAddForm = () => {
                     <InputNumber
                       onChange={inHouseChangeHandler}
                       min={0}
+                      max={result?.totalFabric}
                       style={{ width: "100%" }}
                       placeholder="please input Fabric In House (KG)"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="Cutting Required"
                     name="cuttingRequired"
@@ -346,8 +513,8 @@ const ProductionAddForm = () => {
                       placeholder="Cutting Required"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="Cutting Completed (Per price)"
                     name="cuttingCompleted"
@@ -367,8 +534,8 @@ const ProductionAddForm = () => {
                       placeholder="Cutting Completed (Per price)"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="Delivery To Print Remaining (Per Price)"
                     name="deliveryToPrintRemaining"
@@ -386,8 +553,8 @@ const ProductionAddForm = () => {
                       placeholder="Delivery To Print Remaining (Per Price)"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     validateTrigger="onBlur"
                     label="Delivery To Print (Per Price)"
@@ -407,8 +574,8 @@ const ProductionAddForm = () => {
                       placeholder="Delivery To Print (Per Price)"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="Print Receivable"
                     name="printReceivable"
@@ -425,8 +592,8 @@ const ProductionAddForm = () => {
                       placeholder="Print Receivable"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     validateTrigger="onBlur"
                     label="Print Completed"
@@ -446,8 +613,8 @@ const ProductionAddForm = () => {
                       placeholder="Print Completed"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="sewing Input Remaining "
                     name="sewingInputRemaining"
@@ -464,8 +631,8 @@ const ProductionAddForm = () => {
                       placeholder="sewing Input Remaining"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     validateTrigger="onBlur"
                     label="sewing Input"
@@ -485,8 +652,8 @@ const ProductionAddForm = () => {
                       placeholder="sewing Input"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="sewing Output Remaining"
                     name="sewingOutputRemaining"
@@ -524,8 +691,8 @@ const ProductionAddForm = () => {
                       placeholder="sewing Output"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="Finishing Output Remaining "
                     name="finishingOutputRemaining"
@@ -563,8 +730,8 @@ const ProductionAddForm = () => {
                       placeholder="Finishing Output"
                     />
                   </Form.Item>
-                </Col>
-                <Col span={24} md={{ span: 12 }}>
+                </Col> */}
+                {/* <Col span={24} md={{ span: 12 }}>
                   <Form.Item
                     label="Packing Remaining "
                     name="packingRemaining"
@@ -638,7 +805,7 @@ const ProductionAddForm = () => {
                     placeholder="Remarks"
                     message="Please Enter Remarks"
                   />
-                </Col>
+                </Col> */}
               </Row>
 
               <Form.Item wrapperCol={{ offset: 6, span: 16 }}>

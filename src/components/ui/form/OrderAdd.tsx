@@ -32,7 +32,7 @@ const OrderAdd = () => {
   };
 
   const handleValuesChange = (_: TOrderAdd, allValues: TOrderAdd) => {
-    const { fabricConsumption, quantity, date, shipmentDate } = allValues;
+    const { fabricConsumption, quantity, orderDate, shipmentDate } = allValues;
 
     // Calculate totalPrice if both unit and unitPrice are present
     if (fabricConsumption && quantity) {
@@ -48,8 +48,8 @@ const OrderAdd = () => {
     }
 
     // Calculate leadTime
-    if (date && shipmentDate) {
-      const startDate = dayjs(date).format("YYYY-MM-DD");
+    if (orderDate && shipmentDate) {
+      const startDate = dayjs(orderDate).format("YYYY-MM-DD");
       const endDate = dayjs(shipmentDate).format("YYYY-MM-DD");
       calculateLeadTime(startDate, endDate);
     }
@@ -68,8 +68,8 @@ const OrderAdd = () => {
       styleNo = style + item + values.styleNo;
     }
     const orderNo = "sta-" + values.orderNo;
-    if (values.date) {
-      values.date = dayjs(values.date).format("YYYY-MM-DD");
+    if (values.orderDate) {
+      values.orderDate = dayjs(values.orderDate).format("YYYY-MM-DD");
     }
     if (values.shipmentDate) {
       values.shipmentDate = dayjs(values.shipmentDate).format("YYYY-MM-DD");
@@ -163,95 +163,6 @@ const OrderAdd = () => {
                 {RenderFormItem(field)}
               </Col>
             ))}
-
-            {/* <Row gutter={10}>
-            
-            <Col span={24} md={{ span: 8 }}>
-              <CustomInput
-                label="Buyer"
-                name="buyer"
-                message="Please input! Buyer"
-                placeholder="please input Buyer"
-              />
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <CustomTextArea
-                label="Description"
-                name="description"
-                message="Please input! Description"
-                placeholder="please input description"
-              />
-            </Col>
-           
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item
-                label="Order Quantity"
-                name="quantity"
-                rules={[
-                  { required: true, message: "Please input! Order Quantity" },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  min={0}
-                  onChange={onChangeQuantity}
-                  placeholder="please input Order Quantity number"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item
-                label="Order place Date"
-                name="date"
-                rules={[{ required: true, message: "Please input! Date" }]}
-              >
-                <DatePicker
-                  onChange={onChangeDate}
-                  style={{ width: "100%" }}
-                  disabledDate={disableDates}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item
-                label="Shipment Date"
-                name="shipmentDate"
-                rules={[
-                  { required: true, message: "Please input! shipment Date" },
-                ]}
-              >
-                <DatePicker
-                  onChange={onChangeShipmentDate}
-                  style={{ width: "100%" }}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item label="Lead Time" name="leadTime">
-                <Input style={{ width: "100%" }} disabled />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item
-                label="Fabric Consumption (KG)"
-                name="fabricConsumption"
-                rules={[{ required: true, message: "Please Input Unit! " }]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  min={0}
-                  onChange={onChangeFabricConsumption}
-                  placeholder="please input unit number"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item label="Total Fabric Required" name="totalFabric">
-                <InputNumber style={{ width: "100%" }} disabled />
-              </Form.Item>
-            </Col>
-          </Row> */}
-
             <Col span={24}>
               <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
                 <Button type="primary" htmlType="submit">
