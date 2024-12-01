@@ -934,4 +934,13 @@ export const productionReportFields = [
     },
     type: "Input",
   },
+  {
+    label: "Date",
+    name: "date",
+    type: "DatePicker",
+    props: {
+      placeholder: "please input  Date",
+      disabledDate: getDisabledDates(30),
+    },
+  },
 ];
