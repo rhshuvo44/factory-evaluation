@@ -30,7 +30,7 @@ const ProductionTable = () => {
   };
 
   const { data, isError, isLoading } = useGetAllProductionQuery(undefined);
-
+console.log(data);
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {isError}</div>;
   return (
