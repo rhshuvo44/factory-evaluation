@@ -285,3 +285,69 @@ export type TOrderAdd = {
     fabricConsumption: number
     totalFabric: number
 }
+export type TDashboardProductionReport = {
+    date: string
+    cuttingCompleted: number
+    printCompleted: number
+    sewingOutput: number
+    finishingOutput: number
+    packingCompleted: number
+}
+
+export type TOutput = {
+    _id?: string;
+    date: string
+    cuttingCompleted: number
+    sewingOutput: number
+    finishingOutput: number
+    packingCompleted: number
+}
+
+
+export const DashboardProductionColumns = [
+    {
+        title: "Date",
+        dataIndex: "date",
+        key: "date",
+    },
+    {
+        title: "Order No",
+        dataIndex: "orderNo",
+        key: "orderNo",
+    },
+    {
+        title: "Style No",
+        dataIndex: "styleNo",
+        key: "styleNo",
+    },
+    {
+        title: "Quantity",
+        dataIndex: "quantity",
+        key: "quantity",
+    },
+    {
+        title: "Cutting Completed",
+        dataIndex: "cuttingCompleted",
+        key: "cuttingCompleted",
+    },
+    {
+        title: "Print Completed",
+        dataIndex: "printCompleted",
+        key: "printCompleted",
+    },
+    {
+        title: "Sewing Output",
+        dataIndex: "sewingOutput",
+        key: "sewingOutput",
+    },
+    {
+        title: "Finishing Output",
+        dataIndex: "finishingOutput",
+        key: "finishingOutput",
+    },
+    {
+        title: "Packing Completed",
+        dataIndex: "packingCompleted",
+        key: "packingCompleted",
+    },
+];

@@ -11,10 +11,8 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { formItemLayout } from "../../../constants/formItemLayout";
-import { userRole } from "../../../constants/userRole";
 
 import dayjs from "dayjs";
-import { useCreateNotificationMutation } from "../../../redux/features/notification/notificationApi";
 import {
   useGetAllOrderNoQuery,
   useSingleOrderQuery,
@@ -23,7 +21,6 @@ import {
   useCreateProductionMutation,
   useOrderNoProductionQuery,
 } from "../../../redux/features/productionReport/productionApi";
-import { useGetMeQuery } from "../../../redux/features/user/userApi";
 import {
   productionReportDisableFields,
   productionReportFields,
@@ -35,7 +32,7 @@ const ProductionAddForm = () => {
   const [form] = Form.useForm();
   const [orderNo, setOrderNo] = useState<string>();
 
-  const { data: user } = useGetMeQuery(undefined);
+  // const { data: user } = useGetMeQuery(undefined);
   const queryParams = orderNo ? orderNo : undefined;
 
   const { data: allOrderNo } = useGetAllOrderNoQuery("");
@@ -48,7 +45,7 @@ const ProductionAddForm = () => {
 
   const result = productionReport?.data ?? data?.data;
 
-  const [createNotificationMutation] = useCreateNotificationMutation();
+  // const [createNotificationMutation] = useCreateNotificationMutation();
   const [createProduction] = useCreateProductionMutation();
 
   const orderNoChangeHandler: InputNumberProps["onChange"] = (values) => {
@@ -248,15 +245,15 @@ const ProductionAddForm = () => {
 
     if (!res.success) return toast.error(res.message);
     toast.success("Create Production Report successfully");
-    form.resetFields();
+    // form.resetFields();
     // Check if user role is admin before creating a notification
-    if (user?.data?.role === userRole.Coordinator) {
-      const notify = {
-        message: `New production Report Generate created by ${user?.data?.name}`,
-        date: moment(),
-      };
-      await createNotificationMutation(notify);
-    }
+    // if (user?.data?.role === userRole.Coordinator) {
+    //   const notify = {
+    //     message: `New production Report Generate created by ${user?.data?.name}`,
+    //     date: moment(),
+    //   };
+    //   await createNotificationMutation(notify);
+    // }
   };
   return (
     <Row justify="center">

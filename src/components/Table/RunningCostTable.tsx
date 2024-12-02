@@ -15,9 +15,11 @@ import { useGetTodayUtilityQuery } from "../../redux/features/utility/utilityApi
 import { useAppSelector } from "../../redux/hook";
 import { runningColums, TFixed, TUtility } from "../../types";
 import { verifyToken } from "../../utils/verifyToken";
+import DashboardProductionForm from "../ui/form/DashboardProductionForm";
 import ReportForm from "../ui/form/ReportForm";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
+import DashboardProductionTable from "./DashboardProductionTable";
 import EvaluationTable from "./EvaluationTable";
 
 const RunningCostTable = () => {
@@ -263,6 +265,12 @@ const RunningCostTable = () => {
           runningCost={roundCost}
           date={queryParams.date?.toString()}
         />
+      ) : null}
+      <DashboardProductionTable date={queryParams.date?.toString()} />
+      {user?.role === userRole.superAdmin ||
+      user?.role === userRole.ADMIN ||
+      user?.role === userRole.Coordinator ? (
+        <DashboardProductionForm date={queryParams.date?.toString()} />
       ) : null}
     </>
   );
