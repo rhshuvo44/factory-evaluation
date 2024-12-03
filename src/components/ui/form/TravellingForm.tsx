@@ -13,7 +13,6 @@ const TravellingForm = () => {
 
   const handleValuesChange = (_: TTravel, allValues: TTravel) => {
     const { unit, unitPrice } = allValues;
-
     // Calculate totalPrice if both unit and unitPrice are present
     if (unit && unitPrice) {
       form.setFieldsValue({

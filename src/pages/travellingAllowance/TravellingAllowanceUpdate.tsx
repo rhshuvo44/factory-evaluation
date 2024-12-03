@@ -1,27 +1,16 @@
-import {
-  Button,
-  Col,
-  Form,
-  InputNumber,
-  InputNumberProps,
-  Row,
-  Select,
-} from "antd";
-import { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "antd";
+import dayjs from "dayjs";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import CustomInput from "../../components/form/CustomInput";
-import CustomInputNumber from "../../components/form/CustomInputNumber";
-import CustomTextArea from "../../components/form/CustomTextArea";
+import RenderFormItem from "../../components/form/RenderFormItem";
 import Loading from "../../components/ui/Loading";
 import SectionTitle from "../../components/ui/SectionTitle";
 import { formItemLayout } from "../../constants/formItemLayout";
-import { paymentOptions } from "../../constants/Options";
 import {
   useSingleTravellingQuery,
   useUpdateTravellingMutation,
 } from "../../redux/features/travelling/travellingApi";
-import { TTravel } from "../../types";
+import { travellingFields, TTravel } from "../../types";
 
 const TravellingAllowanceUpdate = () => {
   const [form] = Form.useForm();
@@ -31,33 +20,32 @@ const TravellingAllowanceUpdate = () => {
   const { data, isLoading } = useSingleTravellingQuery(id);
   const [updateTravelling] = useUpdateTravellingMutation();
   const result = data?.data;
-  const [unit, setUnit] = useState<number>(result?.unit);
-  const [unitPrice, setUnitPrice] = useState<number>(result?.unitPrice);
 
-  const onChangeUnit: InputNumberProps["onChange"] = (values) => {
-    setUnit(values as number);
+  const handleValuesChange = (_: TTravel, allValues: TTravel) => {
+    const { unit, unitPrice } = allValues;
+
+    // Calculate totalPrice if both unit and unitPrice are present
+    if (unit && unitPrice) {
+      form.setFieldsValue({
+        totalPrice: unit * unitPrice,
+      });
+    } else {
+      form.setFieldsValue({
+        totalPrice: 0,
+      });
+    }
   };
-  const onChangeUnitPrice: InputNumberProps["onChange"] = (values) => {
-    setUnitPrice(values as number);
-  };
-  useEffect(() => {
-    const unitValue = unit || result?.unit;
-    const unitPriceValue = unitPrice || result?.unitPrice;
-    const calculatedAmount =
-      unit || unitPrice ? unitValue * unitPriceValue : result?.totalPrice;
-    form.setFieldsValue({
-      totalPrice: calculatedAmount,
-    });
-  }, [unit, unitPrice, form, result]);
   const initialValues = {
     buyerId: result?.buyerId,
     description: result?.description,
     orderNo: result?.orderNo,
     particulars: result?.particulars,
     payTo: result?.payTo,
+    memoNo: result?.memoNo,
     paymentType: result?.paymentType,
     remark: result?.remark,
     unit: result?.unit,
+    date: result?.date ? dayjs(result?.date) : undefined,
     unitPrice: result?.unitPrice,
     totalPrice: result?.totalPrice,
   };
@@ -77,7 +65,7 @@ const TravellingAllowanceUpdate = () => {
   };
   return (
     <Row justify="center">
-        <SectionTitle title="Travelling Allowance Update" />
+      <SectionTitle title="Travelling Allowance Update" />
       <Col span={24}>
         <Form
           layout="vertical"
@@ -86,94 +74,14 @@ const TravellingAllowanceUpdate = () => {
           {...formItemLayout}
           onFinish={onFinish}
           initialValues={initialValues}
+          onValuesChange={handleValuesChange}
         >
-          <Row gutter={16}>
-            <Col span={24} md={{ span: 8 }}>
-              <CustomInput
-                label="Particulars"
-                name="particulars"
-                message="Please input! Particulars"
-              />
-            </Col>
-            <Col span={24} md={{ span: 16 }}>
-              <CustomTextArea
-                label="Description"
-                name="description"
-                message="Please input! Description"
-              />
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <CustomInput
-                label="Remark"
-                name="remark"
-                message="Please input! Remark"
-              />
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <CustomInputNumber
-                label="Buyer ID"
-                name="buyerId"
-                message="Please input! Buyer ID"
-              />
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <CustomInputNumber
-                label="Order No"
-                name="orderNo"
-                message="Please input! Order No"
-              />
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <CustomInput
-                label="Pay to"
-                name="payTo"
-                message="Please input! Pay to"
-              />
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item
-                label="Payment Type"
-                name="paymentType"
-                rules={[
-                  { required: true, message: "Please select Payment Type! " },
-                ]}
-              >
-                <Select style={{ width: "100%" }} options={paymentOptions} />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item
-                label="Unit"
-                name="unit"
-                rules={[{ required: true, message: "Please Input Unit! " }]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  min={0}
-                  onChange={onChangeUnit}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item
-                label="Unit Price"
-                name="unitPrice"
-                rules={[
-                  { required: true, message: "Please Input Unit Price! " },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  min={0}
-                  onChange={onChangeUnitPrice}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24} md={{ span: 8 }}>
-              <Form.Item label="Total Price" name="totalPrice">
-                <InputNumber style={{ width: "100%" }} disabled />
-              </Form.Item>
-            </Col>
+          <Row gutter={10}>
+            {travellingFields?.map((field, index) => (
+              <Col xs={24} md={8} key={index}>
+                {RenderFormItem(field)}
+              </Col>
+            ))}
           </Row>
           <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
             <Button type="primary" htmlType="submit">

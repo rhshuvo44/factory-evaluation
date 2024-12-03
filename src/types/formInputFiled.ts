@@ -133,7 +133,7 @@ export const travellingFields = [
       placeholder: "please input Remark",
     },
   },
- 
+
   {
     label: "Buyer ID",
     name: "buyerId",
@@ -236,14 +236,6 @@ export const miscellaneousFields = [
     type: "Input",
     props: {
       placeholder: "please input Remark",
-    },
-  },
-  {
-    label: "Quantity",
-    name: "quantity",
-    type: "InputNumber",
-    props: {
-      placeholder: "please input Quantity",
     },
   },
   {

@@ -24,6 +24,22 @@ const MiscellaneousAdd = () => {
       });
     }
   };
+  const onFill = () => {
+    form.setFieldsValue({
+      date: dayjs(),
+      particulars: "no cost",
+      description: "no cost",
+      remark: "no cost",
+      buyerId: 0,
+      orderNo: 0,
+      memoNo: 0,
+      payTo: "no cost",
+      paymentType: "Once",
+      unit: 0,
+      unitPrice: 0,
+      totalPrice: 0,
+    });
+  };
   const onFinish = async (values: TMiscellaneous) => {
     if (values.date) {
       values.date = dayjs(values.date).format("YYYY-MM-DD");
@@ -50,11 +66,22 @@ const MiscellaneousAdd = () => {
               </Col>
             ))}
             <Col span={24}>
-              <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item>
+              <Row>
+                <Col>
+                  <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+                    <Button type="primary" htmlType="submit">
+                      Submit
+                    </Button>
+                  </Form.Item>
+                </Col>
+                <Col>
+                  <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+                    <Button type="primary" htmlType="submit" onClick={onFill}>
+                      No Cost For Today
+                    </Button>
+                  </Form.Item>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Form>

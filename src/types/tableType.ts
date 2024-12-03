@@ -12,7 +12,8 @@ type TParticulars = 'Commission'
     | 'Rental Machine Bill'
     | 'Sample Development cost'
     | 'Night Bill (STF)'
-    | 'Night Bill (WRK)';
+    | 'Night Bill (WRK)'
+    | 'no cost'
 export type TSubUtility = {
     unitPrice: number;
     totalPrice: number;
