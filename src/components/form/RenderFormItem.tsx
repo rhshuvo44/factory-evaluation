@@ -1,6 +1,5 @@
 import { DatePicker, Form, Input, InputNumber, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import dayjs from "dayjs";
 
 const RenderFormItem = (field: any) => {
   switch (field.type) {
@@ -51,7 +50,7 @@ const RenderFormItem = (field: any) => {
           name={field.name}
           rules={[{ required: true, message: `${field.label} is required` }]}
         >
-          <DatePicker  {...field.props} style={{ width: "100%" }} />
+          <DatePicker {...field.props} style={{ width: "100%" }} />
         </Form.Item>
       );
     default:
