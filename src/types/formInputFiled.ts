@@ -785,6 +785,15 @@ export const productionReportFields = [
     type: "InputNumber",
     props: {
       placeholder: "please input fabricInHouse ",
+      disabled: true
+    },
+  },
+  {
+    label: "fabric In House ",
+    name: "todayFabricInHouse",
+    type: "InputNumber",
+    props: {
+      placeholder: "please input fabricInHouse ",
 
     },
   },
@@ -801,6 +810,15 @@ export const productionReportFields = [
   {
     label: "Cutting Completed (Per price)",
     name: "cuttingCompleted",
+    type: "InputNumber",
+    props: {
+      placeholder: "Cutting Completed (Per price)",
+      disabled: true
+    },
+  },
+  {
+    label: "Cutting Completed (Per price)",
+    name: "todayCuttingCompleted",
     type: "InputNumber",
     props: {
       placeholder: "Cutting Completed (Per price)",
@@ -822,6 +840,15 @@ export const productionReportFields = [
     type: "InputNumber",
     props: {
       placeholder: "Delivery To Print (Per Price)",
+      disabled: true
+    },
+  },
+  {
+    label: "Delivery To Print (Per Price)",
+    name: "todayDeliveryToPrint",
+    type: "InputNumber",
+    props: {
+      placeholder: "Delivery To Print (Per Price)",
 
     },
   },
@@ -837,6 +864,15 @@ export const productionReportFields = [
   {
     label: "Print Completed",
     name: "printCompleted",
+    props: {
+      placeholder: "please input Print Completed",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Print Completed",
+    name: "todayPrintCompleted",
     props: {
       placeholder: "please input Print Completed",
 
@@ -857,6 +893,15 @@ export const productionReportFields = [
     name: "sewingInput",
     props: {
       placeholder: "please input sewing Input",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Sewing Input",
+    name: "todaySewingInput",
+    props: {
+      placeholder: "please input sewing Input",
     },
     type: "InputNumber",
   },
@@ -869,9 +914,19 @@ export const productionReportFields = [
     },
     type: "InputNumber",
   },
+  
   {
     label: "Sewing Output",
     name: "sewingOutput",
+    props: {
+      placeholder: "sewing Output",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Sewing Output",
+    name: "todaySewingOutput",
     props: {
       placeholder: "sewing Output",
     },
@@ -891,6 +946,15 @@ export const productionReportFields = [
     name: "finishingOutput",
     props: {
       placeholder: "Finishing Output",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Finishing Output",
+    name: "todayFinishingOutput",
+    props: {
+      placeholder: "Finishing Output",
     },
     type: "InputNumber",
   },
@@ -906,6 +970,15 @@ export const productionReportFields = [
   {
     label: "Packing Completed",
     name: "packingCompleted",
+    props: {
+      placeholder: "Packing Completed",
+      disabled: true
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Packing Completed",
+    name: "todayPackingCompleted",
     props: {
       placeholder: "Packing Completed",
     },

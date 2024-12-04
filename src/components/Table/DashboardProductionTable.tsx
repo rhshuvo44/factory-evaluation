@@ -6,11 +6,9 @@ import { DashboardProductionColumns } from "../../types";
 
 const DashboardProductionTable = (date: { date: string }) => {
   const { data, isLoading, isError } = useGetTodayProductionQuery(date);
-
   if (isLoading) return <Loading />;
   if (isError) return <div>Error loading data</div>;
 
- 
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-1 items-center justify-between my-2">

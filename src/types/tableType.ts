@@ -199,6 +199,14 @@ export type TProductionReport = {
     packingCompleted: number
     packingRemaining: number
     remark?: string
+    todayFabricInHouse?: number
+    todayCuttingCompleted?: number
+    todayDeliveryToPrint?: number
+    todayPrintCompleted?: number
+    todaySewingInput?: number
+    todaySewingOutput?: number
+    todayFinishingOutput?: number
+    todayPackingCompleted?: number
 }
 export type TTargetReport = {
     _id?: string;
