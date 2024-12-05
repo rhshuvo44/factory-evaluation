@@ -13,6 +13,11 @@ const DashboardProductionTable = (date: { date: string }) => {
     <>
       <div className="flex flex-col lg:flex-row gap-1 items-center justify-between my-2">
         <SectionTitle title="Production Report" />
+        <div className="text-sm md:text-lg lg:text-3xl font-bold">
+          <span className="text-green-500 px-2">
+            Total Packing Completed:{data?.data?.totalPackingCompleted}
+          </span>
+        </div>
       </div>
       <div className="responsive-table-container">
         <Table

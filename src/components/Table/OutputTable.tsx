@@ -14,9 +14,7 @@ import SectionTitle from "../ui/SectionTitle";
 
 const OutputTable = () => {
   const token = useAppSelector(useCurrentToken);
-
   let user;
-
   if (token) {
     user = verifyToken(token) as TUser;
   }
@@ -78,10 +76,16 @@ const OutputTable = () => {
         ]
       : []),
   ];
+
   return (
     <div>
       <div className="flex items-center justify-between my-2">
         <SectionTitle title="Production Reports" />
+        <div className="text-sm md:text-lg lg:text-3xl font-bold">
+          <span >
+          Total Packing Completed: {data?.data?.totalPackingCompleted}
+          </span>
+        </div>
       </div>
       <div className="responsive-table-container">
         <Table
@@ -89,7 +93,7 @@ const OutputTable = () => {
           className="table-auto"
           bordered
           columns={columns}
-          dataSource={data?.data}
+          dataSource={data?.data?.result}
           rowKey="_id"
           scroll={{ y: 55 * 7 }}
           pagination={false}

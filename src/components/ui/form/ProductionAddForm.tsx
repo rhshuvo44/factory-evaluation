@@ -37,9 +37,12 @@ const ProductionAddForm = () => {
   const { data: allOrderNo, isLoading: orderNoLoading } =
     useGetAllOrderNoQuery("");
   const orders = allOrderNo?.data;
-  const { data: productionReport, isLoading: productionLoading } =
-    useOrderNoProductionQuery(queryParams);
-  const { data, isLoading } = useSingleOrderQuery(queryParams, {
+  const {
+    data: productionReport,
+    isLoading: productionLoading,
+    refetch: productionRefetch,
+  } = useOrderNoProductionQuery(queryParams);
+  const { data, isLoading, refetch } = useSingleOrderQuery(queryParams, {
     // enabled: productionReport?.data === undefined,
   });
 
@@ -50,6 +53,8 @@ const ProductionAddForm = () => {
 
   const orderNoChangeHandler: InputNumberProps["onChange"] = (values) => {
     setOrderNo(values as string);
+    productionRefetch();
+    refetch();
   };
 
   const handleValuesChange = (
