@@ -13,9 +13,10 @@ import {
 } from "../../redux/features/productionReport/productionApi";
 import {
   productionReportDisableFields,
-  productionReportFields,
+  productionReportUpdateFields,
   TProductionReport,
 } from "../../types";
+import dayjs from "dayjs";
 
 const ProductionUpdate = () => {
   const [form] = Form.useForm();
@@ -175,6 +176,7 @@ const ProductionUpdate = () => {
         buyer: result?.buyer,
         description: result?.description,
         orderDate: result?.orderDate ? moment(result?.orderDate) : undefined,
+        date: dayjs(result?.date),
         orderNo: result?.orderNo,
         quantity: result?.quantity,
         styleNo: result?.styleNo,
@@ -253,7 +255,7 @@ const ProductionUpdate = () => {
           </Row>
           <Divider />
           <Row gutter={16}>
-            {productionReportFields?.map((field, index) => (
+            {productionReportUpdateFields?.map((field, index) => (
               <Col span={24} md={{ span: 12 }} key={index}>
                 {RenderFormItem(field)}
               </Col>

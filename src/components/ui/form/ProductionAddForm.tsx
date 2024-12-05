@@ -32,10 +32,10 @@ const ProductionAddForm = () => {
   const [form] = Form.useForm();
   const [orderNo, setOrderNo] = useState<string>();
 
-  // const { data: user } = useGetMeQuery(undefined);
   const queryParams = orderNo ? orderNo : undefined;
 
-  const { data: allOrderNo } = useGetAllOrderNoQuery("");
+  const { data: allOrderNo, isLoading: orderNoLoading } =
+    useGetAllOrderNoQuery("");
   const orders = allOrderNo?.data;
   const { data: productionReport, isLoading: productionLoading } =
     useOrderNoProductionQuery(queryParams);
@@ -59,7 +59,6 @@ const ProductionAddForm = () => {
     const {
       fabricInHouse,
       cuttingCompleted,
-
       todayFabricInHouse,
       todayCuttingCompleted,
       todayDeliveryToPrint,
@@ -72,14 +71,17 @@ const ProductionAddForm = () => {
 
     if (result?.totalFabric && todayFabricInHouse) {
       const requiredFabric =
-        result?.totalFabric - fabricInHouse - todayFabricInHouse;
+        result?.totalFabric - (fabricInHouse || 0) - todayFabricInHouse;
       form.setFieldsValue({
         // Enforce min = 0 for requiredFabric
         requiredFabric: Math.max(0, requiredFabric),
         // Clamp todayFabricInHouse between 0 and totalFabric
         todayFabricInHouse: Math.max(
           0,
-          Math.min(todayFabricInHouse, result?.requiredFabric)
+          Math.min(
+            todayFabricInHouse,
+            result?.requiredFabric || result?.totalFabric
+          )
         ),
       });
     } else {
@@ -98,12 +100,15 @@ const ProductionAddForm = () => {
         // Clamp fabricInHouse between 0 and totalFabric
         todayCuttingCompleted: Math.max(
           0,
-          Math.min(todayCuttingCompleted, result?.cuttingRequired)
+          Math.min(
+            todayCuttingCompleted,
+            result?.cuttingRequired || result?.quantity
+          )
         ),
       });
     } else {
       form.setFieldsValue({
-        cuttingRequired: result?.cuttingRequired,
+        cuttingRequired: result?.cuttingRequired || result?.quantity || 0,
       });
     }
     // deliveryToPrintRemaining: cuttingCompleted - deliveryToPrint,
@@ -112,7 +117,7 @@ const ProductionAddForm = () => {
       const deliveryToPrintRemaining =
         todayCuttingCompleted -
         todayDeliveryToPrint +
-        result?.deliveryToPrintRemaining;
+        (result?.deliveryToPrintRemaining || 0);
       form.setFieldsValue({
         // Enforce min = 0 for requiredFabric
         deliveryToPrintRemaining: Math.max(0, deliveryToPrintRemaining),
@@ -121,14 +126,14 @@ const ProductionAddForm = () => {
           0,
           Math.min(
             todayDeliveryToPrint,
-            todayCuttingCompleted + result?.deliveryToPrintRemaining
+            todayCuttingCompleted + (result?.deliveryToPrintRemaining || 0)
           )
         ),
       });
     } else {
       form.setFieldsValue({
         deliveryToPrintRemaining:
-          result?.deliveryToPrintRemaining + todayCuttingCompleted,
+          (result?.deliveryToPrintRemaining || 0) + todayCuttingCompleted,
       });
     }
 
@@ -136,7 +141,9 @@ const ProductionAddForm = () => {
 
     if (todayDeliveryToPrint && todayPrintCompleted) {
       const printReceivable =
-        todayDeliveryToPrint - todayPrintCompleted + result?.printReceivable;
+        todayDeliveryToPrint -
+        todayPrintCompleted +
+        (result?.printReceivable || 0);
       form.setFieldsValue({
         // Enforce min = 0 for requiredFabric
         printReceivable: Math.max(0, printReceivable),
@@ -145,19 +152,21 @@ const ProductionAddForm = () => {
           0,
           Math.min(
             todayPrintCompleted,
-            result?.printReceivable + todayDeliveryToPrint
+            (result?.printReceivable || 0) + todayDeliveryToPrint
           )
         ),
       });
     } else {
       form.setFieldsValue({
-        printReceivable: result?.printReceivable + todayDeliveryToPrint,
+        printReceivable: (result?.printReceivable || 0) + todayDeliveryToPrint,
       });
     }
     // sewingInputRemaining: printCompleted - sewingInput,
     if (todayPrintCompleted && todaySewingInput) {
       const sewingInputRemaining =
-        todayPrintCompleted - todaySewingInput + result?.sewingInputRemaining;
+        todayPrintCompleted -
+        todaySewingInput +
+        (result?.sewingInputRemaining || 0);
       form.setFieldsValue({
         // Enforce min = 0 for requiredFabric
         sewingInputRemaining: Math.max(0, sewingInputRemaining),
@@ -166,20 +175,22 @@ const ProductionAddForm = () => {
           0,
           Math.min(
             todaySewingInput,
-            result?.sewingInputRemaining + todayPrintCompleted
+            (result?.sewingInputRemaining || 0) + todayPrintCompleted
           )
         ),
       });
     } else {
       form.setFieldsValue({
         sewingInputRemaining:
-          result?.sewingInputRemaining + todayPrintCompleted,
+          (result?.sewingInputRemaining || 0) + todayPrintCompleted,
       });
     }
     // sewingOutputRemaining: sewingInput - sewingOutput,
     if (todaySewingInput && todaySewingOutput) {
       const sewingOutputRemaining =
-        todaySewingInput - todaySewingOutput + result?.sewingOutputRemaining;
+        todaySewingInput -
+        todaySewingOutput +
+        (result?.sewingOutputRemaining || 0);
       form.setFieldsValue({
         // Enforce min = 0 for requiredFabric
         sewingOutputRemaining: Math.max(0, sewingOutputRemaining),
@@ -188,13 +199,14 @@ const ProductionAddForm = () => {
           0,
           Math.min(
             todaySewingOutput,
-            result?.sewingOutputRemaining + todaySewingInput
+            (result?.sewingOutputRemaining || 0) + todaySewingInput
           )
         ),
       });
     } else {
       form.setFieldsValue({
-        sewingOutputRemaining: result?.sewingOutputRemaining + todaySewingInput,
+        sewingOutputRemaining:
+          (result?.sewingOutputRemaining || 0) + todaySewingInput,
       });
     }
     // finishingOutputRemaining: sewingOutput - finishingOutput,
@@ -202,7 +214,7 @@ const ProductionAddForm = () => {
       const finishingOutputRemaining =
         todaySewingOutput -
         todayFinishingOutput +
-        result?.finishingOutputRemaining;
+        (result?.finishingOutputRemaining || 0);
       form.setFieldsValue({
         // Enforce min = 0 for requiredFabric
         finishingOutputRemaining: Math.max(0, finishingOutputRemaining),
@@ -211,20 +223,22 @@ const ProductionAddForm = () => {
           0,
           Math.min(
             todayFinishingOutput,
-            result?.finishingOutputRemaining + todaySewingOutput
+            (result?.finishingOutputRemaining || 0) + todaySewingOutput || 0
           )
         ),
       });
     } else {
       form.setFieldsValue({
         finishingOutputRemaining:
-          result?.finishingOutputRemaining + todaySewingOutput,
+          (result?.finishingOutputRemaining || 0) + todaySewingOutput,
       });
     }
     // packingRemaining: finishingOutput - packingCompleted,
     if (todayFinishingOutput && todayPackingCompleted) {
       const packingRemaining =
-        todayFinishingOutput - todayPackingCompleted + result?.packingRemaining;
+        todayFinishingOutput -
+        todayPackingCompleted +
+        (result?.packingRemaining || 0);
       form.setFieldsValue({
         // Enforce min = 0 for requiredFabric
         packingRemaining: Math.max(0, packingRemaining),
@@ -233,13 +247,14 @@ const ProductionAddForm = () => {
           0,
           Math.min(
             todayPackingCompleted,
-            result?.packingRemaining + todayFinishingOutput
+            (result?.packingRemaining || 0) + todayFinishingOutput
           )
         ),
       });
     } else {
       form.setFieldsValue({
-        packingRemaining: result?.packingRemaining + todayFinishingOutput,
+        packingRemaining:
+          (result?.packingRemaining || 0) + todayFinishingOutput,
       });
     }
   };
@@ -258,24 +273,24 @@ const ProductionAddForm = () => {
           ? moment(result?.shipmentDate)
           : undefined,
         leadTime: result?.leadTime,
-        fabricConsumption: result?.fabricConsumption,
-        finishingOutput: result?.finishingOutput,
-        totalFabric: result?.totalFabric,
-        fabricInHouse: result?.fabricInHouse,
-        cuttingCompleted: result?.cuttingCompleted,
-        cuttingRequired: result?.cuttingRequired,
-        printCompleted: result?.printCompleted,
-        deliveryToPrint: result?.deliveryToPrint,
-        deliveryToPrintRemaining: result?.deliveryToPrintRemaining,
-        sewingInput: result?.sewingInput,
-        finishingOutputRemaining: result?.finishingOutputRemaining,
-        packingCompleted: result?.packingCompleted,
-        packingRemaining: result?.packingRemaining,
-        printReceivable: result?.printReceivable,
-        requiredFabric: result?.requiredFabric,
-        sewingInputRemaining: result?.sewingInputRemaining,
-        sewingOutput: result?.sewingOutput,
-        sewingOutputRemaining: result?.sewingOutputRemaining,
+        fabricConsumption: result?.fabricConsumption || 0,
+        finishingOutput: result?.finishingOutput || 0,
+        totalFabric: result?.totalFabric || 0,
+        fabricInHouse: result?.fabricInHouse || 0,
+        cuttingCompleted: result?.cuttingCompleted || 0,
+        cuttingRequired: result?.cuttingRequired || 0,
+        printCompleted: result?.printCompleted || 0,
+        deliveryToPrint: result?.deliveryToPrint || 0,
+        deliveryToPrintRemaining: result?.deliveryToPrintRemaining || 0,
+        sewingInput: result?.sewingInput || 0,
+        finishingOutputRemaining: result?.finishingOutputRemaining || 0,
+        packingCompleted: result?.packingCompleted || 0,
+        packingRemaining: result?.packingRemaining || 0,
+        printReceivable: result?.printReceivable || 0,
+        requiredFabric: result?.requiredFabric || 0,
+        sewingInputRemaining: result?.sewingInputRemaining || 0,
+        sewingOutput: result?.sewingOutput || 0,
+        sewingOutputRemaining: result?.sewingOutputRemaining || 0,
         remark: result?.remark,
         todayFabricInHouse: 0,
         todayCuttingCompleted: 0,
@@ -365,7 +380,7 @@ const ProductionAddForm = () => {
             </Col>
           </Row>
           <Divider />
-          {isLoading || productionLoading ? (
+          {isLoading || productionLoading || orderNoLoading ? (
             <Loading />
           ) : result ? (
             <>

@@ -67,6 +67,7 @@ const EvaluationTable = ({
           size="small"
           className="table-auto"
           bordered
+          loading={isLoading}
           columns={columns}
           dataSource={dataSource}
           rowKey="_id"

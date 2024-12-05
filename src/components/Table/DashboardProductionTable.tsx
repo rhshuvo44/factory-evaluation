@@ -1,8 +1,8 @@
 import { Table } from "antd";
 import { useGetTodayProductionQuery } from "../../redux/features/productionReport/productionApi";
+import { DashboardProductionColumns } from "../../types";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
-import { DashboardProductionColumns } from "../../types";
 
 const DashboardProductionTable = (date: { date: string }) => {
   const { data, isLoading, isError } = useGetTodayProductionQuery(date);
@@ -19,6 +19,7 @@ const DashboardProductionTable = (date: { date: string }) => {
           size="small"
           className="table-auto"
           bordered
+          loading={isLoading}
           columns={DashboardProductionColumns}
           dataSource={data?.data?.data}
           rowKey="_id"
