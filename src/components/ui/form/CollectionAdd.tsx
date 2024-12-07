@@ -31,7 +31,19 @@ const CollectionAdd = () => {
   };
 
   const time = new Date().toLocaleTimeString();
-
+  const onFill = () => {
+    form.setFieldsValue({
+      date: dayjs(),
+      time: time,
+      style: "No Collection",
+      total: 0,
+      workOrderNo: 0,
+      lineNo: "No Line",
+      chalanNo: 0,
+      ratePer: 0,
+      amount: 0,
+    });
+  };
   const onFinish = async (values: TCollection) => {
     if (values.date) {
       values.date = dayjs(values.date).format("YYYY-MM-DD");
@@ -62,11 +74,22 @@ const CollectionAdd = () => {
               </Col>
             ))}
             <Col span={24}>
-              <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item>
+              <Row>
+                <Col>
+                  <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+                    <Button type="primary" htmlType="submit">
+                      Submit
+                    </Button>
+                  </Form.Item>
+                </Col>
+                <Col>
+                  <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+                    <Button type="primary" htmlType="submit" onClick={onFill}>
+                      No Cost For Today
+                    </Button>
+                  </Form.Item>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Form>

@@ -9,6 +9,7 @@ export const styleOption = [
     { value: "Shorts", label: "Shorts" },
     { value: "Romper/Keeper", label: "Romper/Keeper" },
     { value: "Long Sleeve T-shirt", label: "Long Sleeve T-shirt" },
+    { value: "No Collection", label: "No Collection" },
 ]
 export const designationOption = [
     { value: "Supervisor", label: "Supervisor" },

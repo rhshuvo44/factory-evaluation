@@ -554,6 +554,7 @@ export const CollectionFields = [
         { value: "line 1 / 3rd floor", label: "line 1 / 3rd floor" },
         { value: "line 2 / 4th floor", label: "line 2 / 4th floor" },
         { value: "line 3 / 4th floor", label: "line 3 / 4th floor" },
+        { value: "No Line", label: "No Line" },
       ]
     },
   },
@@ -914,7 +915,7 @@ export const productionReportFields = [
     },
     type: "InputNumber",
   },
-  
+
   {
     label: "Sewing Output",
     name: "sewingOutput",
@@ -1018,10 +1019,10 @@ export const productionReportUpdateFields = [
     type: "InputNumber",
     props: {
       placeholder: "please input fabricInHouse ",
-      
+
     },
   },
- 
+
 
   {
     label: "Cutting Required",
@@ -1038,10 +1039,10 @@ export const productionReportUpdateFields = [
     type: "InputNumber",
     props: {
       placeholder: "Cutting Completed (Per price)",
-      
+
     },
   },
- 
+
   {
     label: "Delivery To Print Remaining (Per Price)",
     name: "deliveryToPrintRemaining",
@@ -1057,10 +1058,10 @@ export const productionReportUpdateFields = [
     type: "InputNumber",
     props: {
       placeholder: "Delivery To Print (Per Price)",
-     
+
     },
   },
- 
+
   {
     label: "Print Receivable",
     name: "printReceivable",
@@ -1075,11 +1076,11 @@ export const productionReportUpdateFields = [
     name: "printCompleted",
     props: {
       placeholder: "please input Print Completed",
-      
+
     },
     type: "InputNumber",
   },
- 
+
   {
     label: "Sewing Input Remaining",
     name: "sewingInputRemaining",
@@ -1094,7 +1095,7 @@ export const productionReportUpdateFields = [
     name: "sewingInput",
     props: {
       placeholder: "please input sewing Input",
-   
+
     },
     type: "InputNumber",
   },
@@ -1108,13 +1109,13 @@ export const productionReportUpdateFields = [
     },
     type: "InputNumber",
   },
-  
+
   {
     label: "Sewing Output",
     name: "sewingOutput",
     props: {
       placeholder: "sewing Output",
-     
+
     },
     type: "InputNumber",
   },
@@ -1133,11 +1134,11 @@ export const productionReportUpdateFields = [
     name: "finishingOutput",
     props: {
       placeholder: "Finishing Output",
-      
+
     },
     type: "InputNumber",
   },
-  
+
   {
     label: "Packing Remaining",
     name: "packingRemaining",
@@ -1152,7 +1153,7 @@ export const productionReportUpdateFields = [
     name: "packingCompleted",
     props: {
       placeholder: "Packing Completed",
-   
+
     },
     type: "InputNumber",
   },

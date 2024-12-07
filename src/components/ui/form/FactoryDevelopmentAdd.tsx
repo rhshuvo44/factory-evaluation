@@ -25,24 +25,24 @@ const FactoryDevelopmentAdd = () => {
       });
     }
   };
-  // const onFill = () => {
-  //   form.setFieldsValue({
-  //     date: dayjs(),
-  //     particulars: "no cost",
-  //     description: "no cost",
-  //     remark: "no cost",
-  //     buyerId: 0,
-  //     orderNo: 0,
-  //     memoNo: 0,
-  //     payTo: "no cost",
-  //     paymentType: "Once",
-  //     unit: 0,
-  //     unitPrice: 0,
-  //     totalPrice: 0,
-  //     quantity: 0,
-  //     orderedBy: "M.D",
-  //   });
-  // };
+  const onFill = () => {
+    form.setFieldsValue({
+      date: dayjs(),
+      particulars: "no cost",
+      description: "no cost",
+      remark: "no cost",
+      buyerId: 0,
+      orderNo: 0,
+      memoNo: 0,
+      payTo: "no cost",
+      paymentType: "Once",
+      unit: 0,
+      unitPrice: 0,
+      totalPrice: 0,
+      quantity: 0,
+      orderedBy: "M.D",
+    });
+  };
   const onFinish = async (values: TFactory) => {
     if (values.date) {
       values.date = dayjs(values.date).format("YYYY-MM-DD");
@@ -77,13 +77,13 @@ const FactoryDevelopmentAdd = () => {
                     </Button>
                   </Form.Item>
                 </Col>
-                {/* <Col>
+                <Col>
                   <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
                     <Button type="primary" htmlType="submit" onClick={onFill}>
                       No Cost For Today
                     </Button>
                   </Form.Item>
-                </Col> */}
+                </Col>
               </Row>
             </Col>
           </Row>
