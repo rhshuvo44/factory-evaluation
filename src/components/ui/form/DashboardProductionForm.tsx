@@ -47,7 +47,6 @@ const DashboardProductionForm = (date: { date: string }) => {
     const res = await createOutputMutation(productData).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Create successfully");
-    form.resetFields();
     // Check if user role is admin before creating a notification
     if (user?.data?.role === userRole.Coordinator) {
       const notify = {

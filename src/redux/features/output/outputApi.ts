@@ -9,6 +9,14 @@ const outputApi = baseApi.injectEndpoints({
 
             providesTags: ['Output'],
         }),
+        getAllOutputsDownload: builder.query<Blob, void>({
+            query: () => (
+                {
+                    url: `/output/production-reports/download`, method: 'GET',
+                    responseHandler: (response) => response.blob(),
+                }),
+
+        }),
 
         createOutput: builder.mutation({
             query: (outputData) => ({
@@ -30,4 +38,4 @@ const outputApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateOutputMutation, useGetAllOutputsQuery, useDeletedOutputMutation } = outputApi;
+export const { useCreateOutputMutation, useGetAllOutputsQuery, useDeletedOutputMutation, useLazyGetAllOutputsDownloadQuery } = outputApi;

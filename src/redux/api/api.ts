@@ -8,7 +8,9 @@ import { logout, setUser } from '../features/auth/authSlice';
 import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
+    // testing api 
     baseUrl: 'https://factory-backend.vercel.app/api',
+    // production api 
     // baseUrl: 'https://factory-evaluation-backend.vercel.app/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
@@ -30,6 +32,9 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     if (result?.error?.status === 404) {
         toast.error(result?.error?.data?.message);
     }
+    if (result?.error?.status === 500) {
+        toast.error(result?.error?.data?.message);
+    }
 
     // if (result?.error?.status === 400) {
     //     toast.error(result?.error?.data?.message);
@@ -38,14 +43,15 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     if (result?.error?.status === 403) {
         toast.error(result?.error?.data?.message)
     }
-    if (result?.error?.status === 401 || (result?.error?.status === 500 && result?.error?.data?.err?.name === 'TokenExpiredError')) {
+    if (result?.error?.status === 401 || result?.error?.data?.err?.name === 'TokenExpiredError') {
         //* Send Refresh
         console.log('Sending refresh token');
-
+        // testing api 
         const res = await fetch('https://factory-backend.vercel.app/api/auth/refresh-token', {
             method: 'POST',
             credentials: 'include',
         });
+        // production api 
         // const res = await fetch('https://factory-evaluation-backend.vercel.app/api/auth/refresh-token', {
         //     method: 'POST',
         //     credentials: 'include',

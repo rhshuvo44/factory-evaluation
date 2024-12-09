@@ -5,10 +5,12 @@ import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeletedReportMutation,
   useGetAllReportsQuery,
+  useLazyGetAllReportsDownloadQuery,
 } from "../../redux/features/report/reportApi";
 import { useAppSelector } from "../../redux/hook";
 import { TReport } from "../../types";
 import { verifyToken } from "../../utils/verifyToken";
+import DownloadButton from "../ui/DownloadButton";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
@@ -20,6 +22,12 @@ const ReportTable = () => {
   if (token) {
     user = verifyToken(token) as TUser;
   }
+  const [triggerDownload, { isLoading: downloadLoading }] =
+    useLazyGetAllReportsDownloadQuery(undefined);
+  const fetchExcelFile = async () => {
+    const data = await triggerDownload().unwrap();
+    return { data };
+  };
   const { data, isLoading, isError } = useGetAllReportsQuery(undefined);
   const [deleteReport] = useDeletedReportMutation();
   const handleDeleted = async (id: string) => {
@@ -28,6 +36,7 @@ const ReportTable = () => {
       toast.success(" Report deleted successfully.");
     }
   };
+
   if (isLoading) return <Loading />;
   if (isError) return <div>Error loading data</div>;
   const columns = [
@@ -111,6 +120,12 @@ const ReportTable = () => {
             {balance}
           </span>
         </div>
+        <DownloadButton
+          buttonText="Reports Download"
+          filename={`reports`}
+          queryFunction={fetchExcelFile}
+          isLoading={downloadLoading}
+        />
       </div>
       <div className="responsive-table-container">
         <Table

@@ -5,10 +5,12 @@ import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import {
   useDeletedOutputMutation,
   useGetAllOutputsQuery,
+  useLazyGetAllOutputsDownloadQuery,
 } from "../../redux/features/output/outputApi";
 import { useAppSelector } from "../../redux/hook";
 import { TOutput } from "../../types";
 import { verifyToken } from "../../utils/verifyToken";
+import DownloadButton from "../ui/DownloadButton";
 import Loading from "../ui/Loading";
 import SectionTitle from "../ui/SectionTitle";
 
@@ -19,6 +21,12 @@ const OutputTable = () => {
     user = verifyToken(token) as TUser;
   }
   const { data, isLoading, isError } = useGetAllOutputsQuery(undefined);
+  const [triggerDownload, { isLoading: downloadLoading }] =
+    useLazyGetAllOutputsDownloadQuery();
+  const fetchExcelFile = async () => {
+    const data = await triggerDownload().unwrap();
+    return { data }; 
+  };
   const [deleteReport] = useDeletedOutputMutation();
   const handleDeleted = async (id: string) => {
     const res = await deleteReport(id);
@@ -26,6 +34,7 @@ const OutputTable = () => {
       toast.success("Production Report deleted successfully.");
     }
   };
+
   if (isLoading) return <Loading />;
   if (isError) return <div>Error loading data</div>;
 
@@ -82,10 +91,16 @@ const OutputTable = () => {
       <div className="flex items-center justify-between my-2">
         <SectionTitle title="Production Reports" />
         <div className="text-sm md:text-lg lg:text-3xl font-bold">
-          <span >
-          Total Packing Completed: {data?.data?.totalPackingCompleted}
+          <span>
+            Total Packing Completed: {data?.data?.totalPackingCompleted}
           </span>
         </div>
+        <DownloadButton
+          buttonText="Production Reports Download"
+          filename={`production-reports`}
+          queryFunction={fetchExcelFile}
+          isLoading={downloadLoading}
+        />
       </div>
       <div className="responsive-table-container">
         <Table

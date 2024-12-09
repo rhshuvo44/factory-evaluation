@@ -9,7 +9,15 @@ const reportApi = baseApi.injectEndpoints({
 
             providesTags: ['report'],
         }),
-
+        getAllReportsDownload: builder.query<Blob, void>({
+            query: () => (
+                {
+                    url: `/report/download`, method: 'GET',
+                    responseHandler: (response) => response.blob(),
+                }),
+           
+            
+        }),
         createReport: builder.mutation({
             query: (reportData) => ({
                 url: '/report',
@@ -30,4 +38,4 @@ const reportApi = baseApi.injectEndpoints({
 
 
 
-export const { useCreateReportMutation, useGetAllReportsQuery, useDeletedReportMutation } = reportApi;
+export const { useCreateReportMutation, useGetAllReportsQuery, useDeletedReportMutation, useLazyGetAllReportsDownloadQuery } = reportApi;
