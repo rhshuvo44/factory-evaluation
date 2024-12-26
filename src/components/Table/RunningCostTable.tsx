@@ -10,6 +10,7 @@ import { useGetTodayFactoryQuery } from "../../redux/features/Factory developmen
 import { useGetTodayFixedCostQuery } from "../../redux/features/fixedCost/fixedCostApi";
 import { useGetTodayLoanQuery } from "../../redux/features/loan/loanApi";
 import { useGetTodayMiscellaneousQuery } from "../../redux/features/Miscellaneous/MiscellaneousApi";
+import { useGetTodayProductionCostsQuery } from "../../redux/features/productionCost/productionCostApi";
 import { useGetTodayTravellingsQuery } from "../../redux/features/travelling/travellingApi";
 import { useGetTodayUtilityQuery } from "../../redux/features/utility/utilityApi";
 import { useAppSelector } from "../../redux/hook";
@@ -60,6 +61,12 @@ const RunningCostTable = () => {
     isFetching: isTravelFetching,
   } = useGetTodayTravellingsQuery(queryParams);
   const {
+    data: productionCostData,
+    isError: isProductionCostError,
+    isLoading: isProductionCostLoading,
+    isFetching: isProductionCostFetching,
+  } = useGetTodayProductionCostsQuery(queryParams);
+  const {
     data: buyerData,
     isError: isBuyerError,
     isLoading: isBuyerLoading,
@@ -104,7 +111,8 @@ const RunningCostTable = () => {
     isLoanLoading ||
     isUtilityLoading ||
     isFixedCostLoading ||
-    isEmployeeCostLoading
+    isEmployeeCostLoading ||
+    isProductionCostError
   )
     return <Loading />;
   if (
@@ -115,7 +123,8 @@ const RunningCostTable = () => {
     isLoanError ||
     isUtilityError ||
     isFixedCostError ||
-    isEmployeeCostError
+    isEmployeeCostError ||
+    isProductionCostLoading
   )
     return <div>Error loading data</div>;
   const fixedCost = (fixedCostData?.data || []).map((item: TFixed) => ({
@@ -196,9 +205,9 @@ const RunningCostTable = () => {
       ...item,
       particulars: "Utility Bills",
     })),
-
     { ...miscData?.data, particulars: "Miscellaneous" },
     { ...travelData?.data, particulars: "Travelling Allowance" },
+    { ...productionCostData?.data, particulars: "Production Costs" },
     { ...buyerData?.data, particulars: "Buyer Development" },
     { ...factoryData?.data, particulars: "Factory Development" },
     { ...loanData?.data, particulars: "Loan Returns" },
@@ -230,7 +239,8 @@ const RunningCostTable = () => {
             isLoanFetching ||
             isUtilityFetching ||
             isFixedCostFetching ||
-            isEmployeeCostFetching
+            isEmployeeCostFetching ||
+            isProductionCostFetching
           }
           size="small"
           className="table-auto"
