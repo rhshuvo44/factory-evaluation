@@ -12,6 +12,9 @@ import OrderUpdate from "../pages/order/OrderUpdate";
 import Production from "../pages/Production/Production";
 import ProductionAdd from "../pages/Production/ProductionAdd";
 import ProductionUpdate from "../pages/Production/ProductionUpdate";
+import ProductionCost from "../pages/productionCost/ProductionCost";
+import ProductionCostForm from "../pages/productionCost/ProductionCostForm";
+import ProductionCostUpdate from "../pages/productionCost/ProductionCostUpdate";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import TargetOutput from "../pages/targetOutput/TargetOutput";
@@ -119,6 +122,25 @@ export const coordinatorPaths = [
         name: "All Target",
         path: "all_target",
         element: <TargetOutput />,
+      },
+    ],
+  },
+  {
+    name: "Production Cost",
+    children: [
+      {
+        name: "Add Production Cost",
+        path: "add_production_cost",
+        element: <ProductionCostForm />,
+      },
+      {
+        path: "production_cost/:id",
+        element: <ProductionCostUpdate />,
+      },
+      {
+        name: "All Production Cost",
+        path: "all_production_costs",
+        element: <ProductionCost />,
       },
     ],
   },

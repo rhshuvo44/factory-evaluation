@@ -41,6 +41,7 @@ export const buyerDevelopmentFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
+    required:false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -129,6 +130,7 @@ export const travellingFields = [
     label: "Remark",
     name: "remark",
     type: "Input",
+    required:false,
     props: {
       placeholder: "please input Remark",
     },
@@ -146,6 +148,7 @@ export const travellingFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
+    required:false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -234,6 +237,7 @@ export const miscellaneousFields = [
     label: "Remark",
     name: "remark",
     type: "Input",
+    required:false,
     props: {
       placeholder: "please input Remark",
     },
@@ -250,6 +254,7 @@ export const miscellaneousFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
+    required:false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -359,6 +364,7 @@ export const factoryDevelopmentFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
+    required:false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -466,6 +472,7 @@ export const loanFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
+    required:false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -988,6 +995,7 @@ export const productionReportFields = [
   {
     label: "Remark",
     name: "remark",
+    required:false,
     props: {
       placeholder: "Remark",
     },
@@ -1161,6 +1169,7 @@ export const productionReportUpdateFields = [
   {
     label: "Remark",
     name: "remark",
+    required:false,
     props: {
       placeholder: "Remark",
     },
@@ -1174,5 +1183,113 @@ export const productionReportUpdateFields = [
       placeholder: "please input  Date",
       disabledDate: getDisabledDates(30),
     },
+  },
+];
+
+export const productionCostFields = [
+  {
+    label: "Particulars",
+    name: "particulars",
+    type: "Input",
+    props: {
+      placeholder: "please input Particulars",
+    },
+  },
+
+  {
+    label: "Description",
+    name: "description",
+    type: "TextArea",
+    props: {
+      placeholder: "please input Description",
+    },
+  },
+  {
+    label: "Remark",
+    name: "remark",
+    type: "Input",
+    required:false,
+    props: {
+      placeholder: "please input Remark",
+    },
+  },
+
+  {
+    label: "Buyer ID",
+    name: "buyerId",
+    type: "InputNumber",
+    props: {
+      placeholder: "please input Buyer ID",
+    },
+  },
+  {
+    label: "Memo No",
+    name: "memoNo",
+    type: "InputNumber",
+    required:false,
+    props: {
+      placeholder: "please input Memo No",
+    },
+  },
+  {
+    label: "Order No",
+    name: "orderNo",
+    props: {
+      placeholder: "please input Order No",
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Pay To",
+    name: "payTo",
+    type: "Input",
+    props: {
+      placeholder: "please input Pay To",
+    },
+  },
+  {
+    label: "Date",
+    name: "date",
+    type: "DatePicker",
+    props: {
+      placeholder: "please input Date",
+      disabledDate: getDisabledDates(30),
+    },
+  },
+  {
+    label: "Payment Type",
+    name: "paymentType",
+    type: "Select",
+    props: {
+      placeholder: "please input Payment Type",
+      options: paymentOptions,
+    },
+  },
+  {
+    label: "Unit",
+    name: "unit",
+    props: {
+      placeholder: "please input Unit",
+      // onChange: onChangeUnit,
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Unit Price",
+    name: "unitPrice",
+    props: {
+      placeholder: "please input unit Price",
+      // onChange: onChangeUnitPrice,
+    },
+    type: "InputNumber",
+  },
+  {
+    label: "Total Price",
+    name: "totalPrice",
+    props: {
+      placeholder: "Unit * Unit price (total price)",
+      disabled: true,
+    },
+    type: "InputNumber",
   },
 ];

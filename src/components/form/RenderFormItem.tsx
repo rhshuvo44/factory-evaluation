@@ -8,7 +8,12 @@ const RenderFormItem = (field: any) => {
         <Form.Item
           label={field.label}
           name={field.name}
-          rules={[{ required: true, message: `${field.label} is required` }]}
+          rules={[
+            {
+              required: field?.required ?? true,
+              message: `${field.label} is required`,
+            },
+          ]}
         >
           <Select {...field.props} style={{ width: "100%" }} />
         </Form.Item>
@@ -18,7 +23,12 @@ const RenderFormItem = (field: any) => {
         <Form.Item
           label={field.label}
           name={field.name}
-          rules={[{ required: true, message: `${field.label} is required` }]}
+          rules={[
+            {
+              required: field?.required ?? true,
+              message: `${field.label} is required`,
+            },
+          ]}
         >
           <TextArea {...field.props} style={{ width: "100%" }} />
         </Form.Item>
@@ -28,7 +38,12 @@ const RenderFormItem = (field: any) => {
         <Form.Item
           label={field.label}
           name={field.name}
-          rules={[{ required: true, message: `${field.label} is required` }]}
+          rules={[
+            {
+              required: field?.required ?? true,
+              message: `${field.label} is required`,
+            },
+          ]}
         >
           <InputNumber min={0} {...field.props} style={{ width: "100%" }} />
         </Form.Item>
@@ -38,7 +53,12 @@ const RenderFormItem = (field: any) => {
         <Form.Item
           label={field.label}
           name={field.name}
-          rules={[{ required: true, message: `${field.label} is required` }]}
+          rules={[
+            {
+              required: field?.required ?? true,
+              message: `${field.label} is required`,
+            },
+          ]}
         >
           <Input {...field.props} style={{ width: "100%" }} />
         </Form.Item>
@@ -48,7 +68,12 @@ const RenderFormItem = (field: any) => {
         <Form.Item
           label={field.label}
           name={field.name}
-          rules={[{ required: true, message: `${field.label} is required` }]}
+          rules={[
+            {
+              required: field?.required ?? true,
+              message: `${field.label} is required`,
+            },
+          ]}
         >
           <DatePicker {...field.props} style={{ width: "100%" }} />
         </Form.Item>

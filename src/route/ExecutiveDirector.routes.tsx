@@ -17,6 +17,9 @@ import MiscellaneousForm from "../pages/Miscellaneous/MiscellaneousForm";
 import MiscellaneousUpdate from "../pages/Miscellaneous/MiscellaneousUpdate";
 import Order from "../pages/order/Order";
 import Production from "../pages/Production/Production";
+import ProductionCost from "../pages/productionCost/ProductionCost";
+import ProductionCostForm from "../pages/productionCost/ProductionCostForm";
+import ProductionCostUpdate from "../pages/productionCost/ProductionCostUpdate";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
@@ -186,6 +189,25 @@ export const executivePaths = [
     name: "Production Report",
     path: "all_production_reports",
     element: <Production />,
+  },
+  {
+    name: "Production Cost",
+    children: [
+      {
+        name: "Add Production Cost",
+        path: "add_production_cost",
+        element: <ProductionCostForm />,
+      },
+      {
+        path: "production_cost/:id",
+        element: <ProductionCostUpdate />,
+      },
+      {
+        name: "All Production Cost",
+        path: "all_production_costs",
+        element: <ProductionCost />,
+      },
+    ],
   },
   {
     name: "All Target",

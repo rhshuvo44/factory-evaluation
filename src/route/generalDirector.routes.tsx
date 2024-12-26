@@ -8,6 +8,7 @@ import Loan from "../pages/loan/Loan";
 import Miscellaneous from "../pages/Miscellaneous/Miscellaneous";
 import Order from "../pages/order/Order";
 import Production from "../pages/Production/Production";
+import ProductionCost from "../pages/productionCost/ProductionCost";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import TargetOutput from "../pages/targetOutput/TargetOutput";
@@ -73,6 +74,10 @@ export const generalPaths = [
     name: "Production Report",
     path: "all_production_reports",
     element: <Production />,
+  },
+  {
+    name: "Production Cost",
+    element: <ProductionCost />,
   },
   {
     name: "All Target",

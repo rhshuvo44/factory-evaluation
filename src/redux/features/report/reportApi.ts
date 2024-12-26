@@ -15,8 +15,10 @@ const reportApi = baseApi.injectEndpoints({
                     url: `/report/download`, method: 'GET',
                     responseHandler: (response) => response.blob(),
                 }),
-           
-            
+            // async onCacheEntryAdded(arg, { cacheEntryRemoved }) {
+            //     await cacheEntryRemoved;
+            // }
+
         }),
         createReport: builder.mutation({
             query: (reportData) => ({
