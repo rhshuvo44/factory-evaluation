@@ -15,9 +15,6 @@ import ProductionUpdate from "../pages/Production/ProductionUpdate";
 import ProductionCost from "../pages/productionCost/ProductionCost";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
-import TargetOutput from "../pages/targetOutput/TargetOutput";
-import TargetOutputAdd from "../pages/targetOutput/TargetOutputAdd";
-import TargetOutputUpdate from "../pages/targetOutput/TargetOutputUpdate";
 import Utility from "../pages/utility/Utility";
 
 export const coordinatorPaths = [
@@ -25,6 +22,9 @@ export const coordinatorPaths = [
     name: "Dashboard",
     path: "dashboard",
     element: <Dashboard />,
+  },
+  {
+    type: "divider",
   },
   {
     name: "Travel Allowance",
@@ -57,9 +57,23 @@ export const coordinatorPaths = [
     element: <Loan />,
   },
   {
+    name: "Production Cost",
+
+    path: "all_production_costs",
+    element: <ProductionCost />,
+  },
+  {
     name: "Utility Bill",
     path: "all_bill",
     element: <Utility />,
+  },
+  {
+    name: "Fixed cost",
+    path: "all_fixed_cost",
+    element: <FixedCost />,
+  },
+  {
+    type: "divider",
   },
   {
     name: "Collection",
@@ -67,10 +81,9 @@ export const coordinatorPaths = [
     element: <Collection />,
   },
   {
-    name: "Fixed cost",
-    path: "all_fixed_cost",
-    element: <FixedCost />,
+    type: "divider",
   },
+
   {
     name: "Orders",
     children: [
@@ -107,27 +120,11 @@ export const coordinatorPaths = [
         path: "all_production_reports",
         element: <Production />,
       },
-      {
-        name: "Add Target",
-        path: "add_target",
-        element: <TargetOutputAdd />,
-      },
-      {
-        path: "target/:id",
-        element: <TargetOutputUpdate />,
-      },
-      {
-        name: "All Target",
-        path: "all_target",
-        element: <TargetOutput />,
-      },
     ],
   },
-  {
-    name: "Production Cost",
 
-    path: "all_production_costs",
-    element: <ProductionCost />,
+  {
+    type: "divider",
   },
   {
     name: "View Report",

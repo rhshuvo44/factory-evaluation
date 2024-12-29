@@ -48,6 +48,10 @@ export const adminPaths = [
     element: <Dashboard />,
   },
   {
+    type: "divider",
+  },
+
+  {
     name: "Travel Allowance",
     children: [
       {
@@ -181,6 +185,47 @@ export const adminPaths = [
     ],
   },
   {
+    name: "Fixed cost",
+    children: [
+      {
+        name: "Add Fixed cost",
+        path: "add_fixed_cost",
+        element: <FixedCostForm />,
+      },
+      {
+        path: "fixed-cost/:id",
+        element: <FixedCostUpdate />,
+      },
+      {
+        name: "All Fixed cost",
+        path: "all_fixed_cost",
+        element: <FixedCost />,
+      },
+    ],
+  },
+  {
+    name: "Production Cost",
+    children: [
+      {
+        name: "Add Production Cost",
+        path: "add_production_cost",
+        element: <ProductionCostForm />,
+      },
+      {
+        path: "production_cost/:id",
+        element: <ProductionCostUpdate />,
+      },
+      {
+        name: "All Production Cost",
+        path: "all_production_costs",
+        element: <ProductionCost />,
+      },
+    ],
+  },
+  {
+    type: "divider",
+  },
+  {
     name: "Collection",
     children: [
       {
@@ -200,23 +245,7 @@ export const adminPaths = [
     ],
   },
   {
-    name: "Fixed cost",
-    children: [
-      {
-        name: "Add Fixed cost",
-        path: "add_fixed_cost",
-        element: <FixedCostForm />,
-      },
-      {
-        path: "fixed-cost/:id",
-        element: <FixedCostUpdate />,
-      },
-      {
-        name: "All Fixed cost",
-        path: "all_fixed_cost",
-        element: <FixedCost />,
-      },
-    ],
+    type: "divider",
   },
   {
     name: "Orders",
@@ -257,28 +286,15 @@ export const adminPaths = [
     ],
   },
   {
-    name: "Production Cost",
-    children: [
-      {
-        name: "Add Production Cost",
-        path: "add_production_cost",
-        element: <ProductionCostForm />,
-      },
-      {
-        path: "production_cost/:id",
-        element: <ProductionCostUpdate />,
-      },
-      {
-        name: "All Production Cost",
-        path: "all_production_costs",
-        element: <ProductionCost />,
-      },
-    ],
+    type: "divider",
   },
   {
     name: "View Report",
     path: "all_reports",
     element: <Report />,
+  },
+  {
+    type: "divider",
   },
   {
     name: "User Management",

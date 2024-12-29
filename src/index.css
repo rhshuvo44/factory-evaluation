@@ -102,3 +102,14 @@
   text-align: start;
   vertical-align: middle;
 }
+:where(.css-dev-only-do-not-override-qnu6hi).ant-menu .ant-menu-item-divider {
+  /* overflow: hidden; */
+  line-height: 0;
+  border-color: rgba(249, 249, 250, 0.3);
+  border-style: solid;
+  border-width: 0;
+  margin: 0px 20px;
+  border-top-width: 1px;
+  margin-block: 1px;
+  padding: 0;
+}

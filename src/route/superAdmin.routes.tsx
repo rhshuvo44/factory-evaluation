@@ -30,9 +30,6 @@ import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import SalaryUpdate from "../pages/salary/SalaryUpdate";
-import TargetOutput from "../pages/targetOutput/TargetOutput";
-import TargetOutputAdd from "../pages/targetOutput/TargetOutputAdd";
-import TargetOutputUpdate from "../pages/targetOutput/TargetOutputUpdate";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAllowanceUpdate";
@@ -49,6 +46,9 @@ export const superAdminPaths = [
     name: "Dashboard",
     path: "dashboard",
     element: <Dashboard />,
+  },
+  {
+    type: "divider",
   },
   {
     name: "Travel Allowance",
@@ -146,6 +146,25 @@ export const superAdminPaths = [
     ],
   },
   {
+    name: "Production Cost",
+    children: [
+      {
+        name: "Add Production Cost",
+        path: "add_production_cost",
+        element: <ProductionCostForm />,
+      },
+      {
+        path: "production_cost/:id",
+        element: <ProductionCostUpdate />,
+      },
+      {
+        name: "All Production Cost",
+        path: "all_production_costs",
+        element: <ProductionCost />,
+      },
+    ],
+  },
+  {
     name: "Loan Return",
     children: [
       {
@@ -184,6 +203,28 @@ export const superAdminPaths = [
     ],
   },
   {
+    name: "Fixed cost",
+    children: [
+      {
+        name: "Add Fixed cost",
+        path: "add_fixed_cost",
+        element: <FixedCostForm />,
+      },
+      {
+        path: "fixed-cost/:id",
+        element: <FixedCostUpdate />,
+      },
+      {
+        name: "All Fixed cost",
+        path: "all_fixed_cost",
+        element: <FixedCost />,
+      },
+    ],
+  },
+  {
+    type: "divider",
+  },
+  {
     name: "Collection",
     children: [
       {
@@ -203,24 +244,9 @@ export const superAdminPaths = [
     ],
   },
   {
-    name: "Fixed cost",
-    children: [
-      {
-        name: "Add Fixed cost",
-        path: "add_fixed_cost",
-        element: <FixedCostForm />,
-      },
-      {
-        path: "fixed-cost/:id",
-        element: <FixedCostUpdate />,
-      },
-      {
-        name: "All Fixed cost",
-        path: "all_fixed_cost",
-        element: <FixedCost />,
-      },
-    ],
+    type: "divider",
   },
+
   {
     name: "Orders",
     children: [
@@ -257,45 +283,19 @@ export const superAdminPaths = [
         path: "all_production_reports",
         element: <Production />,
       },
-      {
-        name: "Add Target",
-        path: "add_target",
-        element: <TargetOutputAdd />,
-      },
-      {
-        path: "target/:id",
-        element: <TargetOutputUpdate />,
-      },
-      {
-        name: "All Target",
-        path: "all_target",
-        element: <TargetOutput />,
-      },
     ],
   },
+
   {
-    name: "Production Cost",
-    children: [
-      {
-        name: "Add Production Cost",
-        path: "add_production_cost",
-        element: <ProductionCostForm />,
-      },
-      {
-        path: "production_cost/:id",
-        element: <ProductionCostUpdate />,
-      },
-      {
-        name: "All Production Cost",
-        path: "all_production_costs",
-        element: <ProductionCost />,
-      },
-    ],
+    type: "divider",
   },
   {
     name: "View Report",
     path: "all_reports",
     element: <Report />,
+  },
+  {
+    type: "divider",
   },
   {
     name: "User Management",

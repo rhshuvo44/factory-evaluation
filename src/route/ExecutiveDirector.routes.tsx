@@ -24,7 +24,6 @@ import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
 import SalaryForm from "../pages/salary/SalaryForm";
 import SalaryUpdate from "../pages/salary/SalaryUpdate";
-import TargetOutput from "../pages/targetOutput/TargetOutput";
 import TravellingAllowance from "../pages/travellingAllowance/TravellingAllowance";
 import TravellingAllowanceForm from "../pages/travellingAllowance/TravellingAllowanceForm";
 import TravellingAllowanceUpdate from "../pages/travellingAllowance/TravellingAllowanceUpdate";
@@ -35,6 +34,9 @@ export const executivePaths = [
     name: "Dashboard",
     path: "dashboard",
     element: <Dashboard />,
+  },
+  {
+    type: "divider",
   },
   {
     name: "Travel Allowance",
@@ -132,6 +134,25 @@ export const executivePaths = [
     ],
   },
   {
+    name: "Production Cost",
+    children: [
+      {
+        name: "Add Production Cost",
+        path: "add_production_cost",
+        element: <ProductionCostForm />,
+      },
+      {
+        path: "production_cost/:id",
+        element: <ProductionCostUpdate />,
+      },
+      {
+        name: "All Production Cost",
+        path: "all_production_costs",
+        element: <ProductionCost />,
+      },
+    ],
+  },
+  {
     name: "Loan Return",
     children: [
       {
@@ -150,7 +171,19 @@ export const executivePaths = [
       },
     ],
   },
-
+  {
+    name: "Utility Bill",
+    path: "all_bill",
+    element: <Utility />,
+  },
+  {
+    name: "Fixed cost",
+    path: "all_fixed_cost",
+    element: <FixedCost />,
+  },
+  {
+    type: "divider",
+  },
   {
     name: "Collection",
     children: [
@@ -171,15 +204,9 @@ export const executivePaths = [
     ],
   },
   {
-    name: "Utility Bill",
-    path: "all_bill",
-    element: <Utility />,
+    type: "divider",
   },
-  {
-    name: "Fixed cost",
-    path: "all_fixed_cost",
-    element: <FixedCost />,
-  },
+ 
   {
     name: "All Orders",
     path: "all_orders",
@@ -190,29 +217,9 @@ export const executivePaths = [
     path: "all_production_reports",
     element: <Production />,
   },
+  
   {
-    name: "Production Cost",
-    children: [
-      {
-        name: "Add Production Cost",
-        path: "add_production_cost",
-        element: <ProductionCostForm />,
-      },
-      {
-        path: "production_cost/:id",
-        element: <ProductionCostUpdate />,
-      },
-      {
-        name: "All Production Cost",
-        path: "all_production_costs",
-        element: <ProductionCost />,
-      },
-    ],
-  },
-  {
-    name: "All Target",
-    path: "all_target",
-    element: <TargetOutput />,
+    type: "divider",
   },
   {
     name: "View Report",

@@ -11,7 +11,6 @@ import Production from "../pages/Production/Production";
 import ProductionCost from "../pages/productionCost/ProductionCost";
 import Report from "../pages/report/Report";
 import Salary from "../pages/salary/Salary";
-import TargetOutput from "../pages/targetOutput/TargetOutput";
 import Utility from "../pages/utility/Utility";
 
 export const generalPaths = [
@@ -19,6 +18,9 @@ export const generalPaths = [
     name: "Dashboard",
     path: "dashboard",
     element: <Dashboard />,
+  },
+  {
+    type: "divider",
   },
   {
     name: "Travel Allowance",
@@ -51,9 +53,22 @@ export const generalPaths = [
     element: <Loan />,
   },
   {
+    name: "Production Cost",
+    path: "all_production_costs",
+    element: <ProductionCost />,
+  },
+  {
     name: "Utility Bill",
     path: "all_bill",
     element: <Utility />,
+  },
+  {
+    name: "Fixed cost",
+    path: "all_fixed_cost",
+    element: <FixedCost />,
+  },
+  {
+    type: "divider",
   },
   {
     name: "Collection",
@@ -61,10 +76,9 @@ export const generalPaths = [
     element: <Collection />,
   },
   {
-    name: "Fixed cost",
-    path: "all_fixed_cost",
-    element: <FixedCost />,
+    type: "divider",
   },
+
   {
     name: "All Orders",
     path: "all_orders",
@@ -75,15 +89,9 @@ export const generalPaths = [
     path: "all_production_reports",
     element: <Production />,
   },
+  
   {
-    name: "Production Cost",
-    path: "all_production_costs",
-    element: <ProductionCost />,
-  },
-  {
-    name: "All Target",
-    path: "all_target",
-    element: <TargetOutput />,
+    type: "divider",
   },
   {
     name: "View Report",
