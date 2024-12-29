@@ -110,8 +110,8 @@
   text-align: start;
   vertical-align: middle;
 }
-:where(.css-dev-only-do-not-override-qnu6hi).ant-menu .ant-menu-item-divider {
-  /* overflow: hidden; */
+/* :where(.css-dev-only-do-not-override-qnu6hi).ant-menu .ant-menu-item-divider {
+ 
   line-height: 0;
   border-color: rgba(249, 249, 250, 0.3) !important;
   border-style: solid;
@@ -119,5 +119,11 @@
   margin: 0px 20px !important;
   border-top-width: 1px;
   margin-block: 1px;
+  padding: 0;
+} */
+.ant-menu .ant-menu-item-divider {
+  line-height: 0;
+  border-top: 1px solid rgba(249, 249, 250, 0.3);
+  margin: 0 20px;
   padding: 0;
 }
