@@ -23,10 +23,10 @@ export type TTravel = {
     date: string;
     particulars: string;
     description: string;
-    remark: string;
+    remark?: string;
     buyerId: number;
     orderNo: number;
-    memoNo: number;
+    memoNo?: number;
     payTo: string;
     paymentType: PaymentType;
     unit: number;
@@ -38,10 +38,10 @@ export type TProductionCost = {
     date: string;
     particulars: string;
     description: string;
-    remark: string;
+    remark?: string;
     buyerId: number;
     orderNo: number;
-    memoNo: number;
+    memoNo?: number;
     payTo: string;
     paymentType: PaymentType;
     unit: number;
@@ -71,7 +71,7 @@ export type TBuyer = {
     description: string;
     quantity: number
     buyerId: number;
-    memoNo: number;
+    memoNo?: number;
     orderNo: number;
     payTo: string;
     paymentType: PaymentType;
@@ -122,7 +122,7 @@ export type TFactory = {
     particulars: string;
     description: string;
     quantity: number;
-    memoNo: number;
+    memoNo?: number;
     orderedBy: 'M.D' | 'Chairman';
     payTo: string;
     paymentType: PaymentType;
@@ -136,7 +136,7 @@ export type TLoan = {
     particulars: "Loan Return"
     description: "Emergency Loan Return" | "EMI Return"
     quantity: number;
-    memoNo: string;
+    memoNo?: string;
     orderedBy: "M.D" | "Chairman";
     payTo: "Sarkar Alliance OPC" | "chairman" | "M.D";
     paymentType: "bank" | "cash";

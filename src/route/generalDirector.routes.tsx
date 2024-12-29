@@ -77,6 +77,7 @@ export const generalPaths = [
   },
   {
     name: "Production Cost",
+    path: "all_production_costs",
     element: <ProductionCost />,
   },
   {

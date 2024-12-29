@@ -72,6 +72,7 @@ export const managingPaths = [
   },
   {
     name: "Production Cost",
+    path: "all_production_costs",
     element: <ProductionCost />,
   },
   {
