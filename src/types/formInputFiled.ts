@@ -41,7 +41,7 @@ export const buyerDevelopmentFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -130,7 +130,7 @@ export const travellingFields = [
     label: "Remark",
     name: "remark",
     type: "Input",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Remark",
     },
@@ -148,7 +148,7 @@ export const travellingFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -237,7 +237,7 @@ export const miscellaneousFields = [
     label: "Remark",
     name: "remark",
     type: "Input",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Remark",
     },
@@ -254,7 +254,7 @@ export const miscellaneousFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -364,7 +364,7 @@ export const factoryDevelopmentFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -472,7 +472,7 @@ export const loanFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Memo No",
     },
@@ -543,7 +543,7 @@ export const loanFields = [
 export const CollectionFields = [
 
   {
-    label: "style",
+    label: "Style",
     name: "style",
     type: "Select",
     props: {
@@ -552,30 +552,24 @@ export const CollectionFields = [
     },
   },
   {
-    label: "line No",
-    name: "lineNo",
-    type: "Select",
+    label: "Order Quantity",
+    name: "orderQuantity",
+    type: "InputNumber",
     props: {
-      placeholder: "please input line No",
-      options: [
-        { value: "line 1 / 3rd floor", label: "line 1 / 3rd floor" },
-        { value: "line 2 / 4th floor", label: "line 2 / 4th floor" },
-        { value: "line 3 / 4th floor", label: "line 3 / 4th floor" },
-        { value: "No Line", label: "No Line" },
-      ]
+      placeholder: "please input Order quantity ",
     },
   },
   {
-    label: "Total",
-    name: "total",
+    label: "Bill Quantity",
+    name: "billQuantity",
     type: "InputNumber",
     props: {
-      placeholder: "please input Total",
+      placeholder: "please input Bill quantity ",
     },
   },
 
   {
-    label: "work Order No",
+    label: "Work Order No",
     name: "workOrderNo",
     type: "InputNumber",
     props: {
@@ -583,11 +577,19 @@ export const CollectionFields = [
     },
   },
   {
-    label: "challan No",
+    label: "Challan No",
     name: "challanNo",
-    type: "InputNumber",
+    type: "Input",
     props: {
       placeholder: "please input challan No",
+    },
+  },
+  {
+    label: "Money Receive No",
+    name: "moneyReceiveNo",
+    type: "Input",
+    props: {
+      placeholder: "please input Money Receive No",
     },
   },
 
@@ -607,7 +609,6 @@ export const CollectionFields = [
     name: "ratePer",
     props: {
       placeholder: "please input Rate Per",
-      // onChange: onChangeUnit,
     },
     type: "InputNumber",
   },
@@ -616,7 +617,7 @@ export const CollectionFields = [
     label: "Amount",
     name: "amount",
     props: {
-      placeholder: "total * ratePer (Amount)",
+      placeholder: "billQuantity * ratePer (Amount)",
       disabled: true,
     },
     type: "InputNumber",
@@ -995,7 +996,7 @@ export const productionReportFields = [
   {
     label: "Remark",
     name: "remark",
-    required:false,
+    required: false,
     props: {
       placeholder: "Remark",
     },
@@ -1169,7 +1170,7 @@ export const productionReportUpdateFields = [
   {
     label: "Remark",
     name: "remark",
-    required:false,
+    required: false,
     props: {
       placeholder: "Remark",
     },
@@ -1208,7 +1209,7 @@ export const productionCostFields = [
     label: "Remark",
     name: "remark",
     type: "Input",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Remark",
     },
@@ -1226,7 +1227,7 @@ export const productionCostFields = [
     label: "Memo No",
     name: "memoNo",
     type: "InputNumber",
-    required:false,
+    required: false,
     props: {
       placeholder: "please input Memo No",
     },

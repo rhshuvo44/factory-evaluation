@@ -1,4 +1,4 @@
-import { Button, Col, Form, Row } from "antd";
+import { Button, Col, Form, Input, Row } from "antd";
 import dayjs from "dayjs";
 
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -16,12 +16,12 @@ const CollectionAdd = () => {
   const [createCollectionMutation] = useCreateCollectionMutation();
 
   const handleValuesChange = (_: TCollection, allValues: TCollection) => {
-    const { total, ratePer } = allValues;
+    const { billQuantity, ratePer } = allValues;
 
     // Calculate totalPrice if both total and ratePer are present
-    if (total && ratePer) {
+    if (billQuantity && ratePer) {
       form.setFieldsValue({
-        amount: total * ratePer,
+        amount: billQuantity * ratePer,
       });
     } else {
       form.setFieldsValue({
@@ -31,26 +31,17 @@ const CollectionAdd = () => {
   };
 
   const time = new Date().toLocaleTimeString();
-  const onFill = () => {
-    form.setFieldsValue({
-      date: dayjs(),
-      time: time,
-      style: "No Collection",
-      total: 0,
-      workOrderNo: 0,
-      lineNo: "No Line",
-      chalanNo: 0,
-      ratePer: 0,
-      amount: 0,
-    });
-  };
+
   const onFinish = async (values: TCollection) => {
+    const billNo = "sta-" + values.billNo;
+
     if (values.date) {
       values.date = dayjs(values.date).format("YYYY-MM-DD");
     }
     const res = await createCollectionMutation({
       ...values,
       time,
+      billNo,
     }).unwrap();
     if (!res.success) return toast.error(res.message);
     toast.success("Create successfully");
@@ -68,6 +59,20 @@ const CollectionAdd = () => {
           onValuesChange={handleValuesChange}
         >
           <Row gutter={10}>
+            <Col span={24} md={{ span: 8 }}>
+              <Form.Item
+                label="Bill No"
+                validateTrigger="onBlur"
+                name="billNo"
+                rules={[{ required: true, message: "Please input bill no" }]}
+              >
+                <Input
+                  addonBefore="sta-"
+                  placeholder="please input Bill No"
+                  style={{ width: "100%" }}
+                />
+              </Form.Item>
+            </Col>
             {CollectionFields?.map((field, index) => (
               <Col xs={24} md={8} key={index}>
                 {RenderFormItem(field)}
@@ -79,13 +84,6 @@ const CollectionAdd = () => {
                   <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
                     <Button type="primary" htmlType="submit">
                       Submit
-                    </Button>
-                  </Form.Item>
-                </Col>
-                <Col>
-                  <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                    <Button type="primary" htmlType="submit" onClick={onFill}>
-                      No Cost For Today
                     </Button>
                   </Form.Item>
                 </Col>

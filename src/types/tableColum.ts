@@ -157,7 +157,6 @@ export const travellingColums = [
 
 
 export const productionColums = [
-    
 
     {
         title: "Date",

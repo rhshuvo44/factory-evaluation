@@ -1,8 +1,8 @@
 
 export type PaymentType = 'Monthly' | 'Daily' | 'Once';
 export type userRole = "admin" | "executive-director" | "managing-director" | "general-manager" | "coordinator"
-export type TLine = "Line 1 / 3rd floor" | "Line 2 / 4th floor" | "Line 3 / 4th floor" | "No Line"
-export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Tank Top" | "Sweat Shirt" | "Trouser" | "Shorts" | "Romper/Keeper" | "Long Sleeve T-shirt" | "No Collection" 
+
+export type TStyle = "Hoody/Jacket" | "Leggins" | "Polo Shirt" | "T-Shirt" | "Tank Top" | "Sweat Shirt" | "Trouser" | "Shorts" | "Romper/Keeper" | "Long Sleeve T-shirt" | "No Collection"
 export type TDesignation = 'Supervisor' | 'G.M' | 'P.M' | 'Ex. Accountant' | 'Security' | 'Cutting Master' | 'Fin. Incharge' | 'Mechanic' | 'Operator' | 'Folding' | 'Check' | 'Poly' | 'Helper' | 'Maid' | 'Cleaner' | 'Cut. Helper' | 'Cutting Man' | 'Line Incharge' | 'Store Keeper'
 
 type TParticulars = 'Commission'
@@ -150,10 +150,12 @@ export type TCollection = {
     date: string;
     time: string;
     style: TStyle;
-    total: number;
+    orderQuantity: number;
+    billQuantity: number;
+    billNo: string;
     workOrderNo: number;
-    lineNo: TLine;
-    chalanNo: number;
+    moneyReceiptNo: string;
+    chalanNo: string;
     ratePer: number;
     amount: number;
 }
