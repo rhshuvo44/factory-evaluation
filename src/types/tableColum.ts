@@ -157,11 +157,7 @@ export const travellingColums = [
 
 
 export const productionColums = [
-    {
-        title: "Order No",
-        dataIndex: "orderNo",
-        key: "orderNo",
-    },
+    
 
     {
         title: "Date",
