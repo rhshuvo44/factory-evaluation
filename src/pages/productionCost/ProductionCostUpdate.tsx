@@ -10,7 +10,7 @@ import {
   useSingleProductionCostQuery,
   useUpdateProductionCostMutation,
 } from "../../redux/features/productionCost/productionCostApi";
-import { TProductionCost, travellingFields, TTravel } from "../../types";
+import { productionCostFields, TProductionCost } from "../../types";
 
 const ProductionCostUpdate = () => {
   const [form] = Form.useForm();
@@ -55,7 +55,7 @@ const ProductionCostUpdate = () => {
 
   if (isLoading) return <Loading />;
 
-  const onFinish = async (values: TTravel) => {
+  const onFinish = async (values: TProductionCost) => {
     const totalPrice = isNaN(values.totalPrice) ? 0 : values.totalPrice;
     const updateData = {
       id,
@@ -80,7 +80,7 @@ const ProductionCostUpdate = () => {
           onValuesChange={handleValuesChange}
         >
           <Row gutter={10}>
-            {travellingFields?.map((field, index) => (
+            {productionCostFields?.map((field, index) => (
               <Col xs={24} md={8} key={index}>
                 {RenderFormItem(field)}
               </Col>
