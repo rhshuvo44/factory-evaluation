@@ -508,7 +508,11 @@ export const collectionColums = [
         dataIndex: "slNo",
         key: "slNo",
     },
-
+    {
+        title: "Bill No",
+        dataIndex: "billNo",
+        key: "billNo",
+    },
     {
         title: "Date",
         dataIndex: "date",
@@ -525,9 +529,14 @@ export const collectionColums = [
         key: "style",
     },
     {
-        title: "Total",
-        dataIndex: "total",
-        key: "total",
+        title: "Order Quantity",
+        dataIndex: "orderQuantity",
+        key: "orderQuantity",
+    },
+    {
+        title: "Bill Quantity",
+        dataIndex: "billQuantity",
+        key: "billQuantity",
     },
     {
         title: "Work Order No ",
@@ -535,10 +544,11 @@ export const collectionColums = [
         key: "workOrderNo",
     },
     {
-        title: "Line No ",
-        dataIndex: "lineNo",
-        key: "lineNo",
+        title: "Money Receive No",
+        dataIndex: "moneyReceiveNo",
+        key: "moneyReceiveNo",
     },
+
     {
         title: "Challan NO",
         dataIndex: "challanNo",
