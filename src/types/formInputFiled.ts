@@ -585,11 +585,11 @@ export const CollectionFields = [
     },
   },
   {
-    label: "Money Receive No",
-    name: "moneyReceiveNo",
+    label: "Money Receipt No",
+    name: "moneyReceiptNo",
     type: "Input",
     props: {
-      placeholder: "please input Money Receive No",
+      placeholder: "please input Money Receipt No",
     },
   },
 

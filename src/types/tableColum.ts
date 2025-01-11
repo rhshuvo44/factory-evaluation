@@ -544,9 +544,9 @@ export const collectionColums = [
         key: "workOrderNo",
     },
     {
-        title: "Money Receive No",
-        dataIndex: "moneyReceiveNo",
-        key: "moneyReceiveNo",
+        title: "Money Receipt No",
+        dataIndex: "moneyReceiptNo",
+        key: "moneyReceiptNo",
     },
 
     {
