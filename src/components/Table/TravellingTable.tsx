@@ -84,8 +84,8 @@ const TravellingTable = () => {
           rowKey="slNo"
           // tableLayout="auto"
           // scroll={{ y: 500 }}
-          scroll={{ y: 55 * 7 }}
-          pagination={false}
+          // scroll={{ y: 55 * 7 }}
+          // pagination={false}
         />
       </div>
     </div>

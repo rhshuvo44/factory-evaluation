@@ -110,8 +110,8 @@ const OutputTable = () => {
           columns={columns}
           dataSource={data?.data?.result}
           rowKey="_id"
-          scroll={{ y: 55 * 7 }}
-          pagination={false}
+          // scroll={{ y: 55 * 7 }}
+          // pagination={false}
         />
       </div>
     </div>
